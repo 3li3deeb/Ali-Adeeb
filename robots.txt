@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://3li3deeb.github.io/Ali-Adeeb/sitemap.xml
