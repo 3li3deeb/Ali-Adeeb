@@ -1,0 +1,16 @@
+<!doctype html><html lang="ar" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow">
+<meta id="metaDesc" name="description" content="كتاب من مكتبة Ali Adeeb"><meta property="og:type" content="book"><meta id="ogTitle" property="og:title" content="Ali Adeeb"><title>Ali Adeeb | كتاب</title>
+<style>
+body{margin:0;background:#f7f5f0;color:#17211e;font-family:Arial,Tahoma,sans-serif}.wrap{max-width:900px;width:92%;margin:auto;padding:35px 0}.book{background:white;border:1px solid #e5ded3;border-radius:18px;padding:28px}.cover{max-width:320px;width:100%;max-height:430px;object-fit:cover;border-radius:12px;display:block;margin:15px auto}h1{font:40px Georgia,serif}.author{color:#a06d36;font-weight:bold}.reader{width:100%;height:75vh;border:1px solid #ddd;border-radius:10px;margin-top:20px}.back{color:#a06d36}
+</style></head><body><main class="wrap"><a class="back" href="index.html">← العودة إلى المكتبة</a><div class="book"><div id="tag">كتاب</div><h1 id="title">جاري تحميل الكتاب...</h1><div id="author" class="author"></div><img id="cover" class="cover" style="display:none"><p id="desc"></p><div id="reader"></div></div></main>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+let id=new URLSearchParams(location.search).get('id');
+fetch('content.json?'+Date.now()).then(r=>r.json()).then(d=>{
+let x=(d.books||[]).find(b=>b.id===id);if(!x){title.textContent='الكتاب غير موجود';return}
+document.title=(x.title||'كتاب')+' | Ali Adeeb';title.textContent=x.title||'';author.textContent=x.author?'✍️ '+x.author:'';desc.textContent=x.description||'';metaDesc.content=x.description||x.title;ogTitle.content=x.title;
+if(x.image){cover.src=x.image;cover.alt=x.title;cover.style.display='block'}
+if(x.url)reader.innerHTML='<iframe class="reader" src="'+esc(x.url)+'#toolbar=1"></iframe>';
+}).catch(()=>title.textContent='تعذر تحميل الكتاب');
+</script></body></html>
