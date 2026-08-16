@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة تحكم Ali Adeeb</title>
+<style>
+body{margin:0;background:#f5f3ee;color:#17211e;font-family:Arial,Tahoma,sans-serif}.wrap{max-width:900px;width:92%;margin:auto;padding:30px 0 60px}.box{background:#fff;border:1px solid #e3ddd2;border-radius:16px;padding:22px;margin:16px 0}label{display:block;font-weight:bold;margin:14px 0 6px}input,textarea{width:100%;padding:11px;border:1px solid #d9d2c7;border-radius:9px;font:inherit;box-sizing:border-box}textarea{min-height:130px}button{border:0;border-radius:9px;padding:11px 18px;background:#17211e;color:white;font-weight:bold;cursor:pointer;margin:6px 4px 0 0}.danger{background:#9b3d35}.muted{color:#68716c;font-size:13px}.item{border:1px solid #e3ddd2;border-radius:12px;padding:15px;margin:10px 0}.status{padding:10px;border-radius:9px;background:#eee}.ok{background:#e2f3e8}.warn{background:#fff3d9}.hidden{display:none}
+</style></head><body><div class="wrap"><h1>لوحة تحكم Ali Adeeb</h1><p class="muted">إضافة وتعديل وحذف المقالات والكتب ثم نشرها مباشرة إلى GitHub.</p>
+<div class="box"><h2>ربط GitHub</h2><label>اسم المستخدم</label><input id="user" value="3li3deeb"><label>اسم المستودع</label><input id="repo" value="Ali-Adeeb"><label>GitHub Fine-grained Token</label><input id="token" type="password" placeholder="الصق التوكن هنا"><p class="muted">لا تحفظ التوكن في الموقع. استخدم توكنًا مخصصًا لهذا المستودع فقط وبصلاحية Contents: Read and write.</p><button onclick="connect()">اتصال وقراءة المحتوى</button><div id="status" class="status">غير متصل</div></div>
+<div id="app" class="hidden"><div class="box"><h2>المقالات</h2><div id="articles"></div><button onclick="addA()">+ إضافة مقال</button></div>
+<div class="box"><h2>الكتب</h2><div id="books"></div><button onclick="addB()">+ إضافة كتاب</button></div>
+<div class="box"><h2>النشر</h2><button onclick="publish()">نشر التغييرات</button><div id="pub" class="status">لم يتم النشر بعد.</div></div></div></div>
+<script>
+let D=null,SHA=null,$=x=>document.getElementById(x),v=x=>$(x).value,api=()=>`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/content.json`;
+async function gh(m,u,b){let r=await fetch(u,{method:m,headers:{Authorization:'Bearer '+v('token'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:b?JSON.stringify(b):undefined}),j=await r.json();if(!r.ok)throw Error(j.message||r.status);return j}
+async function connect(){try{status.textContent='جاري الاتصال...';let r=await gh('GET',api());SHA=r.sha;D=JSON.parse(decodeURIComponent(escape(atob(r.content.replace(/\n/g,'')))));app.classList.remove('hidden');render();status.textContent='تم الاتصال بنجاح';status.className='status ok'}catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status warn'}}
+function render(){articles.innerHTML=D.articles.map((x,i)=>`<div class="item"><b>${x.title}</b><br><span class="muted">${x.category}</span><br><button onclick="editA(${i})">تعديل</button><button class="danger" onclick="delA(${i})">حذف</button></div>`).join('');books.innerHTML=D.books.map((x,i)=>`<div class="item"><b>${x.title}</b><br><span class="muted">${x.description}</span><br><button onclick="editB(${i})">تعديل</button><button class="danger" onclick="delB(${i})">حذف</button></div>`).join('')}
+function addA(){D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10)});render();editA(D.articles.length-1)}
+function editA(i){let x=D.articles[i],t=prompt('عنوان المقال:',x.title);if(t===null)return;x.title=t;x.category=prompt('التصنيف:',x.category)||x.category;x.excerpt=prompt('المقدمة:',x.excerpt)||'';x.body=prompt('نص المقال:',x.body)||'';render()}
+function delA(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}
+function addB(){D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:''});render();editB(D.books.length-1)}
+function editB(i){let x=D.books[i],t=prompt('عنوان الكتاب:',x.title);if(t===null)return;x.title=t;x.description=prompt('وصف الكتاب:',x.description)||'';x.url=prompt('رابط الكتاب أو PDF:',x.url)||'';render()}
+function delB(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
+function b64(s){return btoa(unescape(encodeURIComponent(s)))}
+async function publish(){try{pub.textContent='جاري النشر...';let r=await gh('PUT',api(),{message:'Update site content',content:b64(JSON.stringify(D,null,2)),sha:SHA});SHA=r.content.sha;pub.textContent='تم النشر بنجاح. انتظر قليلاً حتى يتحدث الموقع.';pub.className='status ok'}catch(e){pub.textContent='فشل النشر: '+e.message;pub.className='status warn'}}
+</script></body></html>
