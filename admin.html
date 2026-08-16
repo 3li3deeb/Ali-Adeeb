@@ -1,195 +1,27 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>لوحة تحكم Ali Adeeb — V3</title>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة تحكم Ali Adeeb V4</title>
 <style>
-body{margin:0;background:#f5f3ee;color:#17211e;font-family:Arial,Tahoma,sans-serif}
-.wrap{max-width:920px;width:92%;margin:auto;padding:28px 0 60px}
-.box{background:#fff;border:1px solid #e3ddd2;border-radius:16px;padding:22px;margin:16px 0}
-label{display:block;font-weight:bold;margin:14px 0 6px}
-input,textarea,select{width:100%;padding:11px;border:1px solid #d9d2c7;border-radius:9px;font:inherit;box-sizing:border-box}
-textarea{min-height:130px}
-button{border:0;border-radius:9px;padding:11px 18px;background:#17211e;color:white;font-weight:bold;cursor:pointer;margin:6px 4px 0 0}
-.danger{background:#9b3d35}.muted{color:#68716c;font-size:13px}.item{border:1px solid #e3ddd2;border-radius:12px;padding:15px;margin:10px 0}
-.status{padding:10px;border-radius:9px;background:#eee}.ok{background:#e2f3e8}.warn{background:#fff3d9}
-.hidden{display:none}.preview{display:none;max-width:100%;max-height:240px;border-radius:12px;margin-top:10px;border:1px solid #ddd}
-.small{font-size:12px}
-</style>
-</head>
-<body>
-<div class="wrap">
-<h1>لوحة تحكم Ali Adeeb</h1>
-<p class="muted">V3 — إدارة المقالات والكتب مع رفع صور من الهاتف مباشرة إلى GitHub.</p>
-
-<div class="box">
-<h2>ربط GitHub</h2>
-<label>اسم المستخدم</label><input id="user" value="3li3deeb">
-<label>اسم المستودع</label><input id="repo" value="Ali-Adeeb">
-<label>GitHub Fine-grained Token</label><input id="token" type="password" placeholder="الصق التوكن هنا">
-<p class="muted">التوكن لا يُحفظ في التخزين الدائم. استخدمه لهذا المستودع فقط وبصلاحية Contents: Read and write.</p>
-<button onclick="connect()">اتصال وقراءة المحتوى</button>
-<div id="status" class="status">غير متصل</div>
-</div>
-
-<div id="app" class="hidden">
-<div class="box">
-<h2>المقالات</h2>
-<div id="articles"></div>
-<button onclick="addArticle()">+ إضافة مقال</button>
-</div>
-
-<div class="box">
-<h2>الكتب</h2>
-<div id="books"></div>
-<button onclick="addBook()">+ إضافة كتاب</button>
-</div>
-
-<div class="box">
-<h2>النشر</h2>
-<button onclick="publish()">نشر التغييرات</button>
-<div id="pub" class="status">لم يتم النشر بعد.</div>
-</div>
-</div>
-</div>
-
+body{margin:0;background:#f5f3ee;color:#17211e;font-family:Arial,Tahoma,sans-serif}.wrap{max-width:920px;width:92%;margin:auto;padding:28px 0 60px}.box{background:#fff;border:1px solid #e3ddd2;border-radius:16px;padding:22px;margin:16px 0}label{display:block;font-weight:bold;margin:14px 0 6px}input,textarea{width:100%;padding:11px;border:1px solid #d9d2c7;border-radius:9px;font:inherit;box-sizing:border-box}textarea{min-height:130px}button{border:0;border-radius:9px;padding:11px 18px;background:#17211e;color:white;font-weight:bold;cursor:pointer;margin:6px 4px 0 0}.danger{background:#9b3d35}.muted{color:#68716c;font-size:13px}.item{border:1px solid #e3ddd2;border-radius:12px;padding:15px;margin:10px 0}.status{padding:10px;border-radius:9px;background:#eee}.ok{background:#e2f3e8}.warn{background:#fff3d9}.preview{display:none;max-width:100%;max-height:240px;border-radius:12px;margin-top:10px;border:1px solid #ddd}
+</style></head><body><div class="wrap"><h1>لوحة تحكم Ali Adeeb</h1><p class="muted">V4 — مقالات وكتب مع رفع صور من الهاتف.</p>
+<div class="box"><h2>ربط GitHub</h2><label>اسم المستخدم</label><input id="user" value="3li3deeb"><label>اسم المستودع</label><input id="repo" value="Ali-Adeeb"><label>GitHub Fine-grained Token</label><input id="token" type="password" placeholder="الصق التوكن هنا"><p class="muted">استخدم توكنًا لهذا المستودع فقط وبصلاحية Contents: Read and write.</p><button onclick="connect()">اتصال وقراءة المحتوى</button><div id="status" class="status">غير متصل</div></div>
+<div id="app" class="hidden"><div class="box"><h2>المقالات</h2><div id="articles"></div><button onclick="addA()">+ إضافة مقال</button></div><div class="box"><h2>الكتب</h2><div id="books"></div><button onclick="addB()">+ إضافة كتاب</button></div><div class="box"><h2>النشر</h2><button onclick="publish()">نشر التغييرات</button><div id="pub" class="status">لم يتم النشر بعد.</div></div></div></div>
 <script>
-let D=null, contentSHA=null;
-const $=id=>document.getElementById(id);
-const v=id=>$(id).value;
+let D=null,SHA=null,$=x=>document.getElementById(x),v=x=>$(x).value;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-
-function api(path='content.json'){
- return `https://api.github.com/repos/${encodeURIComponent(v('user'))}/${encodeURIComponent(v('repo'))}/contents/${path}`;
-}
-async function gh(method,url,body){
- const r=await fetch(url,{method,headers:{
-   Authorization:'Bearer '+v('token'),
-   Accept:'application/vnd.github+json',
-   'Content-Type':'application/json'
- },body:body?JSON.stringify(body):undefined});
- const j=await r.json();
- if(!r.ok) throw Error(j.message||('HTTP '+r.status));
- return j;
-}
-function decodeBase64(s){
- const bin=atob(s.replace(/\n/g,''));
- const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
- return new TextDecoder().decode(bytes);
-}
-function encodeBase64(s){
- const bytes=new TextEncoder().encode(s);
- let bin=''; bytes.forEach(b=>bin+=String.fromCharCode(b));
- return btoa(bin);
-}
-async function connect(){
- try{
-  status.textContent='جاري الاتصال...';
-  const r=await gh('GET',api());
-  contentSHA=r.sha;
-  D=JSON.parse(decodeBase64(r.content));
-  D.articles=D.articles||[]; D.books=D.books||[];
-  app.classList.remove('hidden'); render();
-  status.textContent='تم الاتصال بنجاح';
-  status.className='status ok';
- }catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status warn'}
-}
-function render(){
- articles.innerHTML=D.articles.map((x,i)=>`<div class="item">
- <b>${esc(x.title)}</b><br><span class="muted">${esc(x.category||'متنوع')}</span>
- ${x.image?'<br><span class="small">🖼️ توجد صورة غلاف</span>':''}<br>
- <button onclick="editArticle(${i})">تعديل</button>
- <button class="danger" onclick="delArticle(${i})">حذف</button>
- </div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';
- books.innerHTML=D.books.map((x,i)=>`<div class="item">
- <b>${esc(x.title)}</b><br><span class="muted">${esc(x.description||'')}</span>
- ${x.image?'<br><span class="small">🖼️ توجد صورة غلاف</span>':''}<br>
- <button onclick="editBook(${i})">تعديل</button>
- <button class="danger" onclick="delBook(${i})">حذف</button>
- </div>`).join('')||'<p class="muted">لا توجد كتب.</p>';
-}
-function addArticle(){
- D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10),image:''});
- render(); editArticle(D.articles.length-1);
-}
-function addBook(){
- D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:'',date:new Date().toISOString().slice(0,10),image:''});
- render(); editBook(D.books.length-1);
-}
-function editArticle(i){
- const x=D.articles[i];
- const box=document.createElement('div'); box.className='box';
- box.innerHTML=`<h2>تعديل المقال</h2>
- <label>العنوان</label><input id="atitle" value="${esc(x.title)}">
- <label>التصنيف</label><input id="acat" value="${esc(x.category||'متنوع')}">
- <label>المقدمة</label><textarea id="aexcerpt">${esc(x.excerpt||'')}</textarea>
- <label>نص المقال</label><textarea id="abody">${esc(x.body||'')}</textarea>
- <label>صورة الغلاف</label><input id="aimage" type="file" accept="image/*">
- <img id="apreview" class="preview" src="${esc(x.image||'')}" ${x.image?'style="display:block"':''}>
- <p class="muted">اختر صورة من هاتفك. سيتم رفعها إلى GitHub عند حفظ المقال.</p>
- <button onclick="saveArticle(${i},this)">حفظ المقال</button>
- <button class="danger" onclick="this.parentElement.remove()">إلغاء</button>`;
- document.querySelector('.wrap').insertBefore(box,app);
- const file=box.querySelector('#aimage'), preview=box.querySelector('#apreview');
- file.onchange=()=>{if(file.files[0]){preview.src=URL.createObjectURL(file.files[0]);preview.style.display='block'}};
- box.scrollIntoView({behavior:'smooth'});
-}
-async function saveArticle(i,b){
- try{
-  b.disabled=true;b.textContent='جاري الحفظ...';
-  const x=D.articles[i]; x.title=v2('atitle');x.category=v2('acat');x.excerpt=v2('aexcerpt');x.body=v2('abody');
-  const file=b.parentElement.querySelector('#aimage').files[0];
-  if(file){x.image=await uploadImage(file,'articles/'+x.id);}
-  b.parentElement.remove();render();
- }catch(e){alert('تعذر حفظ المقال: '+e.message);b.disabled=false;b.textContent='حفظ المقال'}
-}
-function v2(id){return document.getElementById(id).value}
-function editBook(i){
- const x=D.books[i];
- const box=document.createElement('div'); box.className='box';
- box.innerHTML=`<h2>تعديل الكتاب</h2>
- <label>العنوان</label><input id="btitle" value="${esc(x.title)}">
- <label>الوصف</label><textarea id="bdesc">${esc(x.description||'')}</textarea>
- <label>رابط الكتاب / PDF</label><input id="burl" value="${esc(x.url||'')}">
- <label>صورة غلاف الكتاب</label><input id="bimage" type="file" accept="image/*">
- <img id="bpreview" class="preview" src="${esc(x.image||'')}" ${x.image?'style="display:block"':''}>
- <p class="muted">اختر صورة من الهاتف. سيتم رفعها إلى GitHub عند حفظ الكتاب.</p>
- <button onclick="saveBook(${i},this)">حفظ الكتاب</button>
- <button class="danger" onclick="this.parentElement.remove()">إلغاء</button>`;
- document.querySelector('.wrap').insertBefore(box,app);
- const file=box.querySelector('#bimage'),preview=box.querySelector('#bpreview');
- file.onchange=()=>{if(file.files[0]){preview.src=URL.createObjectURL(file.files[0]);preview.style.display='block'}};
- box.scrollIntoView({behavior:'smooth'});
-}
-async function saveBook(i,b){
- try{
-  b.disabled=true;b.textContent='جاري الحفظ...';
-  const x=D.books[i];x.title=v2('btitle');x.description=v2('bdesc');x.url=v2('burl');
-  const file=b.parentElement.querySelector('#bimage').files[0];
-  if(file){x.image=await uploadImage(file,'books/'+x.id);}
-  b.parentElement.remove();render();
- }catch(e){alert('تعذر حفظ الكتاب: '+e.message);b.disabled=false;b.textContent='حفظ الكتاب'}
-}
-async function uploadImage(file,folder){
- if(file.size>4*1024*1024) throw Error('حجم الصورة أكبر من 4 MB. اختر صورة أصغر.');
- const data=await fileToBase64(file);
- const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
- const path=`assets/${folder}/${Date.now()}-${safe}`;
- await gh('PUT',api(path),{message:'Upload image '+safe,content:data});
- return `assets/${folder}/${Date.now()}-${safe}`.replace(/\/\d+-/,'/'+path.match(/\/(\d+)-/)[1]+'-');
-}
-function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(file)})}
-function delArticle(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}
-function delBook(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
-async function publish(){
- try{
-  pub.textContent='جاري النشر...';
-  const r=await gh('PUT',api(),{message:'Update site content',content:encodeBase64(JSON.stringify(D,null,2)),sha:contentSHA});
-  contentSHA=r.content.sha;
-  pub.textContent='تم نشر التغييرات بنجاح. انتظر قليلاً حتى يتحدث الموقع.';
-  pub.className='status ok';
- }catch(e){pub.textContent='فشل النشر: '+e.message;pub.className='status warn'}
-}
-</script>
-</body></html>
+function api(path='content.json'){return `https://api.github.com/repos/${encodeURIComponent(v('user'))}/${encodeURIComponent(v('repo'))}/contents/${path}`}
+async function gh(method,url,body){let r=await fetch(url,{method,headers:{Authorization:'Bearer '+v('token'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined}),j=await r.json();if(!r.ok)throw Error(j.message||r.status);return j}
+function dec(s){const b=atob(s.replace(/\n/g,'')),a=Uint8Array.from(b,c=>c.charCodeAt(0));return new TextDecoder().decode(a)}
+function enc(s){const a=new TextEncoder().encode(s);let b='';a.forEach(x=>b+=String.fromCharCode(x));return btoa(b)}
+async function connect(){try{status.textContent='جاري الاتصال...';let r=await gh('GET',api());SHA=r.sha;D=JSON.parse(dec(r.content));D.articles=D.articles||[];D.books=D.books||[];app.classList.remove('hidden');render();status.textContent='تم الاتصال بنجاح';status.className='status ok'}catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status warn'}}
+function render(){articles.innerHTML=D.articles.map((x,i)=>`<div class="item"><b>${esc(x.title)}</b><br><span class="muted">${esc(x.category||'متنوع')}</span>${x.image?'<br>🖼️ توجد صورة':''}<br><button onclick="editA(${i})">تعديل</button><button class="danger" onclick="delA(${i})">حذف</button></div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';books.innerHTML=D.books.map((x,i)=>`<div class="item"><b>${esc(x.title)}</b><br><span class="muted">${esc(x.description||'')}</span>${x.image?'<br>🖼️ توجد صورة':''}<br><button onclick="editB(${i})">تعديل</button><button class="danger" onclick="delB(${i})">حذف</button></div>`).join('')||'<p class="muted">لا توجد كتب.</p>'}
+function addA(){D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10),image:''});render();editA(D.articles.length-1)}
+function addB(){D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:'',date:new Date().toISOString().slice(0,10),image:''});render();editB(D.books.length-1)}
+function editA(i){let x=D.articles[i],b=document.createElement('div');b.className='box';b.innerHTML=`<h2>تعديل المقال</h2><label>العنوان</label><input id="t" value="${esc(x.title)}"><label>التصنيف</label><input id="c" value="${esc(x.category||'متنوع')}"><label>المقدمة</label><textarea id="e">${esc(x.excerpt||'')}</textarea><label>نص المقال</label><textarea id="body">${esc(x.body||'')}</textarea><label>صورة الغلاف</label><input id="file" type="file" accept="image/*"><img id="prev" class="preview" ${x.image?`src="${esc(x.image)}" style="display:block"`:''}><p class="muted">الحد الأقصى 4 MB.</p><button onclick="saveA(${i},this)">حفظ المقال</button><button class="danger" onclick="this.parentElement.remove()">إلغاء</button>`;document.querySelector('.wrap').insertBefore(b,app);b.querySelector('#file').onchange=()=>{let f=b.querySelector('#file').files[0];if(f){b.querySelector('#prev').src=URL.createObjectURL(f);b.querySelector('#prev').style.display='block'}};b.scrollIntoView({behavior:'smooth'})}
+function editB(i){let x=D.books[i],b=document.createElement('div');b.className='box';b.innerHTML=`<h2>تعديل الكتاب</h2><label>العنوان</label><input id="bt" value="${esc(x.title)}"><label>الوصف</label><textarea id="bd">${esc(x.description||'')}</textarea><label>رابط الكتاب / PDF</label><input id="bu" value="${esc(x.url||'')}"><label>صورة الغلاف</label><input id="bf" type="file" accept="image/*"><img id="bp" class="preview" ${x.image?`src="${esc(x.image)}" style="display:block"`:''}><p class="muted">الحد الأقصى 4 MB.</p><button onclick="saveB(${i},this)">حفظ الكتاب</button><button class="danger" onclick="this.parentElement.remove()">إلغاء</button>`;document.querySelector('.wrap').insertBefore(b,app);b.querySelector('#bf').onchange=()=>{let f=b.querySelector('#bf').files[0];if(f){b.querySelector('#bp').src=URL.createObjectURL(f);b.querySelector('#bp').style.display='block'}};b.scrollIntoView({behavior:'smooth'})}
+function file64(f){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(f)})}
+async function uploadImage(file,folder){if(file.size>4*1024*1024)throw Error('حجم الصورة أكبر من 4 MB');let safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_'),path=`assets/${folder}/${Date.now()}-${safe}`;let r=await gh('PUT',api(path),{message:'Upload image '+safe,content:await file64(file)});return r.content.path}
+async function saveA(i,btn){try{btn.disabled=true;btn.textContent='جاري الحفظ...';let x=D.articles[i],box=btn.parentElement;x.title=box.querySelector('#t').value;x.category=box.querySelector('#c').value;x.excerpt=box.querySelector('#e').value;x.body=box.querySelector('#body').value;let f=box.querySelector('#file').files[0];if(f)x.image=await uploadImage(f,'articles/'+x.id);box.remove();render()}catch(e){alert('تعذر حفظ المقال: '+e.message);btn.disabled=false;btn.textContent='حفظ المقال'}}
+async function saveB(i,btn){try{btn.disabled=true;btn.textContent='جاري الحفظ...';let x=D.books[i],box=btn.parentElement;x.title=box.querySelector('#bt').value;x.description=box.querySelector('#bd').value;x.url=box.querySelector('#bu').value;let f=box.querySelector('#bf').files[0];if(f)x.image=await uploadImage(f,'books/'+x.id);box.remove();render()}catch(e){alert('تعذر حفظ الكتاب: '+e.message);btn.disabled=false;btn.textContent='حفظ الكتاب'}}
+function delA(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}function delB(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
+async function publish(){try{pub.textContent='جاري النشر...';let r=await gh('PUT',api(),{message:'Update site content',content:enc(JSON.stringify(D,null,2)),sha:SHA});SHA=r.content.sha;pub.textContent='تم نشر التغييرات بنجاح.';pub.className='status ok'}catch(e){pub.textContent='فشل النشر: '+e.message;pub.className='status warn'}}
+</script></body></html>
