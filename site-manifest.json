@@ -1,0 +1,10 @@
+{
+  "name": "Ali Adeeb",
+  "short_name": "Ali Adeeb",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#17211e",
+  "lang": "ar",
+  "dir": "rtl"
+}
