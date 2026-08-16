@@ -1,18 +1,195 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة تحكم Ali Adeeb</title><style>
-:root{--bg:#f5f3ee;--card:#fff;--text:#17211e;--muted:#68716c;--line:#e3ddd2;--accent:#9a6b35;--danger:#9b3d35}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif;line-height:1.8}.wrap{max-width:960px;width:94%;margin:auto;padding:25px 0 60px}.box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 5px 20px #17211e0a}h1{margin:0}label{display:block;font-weight:bold;margin:12px 0 5px}input,textarea{width:100%;padding:12px;border:1px solid #d8d1c6;border-radius:10px;font:inherit}textarea{min-height:170px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.muted{color:var(--muted);font-size:13px}.notice{padding:12px;background:#f7f2e8;border-right:4px solid var(--accent);border-radius:8px}.status{padding:11px;border-radius:10px;background:#eee;margin-top:12px}.ok{background:#e4f4e9}.warn{background:#fff1d6}.hidden{display:none}.item{border:1px solid var(--line);border-radius:14px;padding:15px;margin:10px 0}.top{display:flex;justify-content:space-between;gap:10px;align-items:center}.tag{color:var(--accent);font-size:13px;font-weight:bold}.editor{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{border:0;border-radius:10px;padding:11px 17px;background:var(--text);color:white;font-weight:bold;cursor:pointer}button.accent{background:var(--accent)}button.danger{background:var(--danger)}button.light{background:#ece9e3;color:var(--text)}@media(max-width:650px){.row{grid-template-columns:1fr}.top{display:block}.actions button{flex:1}}
-</style></head><body><main class="wrap"><h1>لوحة تحكم Ali Adeeb</h1><p class="muted">إدارة الموقع والمقالات والكتب ثم نشرها مباشرة إلى GitHub.</p>
-<section class="box"><h2>ربط GitHub</h2><div class="notice">التوكن لا يتم حفظه داخل الملفات؛ يبقى في ذاكرة هذه الصفحة فقط.</div><div class="row"><div><label>اسم المستخدم</label><input id="user" value="3li3deeb"></div><div><label>اسم المستودع</label><input id="repo" value="Ali-Adeeb"></div></div><label>GitHub Fine-grained Token</label><input id="token" type="password" autocomplete="off" placeholder="الصق التوكن هنا"><p class="muted">التوكن يحتاج Contents: Read and write لهذا المستودع.</p><div class="actions"><button onclick="connect()">اتصال وقراءة المحتوى</button><button class="light" onclick="clearToken()">مسح التوكن</button></div><div id="status" class="status">غير متصل</div></section>
-<div id="app" class="hidden"><section class="box"><h2>إعدادات الموقع</h2><label>اسم الموقع</label><input id="siteName"><label>العنوان المختصر</label><input id="siteTagline"><label>وصف الموقع</label><textarea id="siteDesc"></textarea><button class="accent" onclick="saveSite()">حفظ الإعدادات</button></section>
-<section class="box"><h2>المقالات</h2><div id="articles"></div><button onclick="newArticle()">＋ إضافة مقال</button></section>
-<section class="box"><h2>الكتب</h2><div id="books"></div><button onclick="newBook()">＋ إضافة كتاب</button></section>
-<section class="box"><h2>النشر</h2><p class="muted">بعد أي تعديل اضغط هذا الزر حتى يظهر التغيير في الموقع العام.</p><button class="accent" onclick="publish()">نشر التغييرات</button><div id="pub" class="status">لم يتم النشر بعد.</div></section></div></main>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة تحكم Ali Adeeb — V3</title>
+<style>
+body{margin:0;background:#f5f3ee;color:#17211e;font-family:Arial,Tahoma,sans-serif}
+.wrap{max-width:920px;width:92%;margin:auto;padding:28px 0 60px}
+.box{background:#fff;border:1px solid #e3ddd2;border-radius:16px;padding:22px;margin:16px 0}
+label{display:block;font-weight:bold;margin:14px 0 6px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #d9d2c7;border-radius:9px;font:inherit;box-sizing:border-box}
+textarea{min-height:130px}
+button{border:0;border-radius:9px;padding:11px 18px;background:#17211e;color:white;font-weight:bold;cursor:pointer;margin:6px 4px 0 0}
+.danger{background:#9b3d35}.muted{color:#68716c;font-size:13px}.item{border:1px solid #e3ddd2;border-radius:12px;padding:15px;margin:10px 0}
+.status{padding:10px;border-radius:9px;background:#eee}.ok{background:#e2f3e8}.warn{background:#fff3d9}
+.hidden{display:none}.preview{display:none;max-width:100%;max-height:240px;border-radius:12px;margin-top:10px;border:1px solid #ddd}
+.small{font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>لوحة تحكم Ali Adeeb</h1>
+<p class="muted">V3 — إدارة المقالات والكتب مع رفع صور من الهاتف مباشرة إلى GitHub.</p>
+
+<div class="box">
+<h2>ربط GitHub</h2>
+<label>اسم المستخدم</label><input id="user" value="3li3deeb">
+<label>اسم المستودع</label><input id="repo" value="Ali-Adeeb">
+<label>GitHub Fine-grained Token</label><input id="token" type="password" placeholder="الصق التوكن هنا">
+<p class="muted">التوكن لا يُحفظ في التخزين الدائم. استخدمه لهذا المستودع فقط وبصلاحية Contents: Read and write.</p>
+<button onclick="connect()">اتصال وقراءة المحتوى</button>
+<div id="status" class="status">غير متصل</div>
+</div>
+
+<div id="app" class="hidden">
+<div class="box">
+<h2>المقالات</h2>
+<div id="articles"></div>
+<button onclick="addArticle()">+ إضافة مقال</button>
+</div>
+
+<div class="box">
+<h2>الكتب</h2>
+<div id="books"></div>
+<button onclick="addBook()">+ إضافة كتاب</button>
+</div>
+
+<div class="box">
+<h2>النشر</h2>
+<button onclick="publish()">نشر التغييرات</button>
+<div id="pub" class="status">لم يتم النشر بعد.</div>
+</div>
+</div>
+</div>
+
 <script>
-let D=null,SHA=null,$=id=>document.getElementById(id),v=id=>$(id).value.trim();const api=()=>`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/content.json`;
-async function gh(m,u,b){let r=await fetch(u,{method:m,headers:{Authorization:'Bearer '+v('token'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:b?JSON.stringify(b):undefined});let j=await r.json();if(!r.ok)throw Error(j.message||r.status);return j}
-function decode(c){let bin=atob(c.replace(/\n/g,''));let bytes=Uint8Array.from(bin,x=>x.charCodeAt(0));return JSON.parse(new TextDecoder().decode(bytes))}function encode(s){let bytes=new TextEncoder().encode(s),bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(bin)}function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function connect(){try{status.textContent='جاري الاتصال...';let r=await gh('GET',api());SHA=r.sha;D=decode(r.content);D.site=D.site||{};D.articles=D.articles||[];D.books=D.books||[];app.classList.remove('hidden');loadSite();render();status.textContent='تم الاتصال بنجاح ✓';status.className='status ok'}catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status warn'}}
-function clearToken(){token.value='';status.textContent='تم مسح التوكن';status.className='status'}function loadSite(){siteName.value=D.site.name||'Ali Adeeb';siteTagline.value=D.site.tagline||'';siteDesc.value=D.site.description||''}function saveSite(){D.site.name=v('siteName');D.site.tagline=v('siteTagline');D.site.description=v('siteDesc');alert('تم حفظ الإعدادات مؤقتًا. اضغط نشر التغييرات.');}
-function render(){articles.innerHTML=D.articles.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">${esc(x.category||'متنوع')} · ${esc(x.date||'')}</div></div><div class="actions"><button onclick="toggle('ae${i}')">تعديل</button><button class="danger" onclick="delA(${i})">حذف</button></div></div><div id="ae${i}" class="editor hidden"><label>عنوان المقال</label><input id="at${i}" value="${esc(x.title)}"><div class="row"><div><label>التصنيف</label><input id="ac${i}" value="${esc(x.category)}"></div><div><label>التاريخ</label><input id="ad${i}" type="date" value="${esc(x.date)}"></div></div><label>المقدمة</label><textarea id="ax${i}">${esc(x.excerpt)}</textarea><label>نص المقال</label><textarea id="ab${i}" style="min-height:260px">${esc(x.body)}</textarea><div class="actions"><button class="accent" onclick="saveA(${i})">حفظ المقال</button></div></div></div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';books.innerHTML=D.books.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">كتاب</div></div><div class="actions"><button onclick="toggle('be${i}')">تعديل</button><button class="danger" onclick="delB(${i})">حذف</button></div></div><div id="be${i}" class="editor hidden"><label>عنوان الكتاب</label><input id="bt${i}" value="${esc(x.title)}"><label>وصف الكتاب</label><textarea id="bd${i}">${esc(x.description)}</textarea><label>رابط الكتاب أو PDF</label><input id="bu${i}" value="${esc(x.url)}" placeholder="https://..."><div class="actions"><button class="accent" onclick="saveB(${i})">حفظ الكتاب</button></div></div></div>`).join('')||'<p class="muted">لا توجد كتب.</p>'}
-function toggle(id){$(id).classList.toggle('hidden')}function newArticle(){D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10)});render();toggle('ae'+(D.articles.length-1))}function saveA(i){let x=D.articles[i];x.title=v('at'+i)||'مقال بلا عنوان';x.category=v('ac'+i)||'متنوع';x.date=v('ad'+i)||new Date().toISOString().slice(0,10);x.excerpt=v('ax'+i);x.body=v('ab'+i);render();alert('تم حفظ المقال. اضغط نشر التغييرات.')}function delA(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}function newBook(){D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:'',date:new Date().toISOString().slice(0,10)});render();toggle('be'+(D.books.length-1))}function saveB(i){let x=D.books[i];x.title=v('bt'+i)||'كتاب بلا عنوان';x.description=v('bd'+i);x.url=v('bu'+i);render();alert('تم حفظ الكتاب. اضغط نشر التغييرات.')}function delB(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
-async function publish(){if(!D||!SHA)return alert('اتصل بـ GitHub أولًا');try{pub.textContent='جاري النشر...';let r=await gh('PUT',api(),{message:'Update Ali Adeeb content',content:encode(JSON.stringify(D,null,2)),sha:SHA});SHA=r.content.sha;pub.textContent='تم النشر بنجاح ✓ انتظر قليلًا حتى يتحدث الموقع.';pub.className='status ok'}catch(e){pub.textContent='فشل النشر: '+e.message;pub.className='status warn'}}
-</script></body></html>
+let D=null, contentSHA=null;
+const $=id=>document.getElementById(id);
+const v=id=>$(id).value;
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+function api(path='content.json'){
+ return `https://api.github.com/repos/${encodeURIComponent(v('user'))}/${encodeURIComponent(v('repo'))}/contents/${path}`;
+}
+async function gh(method,url,body){
+ const r=await fetch(url,{method,headers:{
+   Authorization:'Bearer '+v('token'),
+   Accept:'application/vnd.github+json',
+   'Content-Type':'application/json'
+ },body:body?JSON.stringify(body):undefined});
+ const j=await r.json();
+ if(!r.ok) throw Error(j.message||('HTTP '+r.status));
+ return j;
+}
+function decodeBase64(s){
+ const bin=atob(s.replace(/\n/g,''));
+ const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+ return new TextDecoder().decode(bytes);
+}
+function encodeBase64(s){
+ const bytes=new TextEncoder().encode(s);
+ let bin=''; bytes.forEach(b=>bin+=String.fromCharCode(b));
+ return btoa(bin);
+}
+async function connect(){
+ try{
+  status.textContent='جاري الاتصال...';
+  const r=await gh('GET',api());
+  contentSHA=r.sha;
+  D=JSON.parse(decodeBase64(r.content));
+  D.articles=D.articles||[]; D.books=D.books||[];
+  app.classList.remove('hidden'); render();
+  status.textContent='تم الاتصال بنجاح';
+  status.className='status ok';
+ }catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status warn'}
+}
+function render(){
+ articles.innerHTML=D.articles.map((x,i)=>`<div class="item">
+ <b>${esc(x.title)}</b><br><span class="muted">${esc(x.category||'متنوع')}</span>
+ ${x.image?'<br><span class="small">🖼️ توجد صورة غلاف</span>':''}<br>
+ <button onclick="editArticle(${i})">تعديل</button>
+ <button class="danger" onclick="delArticle(${i})">حذف</button>
+ </div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';
+ books.innerHTML=D.books.map((x,i)=>`<div class="item">
+ <b>${esc(x.title)}</b><br><span class="muted">${esc(x.description||'')}</span>
+ ${x.image?'<br><span class="small">🖼️ توجد صورة غلاف</span>':''}<br>
+ <button onclick="editBook(${i})">تعديل</button>
+ <button class="danger" onclick="delBook(${i})">حذف</button>
+ </div>`).join('')||'<p class="muted">لا توجد كتب.</p>';
+}
+function addArticle(){
+ D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10),image:''});
+ render(); editArticle(D.articles.length-1);
+}
+function addBook(){
+ D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:'',date:new Date().toISOString().slice(0,10),image:''});
+ render(); editBook(D.books.length-1);
+}
+function editArticle(i){
+ const x=D.articles[i];
+ const box=document.createElement('div'); box.className='box';
+ box.innerHTML=`<h2>تعديل المقال</h2>
+ <label>العنوان</label><input id="atitle" value="${esc(x.title)}">
+ <label>التصنيف</label><input id="acat" value="${esc(x.category||'متنوع')}">
+ <label>المقدمة</label><textarea id="aexcerpt">${esc(x.excerpt||'')}</textarea>
+ <label>نص المقال</label><textarea id="abody">${esc(x.body||'')}</textarea>
+ <label>صورة الغلاف</label><input id="aimage" type="file" accept="image/*">
+ <img id="apreview" class="preview" src="${esc(x.image||'')}" ${x.image?'style="display:block"':''}>
+ <p class="muted">اختر صورة من هاتفك. سيتم رفعها إلى GitHub عند حفظ المقال.</p>
+ <button onclick="saveArticle(${i},this)">حفظ المقال</button>
+ <button class="danger" onclick="this.parentElement.remove()">إلغاء</button>`;
+ document.querySelector('.wrap').insertBefore(box,app);
+ const file=box.querySelector('#aimage'), preview=box.querySelector('#apreview');
+ file.onchange=()=>{if(file.files[0]){preview.src=URL.createObjectURL(file.files[0]);preview.style.display='block'}};
+ box.scrollIntoView({behavior:'smooth'});
+}
+async function saveArticle(i,b){
+ try{
+  b.disabled=true;b.textContent='جاري الحفظ...';
+  const x=D.articles[i]; x.title=v2('atitle');x.category=v2('acat');x.excerpt=v2('aexcerpt');x.body=v2('abody');
+  const file=b.parentElement.querySelector('#aimage').files[0];
+  if(file){x.image=await uploadImage(file,'articles/'+x.id);}
+  b.parentElement.remove();render();
+ }catch(e){alert('تعذر حفظ المقال: '+e.message);b.disabled=false;b.textContent='حفظ المقال'}
+}
+function v2(id){return document.getElementById(id).value}
+function editBook(i){
+ const x=D.books[i];
+ const box=document.createElement('div'); box.className='box';
+ box.innerHTML=`<h2>تعديل الكتاب</h2>
+ <label>العنوان</label><input id="btitle" value="${esc(x.title)}">
+ <label>الوصف</label><textarea id="bdesc">${esc(x.description||'')}</textarea>
+ <label>رابط الكتاب / PDF</label><input id="burl" value="${esc(x.url||'')}">
+ <label>صورة غلاف الكتاب</label><input id="bimage" type="file" accept="image/*">
+ <img id="bpreview" class="preview" src="${esc(x.image||'')}" ${x.image?'style="display:block"':''}>
+ <p class="muted">اختر صورة من الهاتف. سيتم رفعها إلى GitHub عند حفظ الكتاب.</p>
+ <button onclick="saveBook(${i},this)">حفظ الكتاب</button>
+ <button class="danger" onclick="this.parentElement.remove()">إلغاء</button>`;
+ document.querySelector('.wrap').insertBefore(box,app);
+ const file=box.querySelector('#bimage'),preview=box.querySelector('#bpreview');
+ file.onchange=()=>{if(file.files[0]){preview.src=URL.createObjectURL(file.files[0]);preview.style.display='block'}};
+ box.scrollIntoView({behavior:'smooth'});
+}
+async function saveBook(i,b){
+ try{
+  b.disabled=true;b.textContent='جاري الحفظ...';
+  const x=D.books[i];x.title=v2('btitle');x.description=v2('bdesc');x.url=v2('burl');
+  const file=b.parentElement.querySelector('#bimage').files[0];
+  if(file){x.image=await uploadImage(file,'books/'+x.id);}
+  b.parentElement.remove();render();
+ }catch(e){alert('تعذر حفظ الكتاب: '+e.message);b.disabled=false;b.textContent='حفظ الكتاب'}
+}
+async function uploadImage(file,folder){
+ if(file.size>4*1024*1024) throw Error('حجم الصورة أكبر من 4 MB. اختر صورة أصغر.');
+ const data=await fileToBase64(file);
+ const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+ const path=`assets/${folder}/${Date.now()}-${safe}`;
+ await gh('PUT',api(path),{message:'Upload image '+safe,content:data});
+ return `assets/${folder}/${Date.now()}-${safe}`.replace(/\/\d+-/,'/'+path.match(/\/(\d+)-/)[1]+'-');
+}
+function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(file)})}
+function delArticle(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}
+function delBook(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
+async function publish(){
+ try{
+  pub.textContent='جاري النشر...';
+  const r=await gh('PUT',api(),{message:'Update site content',content:encodeBase64(JSON.stringify(D,null,2)),sha:contentSHA});
+  contentSHA=r.content.sha;
+  pub.textContent='تم نشر التغييرات بنجاح. انتظر قليلاً حتى يتحدث الموقع.';
+  pub.className='status ok';
+ }catch(e){pub.textContent='فشل النشر: '+e.message;pub.className='status warn'}
+}
+</script>
+</body></html>
