@@ -26,7 +26,10 @@ font-family:Arial,Tahoma,sans-serif;
 line-height:1.9
 }
 
-a{text-decoration:none;color:inherit}
+a{
+text-decoration:none;
+color:inherit
+}
 
 nav{
 position:sticky;
@@ -53,7 +56,9 @@ font-size:22px;
 direction:ltr
 }
 
-.brand span{color:var(--accent)}
+.brand span{
+color:var(--accent)
+}
 
 .links{
 display:flex;
@@ -108,7 +113,7 @@ background:var(--dark);
 color:white
 }
 
-/* المستطيل الذي يحتوي على الصورة */
+/* الصورة الرئيسية */
 .visual{
 min-height:340px;
 border-radius:26px;
@@ -120,7 +125,6 @@ overflow:hidden;
 padding:20px
 }
 
-/* صورة الشعار */
 .visual img{
 display:block;
 width:100%;
@@ -138,14 +142,18 @@ margin:auto;
 padding:55px 0
 }
 
-.head{margin-bottom:22px}
+.head{
+margin-bottom:22px
+}
 
 .head h2{
 margin:0;
 font-size:28px
 }
 
-.head p{color:var(--muted)}
+.head p{
+color:var(--muted)
+}
 
 .search{
 width:100%;
@@ -175,7 +183,9 @@ font-size:12px;
 font-weight:800
 }
 
-.card h3{margin:8px 0}
+.card h3{
+margin:8px 0
+}
 
 .card p{
 color:var(--muted);
@@ -189,6 +199,122 @@ color:var(--accent);
 font-weight:800
 }
 
+/* صور المقالات والكتب */
+.card .card-image{
+display:block;
+width:100%;
+height:210px;
+object-fit:cover;
+border-radius:13px;
+margin:-4px 0 18px;
+border:1px solid var(--line)
+}
+
+/* منطقة أزرار التفاعل */
+.interactions{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:18px;
+padding-top:14px;
+border-top:1px solid var(--line);
+flex-wrap:wrap
+}
+
+/* أزرار المشاركة والإعجاب والتعليق */
+.interaction-btn{
+border:1px solid var(--line);
+background:#fff;
+color:var(--text);
+border-radius:9px;
+padding:8px 12px;
+font-family:inherit;
+font-size:13px;
+cursor:pointer;
+transition:all .2s ease
+}
+
+.interaction-btn:hover{
+background:#f7f5f0;
+transform:translateY(-1px)
+}
+
+.interaction-btn:active{
+transform:translateY(0)
+}
+
+/* زر الإعجاب بعد الضغط */
+.interaction-btn.liked{
+background:#f7eee5;
+color:var(--accent);
+border-color:#d8c1a5
+}
+
+/* منطقة التعليقات */
+.comment-box{
+display:none;
+width:100%;
+margin-top:10px
+}
+
+.comment-box.show{
+display:block
+}
+
+.comment-input{
+width:100%;
+min-height:80px;
+resize:vertical;
+border:1px solid var(--line);
+border-radius:10px;
+padding:10px;
+font-family:inherit;
+font-size:14px;
+color:var(--text);
+background:#fff;
+outline:none
+}
+
+.comment-input:focus{
+border-color:var(--accent)
+}
+
+.comment-submit{
+margin-top:7px;
+border:0;
+background:var(--dark);
+color:#fff;
+border-radius:9px;
+padding:8px 14px;
+font-family:inherit;
+cursor:pointer
+}
+
+.comment-submit:hover{
+opacity:.9
+}
+
+.comments-list{
+margin-top:12px;
+width:100%
+}
+
+.comment-item{
+background:#f7f5f0;
+border-radius:10px;
+padding:9px 12px;
+margin-top:7px;
+font-size:13px;
+word-break:break-word
+}
+
+.comment-date{
+display:block;
+font-size:10px;
+color:var(--muted);
+margin-top:3px
+}
+
 .about{
 background:var(--dark);
 color:#eef0ed;
@@ -196,7 +322,9 @@ border-radius:25px;
 padding:45px
 }
 
-.about p{color:#bfc8c3}
+.about p{
+color:#bfc8c3
+}
 
 .modal{
 position:fixed;
@@ -208,7 +336,9 @@ justify-content:center;
 padding:20px
 }
 
-.modal.show{display:flex}
+.modal.show{
+display:flex
+}
 
 .dialog{
 background:white;
@@ -224,7 +354,8 @@ padding:30px
 float:left;
 border:0;
 background:none;
-font-size:25px
+font-size:25px;
+cursor:pointer
 }
 
 footer{
@@ -235,7 +366,10 @@ border-top:1px solid var(--line)
 }
 
 @media(max-width:800px){
-.links{display:none}
+
+.links{
+display:none
+}
 
 .hero{
 grid-template-columns:1fr
@@ -253,6 +387,20 @@ max-height:210px
 .grid{
 grid-template-columns:1fr
 }
+
+.card .card-image{
+height:220px
+}
+
+.interactions{
+gap:6px
+}
+
+.interaction-btn{
+padding:7px 10px;
+font-size:12px
+}
+
 }
 </style>
 
@@ -277,6 +425,7 @@ grid-template-columns:1fr
 <meta name="twitter:card" content="summary_large_image">
 
 <style id="ali-adeeb-v15-font">
+
 html,body,button,input,textarea,select{
 font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif !important;
 }
@@ -286,10 +435,11 @@ font-size:12px !important;
 line-height:2 !important
 }
 
-h1,h2,h3,h4,.brand,.kicker,.tag,.btn,.filter,.read,.bookbtn,.links,.date{
+h1,h2,h3,h4,.brand,.kicker,.tag,.btn,.filter,.read,.bookbtn,.links,.date,.interaction-btn,.comment-submit{
 font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif !important;
 font-weight:700 !important
 }
+
 </style>
 
 <script type="application/ld+json">
@@ -302,29 +452,12 @@ font-weight:700 !important
 }
 </script>
 
-<style id="v15-1-card-images">
-.card .card-image{
-display:block;
-width:100%;
-height:210px;
-object-fit:cover;
-border-radius:13px;
-margin:-4px 0 18px;
-border:1px solid var(--line)
-}
-
-@media(max-width:800px){
-.card .card-image{
-height:220px
-}
-}
-</style>
-
 </head>
 
 <body>
 
 <nav>
+
 <div class="nav">
 
 <a class="brand" href="#">
@@ -332,13 +465,25 @@ Al-<span>Adeeb</span>
 </a>
 
 <div class="links">
-<a href="#articles">المقالات</a>
-<a href="#books">الكتب</a>
-<a href="#about">عن الموقع</a>
+
+<a href="#articles">
+المقالات
+</a>
+
+<a href="#books">
+الكتب
+</a>
+
+<a href="#about">
+عن الموقع
+</a>
+
 </div>
 
 </div>
+
 </nav>
+
 
 <section class="hero">
 
@@ -348,7 +493,9 @@ Al-<span>Adeeb</span>
 مساحة للقراءة والفكرة
 </div>
 
-<h1>Al-Adeeb</h1>
+<h1>
+Al-Adeeb
+</h1>
 
 <p id="desc"></p>
 
@@ -362,18 +509,30 @@ Al-<span>Adeeb</span>
 
 </div>
 
-<!-- الصورة الجديدة -->
+
 <div class="visual">
-<img src="logo.png" alt="Al-Adeeb">
+
+<img
+src="logo.png"
+alt="Al-Adeeb">
+
 </div>
 
 </section>
 
+
 <section id="articles">
 
 <div class="head">
-<h2>أحدث المقالات</h2>
-<p>أفكار وقراءات متنوعة.</p>
+
+<h2>
+أحدث المقالات
+</h2>
+
+<p>
+أفكار وقراءات متنوعة.
+</p>
+
 </div>
 
 <input
@@ -382,20 +541,35 @@ class="search"
 placeholder="ابحث في المقالات والكتب..."
 >
 
-<div id="articlesGrid" class="grid"></div>
+<div
+id="articlesGrid"
+class="grid">
+</div>
 
 </section>
+
 
 <section id="books">
 
 <div class="head">
-<h2>الكتب</h2>
-<p>مكتبة قابلة للتوسع.</p>
+
+<h2>
+الكتب
+</h2>
+
+<p>
+مكتبة قابلة للتوسع.
+</p>
+
 </div>
 
-<div id="booksGrid" class="grid"></div>
+<div
+id="booksGrid"
+class="grid">
+</div>
 
 </section>
+
 
 <section id="about">
 
@@ -417,15 +591,19 @@ placeholder="ابحث في المقالات والكتب..."
 
 </section>
 
+
 <footer>
 © 2026 Al-Adeeb — جميع الحقوق محفوظة
 </footer>
+
 
 <div id="modal" class="modal">
 
 <div class="dialog">
 
-<button class="close" onclick="closeModal()">
+<button
+class="close"
+onclick="closeModal()">
 ×
 </button>
 
@@ -435,15 +613,20 @@ placeholder="ابحث في المقالات والكتب..."
 
 </div>
 
+
 <script>
 
 let D={
 site:{},
 articles:[],
 books:[]
-},
+};
 
-esc=s=>String(s??'').replace(
+
+/* حماية النصوص */
+function esc(s){
+
+return String(s??'').replace(
 /[&<>"']/g,
 m=>({
 '&':'&amp;',
@@ -454,41 +637,444 @@ m=>({
 }[m])
 );
 
+}
+
+
+/* إنشاء مفتاح آمن */
+function safeKey(value){
+
+return String(value)
+.replace(/[^a-zA-Z0-9_-]/g,'_');
+
+}
+
+
+/* حساب الإعجابات المحلية */
+function getLikeCount(id,type){
+
+let key='al-adeeb-like-count-'+type+'-'+id;
+
+return parseInt(
+localStorage.getItem(key)||'0'
+);
+
+}
+
+
+/* معرفة هل الزائر ضغط إعجاب */
+function isLiked(id,type){
+
+let key='al-adeeb-liked-'+type+'-'+id;
+
+return localStorage.getItem(key)==='1';
+
+}
+
+
+/* قراءة التعليقات */
+function getComments(id,type){
+
+let key='al-adeeb-comments-'+type+'-'+id;
+
+try{
+
+return JSON.parse(
+localStorage.getItem(key)||'[]'
+);
+
+}catch(e){
+
+return [];
+
+}
+
+}
+
+
+/* عرض التعليقات */
+function loadComments(id,type){
+
+let sid=safeKey(id);
+
+let list=
+document.getElementById(
+'list-'+type+'-'+sid
+);
+
+if(!list)return;
+
+let comments=getComments(id,type);
+
+if(!comments.length){
+
+list.innerHTML='';
+
+return;
+
+}
+
+list.innerHTML=
+comments.map(c=>`
+
+<div class="comment-item">
+
+${esc(c.text)}
+
+<span class="comment-date">
+${esc(c.date)}
+</span>
+
+</div>
+
+`).join('');
+
+}
+
+
+/* فتح وإغلاق التعليقات */
+function toggleComments(id,type){
+
+let sid=safeKey(id);
+
+let box=
+document.getElementById(
+'comments-'+type+'-'+sid
+);
+
+if(!box)return;
+
+box.classList.toggle('show');
+
+if(box.classList.contains('show')){
+
+loadComments(id,type);
+
+}
+
+}
+
+
+/* إضافة تعليق */
+function addComment(id,type){
+
+let sid=safeKey(id);
+
+let input=
+document.getElementById(
+'input-'+type+'-'+sid
+);
+
+if(!input)return;
+
+let text=input.value.trim();
+
+if(!text){
+
+alert('اكتب تعليقك أولاً');
+
+return;
+
+}
+
+let comments=getComments(id,type);
+
+comments.push({
+
+text:text,
+
+date:new Date().toLocaleString('ar-IQ')
+
+});
+
+let key='al-adeeb-comments-'+type+'-'+id;
+
+localStorage.setItem(
+key,
+JSON.stringify(comments)
+);
+
+input.value='';
+
+loadComments(id,type);
+
+}
+
+
+/* الإعجاب */
+function toggleLike(id,type){
+
+let sid=safeKey(id);
+
+let keyLiked=
+'al-adeeb-liked-'+type+'-'+id;
+
+let keyCount=
+'al-adeeb-like-count-'+type+'-'+id;
+
+let liked=
+localStorage.getItem(keyLiked)==='1';
+
+let count=
+parseInt(
+localStorage.getItem(keyCount)||'0'
+);
+
+let button=
+document.getElementById(
+'like-'+type+'-'+sid
+);
+
+let number=
+document.getElementById(
+'count-'+type+'-'+sid
+);
+
+
+if(liked){
+
+localStorage.removeItem(keyLiked);
+
+count=Math.max(0,count-1);
+
+if(button){
+
+button.classList.remove('liked');
+
+button.innerHTML=
+'♡ إعجاب <span id="count-'+type+'-'+sid+'">'+count+'</span>';
+
+}
+
+}else{
+
+localStorage.setItem(keyLiked,'1');
+
+count++;
+
+if(button){
+
+button.classList.add('liked');
+
+button.innerHTML=
+'♥ أعجبني <span id="count-'+type+'-'+sid+'">'+count+'</span>';
+
+}
+
+}
+
+localStorage.setItem(
+keyCount,
+count
+);
+
+if(number){
+
+number.textContent=count;
+
+}
+
+}
+
+
+/* مشاركة المحتوى */
+function shareContent(id,type,title){
+
+let url=
+window.location.origin+
+window.location.pathname;
+
+if(type==='article'){
+
+url+='?article='+encodeURIComponent(id);
+
+}else{
+
+url+='?book='+encodeURIComponent(id);
+
+}
+
+
+if(navigator.share){
+
+navigator.share({
+
+title:title||'Al-Adeeb',
+
+text:'مشاركة من موقع Al-Adeeb',
+
+url:url
+
+}).catch(()=>{});
+
+}else if(navigator.clipboard){
+
+navigator.clipboard.writeText(url)
+.then(()=>{
+
+alert('تم نسخ رابط المشاركة');
+
+})
+.catch(()=>{
+
+prompt(
+'انسخ رابط المشاركة:',
+url
+);
+
+});
+
+}else{
+
+prompt(
+'انسخ رابط المشاركة:',
+url
+);
+
+}
+
+}
+
+
+/* إنشاء أزرار التفاعل */
+function interactionHTML(id,type,title){
+
+let sid=safeKey(id);
+
+let count=getLikeCount(id,type);
+
+let liked=isLiked(id,type);
+
+return `
+
+<div class="interactions">
+
+<button
+class="interaction-btn"
+onclick="shareContent(
+'${String(id).replace(/'/g,"\\'")}',
+'${type}',
+'${String(title||'Al-Adeeb').replace(/'/g,"\\'")}'
+)">
+↗ مشاركة
+</button>
+
+
+<button
+class="interaction-btn ${liked?'liked':''}"
+id="like-${type}-${sid}"
+onclick="toggleLike(
+'${String(id).replace(/'/g,"\\'")}',
+'${type}'
+)">
+
+${liked?'♥ أعجبني':'♡ إعجاب'}
+
+<span id="count-${type}-${sid}">
+${count}
+</span>
+
+</button>
+
+
+<button
+class="interaction-btn"
+onclick="toggleComments(
+'${String(id).replace(/'/g,"\\'")}',
+'${type}'
+)">
+💬 تعليق
+</button>
+
+
+<div
+class="comment-box"
+id="comments-${type}-${sid}"
+>
+
+<textarea
+class="comment-input"
+id="input-${type}-${sid}"
+placeholder="اكتب تعليقك هنا..."
+></textarea>
+
+<button
+class="comment-submit"
+onclick="addComment(
+'${String(id).replace(/'/g,"\\'")}',
+'${type}'
+)">
+إضافة التعليق
+</button>
+
+<div
+class="comments-list"
+id="list-${type}-${sid}">
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* عرض المقالات والكتب */
 function render(){
 
-let q=search.value.toLowerCase();
+let q=
+search.value.toLowerCase();
+
+
+/* المقالات */
 
 articlesGrid.innerHTML=
 
 D.articles
+
 .filter(x=>
-(x.title+' '+x.category+' '+x.excerpt+' '+x.body)
+
+(
+x.title+' '+
+x.category+' '+
+x.excerpt+' '+
+x.body
+)
 .toLowerCase()
 .includes(q)
+
 )
+
 .map(x=>`
 
 <article class="card">
 
 ${x.image?
+
 `<img
 class="card-image"
 src="${esc(x.image)}"
 alt="${esc(x.title)}"
 loading="lazy">`
+
 :''}
+
 
 <div class="tag">
 ${esc(x.category)}
 </div>
 
+
 <h3>
 ${esc(x.title)}
 </h3>
 
+
 <p>
 ${esc(x.excerpt)}
 </p>
+
 
 <a
 class="read"
@@ -496,40 +1082,60 @@ href="article.html?id=${encodeURIComponent(x.id)}">
 قراءة المقال ←
 </a>
 
+
+${interactionHTML(
+x.id,
+'article',
+x.title
+)}
+
 </article>
 
 `)
-.join('')||'<p>لا توجد نتائج.</p>';
 
+.join('')
+
+||'<p>لا توجد نتائج.</p>';
+
+
+/* الكتب */
 
 booksGrid.innerHTML=
 
 D.books
+
 .map(x=>`
 
 <article class="card">
 
 ${x.image?
+
 `<img
 class="card-image"
 src="${esc(x.image)}"
 alt="${esc(x.title)}"
 loading="lazy">`
+
 :''}
+
 
 <div class="tag">
 كتاب
 </div>
 
+
 <h3>
 ${esc(x.title)}
 </h3>
+
 
 <p>
 ${esc(x.description)}
 </p>
 
+
 ${x.url?
+
 `<a
 class="read"
 href="${esc(x.url)}"
@@ -537,18 +1143,34 @@ target="_blank"
 rel="noopener">
 فتح الكتاب ←
 </a>`
+
 :''}
+
+
+${interactionHTML(
+x.id||x.title,
+'book',
+x.title
+)}
 
 </article>
 
 `)
-.join('')||'<p>لا توجد كتب بعد.</p>'
+
+.join('')
+
+||'<p>لا توجد كتب بعد.</p>';
 
 }
 
+
+/* النافذة المنبثقة */
 function openA(id){
 
-let x=D.articles.find(a=>a.id===id);
+let x=
+D.articles.find(
+a=>a.id===id
+);
 
 if(!x)return;
 
@@ -568,40 +1190,60 @@ ${esc(x.body).replace(/\n/g,'<br>')}
 
 `;
 
-modal.classList.add('show')
+modal.classList.add('show');
+
 }
 
+
+/* إغلاق النافذة */
 function closeModal(){
-modal.classList.remove('show')
+
+modal.classList.remove('show');
+
 }
 
+
+/* البحث */
 search.oninput=render;
 
+
+/* تحميل المحتوى */
 fetch('content.json?'+Date.now())
+
 .then(r=>r.json())
+
 .then(x=>{
 
 D=x;
 
+
 desc.textContent=
 x.site?.description||'';
 
+
 tagline.textContent=
-x.site?.tagline||'مساحة للقراءة والفكرة';
+x.site?.tagline||
+'مساحة للقراءة والفكرة';
+
 
 aboutTitle.textContent=
-'أهلاً بك في '+(x.site?.name||'Al-Adeeb');
+'أهلاً بك في '+
+(x.site?.name||'Al-Adeeb');
+
 
 aboutText.textContent=
 x.site?.description||'';
 
-render()
+
+render();
 
 })
+
+
 .catch(()=>{
 
 desc.textContent=
-'تعذر تحميل المحتوى حالياً.'
+'تعذر تحميل المحتوى حالياً.';
 
 });
 
