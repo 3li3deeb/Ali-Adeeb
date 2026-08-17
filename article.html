@@ -43,12 +43,12 @@ fetch('content.json?'+Date.now()).then(r=>r.json()).then(D=>{
  const x=(D.articles||[]).find(a=>a.id===id);
  if(!x){document.title='المقال غير موجود — Ali Adeeb';article.innerHTML='<h1>المقال غير موجود</h1><p>تعذر العثور على المقال المطلوب.</p>';return}
  const base='https://3li3deeb.github.io/Ali-Adeeb/article.html?id='+encodeURIComponent(x.id);
- document.title=(x.title||'مقال')+' — Ali Adeeb';
- metaDescription.content=x.excerpt||x.title||'مقال من Ali Adeeb';
+ document.title=(x.seoTitle||x.title||'مقال')+' — Ali Adeeb';
+ metaDescription.content=x.seoDescription||x.excerpt||x.title||'مقال من Ali Adeeb';
  canonical.href=base; ogTitle.content=x.title||'Ali Adeeb'; ogDescription.content=x.excerpt||''; ogUrl.content=base;
  article.innerHTML=`<div class="tag">${esc(x.category||'متنوع')}</div><h1>${esc(x.title||'مقال')}</h1><div class="date">${esc(x.date||'')}</div>${x.image?`<img class="cover" src="${esc(x.image)}" alt="${esc(x.title||'')}">`:''}<p class="excerpt">${esc(x.excerpt||'')}</p><div class="body">${paragraphs(x.body)}</div>`;
  const ld=document.createElement('script');ld.type='application/ld+json';ld.textContent=JSON.stringify({
-   "@context":"https://schema.org","@type":"Article","headline":x.title||"مقال","description":x.excerpt||"",
+   "@context":"https://schema.org","@type":"Article","headline":x.seoTitle||x.title||"مقال","description":x.seoDescription||x.excerpt||"",
    "datePublished":x.date||undefined,"inLanguage":"ar","mainEntityOfPage":base,
    "author":{"@type":"Person","name":"Ali Adeeb"}
  });document.head.appendChild(ld);
