@@ -12,18 +12,8 @@ async function gh(m,u,b){let r=await fetch(u,{method:m,headers:{Authorization:'B
 function decode(c){let bin=atob(c.replace(/\n/g,''));let bytes=Uint8Array.from(bin,x=>x.charCodeAt(0));return JSON.parse(new TextDecoder().decode(bytes))}function encode(s){let bytes=new TextEncoder().encode(s),bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(bin)}function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 async function connect(){try{status.textContent='جاري الاتصال...';let r=await gh('GET',api());SHA=r.sha;D=decode(r.content);D.site=D.site||{};D.articles=D.articles||[];D.books=D.books||[];app.classList.remove('hidden');loadSite();render();status.textContent='تم الاتصال بنجاح ✓';status.className='status ok'}catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status warn'}}
 function clearToken(){token.value='';status.textContent='تم مسح التوكن';status.className='status'}function loadSite(){siteName.value=D.site.name||'Ali Adeeb';siteTagline.value=D.site.tagline||'';siteDesc.value=D.site.description||''}function saveSite(){D.site.name=v('siteName');D.site.tagline=v('siteTagline');D.site.description=v('siteDesc');alert('تم حفظ الإعدادات مؤقتًا. اضغط نشر التغييرات.');}
-function render(){articles.innerHTML=D.articles.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">${esc(x.category||'متنوع')} · ${esc(x.date||'')}</div></div><div class="actions"><button onclick="toggle('ae${i}')">تعديل</button><button class="danger" onclick="delA(${i})">حذف</button></div></div><div id="ae${i}" class="editor hidden"><label>عنوان المقال</label><input id="at${i}" value="${esc(x.title)}"><div class="row"><div><label>التصنيف</label><input id="ac${i}" value="${esc(x.category)}"></div><div><label>التاريخ</label><input id="ad${i}" type="date" value="${esc(x.date)}"></div></div><label>المقدمة</label><textarea id="ax${i}">${esc(x.excerpt)}</textarea><label>عنوان Google (SEO)</label><input id="ast${i}" value="${esc(x.seoTitle||x.title||'')}"><label>وصف Google (SEO)</label><textarea id="asd${i}">${esc(x.seoDescription||x.excerpt||'')}</textarea><label>كلمات مفتاحية</label><input id="ak${i}" value="${esc(x.keywords||'')}" placeholder="مثال: التقنية، الإنترنت، الدماغ"><label>نص المقال</label><textarea id="ab${i}" style="min-height:260px">${esc(x.body)}</textarea><div class="actions"><button class="light" onclick="previewA(${i})">معاينة</button><button class="accent" onclick="saveA(${i})">حفظ المقال</button></div></div></div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';books.innerHTML=D.books.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">كتاب</div></div><div class="actions"><button onclick="toggle('be${i}')">تعديل</button><button class="danger" onclick="delB(${i})">حذف</button></div></div><div id="be${i}" class="editor hidden"><label>عنوان الكتاب</label><input id="bt${i}" value="${esc(x.title)}"><label>وصف الكتاب</label><textarea id="bd${i}">${esc(x.description)}</textarea><label>رابط الكتاب أو PDF</label><input id="bu${i}" value="${esc(x.url)}" placeholder="https://..."><div class="actions"><button class="accent" onclick="saveB(${i})">حفظ الكتاب</button></div></div></div>`).join('')||'<p class="muted">لا توجد كتب.</p>'}
-
-function previewA(i){
- const x=D.articles[i];
- const title=v('at'+i)||'مقال جديد', ex=v('ax'+i)||'';
- const w=window.open('','_blank','width=700,height=800');
- if(!w){alert('اسمح للنوافذ المنبثقة لمعاينة المقال.');return}
- w.document.write('<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>معاينة</title><style>body{font-family:Tahoma,Arial,sans-serif;max-width:760px;margin:30px auto;padding:20px;line-height:2;background:#f5f3ee}article{background:white;padding:25px;border-radius:18px}h1{line-height:1.4}</style><article><h1>'+esc(title)+'</h1><p>'+esc(ex)+'</p></article>');
- w.document.close();
-}
-
-function toggle(id){$(id).classList.toggle('hidden')}function newArticle(){D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10)});render();toggle('ae'+(D.articles.length-1))}function saveA(i){let x=D.articles[i];x.title=v('at'+i)||'مقال بلا عنوان';x.category=v('ac'+i)||'متنوع';x.date=v('ad'+i)||new Date().toISOString().slice(0,10);x.excerpt=v('ax'+i);x.seoTitle=v('ast'+i)||x.title;x.seoDescription=v('asd'+i)||x.excerpt;x.keywords=v('ak'+i);x.body=v('ab'+i);render();alert('تم حفظ المقال. اضغط نشر التغييرات.')}function delA(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}function newBook(){D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:'',date:new Date().toISOString().slice(0,10)});render();toggle('be'+(D.books.length-1))}function saveB(i){let x=D.books[i];x.title=v('bt'+i)||'كتاب بلا عنوان';x.description=v('bd'+i);x.url=v('bu'+i);render();alert('تم حفظ الكتاب. اضغط نشر التغييرات.')}function delB(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
+function render(){articles.innerHTML=D.articles.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">${esc(x.category||'متنوع')} · ${esc(x.date||'')}</div></div><div class="actions"><button onclick="toggle('ae${i}')">تعديل</button><button class="danger" onclick="delA(${i})">حذف</button></div></div><div id="ae${i}" class="editor hidden"><label>عنوان المقال</label><input id="at${i}" value="${esc(x.title)}"><div class="row"><div><label>التصنيف</label><input id="ac${i}" value="${esc(x.category)}"></div><div><label>التاريخ</label><input id="ad${i}" type="date" value="${esc(x.date)}"></div></div><label>المقدمة</label><textarea id="ax${i}">${esc(x.excerpt)}</textarea><label>نص المقال</label><textarea id="ab${i}" style="min-height:260px">${esc(x.body)}</textarea><div class="actions"><button class="accent" onclick="saveA(${i})">حفظ المقال</button></div></div></div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';books.innerHTML=D.books.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">كتاب</div></div><div class="actions"><button onclick="toggle('be${i}')">تعديل</button><button class="danger" onclick="delB(${i})">حذف</button></div></div><div id="be${i}" class="editor hidden"><label>عنوان الكتاب</label><input id="bt${i}" value="${esc(x.title)}"><label>وصف الكتاب</label><textarea id="bd${i}">${esc(x.description)}</textarea><label>رابط الكتاب أو PDF</label><input id="bu${i}" value="${esc(x.url)}" placeholder="https://..."><div class="actions"><button class="accent" onclick="saveB(${i})">حفظ الكتاب</button></div></div></div>`).join('')||'<p class="muted">لا توجد كتب.</p>'}
+function toggle(id){$(id).classList.toggle('hidden')}function newArticle(){D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10)});render();toggle('ae'+(D.articles.length-1))}function saveA(i){let x=D.articles[i];x.title=v('at'+i)||'مقال بلا عنوان';x.category=v('ac'+i)||'متنوع';x.date=v('ad'+i)||new Date().toISOString().slice(0,10);x.excerpt=v('ax'+i);x.body=v('ab'+i);render();alert('تم حفظ المقال. اضغط نشر التغييرات.')}function delA(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}function newBook(){D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',url:'',date:new Date().toISOString().slice(0,10)});render();toggle('be'+(D.books.length-1))}function saveB(i){let x=D.books[i];x.title=v('bt'+i)||'كتاب بلا عنوان';x.description=v('bd'+i);x.url=v('bu'+i);render();alert('تم حفظ الكتاب. اضغط نشر التغييرات.')}function delB(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
 
 async function putFile(path,text,message){
   let old=null;
@@ -45,6 +35,27 @@ function articlePage(x){
 <style>body{margin:0;background:#f5f3ee;color:#17211e;font-family:Amiri,Tahoma,Arial,sans-serif;line-height:2;font-size:19px}main{max-width:850px;width:92%;margin:auto;padding:28px 0 70px}article{background:#fff;border:1px solid #e3ddd2;border-radius:22px;padding:28px}a{color:#9a6b35;font-weight:700}.tag{color:#9a6b35;font-weight:700}.date{color:#68716c;font-size:14px}h1{font-size:38px;line-height:1.35}.excerpt{color:#68716c;font-size:20px}.cover{width:100%;max-height:520px;object-fit:cover;border-radius:16px;margin:20px 0}p{margin:0 0 20px}@media(max-width:650px){article{padding:20px}h1{font-size:30px}}</style>
 </head><body><main><a href="../">← العودة إلى الموقع</a><article><div class="tag">${esc(x.category||'متنوع')}</div><h1>${title}</h1><div class="date">${date}</div>${image}<p class="excerpt">${desc}</p>${body}</article></main>
 <script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Article","headline":x.title||"مقال","description":x.excerpt||"","datePublished":x.date||undefined,"inLanguage":"ar","mainEntityOfPage":url,"author":{"@type":"Person","name":"Ali Adeeb"}})}</script>
+
+<style id="v16-connection-debug">
+#status{white-space:pre-wrap}
+</style>
+<script id="v16-connection-debug-script">
+(function(){
+  const oldConnect = window.connect;
+  if(typeof oldConnect === 'function'){
+    window.connect = async function(){
+      try{
+        return await oldConnect.apply(this, arguments);
+      }catch(e){
+        const el=document.getElementById('status');
+        if(el) el.textContent='فشل الاتصال: '+(e?.message||e);
+        throw e;
+      }
+    }
+  }
+})();
+</script>
+
 </body></html>`;
 }
 function buildSitemap(){
