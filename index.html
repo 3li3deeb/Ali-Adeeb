@@ -34,6 +34,15 @@ h1,h2,h3,h4,.brand,.kicker,.tag,.btn,.filter,.read,.bookbtn,.links,.date{
 }
 </script>
 
+
+<style id="v15-1-card-images">
+.card .card-image{
+  display:block;width:100%;height:210px;object-fit:cover;
+  border-radius:13px;margin:-4px 0 18px;
+  border:1px solid var(--line);
+}
+@media(max-width:800px){.card .card-image{height:220px}}
+</style>
 </head><body>
 <nav><div class="nav"><a class="brand" href="#">Ali <span>Adeeb</span></a><div class="links"><a href="#articles">المقالات</a><a href="#books">الكتب</a><a href="#about">عن الموقع</a></div></div></nav>
 <section class="hero"><div><div class="kicker" id="tagline">مساحة للقراءة والفكرة</div><h1>Ali Adeeb</h1><p id="desc"></p><a class="btn primary" href="#articles">استكشف المقالات</a><a class="btn" href="#books">تصفح الكتب</a></div><div class="visual"><div class="monogram">AA</div></div></section>
@@ -41,4 +50,17 @@ h1,h2,h3,h4,.brand,.kicker,.tag,.btn,.filter,.read,.bookbtn,.links,.date{
 <section id="books"><div class="head"><h2>الكتب</h2><p>مكتبة قابلة للتوسع.</p></div><div id="booksGrid" class="grid"></div></section>
 <section id="about"><div class="about"><div class="kicker">عن الموقع</div><h2 id="aboutTitle">أهلاً بك في Ali Adeeb</h2><p id="aboutText">مساحة شخصية للنشر والمعرفة.</p></div></section><footer>© 2026 Ali Adeeb — جميع الحقوق محفوظة</footer>
 <div id="modal" class="modal"><div class="dialog"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
-<script>let D={site:{},articles:[],books:[]},esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));function render(){let q=search.value.toLowerCase();articlesGrid.innerHTML=D.articles.filter(x=>(x.title+' '+x.category+' '+x.excerpt+' '+x.body).toLowerCase().includes(q)).map(x=>`<article class="card"><div class="tag">${esc(x.category)}</div><h3>${esc(x.title)}</h3><p>${esc(x.excerpt)}</p><a class="read" href="article.html?id=${encodeURIComponent(x.id)}">قراءة المقال ←</a></article>`).join('')||'<p>لا توجد نتائج.</p>';booksGrid.innerHTML=D.books.map(x=>`<article class="card"><div class="tag">كتاب</div><h3>${esc(x.title)}</h3><p>${esc(x.description)}</p>${x.url?`<a class="read" href="${esc(x.url)}" target="_blank" rel="noopener">فتح الكتاب ←</a>`:''}</article>`).join('')||'<p>لا توجد كتب بعد.</p>'}function openA(id){let x=D.articles.find(a=>a.id===id);if(!x)return;modalBody.innerHTML=`<div class="tag">${esc(x.category)} · ${esc(x.date||'')}</div><h2>${esc(x.title)}</h2><p>${esc(x.body).replace(/\n/g,'<br>')}</p>`;modal.classList.add('show')}function closeModal(){modal.classList.remove('show')}search.oninput=render;fetch('content.json?'+Date.now()).then(r=>r.json()).then(x=>{D=x;desc.textContent=x.site?.description||'';tagline.textContent=x.site?.tagline||'مساحة للقراءة والفكرة';aboutTitle.textContent='أهلاً بك في '+(x.site?.name||'Ali Adeeb');aboutText.textContent=x.site?.description||'';render()}).catch(()=>{desc.textContent='تعذر تحميل المحتوى حالياً.'});</script></body></html>
+<script>let D={site:{},articles:[],books:[]},esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));function render(){
+let q=search.value.toLowerCase();
+articlesGrid.innerHTML=D.articles.filter(x=>(x.title+' '+x.category+' '+x.excerpt+' '+x.body).toLowerCase().includes(q)).map(x=>`<article class="card">
+${x.image?`<img class="card-image" src="${esc(x.image)}" alt="${esc(x.title)}" loading="lazy">`:''}
+<div class="tag">${esc(x.category)}</div><h3>${esc(x.title)}</h3><p>${esc(x.excerpt)}</p>
+<a class="read" href="article.html?id=${encodeURIComponent(x.id)}">قراءة المقال ←</a>
+</article>`).join('')||'<p>لا توجد نتائج.</p>';
+booksGrid.innerHTML=D.books.map(x=>`<article class="card">
+${x.image?`<img class="card-image" src="${esc(x.image)}" alt="${esc(x.title)}" loading="lazy">`:''}
+<div class="tag">كتاب</div><h3>${esc(x.title)}</h3><p>${esc(x.description)}</p>
+${x.url?`<a class="read" href="${esc(x.url)}" target="_blank" rel="noopener">فتح الكتاب ←</a>`:''}
+</article>`).join('')||'<p>لا توجد كتب بعد.</p>'
+}
+function openA(id){let x=D.articles.find(a=>a.id===id);if(!x)return;modalBody.innerHTML=`<div class="tag">${esc(x.category)} · ${esc(x.date||'')}</div><h2>${esc(x.title)}</h2><p>${esc(x.body).replace(/\n/g,'<br>')}</p>`;modal.classList.add('show')}function closeModal(){modal.classList.remove('show')}search.oninput=render;fetch('content.json?'+Date.now()).then(r=>r.json()).then(x=>{D=x;desc.textContent=x.site?.description||'';tagline.textContent=x.site?.tagline||'مساحة للقراءة والفكرة';aboutTitle.textContent='أهلاً بك في '+(x.site?.name||'Ali Adeeb');aboutText.textContent=x.site?.description||'';render()}).catch(()=>{desc.textContent='تعذر تحميل المحتوى حالياً.'});</script></body></html>
