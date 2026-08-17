@@ -34,28 +34,7 @@ function articlePage(x){
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>body{margin:0;background:#f5f3ee;color:#17211e;font-family:Amiri,Tahoma,Arial,sans-serif;line-height:2;font-size:19px}main{max-width:850px;width:92%;margin:auto;padding:28px 0 70px}article{background:#fff;border:1px solid #e3ddd2;border-radius:22px;padding:28px}a{color:#9a6b35;font-weight:700}.tag{color:#9a6b35;font-weight:700}.date{color:#68716c;font-size:14px}h1{font-size:38px;line-height:1.35}.excerpt{color:#68716c;font-size:20px}.cover{width:100%;max-height:520px;object-fit:cover;border-radius:16px;margin:20px 0}p{margin:0 0 20px}@media(max-width:650px){article{padding:20px}h1{font-size:30px}}</style>
 </head><body><main><a href="../">← العودة إلى الموقع</a><article><div class="tag">${esc(x.category||'متنوع')}</div><h1>${title}</h1><div class="date">${date}</div>${image}<p class="excerpt">${desc}</p>${body}</article></main>
-<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Article","headline":x.title||"مقال","description":x.excerpt||"","datePublished":x.date||undefined,"inLanguage":"ar","mainEntityOfPage":url,"author":{"@type":"Person","name":"Ali Adeeb"}})}</script>
-
-<style id="v16-connection-debug">
-#status{white-space:pre-wrap}
-</style>
-<script id="v16-connection-debug-script">
-(function(){
-  const oldConnect = window.connect;
-  if(typeof oldConnect === 'function'){
-    window.connect = async function(){
-      try{
-        return await oldConnect.apply(this, arguments);
-      }catch(e){
-        const el=document.getElementById('status');
-        if(el) el.textContent='فشل الاتصال: '+(e?.message||e);
-        throw e;
-      }
-    }
-  }
-})();
-</script>
-
+<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Article","headline":x.title||"مقال","description":x.excerpt||"","datePublished":x.date||undefined,"inLanguage":"ar","mainEntityOfPage":url,"author":{"@type":"Person","name":"Ali Adeeb"}})}<\/script>
 </body></html>`;
 }
 function buildSitemap(){
