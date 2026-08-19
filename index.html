@@ -1,4 +1,4 @@
-<!-- Al-Adeeb V16.3.1 — Restored -->
+<!-- Al-Adeeb V17 — Enhanced Reading Experience -->
 <!doctype html>
 <html lang="ar" dir="rtl">
 
@@ -32,7 +32,13 @@ rel="stylesheet">
 
 <link rel="manifest" href="site-manifest.json">
 
+
 <style>
+
+/* =====================================================
+   AL-ADEEB V17
+   BASE / COLORS
+===================================================== */
 
 :root{
 --bg:#f7f5f0;
@@ -41,7 +47,9 @@ rel="stylesheet">
 --muted:#69716d;
 --accent:#9a6b35;
 --line:#e7e0d5;
---dark:#17211e
+--dark:#17211e;
+--soft:#f1eee8;
+--shadow:0 8px 30px rgba(23,33,30,.06)
 }
 
 *{
@@ -74,17 +82,17 @@ font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif
 }
 
 
-/* =========================
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
 nav{
 position:sticky;
 top:0;
-z-index:5;
+z-index:50;
 background:#f7f5f0ee;
 border-bottom:1px solid var(--line);
-backdrop-filter:blur(8px)
+backdrop-filter:blur(10px)
 }
 
 .nav{
@@ -115,14 +123,18 @@ font-size:16px;
 font-weight:700
 }
 
+.links a{
+transition:color .2s ease
+}
+
 .links a:hover{
 color:var(--accent)
 }
 
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
 max-width:1120px;
@@ -152,7 +164,8 @@ text-align:right
 
 .hero p{
 font-size:19px;
-color:var(--muted)
+color:var(--muted);
+margin:0 0 8px
 }
 
 .btn{
@@ -162,7 +175,13 @@ border-radius:10px;
 border:1px solid var(--line);
 font-weight:700;
 font-size:15px;
-margin:10px 6px 0 0
+margin:10px 6px 0 0;
+transition:all .2s ease
+}
+
+.btn:hover{
+transform:translateY(-1px);
+box-shadow:0 4px 15px rgba(0,0,0,.05)
 }
 
 .primary{
@@ -171,9 +190,9 @@ color:white
 }
 
 
-/* =========================
-   LOGO / HERO IMAGE
-========================= */
+/* =====================================================
+   LOGO
+===================================================== */
 
 .visual{
 min-height:340px;
@@ -183,7 +202,8 @@ display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-padding:20px
+padding:20px;
+box-shadow:var(--shadow)
 }
 
 .visual img{
@@ -197,9 +217,9 @@ border-radius:18px
 }
 
 
-/* =========================
+/* =====================================================
    SECTIONS
-========================= */
+===================================================== */
 
 section{
 max-width:1120px;
@@ -219,47 +239,81 @@ font-size:30px
 
 .head p{
 color:var(--muted);
-font-size:16px
+font-size:16px;
+margin:4px 0 0
 }
 
 
-/* =========================
+/* =====================================================
    SEARCH
-========================= */
+===================================================== */
+
+.search-wrap{
+position:relative;
+margin-bottom:24px
+}
 
 .search{
 width:100%;
-padding:13px 15px;
+padding:14px 17px;
 border:1px solid var(--line);
-border-radius:12px;
+border-radius:13px;
 font:inherit;
-margin-bottom:20px;
 background:#fff;
 color:var(--text);
-outline:none
+outline:none;
+transition:border-color .2s ease,box-shadow .2s ease
 }
 
 .search:focus{
-border-color:var(--accent)
+border-color:var(--accent);
+box-shadow:0 0 0 3px rgba(154,107,53,.08)
+}
+
+.search::placeholder{
+color:#8a918d
 }
 
 
-/* =========================
-   GRID / CARDS
-========================= */
+/* =====================================================
+   GRID
+===================================================== */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:18px
+gap:20px
 }
 
+
+/* =====================================================
+   CARDS
+===================================================== */
+
 .card{
-background:white;
+background:var(--card);
 border:1px solid var(--line);
-border-radius:17px;
-padding:24px;
-overflow:hidden
+border-radius:18px;
+padding:20px;
+overflow:hidden;
+box-shadow:0 2px 8px rgba(23,33,30,.025);
+transition:transform .22s ease,box-shadow .22s ease
+}
+
+.card:hover{
+transform:translateY(-3px);
+box-shadow:var(--shadow)
+}
+
+.card .card-image{
+display:block;
+width:calc(100% + 40px);
+height:210px;
+object-fit:cover;
+border-radius:13px;
+margin:-20px -20px 18px;
+border:1px solid var(--line);
+background:var(--soft)
 }
 
 .tag{
@@ -269,48 +323,71 @@ font-weight:700
 }
 
 .card h3{
-margin:8px 0;
+margin:7px 0;
 font-size:22px;
 line-height:1.7
 }
 
 .card p{
 color:var(--muted);
-font-size:15px
+font-size:15px;
+margin:5px 0
 }
 
+
+/* =====================================================
+   READING META
+===================================================== */
+
+.article-meta{
+display:flex;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:8px;
+font-size:12px;
+color:var(--muted)
+}
+
+.article-meta span{
+display:inline-flex;
+align-items:center;
+gap:3px
+}
+
+.meta-dot{
+width:4px;
+height:4px;
+background:#aaa;
+border-radius:50%;
+display:inline-block
+}
+
+
+/* =====================================================
+   READ BUTTON
+===================================================== */
+
 .read{
-display:inline-block;
+display:inline-flex;
+align-items:center;
+gap:5px;
 margin-top:15px;
 color:var(--accent);
 font-weight:700;
-font-size:15px
+font-size:15px;
+transition:gap .2s ease
 }
 
 .read:hover{
-text-decoration:underline
+gap:9px;
+text-decoration:none
 }
 
 
-/* =========================
-   ARTICLE / BOOK IMAGES
-========================= */
-
-.card .card-image{
-display:block;
-width:100%;
-height:210px;
-object-fit:cover;
-border-radius:13px;
-margin:-4px 0 18px;
-border:1px solid var(--line);
-background:#f1eee8
-}
-
-
-/* =========================
+/* =====================================================
    INTERACTIONS
-========================= */
+===================================================== */
 
 .interactions{
 display:flex;
@@ -350,9 +427,9 @@ border-color:#d8c1a5
 }
 
 
-/* =========================
+/* =====================================================
    COMMENTS
-========================= */
+===================================================== */
 
 .comment-box{
 display:none;
@@ -419,9 +496,9 @@ margin-top:3px
 }
 
 
-/* =========================
+/* =====================================================
    ABOUT
-========================= */
+===================================================== */
 
 .about{
 background:var(--dark);
@@ -435,19 +512,19 @@ color:#bfc8c3
 }
 
 
-/* =========================
-   MODAL
-========================= */
+/* =====================================================
+   MODAL / READING VIEW
+===================================================== */
 
 .modal{
 position:fixed;
 inset:0;
-background:#0008;
+background:rgba(0,0,0,.55);
 display:none;
 align-items:center;
 justify-content:center;
 padding:20px;
-z-index:20
+z-index:100
 }
 
 .modal.show{
@@ -456,27 +533,69 @@ display:flex
 
 .dialog{
 background:white;
-max-width:760px;
+max-width:800px;
 width:100%;
 max-height:90vh;
 overflow:auto;
-border-radius:18px;
-padding:30px;
-color:var(--text)
+border-radius:20px;
+padding:32px;
+color:var(--text);
+box-shadow:0 20px 70px rgba(0,0,0,.2)
+}
+
+.dialog h2{
+font-size:30px;
+line-height:1.5;
+margin:8px 0 12px
+}
+
+.dialog p{
+font-size:18px;
+line-height:2.25;
+color:#303936
+}
+
+.dialog-image{
+display:block;
+width:100%;
+max-height:420px;
+object-fit:cover;
+border-radius:15px;
+margin:15px 0 25px
 }
 
 .close{
 float:left;
 border:0;
 background:none;
-font-size:25px;
-cursor:pointer
+font-size:28px;
+cursor:pointer;
+color:var(--muted)
+}
+
+.close:hover{
+color:var(--text)
 }
 
 
-/* =========================
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty{
+grid-column:1/-1;
+background:#fff;
+border:1px dashed var(--line);
+border-radius:15px;
+padding:30px;
+text-align:center;
+color:var(--muted)
+}
+
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer{
 padding:32px;
@@ -486,9 +605,9 @@ border-top:1px solid var(--line)
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:800px){
 
@@ -498,7 +617,8 @@ display:none
 
 .hero{
 grid-template-columns:1fr;
-padding-top:50px
+padding-top:50px;
+gap:35px
 }
 
 .visual{
@@ -531,12 +651,25 @@ h1{
 font-size:58px
 }
 
+.dialog{
+padding:23px;
+max-height:92vh
+}
+
+.dialog h2{
+font-size:25px
+}
+
+.dialog p{
+font-size:17px
+}
+
 }
 
 
-/* =========================
+/* =====================================================
    AMIRI / NASKH
-========================= */
+===================================================== */
 
 html,
 body,
@@ -582,9 +715,9 @@ font-weight:700 !important
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      NAVIGATION
-========================= -->
+===================================================== -->
 
 <nav>
 
@@ -596,17 +729,9 @@ Al-<span>Adeeb</span>
 
 <div class="links">
 
-<a href="#articles">
-المقالات
-</a>
-
-<a href="#books">
-الكتب
-</a>
-
-<a href="#about">
-عن الموقع
-</a>
+<a href="#articles">المقالات</a>
+<a href="#books">الكتب</a>
+<a href="#about">عن الموقع</a>
 
 </div>
 
@@ -615,9 +740,9 @@ Al-<span>Adeeb</span>
 </nav>
 
 
-<!-- =========================
+<!-- =====================================================
      HERO
-========================= -->
+===================================================== -->
 
 <section class="hero">
 
@@ -656,9 +781,9 @@ loading="eager">
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      ARTICLES
-========================= -->
+===================================================== -->
 
 <section id="articles">
 
@@ -675,12 +800,16 @@ loading="eager">
 </div>
 
 
+<div class="search-wrap">
+
 <input
 id="search"
 class="search"
 placeholder="ابحث في المقالات والكتب..."
 autocomplete="off"
 >
+
+</div>
 
 
 <div
@@ -691,9 +820,9 @@ class="grid">
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      BOOKS
-========================= -->
+===================================================== -->
 
 <section id="books">
 
@@ -718,9 +847,9 @@ class="grid">
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      ABOUT
-========================= -->
+===================================================== -->
 
 <section id="about">
 
@@ -748,15 +877,14 @@ class="grid">
 </footer>
 
 
-<!-- =========================
-     MODAL
-========================= -->
+<!-- =====================================================
+     READING MODAL
+===================================================== -->
 
 <div
 id="modal"
 class="modal"
-aria-hidden="true"
->
+aria-hidden="true">
 
 <div class="dialog">
 
@@ -776,10 +904,9 @@ aria-label="إغلاق">
 
 <script>
 
-
-/* =========================
+/* =====================================================
    DATA
-========================= */
+===================================================== */
 
 let D={
 site:{},
@@ -788,9 +915,9 @@ books:[]
 };
 
 
-/* =========================
+/* =====================================================
    SAFE TEXT
-========================= */
+===================================================== */
 
 function esc(s){
 
@@ -808,9 +935,9 @@ m=>({
 }
 
 
-/* =========================
+/* =====================================================
    SAFE ID
-========================= */
+===================================================== */
 
 function safeKey(value){
 
@@ -820,9 +947,9 @@ return String(value)
 }
 
 
-/* =========================
-   LOCAL LIKES
-========================= */
+/* =====================================================
+   LIKE SYSTEM
+===================================================== */
 
 function getLikeCount(id,type){
 
@@ -846,9 +973,9 @@ return localStorage.getItem(key)==='1';
 }
 
 
-/* =========================
+/* =====================================================
    COMMENTS
-========================= */
+===================================================== */
 
 function getComments(id,type){
 
@@ -980,9 +1107,9 @@ loadComments(id,type);
 }
 
 
-/* =========================
+/* =====================================================
    LIKE
-========================= */
+===================================================== */
 
 function toggleLike(id,type){
 
@@ -1007,19 +1134,23 @@ document.getElementById(
 'like-'+type+'-'+sid
 );
 
-
 if(liked){
 
 localStorage.removeItem(keyLiked);
 
-count=Math.max(0,count-1);
+count=Math.max(
+0,
+count-1
+);
 
 if(button){
 
 button.classList.remove('liked');
 
 button.innerHTML=
-'♡ إعجاب <span id="count-'+type+'-'+sid+'">'+count+'</span>';
+'♡ إعجاب <span id="count-'+type+'-'+sid+'">'+
+count+
+'</span>';
 
 }
 
@@ -1037,7 +1168,9 @@ if(button){
 button.classList.add('liked');
 
 button.innerHTML=
-'♥ أعجبني <span id="count-'+type+'-'+sid+'">'+count+'</span>';
+'♥ أعجبني <span id="count-'+type+'-'+sid+'">'+
+count+
+'</span>';
 
 }
 
@@ -1051,9 +1184,9 @@ count
 }
 
 
-/* =========================
+/* =====================================================
    SHARE
-========================= */
+===================================================== */
 
 function shareContent(id,type,title){
 
@@ -1075,7 +1208,6 @@ encodeURIComponent(id);
 
 }
 
-
 if(navigator.share){
 
 navigator.share({
@@ -1092,14 +1224,13 @@ url:url
 
 else if(navigator.clipboard){
 
-navigator.clipboard.writeText(url)
-
+navigator.clipboard
+.writeText(url)
 .then(()=>{
 
 alert('تم نسخ رابط المشاركة');
 
 })
-
 .catch(()=>{
 
 prompt(
@@ -1123,9 +1254,9 @@ url
 }
 
 
-/* =========================
+/* =====================================================
    INTERACTION BUTTONS
-========================= */
+===================================================== */
 
 function interactionHTML(
 id,
@@ -1152,11 +1283,9 @@ String(title||'Al-Adeeb')
 .replace(/\\/g,'\\\\')
 .replace(/'/g,"\\'");
 
-
 return `
 
 <div class="interactions">
-
 
 <button
 class="interaction-btn"
@@ -1164,8 +1293,7 @@ onclick="shareContent(
 '${safeId}',
 '${type}',
 '${safeTitle}'
-)"
->
+)">
 ↗ مشاركة
 </button>
 
@@ -1176,8 +1304,7 @@ id="like-${type}-${sid}"
 onclick="toggleLike(
 '${safeId}',
 '${type}'
-)"
->
+)">
 
 ${liked?'♥ أعجبني':'♡ إعجاب'}
 
@@ -1193,8 +1320,7 @@ class="interaction-btn"
 onclick="toggleComments(
 '${safeId}',
 '${type}'
-)"
->
+)">
 💬 تعليق
 </button>
 
@@ -1216,20 +1342,17 @@ class="comment-submit"
 onclick="addComment(
 '${safeId}',
 '${type}'
-)"
->
+)">
 إضافة التعليق
 </button>
 
 
 <div
 class="comments-list"
-id="list-${type}-${sid}"
-></div>
-
-
+id="list-${type}-${sid}">
 </div>
 
+</div>
 
 </div>
 
@@ -1238,23 +1361,46 @@ id="list-${type}-${sid}"
 }
 
 
-/* =========================
+/* =====================================================
+   ESTIMATE READING TIME
+===================================================== */
+
+function readingTime(text){
+
+let words=
+String(text||'')
+.trim()
+.split(/\s+/)
+.filter(Boolean)
+.length;
+
+let minutes=
+Math.max(
+1,
+Math.ceil(words/180)
+);
+
+return minutes;
+
+}
+
+
+/* =====================================================
    RENDER
-========================= */
+===================================================== */
 
 function render(){
 
 let q=
-search.value.toLowerCase().trim();
+search.value
+.toLowerCase()
+.trim();
 
 
 /* ARTICLES */
 
-articlesGrid.innerHTML=
-
-D.articles
-
-.filter(x=>
+let filteredArticles=
+D.articles.filter(x=>
 
 (
 (x.title||'')+' '+
@@ -1267,8 +1413,12 @@ D.articles
 
 .includes(q)
 
-)
+);
 
+
+articlesGrid.innerHTML=
+
+filteredArticles
 
 .map(x=>`
 
@@ -1291,7 +1441,7 @@ onerror="this.style.display='none'"
 
 
 <div class="tag">
-${esc(x.category)}
+${esc(x.category||'مقال')}
 </div>
 
 
@@ -1301,8 +1451,29 @@ ${esc(x.title)}
 
 
 <p>
-${esc(x.excerpt)}
+${esc(x.excerpt||'')}
 </p>
+
+
+<div class="article-meta">
+
+<span>
+📖 ${readingTime(x.body)} دقيقة قراءة
+</span>
+
+${x.date?
+
+`
+<span class="meta-dot"></span>
+
+<span>
+${esc(x.date)}
+</span>
+`
+
+:''}
+
+</div>
 
 
 <a
@@ -1326,8 +1497,14 @@ x.title
 
 .join('')
 
+
 ||
-'<p>لا توجد نتائج.</p>';
+
+`
+<div class="empty">
+لا توجد مقالات مطابقة لبحثك.
+</div>
+`;
 
 
 /* BOOKS */
@@ -1367,7 +1544,7 @@ ${esc(x.title)}
 
 
 <p>
-${esc(x.description)}
+${esc(x.description||'')}
 </p>
 
 
@@ -1378,8 +1555,7 @@ ${x.url?
 class="read"
 href="${esc(x.url)}"
 target="_blank"
-rel="noopener"
->
+rel="noopener">
 فتح الكتاب ←
 </a>
 `
@@ -1401,14 +1577,19 @@ x.title
 .join('')
 
 ||
-'<p>لا توجد كتب بعد.</p>';
+
+`
+<div class="empty">
+لا توجد كتب بعد.
+</div>
+`;
 
 }
 
 
-/* =========================
-   MODAL
-========================= */
+/* =====================================================
+   ARTICLE READER
+===================================================== */
 
 function openA(id){
 
@@ -1423,11 +1604,8 @@ if(!x)return;
 modalBody.innerHTML=`
 
 <div class="tag">
-
-${esc(x.category)}
-·
-${esc(x.date||'')}
-
+${esc(x.category||'مقال')}
+${x.date?' · '+esc(x.date):''}
 </div>
 
 
@@ -1436,21 +1614,32 @@ ${esc(x.title)}
 </h2>
 
 
-${x.image?
+${
+x.image?
 
 `
 <img
-class="card-image"
+class="dialog-image"
 src="${esc(x.image)}"
 alt="${esc(x.title)}"
 >
 `
 
-:''}
+:''
+}
+
+
+<div class="article-meta">
+
+<span>
+📖 ${readingTime(x.body)} دقيقة قراءة
+</span>
+
+</div>
 
 
 <p>
-${esc(x.body).replace(
+${esc(x.body||'').replace(
 /\n/g,
 '<br>'
 )}
@@ -1481,7 +1670,9 @@ modal.setAttribute(
 }
 
 
-/* إغلاق النافذة عند الضغط خارجها */
+/* =====================================================
+   CLOSE MODAL OUTSIDE
+===================================================== */
 
 modal.addEventListener(
 'click',
@@ -1496,17 +1687,34 @@ closeModal();
 });
 
 
-/* =========================
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+'keydown',
+function(e){
+
+if(e.key==='Escape'){
+
+closeModal();
+
+}
+
+});
+
+
+/* =====================================================
    SEARCH
-========================= */
+===================================================== */
 
 search.oninput=
 render;
 
 
-/* =========================
+/* =====================================================
    LOAD CONTENT
-========================= */
+===================================================== */
 
 fetch(
 'content.json?'+Date.now()
