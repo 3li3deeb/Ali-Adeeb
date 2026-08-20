@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>المقال — Al-Adeeb</title><meta id="metaDescription" name="description" content="مقال من Al-Adeeb"><meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="site-manifest.json">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#17211e;font-family:"Amiri",Tahoma,Arial,sans-serif;line-height:2;font-size:19px}main{max-width:850px;width:92%;margin:auto;padding:28px 0 70px}.back{display:inline-block;margin-bottom:25px;color:#9a6b35;font-weight:700}article{background:#fff;border:1px solid #e3ddd2;border-radius:22px;padding:28px 30px;box-shadow:0 8px 30px #17211e0b}.tag{color:#9a6b35;font-weight:700;font-size:15px}.date{color:#68716c;font-size:14px}h1{font-size:38px;line-height:1.35;margin:10px 0 18px}.excerpt{color:#68716c;font-size:20px}.body{margin-top:28px}.body p{margin:0 0 20px}.cover{display:block;width:100%;max-height:520px;object-fit:cover;border-radius:16px;margin:20px 0}.interactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px;padding-top:16px;border-top:1px solid #e3ddd2}.interaction-btn{border:1px solid #e3ddd2;background:#fff;border-radius:9px;padding:8px 13px;font-family:inherit;cursor:pointer}.interaction-btn.liked{color:#9a6b35;background:#f7eee5}.comment-box{display:none;width:100%;margin-top:10px}.comment-box.show{display:block}.comment-input{width:100%;min-height:90px;padding:10px;border:1px solid #ddd;border-radius:10px;font:inherit}.comment-submit{margin-top:7px;border:0;background:#17211e;color:#fff;border-radius:9px;padding:8px 14px;font:inherit}.comment-item{background:#f7f5f0;border-radius:10px;padding:9px 12px;margin-top:7px;font-size:14px}.comment-date{display:block;font-size:10px;color:#68716c}
+
+.body h2{font-size:30px;line-height:1.5;margin:28px 0 12px}.body h3{font-size:25px;line-height:1.5;margin:24px 0 10px}.body blockquote{border-right:4px solid #9a6b35;background:#faf7f1;padding:10px 16px;margin:18px 0;color:#555;border-radius:8px}.body ul,.body ol{padding-right:28px}.body img{max-width:100%;height:auto;border-radius:14px;margin:14px 0}.body a{color:#9a6b35;text-decoration:underline}.body span[style]{line-height:1.9}
+@media(max-width:650px){article{padding:22px 18px}h1{font-size:30px}}
+</style></head><body><main><a id="back" class="back">← العودة إلى الموقع</a><article id="article"><p>جاري تحميل المقال...</p></article></main>
+<script>
+const id=new URLSearchParams(location.search).get('id');const $=x=>document.getElementById(x);
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function key(v){return String(v).replace(/[^a-zA-Z0-9_-]/g,'_')}
+function getLike(){return +localStorage.getItem('al-adeeb-like-count-article-'+id)||0}
+function liked(){return localStorage.getItem('al-adeeb-liked-article-'+id)==='1'}
+function comments(){try{return JSON.parse(localStorage.getItem('al-adeeb-comments-article-'+id)||'[]')}catch{return[]}}
+function interactions(){
+ let c=getLike(),l=liked(),k=key(id);
+ return `<div class="interactions"><button id="like" class="interaction-btn ${l?'liked':''}" onclick="toggleLike()"> ${l?'♥ أعجبني':'♡ إعجاب'} <span id="count">${c}</span></button><button class="interaction-btn" onclick="share()">↗ مشاركة</button><button class="interaction-btn" onclick="toggleComments()">💬 تعليق</button><div id="commentBox" class="comment-box"><textarea id="commentInput" class="comment-input" placeholder="اكتب تعليقك هنا..."></textarea><button class="comment-submit" onclick="addComment()">إضافة التعليق</button><div id="comments"></div></div></div>`
+}
+function toggleLike(){let l=liked(),c=getLike();localStorage.setItem('al-adeeb-liked-article-'+id,l?'0':'1');localStorage.setItem('al-adeeb-like-count-article-'+id,Math.max(0,c+(l?-1:1)));location.reload()}
+function toggleComments(){$('commentBox').classList.toggle('show');loadComments()}
+function loadComments(){$('comments').innerHTML=comments().map(c=>`<div class="comment-item">${esc(c.text)}<span class="comment-date">${esc(c.date)}</span></div>`).join('')}
+function addComment(){let i=$('commentInput'),t=i.value.trim();if(!t)return alert('اكتب تعليقك أولاً');let a=comments();a.push({text:t,date:new Date().toLocaleString('ar-IQ')});localStorage.setItem('al-adeeb-comments-article-'+id,JSON.stringify(a));i.value='';loadComments()}
+function share(){let u=location.href;if(navigator.share)navigator.share({title:document.title,text:'مشاركة من موقع Al-Adeeb',url:u}).catch(()=>{});else navigator.clipboard?.writeText(u).then(()=>alert('تم نسخ الرابط'))}
+function richHTML(s){
+ const src=String(s??'');
+ if(!src.trim())return '';
+ if(!/[<][a-z][\s\S]*[>]/i.test(src)) return src.split(/\n\s*\n|\n/).filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('');
+ const doc=new DOMParser().parseFromString(`<div>${src}</div>`,'text/html');
+ const allowed=new Set(['P','BR','STRONG','B','EM','I','U','S','DEL','H2','H3','UL','OL','LI','BLOCKQUOTE','A','SPAN','IMG','DIV']);
+ const clean=doc.body.firstElementChild;
+ function walk(node){
+   [...node.childNodes].forEach(n=>{
+     if(n.nodeType===1){
+       if(!allowed.has(n.tagName)){n.replaceWith(...[...n.childNodes]);return}
+       [...n.attributes].forEach(a=>{
+         const ok=(n.tagName==='A'&&a.name==='href')||(n.tagName==='A'&&a.name==='target')||(n.tagName==='A'&&a.name==='rel')||(n.tagName==='IMG'&&a.name==='src')||(n.tagName==='IMG'&&a.name==='alt')||(n.tagName==='IMG'&&a.name==='title')||(a.name==='style'&&['SPAN','DIV','P','H2','H3','BLOCKQUOTE'].includes(n.tagName));
+         if(!ok)n.removeAttribute(a.name);
+       });
+       if(n.tagName==='A'){let h=n.getAttribute('href')||'';if(!/^(https?:|mailto:|#|\/)/i.test(h))n.removeAttribute('href');else{n.setAttribute('target','_blank');n.setAttribute('rel','noopener')}}
+       if(n.tagName==='IMG'){let u=n.getAttribute('src')||'';if(!/^(https?:|data:image\/|\/|assets\/)/i.test(u))n.remove()}
+       walk(n);
+     }
+   });
+ }
+ walk(clean);
+ return clean.innerHTML;
+}
+fetch('content.json?'+Date.now()).then(r=>r.json()).then(D=>{
+ const x=(D.articles||[]).find(a=>String(a.id)===String(id));if(!x){$('article').innerHTML='<h1>المقال غير موجود</h1>';return}
+ const base=location.origin+location.pathname+'?id='+encodeURIComponent(x.id);document.title=(x.title||'مقال')+' — Al-Adeeb';$('back').href='./?return=article-card-'+encodeURIComponent(x.id);
+ $('article').innerHTML=`<div class="tag">${esc(x.category||'متنوع')}</div><h1>${esc(x.title||'مقال')}</h1><div class="date">${esc(x.date||'')}</div>${x.image?`<img class="cover" src="${esc(x.image)}" alt="${esc(x.title||'')}">`:''}<p class="excerpt">${esc(x.excerpt||'')}</p><div class="body">${richHTML(x.body)}</div>${interactions()}`;loadComments();
+}).catch(()=>$('article').innerHTML='<h1>تعذر تحميل المقال</h1>');
+</script></body></html>
