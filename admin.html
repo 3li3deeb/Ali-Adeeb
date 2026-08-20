@@ -1,38 +1,2214 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة تحكم Al-Adeeb</title>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة تحكم Al-Adeeb</title>
+
 <style>
-:root{--bg:#f5f3ee;--card:#fff;--text:#17211e;--muted:#68716c;--line:#e3ddd2;--accent:#9a6b35;--danger:#9b3d35}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif;line-height:1.8}.wrap{max-width:960px;width:94%;margin:auto;padding:25px 0 60px}.box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin:16px 0}h1{margin:0}label{display:block;font-weight:bold;margin:12px 0 5px}input,textarea,select{width:100%;padding:12px;border:1px solid #d8d1c6;border-radius:10px;font:inherit}textarea{min-height:150px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.muted{color:var(--muted);font-size:13px}.notice{padding:12px;background:#f7f2e8;border-right:4px solid var(--accent);border-radius:8px}.status{padding:11px;border-radius:10px;background:#eee;margin-top:12px}.ok{background:#e4f4e9}.warn{background:#fff1d6}.hidden{display:none}.item{border:1px solid var(--line);border-radius:14px;padding:15px;margin:10px 0}.top{display:flex;justify-content:space-between;gap:10px;align-items:center}.tag{color:var(--accent);font-size:13px;font-weight:bold}.editor{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{border:0;border-radius:10px;padding:11px 17px;background:var(--text);color:white;font-weight:bold;cursor:pointer}button.accent{background:var(--accent)}button.danger{background:var(--danger)}button.light{background:#ece9e3;color:var(--text)}.upload{border:1px dashed #b9afa0;padding:14px;border-radius:10px;background:#faf8f4}.preview{max-width:180px;max-height:120px;margin-top:10px;border-radius:8px;display:none}.cat-buttons{display:flex;gap:7px;flex-wrap:wrap}.cat-buttons button{background:#ece9e3;color:var(--text)}.cat-buttons button.active{background:var(--accent);color:#fff}@media(max-width:650px){.row{grid-template-columns:1fr}.top{display:block}.actions button{flex:1}}
-</style></head><body><main class="wrap"><h1>لوحة تحكم Al-Adeeb</h1><p class="muted">إدارة الموقع والمقالات والكتب والنشر إلى GitHub.</p>
-<section class="box"><h2>ربط GitHub</h2><div class="notice">التوكن يبقى في ذاكرة الصفحة ولا يُكتب داخل الملفات.</div><div class="row"><div><label>اسم المستخدم</label><input id="user" value="3li3deeb"></div><div><label>اسم المستودع</label><input id="repo" value="Ali-Adeeb"></div></div><label>GitHub Fine-grained Token</label><input id="token" type="password" autocomplete="off" placeholder="الصق التوكن هنا"><p class="muted">يحتاج Contents: Read and write.</p><div class="actions"><button onclick="connect()">اتصال وقراءة المحتوى</button><button class="light" onclick="clearToken()">مسح التوكن</button></div><div id="status" class="status">غير متصل</div></section>
+:root{
+  --bg:#f5f3ee;
+  --card:#fff;
+  --text:#17211e;
+  --muted:#68716c;
+  --line:#e3ddd2;
+  --accent:#9a6b35;
+  --danger:#9b3d35;
+}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
+  line-height:1.8
+}
+
+.wrap{
+  max-width:960px;
+  width:94%;
+  margin:auto;
+  padding:25px 0 60px
+}
+
+.box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  margin:16px 0
+}
+
+h1{
+  margin:0
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:12px 0 5px
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d8d1c6;
+  border-radius:10px;
+  font:inherit;
+  background:#fff;
+  color:var(--text)
+}
+
+textarea{
+  min-height:150px;
+  resize:vertical
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+
+.muted{
+  color:var(--muted);
+  font-size:13px
+}
+
+.notice{
+  padding:12px;
+  background:#f7f2e8;
+  border-right:4px solid var(--accent);
+  border-radius:8px
+}
+
+.status{
+  padding:11px;
+  border-radius:10px;
+  background:#eee;
+  margin-top:12px
+}
+
+.ok{
+  background:#e4f4e9
+}
+
+.warn{
+  background:#fff1d6
+}
+
+.hidden{
+  display:none !important
+}
+
+.item{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:15px;
+  margin:10px 0;
+  background:#fff
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center
+}
+
+.tag{
+  color:var(--accent);
+  font-size:13px;
+  font-weight:bold
+}
+
+.editor{
+  border-top:1px solid var(--line);
+  margin-top:14px;
+  padding-top:12px
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 17px;
+  background:var(--text);
+  color:white;
+  font-weight:bold;
+  cursor:pointer
+}
+
+button.accent{
+  background:var(--accent)
+}
+
+button.danger{
+  background:var(--danger)
+}
+
+button.light{
+  background:#ece9e3;
+  color:var(--text)
+}
+
+button:hover{
+  opacity:.92
+}
+
+.upload{
+  border:1px dashed #b9afa0;
+  padding:14px;
+  border-radius:10px;
+  background:#faf8f4
+}
+
+.preview{
+  max-width:240px;
+  max-height:180px;
+  margin-top:10px;
+  border-radius:10px;
+  display:none;
+  border:1px solid var(--line);
+  object-fit:cover
+}
+
+.cat-buttons{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap
+}
+
+.cat-buttons button{
+  background:#ece9e3;
+  color:var(--text);
+  padding:8px 13px
+}
+
+.cat-buttons button.active{
+  background:var(--accent);
+  color:#fff
+}
+
+/* =========================
+   RICH TEXT EDITOR
+========================= */
+
+.rich-wrap{
+  border:1px solid #d8d1c6;
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+  margin-top:8px
+}
+
+.toolbar{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  padding:8px;
+  background:#f4f1eb;
+  border-bottom:1px solid #ddd6ca;
+  position:sticky;
+  top:0;
+  z-index:2
+}
+
+.toolbar button,
+.toolbar select,
+.toolbar input{
+  width:auto;
+  margin:0;
+  padding:7px 9px;
+  border:1px solid #d8d1c6;
+  border-radius:7px;
+  background:#fff;
+  color:var(--text);
+  font:inherit;
+  font-weight:bold;
+  cursor:pointer
+}
+
+.toolbar button:hover{
+  background:#eee8de
+}
+
+.toolbar .sep{
+  width:1px;
+  height:30px;
+  background:#d8d1c6;
+  margin:0 2px
+}
+
+.rich-editor{
+  min-height:360px;
+  padding:18px;
+  outline:none;
+  line-height:2;
+  font-size:19px;
+  direction:rtl;
+  text-align:right;
+  background:#fff
+}
+
+.rich-editor:focus{
+  box-shadow:inset 0 0 0 2px #9a6b3525
+}
+
+.rich-editor:empty:before{
+  content:attr(data-placeholder);
+  color:#999
+}
+
+.rich-editor img{
+  max-width:100%;
+  height:auto;
+  border-radius:10px
+}
+
+.rich-editor blockquote{
+  border-right:4px solid var(--accent);
+  margin:14px 0;
+  padding:8px 14px;
+  background:#faf7f1;
+  color:#555
+}
+
+.rich-editor h2,
+.rich-editor h3{
+  margin:18px 0 10px
+}
+
+.rich-editor a{
+  color:var(--accent);
+  text-decoration:underline
+}
+
+.editor-title{
+  background:#f7f2e8;
+  border-right:4px solid var(--accent);
+  border-radius:8px;
+  padding:10px 12px;
+  margin-bottom:14px;
+  font-weight:bold
+}
+
+.image-note{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:12px
+}
+
+.file-name{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--muted)
+}
+
+@media(max-width:650px){
+
+  .row{
+    grid-template-columns:1fr
+  }
+
+  .top{
+    display:block
+  }
+
+  .actions button{
+    flex:1
+  }
+
+  .toolbar{
+    position:relative
+  }
+
+  .toolbar button,
+  .toolbar select{
+    font-size:13px
+  }
+
+  .rich-editor{
+    min-height:300px;
+    font-size:18px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+<h1>لوحة تحكم Al-Adeeb</h1>
+<p class="muted">
+إدارة الموقع والمقالات والكتب والنشر إلى GitHub.
+</p>
+
+<!-- =========================
+     GITHUB
+========================= -->
+
+<section class="box">
+
+<h2>ربط GitHub</h2>
+
+<div class="notice">
+التوكن يبقى في ذاكرة الصفحة ولا يُكتب داخل الملفات.
+</div>
+
+<div class="row">
+
+<div>
+<label>اسم المستخدم</label>
+<input id="user" value="3li3deeb">
+</div>
+
+<div>
+<label>اسم المستودع</label>
+<input id="repo" value="Ali-Adeeb">
+</div>
+
+</div>
+
+<label>GitHub Fine-grained Token</label>
+
+<input
+id="token"
+type="password"
+autocomplete="off"
+placeholder="الصق التوكن هنا"
+>
+
+<p class="muted">
+يحتاج Contents: Read and write.
+</p>
+
+<div class="actions">
+
+<button onclick="connect()">
+اتصال وقراءة المحتوى
+</button>
+
+<button class="light" onclick="clearToken()">
+مسح التوكن
+</button>
+
+</div>
+
+<div id="status" class="status">
+غير متصل
+</div>
+
+</section>
+
+
 <div id="app" class="hidden">
-<section class="box"><h2>إعدادات الموقع</h2><label>اسم الموقع</label><input id="siteName"><label>العنوان المختصر</label><input id="siteTagline"><label>وصف الموقع</label><textarea id="siteDesc"></textarea><button class="accent" onclick="saveSite()">حفظ الإعدادات</button></section>
-<section class="box"><h2>المقالات</h2><div id="articles"></div><button onclick="newArticle()">＋ إضافة مقال</button></section>
-<section class="box"><h2>الكتب</h2><div id="books"></div><button onclick="newBook()">＋ إضافة كتاب</button></section>
-<section class="box"><h2>النشر</h2><p class="muted">بعد التعديلات اضغط نشر التغييرات.</p><button class="accent" onclick="publish()">نشر التغييرات</button><div id="pub" class="status">لم يتم النشر بعد.</div></section>
-</div></main>
+
+<!-- =========================
+     SITE SETTINGS
+========================= -->
+
+<section class="box">
+
+<h2>إعدادات الموقع</h2>
+
+<label>اسم الموقع</label>
+<input id="siteName">
+
+<label>العنوان المختصر</label>
+<input id="siteTagline">
+
+<label>وصف الموقع</label>
+<textarea id="siteDesc"></textarea>
+
+<button class="accent" onclick="saveSite()">
+حفظ الإعدادات
+</button>
+
+</section>
+
+
+<!-- =========================
+     ARTICLES
+========================= -->
+
+<section class="box">
+
+<h2>المقالات</h2>
+
+<div id="articles"></div>
+
+<button onclick="newArticle()">
+＋ إضافة مقال
+</button>
+
+</section>
+
+
+<!-- =========================
+     BOOKS
+========================= -->
+
+<section class="box">
+
+<h2>الكتب</h2>
+
+<div id="books"></div>
+
+<button onclick="newBook()">
+＋ إضافة كتاب
+</button>
+
+</section>
+
+
+<!-- =========================
+     PUBLISH
+========================= -->
+
+<section class="box">
+
+<h2>النشر</h2>
+
+<p class="muted">
+بعد التعديلات اضغط نشر التغييرات.
+</p>
+
+<button class="accent" onclick="publish()">
+نشر التغييرات
+</button>
+
+<div id="pub" class="status">
+لم يتم النشر بعد.
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+
 <script>
-let D=null,SHA=null,$=id=>document.getElementById(id),v=id=>$(id).value.trim(),categories=['متنوع','ثقافة','فكر','علم','تاريخ','أدب','مجتمع','تقنية','دين','أخبار'];
-const api=()=>`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/content.json`;
-async function gh(m,u,b){let r=await fetch(u,{method:m,headers:{Authorization:'Bearer '+v('token'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:b?JSON.stringify(b):undefined});let j=await r.json();if(!r.ok)throw Error(j.message||r.status);return j}
-function decode(c){let bin=atob(c.replace(/\n/g,'')),bytes=Uint8Array.from(bin,x=>x.charCodeAt(0));return JSON.parse(new TextDecoder().decode(bytes))}
-function encode(s){let bytes=new TextEncoder().encode(s),bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(bin)}
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function uploadFile(file,path){let buf=await file.arrayBuffer(),bytes=new Uint8Array(buf),bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));let content=btoa(bin);let url=`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/${path}`;let existing=null;try{existing=await gh('GET',url)}catch(e){}let body={message:'Upload '+path,content};if(existing?.sha)body.sha=existing.sha;let r=await gh('PUT',url,body);return path}
-async function connect(){try{$('status').textContent='جاري الاتصال بـ GitHub...';let r=await gh('GET',api());SHA=r.sha;D=decode(r.content);D.site=D.site||{};D.articles=D.articles||[];D.books=D.books||[];$('app').classList.remove('hidden');loadSite();render();$('status').textContent='تم الاتصال بنجاح ✓';$('status').className='status ok'}catch(e){$('status').textContent='فشل الاتصال: '+e.message;$('status').className='status warn'}}
-function clearToken(){$('token').value='';$('status').textContent='تم مسح التوكن'}
-function loadSite(){$('siteName').value=D.site.name||'Al-Adeeb';$('siteTagline').value=D.site.tagline||'مساحة للقراءة والفكرة';$('siteDesc').value=D.site.description||''}
-function saveSite(){D.site.name=v('siteName')||'Al-Adeeb';D.site.tagline=v('siteTagline');D.site.description=v('siteDesc');alert('تم الحفظ مؤقتاً. اضغط نشر.')}
-function catBtns(i,val){return `<div class="cat-buttons">${categories.map(c=>`<button type="button" class="${c===val?'active':''}" onclick="setCat(${i},'${c}')">${c}</button>`).join('')}</div><input id="ac${i}" value="${esc(val||'متنوع')}" readonly style="margin-top:7px">`}
-function setCat(i,c){$('ac'+i).value=c;render();toggle('ae'+i)}
+
+/* =========================
+   DATA
+========================= */
+
+let D=null;
+let SHA=null;
+
+const $=id=>document.getElementById(id);
+
+const v=id=>$(id).value.trim();
+
+const categories=[
+  'متنوع',
+  'ثقافة',
+  'فكر',
+  'علم',
+  'تاريخ',
+  'أدب',
+  'مجتمع',
+  'تقنية',
+  'دين',
+  'أخبار'
+];
+
+
+/* =========================
+   GITHUB API
+========================= */
+
+const api=()=>`
+https://api.github.com/repos/
+${v('user')}/${v('repo')}/contents/content.json
+`.replace(/\s+/g,'');
+
+
+async function gh(method,url,body){
+
+  const r=await fetch(url,{
+    method:method,
+
+    headers:{
+      Authorization:'Bearer '+v('token'),
+      Accept:'application/vnd.github+json',
+      'Content-Type':'application/json'
+    },
+
+    body:body
+      ?JSON.stringify(body)
+      :undefined
+  });
+
+  const j=await r.json();
+
+  if(!r.ok){
+    throw Error(j.message||r.status)
+  }
+
+  return j;
+}
+
+
+/* =========================
+   BASE64
+========================= */
+
+function decode(c){
+
+  let bin=atob(
+    c.replace(/\n/g,'')
+  );
+
+  let bytes=Uint8Array.from(
+    bin,
+    x=>x.charCodeAt(0)
+  );
+
+  return JSON.parse(
+    new TextDecoder().decode(bytes)
+  );
+}
+
+
+function encode(s){
+
+  let bytes=new TextEncoder().encode(s);
+
+  let bin='';
+
+  for(let i=0;i<bytes.length;i+=8192){
+
+    bin+=String.fromCharCode(
+      ...bytes.subarray(i,i+8192)
+    );
+
+  }
+
+  return btoa(bin);
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function esc(s){
+
+  return String(s??'').replace(
+    /[&<>"']/g,
+    m=>({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[m])
+  );
+}
+
+
+/* =========================
+   UPLOAD FILE
+========================= */
+
+async function uploadFile(file,path){
+
+  if(!file){
+    throw Error('لم يتم اختيار ملف.')
+  }
+
+  const buf=await file.arrayBuffer();
+
+  const bytes=new Uint8Array(buf);
+
+  let bin='';
+
+  for(let i=0;i<bytes.length;i+=8192){
+
+    bin+=String.fromCharCode(
+      ...bytes.subarray(i,i+8192)
+    );
+
+  }
+
+  const content=btoa(bin);
+
+  const url=
+    `https://api.github.com/repos/${v('user')}/${v('repo')}/contents/${path}`;
+
+  let existing=null;
+
+  try{
+    existing=await gh('GET',url);
+  }catch(e){
+    existing=null;
+  }
+
+  const body={
+    message:'Upload '+path,
+    content:content
+  };
+
+  if(existing && existing.sha){
+    body.sha=existing.sha;
+  }
+
+  await gh('PUT',url,body);
+
+  return path;
+}
+
+
+/* =========================
+   CONNECT
+========================= */
+
+async function connect(){
+
+  try{
+
+    $('status').textContent=
+      'جاري الاتصال بـ GitHub...';
+
+    $('status').className='status';
+
+    const r=await gh(
+      'GET',
+      api()
+    );
+
+    SHA=r.sha;
+
+    D=decode(r.content);
+
+    D.site=D.site||{};
+    D.articles=D.articles||[];
+    D.books=D.books||[];
+
+    $('app').classList.remove('hidden');
+
+    loadSite();
+
+    render();
+
+    $('status').textContent=
+      'تم الاتصال بنجاح ✓';
+
+    $('status').className=
+      'status ok';
+
+  }catch(e){
+
+    $('status').textContent=
+      'فشل الاتصال: '+e.message;
+
+    $('status').className=
+      'status warn';
+
+  }
+
+}
+
+
+/* =========================
+   CLEAR TOKEN
+========================= */
+
+function clearToken(){
+
+  $('token').value='';
+
+  $('status').textContent=
+    'تم مسح التوكن';
+
+  $('status').className='status';
+
+}
+
+
+/* =========================
+   SITE
+========================= */
+
+function loadSite(){
+
+  $('siteName').value=
+    D.site.name||'Al-Adeeb';
+
+  $('siteTagline').value=
+    D.site.tagline||
+    'مساحة للقراءة والفكرة';
+
+  $('siteDesc').value=
+    D.site.description||'';
+
+}
+
+
+function saveSite(){
+
+  D.site.name=
+    v('siteName')||'Al-Adeeb';
+
+  D.site.tagline=
+    v('siteTagline');
+
+  D.site.description=
+    v('siteDesc');
+
+  alert(
+    'تم الحفظ مؤقتاً. اضغط نشر.'
+  );
+
+}
+
+
+/* =========================
+   CATEGORY BUTTONS
+========================= */
+
+function catBtns(i,val){
+
+  return `
+    <div class="cat-buttons">
+
+      ${categories.map(c=>`
+
+        <button
+          type="button"
+          class="${c===val?'active':''}"
+          onclick="setCat(${i},'${c}')"
+        >
+          ${c}
+        </button>
+
+      `).join('')}
+
+    </div>
+
+    <input
+      id="ac${i}"
+      value="${esc(val||'متنوع')}"
+      readonly
+      style="margin-top:7px"
+    >
+  `;
+}
+
+
+function setCat(i,c){
+
+  $('ac'+i).value=c;
+
+  render();
+
+  setTimeout(()=>{
+
+    const editor=
+      $('ae'+i);
+
+    if(editor){
+      editor.classList.remove('hidden');
+    }
+
+  },0);
+
+}
+
+
+/* =========================
+   SAVE CURRENT EDITOR
+========================= */
+
+let savedRange=null;
+let activeEditor=null;
+
+
+document.addEventListener(
+  'selectionchange',
+  function(){
+
+    const sel=window.getSelection();
+
+    if(!sel || !sel.rangeCount){
+      return;
+    }
+
+    const node=sel.anchorNode;
+
+    if(!node){
+      return;
+    }
+
+    const editor=
+      node.nodeType===3
+      ?node.parentElement?.closest?.('.rich-editor')
+      :node.closest?.('.rich-editor');
+
+    if(editor){
+
+      activeEditor=editor;
+
+      savedRange=
+        sel.getRangeAt(0).cloneRange();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   RICH EDITOR
+========================= */
+
+function getEditor(){
+
+  if(activeEditor &&
+     document.body.contains(activeEditor)){
+
+    return activeEditor;
+
+  }
+
+  return document.querySelector(
+    '.rich-editor'
+  );
+
+}
+
+
+function restoreSelection(){
+
+  const editor=getEditor();
+
+  if(!editor){
+    return null;
+  }
+
+  editor.focus();
+
+  const sel=
+    window.getSelection();
+
+  if(
+    savedRange &&
+    editor.contains(savedRange.commonAncestorContainer)
+  ){
+
+    sel.removeAllRanges();
+
+    sel.addRange(
+      savedRange
+    );
+
+  }
+
+  return editor;
+}
+
+
+function richCmd(cmd,val=null){
+
+  const editor=
+    restoreSelection();
+
+  if(!editor){
+    return;
+  }
+
+  document.execCommand(
+    cmd,
+    false,
+    val
+  );
+
+  saveSelection();
+}
+
+
+function saveSelection(){
+
+  const sel=
+    window.getSelection();
+
+  if(
+    sel &&
+    sel.rangeCount
+  ){
+
+    const node=
+      sel.anchorNode;
+
+    const editor=
+      node?.nodeType===3
+      ?node.parentElement?.closest?.('.rich-editor')
+      :node?.closest?.('.rich-editor');
+
+    if(editor){
+
+      activeEditor=editor;
+
+      savedRange=
+        sel.getRangeAt(0).cloneRange();
+
+    }
+
+  }
+
+}
+
+
+function richBlock(value){
+
+  if(value){
+    richCmd(
+      'formatBlock',
+      value
+    );
+  }
+
+}
+
+
+function richFontSize(value){
+
+  if(value){
+
+    richCmd(
+      'fontSize',
+      value
+    );
+
+  }
+
+}
+
+
+function richColor(value){
+
+  richCmd(
+    'foreColor',
+    value
+  );
+
+}
+
+
+function richHighlight(value){
+
+  richCmd(
+    'hiliteColor',
+    value
+  );
+
+}
+
+
+function richLink(){
+
+  const url=
+    prompt(
+      'أدخل رابط الموقع:'
+    );
+
+  if(url){
+
+    richCmd(
+      'createLink',
+      url
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FOCUS EDITOR
+========================= */
+
+function focusEditor(el){
+
+  activeEditor=el;
+
+  el.focus();
+
+  const sel=
+    window.getSelection();
+
+  const range=
+    document.createRange();
+
+  range.selectNodeContents(el);
+
+  range.collapse(false);
+
+  sel.removeAllRanges();
+
+  sel.addRange(range);
+
+  savedRange=
+    range.cloneRange();
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
 function render(){
- $('articles').innerHTML=D.articles.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">${esc(x.category||'متنوع')} · ${esc(x.date||'')}</div></div><div class="actions"><button onclick="toggle('ae${i}')">تعديل</button><button class="danger" onclick="delA(${i})">حذف</button></div></div><div id="ae${i}" class="editor hidden"><label>عنوان المقال</label><input id="at${i}" value="${esc(x.title)}"><label>القسم — اختر بنقرة</label>${catBtns(i,x.category)}<div class="row"><div><label>التاريخ</label><input id="ad${i}" type="date" value="${esc(x.date||'')}"></div><div><label>صورة المقال</label><div class="upload"><input id="ai${i}" type="file" accept="image/*"><small>اختيار صورة من الهاتف ثم حفظ المقال.</small></div></div></div><label>المقدمة</label><textarea id="ax${i}">${esc(x.excerpt)}</textarea><label>نص المقال</label><textarea id="ab${i}" style="min-height:260px">${esc(x.body)}</textarea><div class="actions"><button class="accent" onclick="saveA(${i})">حفظ المقال</button></div></div></div>`).join('')||'<p class="muted">لا توجد مقالات.</p>';
- $('books').innerHTML=D.books.map((x,i)=>`<div class="item"><div class="top"><div><b>${esc(x.title||'بدون عنوان')}</b><div class="tag">كتاب</div></div><div class="actions"><button onclick="toggle('be${i}')">تعديل</button><button class="danger" onclick="delB(${i})">حذف</button></div></div><div id="be${i}" class="editor hidden"><label>عنوان الكتاب</label><input id="bt${i}" value="${esc(x.title)}"><label>المؤلف</label><input id="ba${i}" value="${esc(x.author||'')}"><label>صورة الغلاف</label><div class="upload"><input id="bi${i}" type="file" accept="image/*"><small>اختيار الغلاف من الهاتف.</small></div><label>ملف PDF للكتاب</label><div class="upload"><input id="bf${i}" type="file" accept="application/pdf"><small>سيتم رفع PDF إلى المستودع وتشغيله داخل صفحة الكتاب.</small></div><label>وصف الكتاب</label><textarea id="bd${i}">${esc(x.description)}</textarea><div class="actions"><button class="accent" onclick="saveB(${i})">حفظ الكتاب</button></div></div></div>`).join('')||'<p class="muted">لا توجد كتب.</p>'}
-function toggle(id){$(id).classList.toggle('hidden')}
-function newArticle(){D.articles.push({id:'article-'+Date.now(),title:'مقال جديد',category:'متنوع',excerpt:'',body:'',date:new Date().toISOString().slice(0,10)});render();toggle('ae'+(D.articles.length-1))}
-async function saveA(i){try{let x=D.articles[i],f=$('ai'+i).files[0];x.title=v('at'+i)||'مقال بلا عنوان';x.category=v('ac'+i)||'متنوع';x.date=v('ad'+i)||new Date().toISOString().slice(0,10);x.excerpt=v('ax'+i);x.body=v('ab'+i);if(f){let ext=(f.name.split('.').pop()||'jpg').toLowerCase(),path=`assets/articles/${x.id}.${ext}`;await uploadFile(f,path);x.image=path}render();alert('تم حفظ المقال. اضغط نشر التغييرات.') }catch(e){alert('تعذر رفع الصورة: '+e.message)}}
-function delA(i){if(confirm('حذف المقال؟')){D.articles.splice(i,1);render()}}
-function newBook(){D.books.push({id:'book-'+Date.now(),title:'كتاب جديد',description:'',author:'',file:'',image:''});render();toggle('be'+(D.books.length-1))}
-async function saveB(i){try{let x=D.books[i],img=$('bi'+i).files[0],pdf=$('bf'+i).files[0];x.title=v('bt'+i)||'كتاب بلا عنوان';x.author=v('ba'+i);x.description=v('bd'+i);if(img){let ext=(img.name.split('.').pop()||'jpg').toLowerCase();let path=`assets/books/${x.id}-cover.${ext}`;await uploadFile(img,path);x.image=path}if(pdf){let path=`assets/books/${x.id}.pdf`;await uploadFile(pdf,path);x.file=path}render();alert('تم حفظ الكتاب ورفع الملفات. اضغط نشر التغييرات.') }catch(e){alert('تعذر رفع الملف: '+e.message)}}
-function delB(i){if(confirm('حذف الكتاب؟')){D.books.splice(i,1);render()}}
-async function publish(){try{if(!D||!SHA)return alert('اتصل بـ GitHub أولاً');$('pub').textContent='جاري نشر content.json...';let r=await gh('PUT',api(),{message:'Update Al-Adeeb V16.4',content:encode(JSON.stringify(D,null,2)),sha:SHA});SHA=r.content.sha;$('pub').textContent='تم النشر بنجاح ✓';$('pub').className='status ok'}catch(e){$('pub').textContent='فشل النشر: '+e.message;$('pub').className='status warn'}}
+
+  $('articles').innerHTML=
+
+    D.articles.map((x,i)=>`
+
+      <div class="item">
+
+        <div class="top">
+
+          <div>
+
+            <b>
+              ${esc(x.title||'بدون عنوان')}
+            </b>
+
+            <div class="tag">
+              ${esc(x.category||'متنوع')}
+              ·
+              ${esc(x.date||'')}
+            </div>
+
+          </div>
+
+          <div class="actions">
+
+            <button
+              onclick="toggle('ae${i}')"
+            >
+              تعديل
+            </button>
+
+            <button
+              class="danger"
+              onclick="delA(${i})"
+            >
+              حذف
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="ae${i}"
+          class="editor hidden"
+        >
+
+          <div class="editor-title">
+            تحرير المقال
+          </div>
+
+
+          <label>
+            عنوان المقال
+          </label>
+
+          <input
+            id="at${i}"
+            value="${esc(x.title)}"
+          >
+
+
+          <label>
+            القسم — اختر بنقرة
+          </label>
+
+          ${catBtns(
+            i,
+            x.category
+          )}
+
+
+          <div class="row">
+
+            <div>
+
+              <label>
+                التاريخ
+              </label>
+
+              <input
+                id="ad${i}"
+                type="date"
+                value="${esc(x.date||'')}"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label>
+                صورة المقال
+              </label>
+
+              <div class="upload">
+
+                <input
+                  id="ai${i}"
+                  type="file"
+                  accept="image/*"
+                  onchange="previewArticleImage(${i})"
+                >
+
+                <div class="image-note">
+                  اختر صورة من الهاتف ثم اضغط حفظ المقال.
+                </div>
+
+                <div
+                  id="file-name-${i}"
+                  class="file-name"
+                ></div>
+
+                <img
+                  id="preview-${i}"
+                  class="preview"
+                  src="${esc(x.image||'')}"
+                  ${x.image?'style="display:block"':''}
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <label>
+            المقدمة
+          </label>
+
+          <textarea
+            id="ax${i}"
+          >${esc(x.excerpt)}</textarea>
+
+
+          <label>
+            نص المقال
+          </label>
+
+
+          <div class="rich-wrap">
+
+            <div
+              class="toolbar"
+              onmousedown="handleToolbarMouseDown(event)"
+            >
+
+              <button
+                type="button"
+                title="تراجع"
+                onclick="richCmd('undo')"
+              >
+                ↶
+              </button>
+
+              <button
+                type="button"
+                title="إعادة"
+                onclick="richCmd('redo')"
+              >
+                ↷
+              </button>
+
+              <span class="sep"></span>
+
+
+              <select
+                onchange="
+                  richBlock(this.value);
+                  this.selectedIndex=0
+                "
+              >
+
+                <option value="">
+                  نوع النص
+                </option>
+
+                <option value="p">
+                  فقرة
+                </option>
+
+                <option value="h2">
+                  عنوان رئيسي
+                </option>
+
+                <option value="h3">
+                  عنوان فرعي
+                </option>
+
+                <option value="blockquote">
+                  اقتباس
+                </option>
+
+              </select>
+
+
+              <select
+                onchange="
+                  richFontSize(this.value);
+                  this.selectedIndex=0
+                "
+              >
+
+                <option value="">
+                  حجم الخط
+                </option>
+
+                <option value="1">
+                  صغير جداً
+                </option>
+
+                <option value="2">
+                  صغير
+                </option>
+
+                <option value="3">
+                  عادي
+                </option>
+
+                <option value="4">
+                  كبير
+                </option>
+
+                <option value="5">
+                  كبير جداً
+                </option>
+
+                <option value="6">
+                  ضخم
+                </option>
+
+                <option value="7">
+                  ضخم جداً
+                </option>
+
+              </select>
+
+
+              <button
+                type="button"
+                onclick="richCmd('bold')"
+                title="عريض"
+              >
+                <b>B</b>
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('italic')"
+                title="مائل"
+              >
+                <i>I</i>
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('underline')"
+                title="تحته خط"
+              >
+                <u>U</u>
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('strikeThrough')"
+                title="يتوسطه خط"
+              >
+                <s>S</s>
+              </button>
+
+
+              <input
+                type="color"
+                title="لون النص"
+                value="#17211e"
+                onchange="richColor(this.value)"
+              >
+
+
+              <input
+                type="color"
+                title="تمييز النص"
+                value="#fff1a8"
+                onchange="richHighlight(this.value)"
+              >
+
+
+              <span class="sep"></span>
+
+
+              <button
+                type="button"
+                onclick="richCmd('justifyRight')"
+                title="يمين"
+              >
+                ☰
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('justifyCenter')"
+                title="وسط"
+              >
+                ≡
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('justifyLeft')"
+                title="يسار"
+              >
+                ☷
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('insertUnorderedList')"
+                title="قائمة نقطية"
+              >
+                • قائمة
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('insertOrderedList')"
+                title="قائمة مرقمة"
+              >
+                1. قائمة
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richLink()"
+                title="إضافة رابط"
+              >
+                🔗 رابط
+              </button>
+
+
+              <button
+                type="button"
+                onclick="richCmd('removeFormat')"
+                title="إزالة التنسيق"
+              >
+                Tx
+              </button>
+
+            </div>
+
+
+            <div
+              id="ab${i}"
+              class="rich-editor"
+              contenteditable="true"
+              data-placeholder="اكتب نص المقال هنا..."
+              onfocus="activeEditor=this"
+              onclick="activeEditor=this"
+              onkeyup="saveSelection()"
+              onmouseup="saveSelection()"
+            >${x.body||''}</div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="accent"
+              onclick="saveA(${i})"
+            >
+              حفظ المقال
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join('')
+
+    ||
+
+    '<p class="muted">لا توجد مقالات.</p>';
+
+
+  /* =========================
+     BOOKS
+  ========================= */
+
+  $('books').innerHTML=
+
+    D.books.map((x,i)=>`
+
+      <div class="item">
+
+        <div class="top">
+
+          <div>
+
+            <b>
+              ${esc(x.title||'بدون عنوان')}
+            </b>
+
+            <div class="tag">
+              كتاب
+            </div>
+
+          </div>
+
+          <div class="actions">
+
+            <button
+              onclick="toggle('be${i}')"
+            >
+              تعديل
+            </button>
+
+            <button
+              class="danger"
+              onclick="delB(${i})"
+            >
+              حذف
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="be${i}"
+          class="editor hidden"
+        >
+
+          <div class="editor-title">
+            تحرير بيانات الكتاب
+          </div>
+
+
+          <label>
+            عنوان الكتاب
+          </label>
+
+          <input
+            id="bt${i}"
+            value="${esc(x.title)}"
+          >
+
+
+          <label>
+            المؤلف
+          </label>
+
+          <input
+            id="ba${i}"
+            value="${esc(x.author||'')}"
+          >
+
+
+          <label>
+            صورة الغلاف
+          </label>
+
+          <div class="upload">
+
+            <input
+              id="bi${i}"
+              type="file"
+              accept="image/*"
+            >
+
+            <div class="image-note">
+              اختيار الغلاف من الهاتف.
+            </div>
+
+          </div>
+
+
+          <label>
+            ملف PDF للكتاب
+          </label>
+
+          <div class="upload">
+
+            <input
+              id="bf${i}"
+              type="file"
+              accept="application/pdf"
+            >
+
+            <div class="image-note">
+              سيتم رفع PDF إلى المستودع وتشغيله داخل صفحة الكتاب.
+            </div>
+
+          </div>
+
+
+          <label>
+            وصف الكتاب
+          </label>
+
+          <textarea
+            id="bd${i}"
+          >${esc(x.description)}</textarea>
+
+
+          <div class="actions">
+
+            <button
+              class="accent"
+              onclick="saveB(${i})"
+            >
+              حفظ الكتاب
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join('')
+
+    ||
+
+    '<p class="muted">لا توجد كتب.</p>';
+
+}
+
+
+/* =========================
+   TOOLBAR SELECTION
+========================= */
+
+function handleToolbarMouseDown(event){
+
+  const target=
+    event.target.closest(
+      'button,select,input'
+    );
+
+  if(!target){
+    return;
+  }
+
+  saveSelection();
+
+  /*
+    نمنع فقدان تحديد النص قبل تنفيذ
+    أمر التنسيق.
+  */
+
+  if(target.tagName==='BUTTON'){
+    event.preventDefault();
+  }
+
+}
+
+
+/* =========================
+   TOGGLE EDITOR
+========================= */
+
+function toggle(id){
+
+  const el=$(id);
+
+  if(!el){
+    return;
+  }
+
+  el.classList.toggle('hidden');
+
+  if(!el.classList.contains('hidden')){
+
+    setTimeout(()=>{
+
+      const rich=
+        el.querySelector('.rich-editor');
+
+      if(rich){
+
+        activeEditor=rich;
+
+      }
+
+    },50);
+
+  }
+
+}
+
+
+/* =========================
+   NEW ARTICLE
+========================= */
+
+function newArticle(){
+
+  const index=
+    D.articles.length;
+
+  D.articles.push({
+
+    id:'article-'+Date.now(),
+
+    title:'مقال جديد',
+
+    category:'متنوع',
+
+    excerpt:'',
+
+    body:'',
+
+    date:new Date()
+      .toISOString()
+      .slice(0,10),
+
+    image:''
+
+  });
+
+
+  render();
+
+
+  /*
+    فتح المحرر بشكل مؤكد بعد
+    اكتمال إعادة بناء DOM.
+  */
+
+  setTimeout(()=>{
+
+    const editor=
+      $('ae'+index);
+
+    if(editor){
+
+      editor.classList.remove(
+        'hidden'
+      );
+
+      editor.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+      const rich=
+        editor.querySelector(
+          '.rich-editor'
+        );
+
+      if(rich){
+
+        activeEditor=rich;
+
+        setTimeout(()=>{
+          rich.focus();
+        },250);
+
+      }
+
+    }
+
+  },50);
+
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+function previewArticleImage(i){
+
+  const input=
+    $('ai'+i);
+
+  const preview=
+    $('preview-'+i);
+
+  const fileName=
+    $('file-name-'+i);
+
+  if(
+    !input ||
+    !input.files ||
+    !input.files[0]
+  ){
+    return;
+  }
+
+  const file=
+    input.files[0];
+
+  fileName.textContent=
+    'الملف المختار: '+file.name;
+
+  preview.src=
+    URL.createObjectURL(file);
+
+  preview.style.display=
+    'block';
+
+}
+
+
+/* =========================
+   SAVE ARTICLE
+========================= */
+
+async function saveA(i){
+
+  const button=
+    event?.currentTarget;
+
+  try{
+
+    if(button){
+      button.disabled=true;
+      button.textContent=
+        'جاري الحفظ...';
+    }
+
+
+    const x=
+      D.articles[i];
+
+
+    x.title=
+      v('at'+i)||
+      'مقال بلا عنوان';
+
+
+    x.category=
+      v('ac'+i)||
+      'متنوع';
+
+
+    x.date=
+      v('ad'+i)||
+      new Date()
+        .toISOString()
+        .slice(0,10);
+
+
+    x.excerpt=
+      v('ax'+i);
+
+
+    const editor=
+      $('ab'+i);
+
+    if(editor){
+
+      x.body=
+        editor.innerHTML;
+
+    }
+
+
+    const file=
+      $('ai'+i)
+      ?.files?.[0];
+
+
+    if(file){
+
+      const ext=
+        (file.name
+          .split('.')
+          .pop()||
+          'jpg')
+          .toLowerCase();
+
+
+      const path=
+        `assets/articles/${x.id}.${ext}`;
+
+
+      x.image=
+        await uploadFile(
+          file,
+          path
+        );
+
+    }
+
+
+    render();
+
+
+    alert(
+      'تم حفظ المقال بنجاح. اضغط نشر التغييرات.'
+    );
+
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      'تعذر حفظ المقال:\n'+
+      e.message
+    );
+
+
+  }finally{
+
+    if(button){
+
+      button.disabled=false;
+
+      button.textContent=
+        'حفظ المقال';
+
+    }
+
+  }
+
+}
+
+
+/* =========================
+   DELETE ARTICLE
+========================= */
+
+function delA(i){
+
+  if(
+    confirm(
+      'هل أنت متأكد من حذف المقال؟'
+    )
+  ){
+
+    D.articles.splice(
+      i,
+      1
+    );
+
+    render();
+
+  }
+
+}
+
+
+/* =========================
+   NEW BOOK
+========================= */
+
+function newBook(){
+
+  const index=
+    D.books.length;
+
+  D.books.push({
+
+    id:'book-'+Date.now(),
+
+    title:'كتاب جديد',
+
+    description:'',
+
+    author:'',
+
+    file:'',
+
+    image:''
+
+  });
+
+
+  render();
+
+
+  setTimeout(()=>{
+
+    const editor=
+      $('be'+index);
+
+    if(editor){
+
+      editor.classList.remove(
+        'hidden'
+      );
+
+      editor.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+    }
+
+  },50);
+
+}
+
+
+/* =========================
+   SAVE BOOK
+========================= */
+
+async function saveB(i){
+
+  const button=
+    event?.currentTarget;
+
+  try{
+
+    if(button){
+
+      button.disabled=true;
+
+      button.textContent=
+        'جاري الحفظ...';
+
+    }
+
+
+    const x=
+      D.books[i];
+
+
+    const img=
+      $('bi'+i)
+      ?.files?.[0];
+
+
+    const pdf=
+      $('bf'+i)
+      ?.files?.[0];
+
+
+    x.title=
+      v('bt'+i)||
+      'كتاب بلا عنوان';
+
+
+    x.author=
+      v('ba'+i);
+
+
+    x.description=
+      v('bd'+i);
+
+
+    if(img){
+
+      const ext=
+        (
+          img.name
+          .split('.')
+          .pop()||
+          'jpg'
+        ).toLowerCase();
+
+
+      const path=
+        `assets/books/${x.id}-cover.${ext}`;
+
+
+      x.image=
+        await uploadFile(
+          img,
+          path
+        );
+
+    }
+
+
+    if(pdf){
+
+      const path=
+        `assets/books/${x.id}.pdf`;
+
+
+      x.file=
+        await uploadFile(
+          pdf,
+          path
+        );
+
+    }
+
+
+    render();
+
+
+    alert(
+      'تم حفظ الكتاب ورفع الملفات. اضغط نشر التغييرات.'
+    );
+
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      'تعذر رفع الملف:\n'+
+      e.message
+    );
+
+
+  }finally{
+
+    if(button){
+
+      button.disabled=false;
+
+      button.textContent=
+        'حفظ الكتاب';
+
+    }
+
+  }
+
+}
+
+
+/* =========================
+   DELETE BOOK
+========================= */
+
+function delB(i){
+
+  if(
+    confirm(
+      'هل أنت متأكد من حذف الكتاب؟'
+    )
+  ){
+
+    D.books.splice(
+      i,
+      1
+    );
+
+    render();
+
+  }
+
+}
+
+
+/* =========================
+   PUBLISH
+========================= */
+
+async function publish(){
+
+  try{
+
+    if(
+      !D ||
+      !SHA
+    ){
+
+      alert(
+        'اتصل بـ GitHub أولاً'
+      );
+
+      return;
+    }
+
+
+    $('pub').textContent=
+      'جاري نشر content.json...';
+
+    $('pub').className=
+      'status';
+
+
+    const r=
+      await gh(
+        'PUT',
+        api(),
+        {
+
+          message:
+            'Update Al-Adeeb V16.7 Rich Text Editor',
+
+          content:
+            encode(
+              JSON.stringify(
+                D,
+                null,
+                2
+              )
+            ),
+
+          sha:SHA
+
+        }
+      );
+
+
+    SHA=
+      r.content.sha;
+
+
+    $('pub').textContent=
+      'تم النشر بنجاح ✓';
+
+    $('pub').className=
+      'status ok';
+
+
+  }catch(e){
+
+    console.error(e);
+
+    $('pub').textContent=
+      'فشل النشر: '+e.message;
+
+    $('pub').className=
+      'status warn';
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>async function publish(){try{if(!D||!SHA)return alert('اتصل بـ GitHub أولاً');$('pub').textContent='جاري نشر content.json...';let r=await gh('PUT',api(),{message:'Update Al-Adeeb V16.4',content:encode(JSON.stringify(D,null,2)),sha:SHA});SHA=r.content.sha;$('pub').textContent='تم النشر بنجاح ✓';$('pub').className='status ok'}catch(e){$('pub').textContent='فشل النشر: '+e.message;$('pub').className='status warn'}}
 </script></body></html>
