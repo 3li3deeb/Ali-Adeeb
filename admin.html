@@ -145,6 +145,7 @@ cursor:pointer;
 
 button.accent{background:var(--accent)}
 button.danger{background:var(--danger)}
+
 button.light{
 background:#ece9e3;
 color:var(--text);
@@ -310,7 +311,7 @@ color:#777;
 font-size:12px;
 }
 
-/* الخطوط داخل المحرر */
+/* الخطوط */
 
 .font-amiri{
 font-family:"Amiri",serif;
@@ -339,8 +340,6 @@ font-family:Georgia,serif;
 .font-arial{
 font-family:Arial,sans-serif;
 }
-
-/* معاينة */
 
 .preview-box{
 border:1px solid var(--line);
@@ -398,6 +397,7 @@ font-size:18px;
 <main class="wrap">
 
 <h1>لوحة تحكم Al-Adeeb</h1>
+
 <p class="muted">
 إدارة الموقع والمقالات والكتب والنشر إلى GitHub.
 </p>
@@ -574,6 +574,13 @@ const categories=[
 
 let savedSelections={};
 
+/*
+   تخزين الملفات التي يختارها المستخدم فوراً.
+   هذا مهم جداً على الهاتف لأن بعض المتصفحات
+   قد تفقد صلاحية قراءة ملف الهاتف بعد مرور وقت.
+*/
+const fileCache={};
+
 
 /* =========================================================
    GITHUB API
@@ -604,6 +611,107 @@ return data;
 
 
 /* =========================================================
+   FILE TO BASE64
+   نسخة أكثر توافقاً مع متصفحات الهاتف
+========================================================= */
+
+function fileToBase64(file){
+
+return new Promise((resolve,reject)=>{
+
+if(!file){
+reject(
+new Error('لم يتم اختيار ملف.')
+);
+return;
+}
+
+const reader=new FileReader();
+
+reader.onload=()=>{
+try{
+
+const result=String(reader.result||'');
+
+const comma=result.indexOf(',');
+
+if(comma===-1){
+reject(
+new Error('تعذر قراءة الملف.')
+);
+return;
+}
+
+resolve(
+result.substring(comma+1)
+);
+
+}catch(e){
+reject(e);
+}
+};
+
+reader.onerror=()=>{
+reject(
+new Error(
+'تعذر قراءة الملف من الهاتف. أعد اختيار الملف وحاول مرة أخرى.'
+)
+);
+};
+
+reader.onabort=()=>{
+reject(
+new Error(
+'تم إلغاء قراءة الملف.'
+)
+);
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* =========================================================
+   CACHE FILE
+========================================================= */
+
+async function cacheFileInput(input){
+
+if(!input || !input.files || !input.files[0]){
+return;
+}
+
+const file=input.files[0];
+
+try{
+
+const base64=await fileToBase64(file);
+
+fileCache[input.id]={
+name:file.name,
+type:file.type,
+size:file.size,
+base64:base64
+};
+
+}catch(e){
+
+delete fileCache[input.id];
+
+alert(
+'تعذر قراءة الملف من الهاتف:\n'+
+e.message
+);
+
+}
+
+}
+
+
+/* =========================================================
    ENCODE / DECODE
 ========================================================= */
 
@@ -619,6 +727,7 @@ x=>x.charCodeAt(0)
 return JSON.parse(
 new TextDecoder().decode(bytes)
 );
+
 }
 
 
@@ -633,12 +742,15 @@ let i=0;
 i<bytes.length;
 i+=8192
 ){
+
 bin+=String.fromCharCode(
 ...bytes.subarray(i,i+8192)
 );
+
 }
 
 return btoa(bin);
+
 }
 
 
@@ -666,31 +778,19 @@ m=>({
    UPLOAD FILE
 ========================================================= */
 
-async function uploadFile(file,path){
+async function uploadFile(file,path,preloadedBase64=null){
+
+let content=preloadedBase64;
+
+if(!content){
 
 if(!file){
 throw Error('لم يتم اختيار ملف.');
 }
 
-let buffer=await file.arrayBuffer();
-
-let bytes=new Uint8Array(buffer);
-
-let bin='';
-
-for(
-let i=0;
-i<bytes.length;
-i+=8192
-){
-
-bin+=String.fromCharCode(
-...bytes.subarray(i,i+8192)
-);
+content=await fileToBase64(file);
 
 }
-
-let content=btoa(bin);
 
 let url=
 `https://api.github.com/repos/${v('user')}/${v('repo')}/contents/${path}`;
@@ -698,7 +798,9 @@ let url=
 let existing=null;
 
 try{
+
 existing=await gh('GET',url);
+
 }catch(e){}
 
 let body={
@@ -710,9 +812,14 @@ if(existing?.sha){
 body.sha=existing.sha;
 }
 
-let result=await gh('PUT',url,body);
+let result=await gh(
+'PUT',
+url,
+body
+);
 
 return result;
+
 }
 
 
@@ -735,9 +842,11 @@ api()
 );
 
 if(!r.content||!r.sha){
+
 throw Error(
 'تعذر قراءة content.json.'
 );
+
 }
 
 SHA=r.sha;
@@ -982,10 +1091,10 @@ value="${esc(x.date||'')}">
 id="ai${i}"
 type="file"
 accept="image/*"
-onchange="previewImage(this,'ap${i}')">
+onchange="handleImageSelect(this,'ap${i}')">
 
 <small>
-اختيار صورة من الهاتف ثم حفظ المقال.
+اختر صورة من الهاتف ثم احفظ المقال.
 </small>
 
 <img
@@ -1118,7 +1227,7 @@ value="${esc(x.author||'')}">
 id="bi${i}"
 type="file"
 accept="image/*"
-onchange="previewImage(this,'bp${i}')">
+onchange="handleImageSelect(this,'bp${i}')">
 
 <small>
 اختيار الغلاف من الهاتف.
@@ -1141,7 +1250,8 @@ ${x.image?`src="${esc(x.image)}" style="display:block"`:''}>
 <input
 id="bf${i}"
 type="file"
-accept="application/pdf">
+accept="application/pdf"
+onchange="cacheFileInput(this)">
 
 <small>
 سيتم رفع PDF إلى المستودع وتشغيله داخل صفحة الكتاب.
@@ -1184,6 +1294,68 @@ onclick="saveB(${i})">
 `).join('') ||
 
 '<p class="muted">لا توجد كتب.</p>';
+
+}
+
+
+/* =========================================================
+   IMAGE SELECT
+========================================================= */
+
+async function handleImageSelect(input,previewId){
+
+const file=input?.files?.[0];
+
+const img=$(previewId);
+
+if(!file){
+
+if(img){
+img.style.display='none';
+}
+
+delete fileCache[input.id];
+
+return;
+}
+
+try{
+
+if(img){
+
+img.src=URL.createObjectURL(file);
+img.style.display='block';
+
+}
+
+/*
+   نقرأ الصورة فور اختيارها ونخزنها.
+   بذلك لا نعتمد على صلاحية ملف الهاتف
+   عند الضغط على حفظ بعد عدة دقائق.
+*/
+
+await cacheFileInput(input);
+
+if(!fileCache[input.id]){
+
+throw Error(
+'لم يتم الاحتفاظ بالصورة في ذاكرة الصفحة.'
+);
+
+}
+
+}catch(e){
+
+if(img){
+img.style.display='none';
+}
+
+alert(
+'تعذر تجهيز الصورة:\n'+
+e.message
+);
+
+}
 
 }
 
@@ -1489,6 +1661,7 @@ return active;
 }
 
 return document.querySelector('.rich-editor');
+
 }
 
 
@@ -1532,6 +1705,7 @@ let selection=window.getSelection();
 selection.removeAllRanges();
 
 try{
+
 selection.addRange(
 savedRange.range
 );
@@ -1625,31 +1799,11 @@ if(!editor)return;
 
 editor.focus();
 
-let selection=window.getSelection();
-
-if(!selection.rangeCount){
-return;
-}
-
-let range=selection.getRangeAt(0);
-
-if(range.collapsed){
-
 document.execCommand(
 'fontName',
 false,
 font
 );
-
-}else{
-
-document.execCommand(
-'fontName',
-false,
-font
-);
-
-}
 
 saveSelection();
 
@@ -1844,8 +1998,13 @@ savedRange?.editor ||
 getActiveEditor();
 
 if(!editor){
-alert('ضع المؤشر داخل نص المقال أولاً.');
+
+alert(
+'ضع المؤشر داخل نص المقال أولاً.'
+);
+
 return;
+
 }
 
 let input=document.createElement('input');
@@ -1855,11 +2014,18 @@ input.accept='image/*';
 
 input.onchange=async()=>{
 
-let file=input.files[0];
+let file=input.files?.[0];
 
 if(!file)return;
 
 try{
+
+/*
+   نقرأ الملف فور اختياره قبل أي عملية أخرى.
+*/
+
+let base64=
+await fileToBase64(file);
 
 let articleId=
 editor.id.replace('ab','');
@@ -1868,7 +2034,11 @@ let article=
 D.articles[parseInt(articleId)];
 
 if(!article){
-throw Error('تعذر تحديد المقال.');
+
+throw Error(
+'تعذر تحديد المقال.'
+);
+
 }
 
 let ext=
@@ -1878,8 +2048,17 @@ let ext=
 let path=
 `assets/articles/${article.id}-inline-${Date.now()}.${ext}`;
 
-let result=
-await uploadFile(file,path);
+
+/*
+   نرسل النسخة المقروءة مسبقاً إلى GitHub.
+*/
+
+await uploadFile(
+null,
+path,
+base64
+);
+
 
 restoreSelection();
 
@@ -1913,13 +2092,14 @@ selection.addRange(range);
 saveSelection();
 
 alert(
-'تم رفع الصورة وإدراجها داخل المقال.'
+'تم رفع الصورة وإدراجها داخل المقال ✓'
 );
 
 }catch(e){
 
 alert(
-'تعذر رفع الصورة: '+e.message
+'تعذر رفع الصورة:\n'+
+e.message
 );
 
 }
@@ -2038,8 +2218,23 @@ try{
 
 let x=D.articles[i];
 
+if(!x){
+throw Error('تعذر تحديد المقال.');
+}
+
+let imageInput=
+$('ai'+i);
+
 let imageFile=
-$('ai'+i)?.files?.[0];
+imageInput?.files?.[0];
+
+let cachedImage=
+fileCache[imageInput?.id];
+
+
+/* =========================
+   TEXT
+========================= */
 
 x.title=
 v('at'+i)||
@@ -2062,7 +2257,9 @@ x.body=
 $('ab'+i)?.innerHTML||'';
 
 
-/* COVER IMAGE */
+/* =========================
+   COVER IMAGE
+========================= */
 
 if(imageFile){
 
@@ -2073,20 +2270,47 @@ let ext=
 let path=
 `assets/articles/${x.id}.${ext}`;
 
+
+/*
+   نستخدم النسخة الموجودة في الذاكرة
+   إذا كانت قد قُرئت عند اختيار الصورة.
+*/
+
+if(cachedImage?.base64){
+
+await uploadFile(
+null,
+path,
+cachedImage.base64
+);
+
+}else{
+
+/*
+   احتياطياً إذا لم تكن الصورة مخزنة،
+   نقرأها الآن.
+*/
+
 await uploadFile(
 imageFile,
 path
 );
+
+}
 
 x.image=path;
 
 }
 
 
+/* =========================
+   RENDER
+========================= */
+
 render();
 
 alert(
-'تم حفظ المقال بنجاح.\n\nاضغط "نشر التغييرات" حتى يظهر على الموقع.'
+'تم حفظ المقال بنجاح ✓\n\nاضغط "نشر التغييرات" حتى يظهر على الموقع.'
 );
 
 }catch(e){
@@ -2162,11 +2386,27 @@ try{
 
 let x=D.books[i];
 
+if(!x){
+throw Error('تعذر تحديد الكتاب.');
+}
+
+let imageInput=
+$('bi'+i);
+
+let pdfInput=
+$('bf'+i);
+
 let imageFile=
-$('bi'+i)?.files?.[0];
+imageInput?.files?.[0];
 
 let pdfFile=
-$('bf'+i)?.files?.[0];
+pdfInput?.files?.[0];
+
+let cachedImage=
+fileCache[imageInput?.id];
+
+let cachedPdf=
+fileCache[pdfInput?.id];
 
 
 x.title=
@@ -2180,7 +2420,9 @@ x.description=
 v('bd'+i);
 
 
-/* COVER */
+/* =========================
+   COVER
+========================= */
 
 if(imageFile){
 
@@ -2191,27 +2433,53 @@ let ext=
 let path=
 `assets/books/${x.id}-cover.${ext}`;
 
+if(cachedImage?.base64){
+
+await uploadFile(
+null,
+path,
+cachedImage.base64
+);
+
+}else{
+
 await uploadFile(
 imageFile,
 path
 );
+
+}
 
 x.image=path;
 
 }
 
 
-/* PDF */
+/* =========================
+   PDF
+========================= */
 
 if(pdfFile){
 
 let path=
 `assets/books/${x.id}.pdf`;
 
+if(cachedPdf?.base64){
+
+await uploadFile(
+null,
+path,
+cachedPdf.base64
+);
+
+}else{
+
 await uploadFile(
 pdfFile,
 path
 );
+
+}
 
 x.file=path;
 
@@ -2221,7 +2489,7 @@ x.file=path;
 render();
 
 alert(
-'تم حفظ الكتاب ورفع الملفات بنجاح.\n\nاضغط "نشر التغييرات".'
+'تم حفظ الكتاب ورفع الملفات بنجاح ✓\n\nاضغط "نشر التغييرات".'
 );
 
 }catch(e){
@@ -2404,7 +2672,7 @@ await gh(
 api(),
 {
 message:
-'Update Al-Adeeb V16.6 Rich Text Editor',
+'Update Al-Adeeb V16.7 File Upload Fix',
 
 content:
 encode(
