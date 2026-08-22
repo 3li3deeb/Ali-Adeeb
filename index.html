@@ -1,15 +1,34 @@
 <!doctype html>
-
 <html lang="ar" dir="rtl">
-<head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Al-Adeeb</title><meta name="description" content="Al-Adeeb — مساحة للقراءة والفكرة، مقالات وكتب.">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Al-Adeeb</title>
+
+<meta name="description" content="Al-Adeeb — مساحة للقراءة والفكرة، مقالات وكتب.">
 <meta name="author" content="Al-Adeeb">
-<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://3li3deeb.github.io/Ali-Adeeb/"><meta property="og:site_name" content="Al-Adeeb">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<link rel="canonical" href="https://3li3deeb.github.io/Ali-Adeeb/">
+
+<meta property="og:site_name" content="Al-Adeeb">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Al-Adeeb">
 <meta property="og:description" content="مساحة للقراءة والفكرة، مقالات وقراءات وكتب.">
-<meta property="og:url" content="https://3li3deeb.github.io/Ali-Adeeb/"><meta name="twitter:card" content="summary_large_image"><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet"><link rel="manifest" href="site-manifest.json"><style>
+<meta property="og:url" content="https://3li3deeb.github.io/Ali-Adeeb/">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="manifest" href="site-manifest.json">
+
+<style>
 
 /* =========================================================
    VARIABLES
@@ -21,6 +40,7 @@
 --text:#18201d;
 --muted:#69716d;
 --accent:#9a6b35;
+--accent-dark:#765025;
 --line:#e7e0d5;
 --dark:#17211e;
 }
@@ -47,12 +67,6 @@ font-size:17px;
 line-height:2;
 position:relative;
 overflow-x:hidden;
-transition:opacity .28s ease,transform .28s ease;
-}
-
-body.page-leaving{
-opacity:0;
-transform:translateY(8px);
 }
 
 a{
@@ -64,7 +78,7 @@ button,
 input,
 textarea,
 select{
-font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+font-family:inherit;
 }
 
 
@@ -73,102 +87,48 @@ font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
 ========================================================= */
 
 body::before{
-
 content:
 "A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة
- ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A
- ن  ص  و  ر  ة  ف  ك  ر  ة";
+ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A
+ن  ص  و  ر  ة  ف  ك  ر  ة";
 
 position:fixed;
-
 inset:-8%;
-
 z-index:-2;
-
 pointer-events:none;
 
 font-family:Georgia,"Amiri",serif;
-
 font-size:34px;
-
 line-height:3.1;
-
 letter-spacing:12px;
-
 word-spacing:18px;
 
-color:#9a6b35;
-
+color:var(--accent);
 opacity:.025;
 
 transform:rotate(-8deg) scale(1.08);
-
 white-space:normal;
-
-animation:backgroundDrift 28s ease-in-out infinite alternate;
 }
 
-
 body::after{
-
 content:
 "Al-Adeeb  •  A  •  ع  •  أ  •  د  •  ب
- •  A  •  2026";
+•  A  •  2026";
 
 position:fixed;
-
 inset:15% -10%;
-
 z-index:-2;
-
 pointer-events:none;
 
 font-family:Georgia,"Amiri",serif;
-
 font-size:24px;
-
 line-height:5;
-
 letter-spacing:18px;
 
-color:#17211e;
-
+color:var(--dark);
 opacity:.018;
 
 transform:rotate(7deg);
-
-white-space:normal;
-
-animation:backgroundDriftReverse 34s ease-in-out infinite alternate;
-}
-
-
-/* =========================================================
-   BACKGROUND ANIMATION
-========================================================= */
-
-@keyframes backgroundDrift{
-
-from{
-transform:rotate(-8deg) scale(1.08) translate3d(-10px,-5px,0);
-}
-
-to{
-transform:rotate(-7deg) scale(1.1) translate3d(12px,10px,0);
-}
-
-}
-
-@keyframes backgroundDriftReverse{
-
-from{
-transform:rotate(7deg) translate3d(10px,8px,0);
-}
-
-to{
-transform:rotate(6deg) translate3d(-12px,-8px,0);
-}
-
 }
 
 
@@ -177,46 +137,28 @@ transform:rotate(6deg) translate3d(-12px,-8px,0);
 ========================================================= */
 
 nav{
-
 position:sticky;
-
 top:0;
-
 z-index:20;
 
 background:#f7f5f0ee;
-
 border-bottom:1px solid var(--line);
 
-backdrop-filter:blur(8px);
-
-transition:
-box-shadow .3s ease,
-background .3s ease;
-}
-
-nav:hover{
-box-shadow:0 6px 24px rgba(23,33,30,.05);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
 }
 
 .nav{
-
 max-width:1120px;
-
 width:92%;
-
 margin:auto;
 
-min-height:92px;
-
+min-height:100px;
 padding:10px 0;
 
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 gap:18px;
 }
 
@@ -226,201 +168,73 @@ gap:18px;
 ========================================================= */
 
 .brand-wrap{
-
 display:flex;
-
 flex-direction:column;
-
 align-items:flex-start;
-
-gap:5px;
+gap:6px;
 }
 
 .brand{
-
 font-weight:700;
-
-font-size:25px;
-
+font-size:28px;
 direction:ltr;
-
 line-height:1.2;
-
 cursor:pointer;
-
-display:inline-block;
 
 position:relative;
 
 transition:
-color .3s ease,
-transform .3s ease,
-letter-spacing .3s ease;
-
-animation:brandAppear .9s ease both;
-}
-
-.brand::after{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-right:0;
-
-bottom:-4px;
-
-height:2px;
-
-background:var(--accent);
-
-transform:scaleX(0);
-
-transform-origin:right;
-
-transition:transform .35s ease;
-
-border-radius:10px;
+transform .35s cubic-bezier(.2,.8,.2,1),
+letter-spacing .35s ease;
 }
 
 .brand:hover{
-
-transform:translateY(-2px);
-
+transform:translateY(-2px) scale(1.025);
 letter-spacing:.5px;
 }
 
-.brand:hover::after{
-
-transform:scaleX(1);
-
-transform-origin:left;
+.brand:active{
+transform:scale(.96);
 }
 
 .brand span{
-
 color:var(--accent);
 
 display:inline-block;
 
 transition:
-transform .3s ease,
+transform .4s ease,
 color .3s ease;
 }
 
 .brand:hover span{
-
-transform:translateY(-2px);
-color:#7f5428;
+transform:rotate(-2deg);
+color:var(--accent-dark);
 }
 
 
 /* =========================================================
-   BRAND ANIMATION
-========================================================= */
-
-@keyframes brandAppear{
-
-0%{
-opacity:0;
-transform:translateY(-12px);
-letter-spacing:5px;
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-letter-spacing:0;
-}
-
-}
-
-
-/* =========================================================
-   OLD NAV LINKS
-========================================================= */
-
-.links{
-
-display:flex;
-
-gap:24px;
-
-color:#4f5954;
-
-font-weight:700;
-}
-
-.links a{
-
-position:relative;
-
-transition:
-color .25s ease,
-transform .25s ease;
-}
-
-.links a::after{
-
-content:"";
-
-position:absolute;
-
-height:2px;
-
-bottom:-5px;
-
-right:0;
-
-left:100%;
-
-background:var(--accent);
-
-transition:left .25s ease;
-}
-
-.links a:hover{
-
-color:var(--accent);
-
-transform:translateY(-1px);
-}
-
-.links a:hover::after{
-
-left:0;
-}
-
-
-/* =========================================================
-   SECTION BUTTONS
+   SECTION NAVIGATION
 ========================================================= */
 
 .section-nav{
-
 display:flex;
-
 align-items:center;
-
 gap:3px;
 
 background:var(--accent);
 
 border-radius:11px;
-
 padding:4px 5px;
 
 white-space:nowrap;
-
 overflow-x:auto;
-
 max-width:100%;
 
 scrollbar-width:none;
 
-box-shadow:0 3px 12px rgba(154,107,53,.12);
+box-shadow:
+0 4px 14px rgba(154,107,53,.10);
 }
 
 .section-nav::-webkit-scrollbar{
@@ -428,40 +242,55 @@ display:none;
 }
 
 .section-nav a{
-
 color:#fff;
 
-padding:4px 10px;
-
+padding:5px 10px;
 border-radius:8px;
 
 font-size:14px;
-
 font-weight:700;
-
 line-height:1.5;
 
 transition:
-background .2s ease,
-transform .2s ease,
-box-shadow .2s ease;
+background .25s ease,
+transform .25s ease,
+box-shadow .25s ease;
 }
 
 .section-nav a:hover,
 .section-nav a:focus{
-
-background:#7f5428;
-
+background:var(--accent-dark);
 color:#fff;
 
 transform:translateY(-1px);
-
-box-shadow:0 3px 8px rgba(0,0,0,.12);
+box-shadow:0 4px 10px rgba(0,0,0,.08);
 }
 
 .section-nav a:active{
-
 transform:scale(.94);
+}
+
+
+/* =========================================================
+   OLD LINKS
+========================================================= */
+
+.links{
+display:flex;
+gap:24px;
+color:#4f5954;
+font-weight:700;
+}
+
+.links a{
+transition:
+color .25s ease,
+transform .25s ease;
+}
+
+.links a:hover{
+color:var(--accent);
+transform:translateY(-1px);
 }
 
 
@@ -470,19 +299,14 @@ transform:scale(.94);
 ========================================================= */
 
 .hero{
-
 max-width:1120px;
-
 width:92%;
-
 margin:auto;
 
 padding:75px 0 60px;
 
 display:grid;
-
 grid-template-columns:1.2fr .8fr;
-
 gap:50px;
 
 align-items:center;
@@ -490,76 +314,55 @@ align-items:center;
 
 .kicker,
 .tag{
-
 color:var(--accent);
-
 font-weight:700;
 }
 
-.kicker{
-
-animation:fadeUp .7s .1s ease both;
-}
-
 h1{
-
-font-family:Georgia,serif;
+font-family:Georgia,"Amiri",serif;
 
 font-size:clamp(50px,7vw,82px);
-
 line-height:1;
 
 margin:12px 0 20px;
 
 direction:ltr;
-
 text-align:right;
 
-animation:titleReveal .9s .18s ease both;
+animation:
+titleReveal .9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes titleReveal{
+from{
+opacity:0;
+transform:translateY(18px);
+filter:blur(4px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+filter:blur(0);
+}
 }
 
 .hero p{
-
 font-size:19px;
-
 color:var(--muted);
 
-animation:fadeUp .8s .3s ease both;
-}
-
-
-/* =========================================================
-   HERO ANIMATIONS
-========================================================= */
-
-@keyframes titleReveal{
-
-0%{
-opacity:0;
-transform:translateY(18px);
-letter-spacing:8px;
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-letter-spacing:0;
-}
-
+animation:
+fadeUp .9s .12s both;
 }
 
 @keyframes fadeUp{
-
 from{
 opacity:0;
-transform:translateY(14px);
+transform:translateY(12px);
 }
-
 to{
 opacity:1;
 transform:translateY(0);
 }
-
 }
 
 
@@ -568,13 +371,11 @@ transform:translateY(0);
 ========================================================= */
 
 .btn{
-
 display:inline-block;
 
 padding:11px 21px;
 
 border-radius:10px;
-
 border:1px solid var(--line);
 
 font-weight:700;
@@ -584,140 +385,84 @@ margin:10px 6px 0 0;
 transition:
 transform .25s ease,
 box-shadow .25s ease,
-background .25s ease,
-color .25s ease;
+background .25s ease;
 }
 
 .btn:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 8px 18px rgba(23,33,30,.08);
+transform:translateY(-2px);
+box-shadow:0 7px 18px rgba(23,33,30,.10);
 }
 
 .btn:active{
-
 transform:scale(.96);
 }
 
 .primary{
-
 background:var(--dark);
-
 color:white;
-}
-
-.primary:hover{
-
-background:#27352f;
 }
 
 
 /* =========================================================
-   LOGO
+   LOGO / VISUAL
 ========================================================= */
 
 .visual{
-
 min-height:340px;
 
 border-radius:26px;
 
-background:linear-gradient(
+background:
+linear-gradient(
 145deg,
 #18231f,
 #34443c
 );
 
 display:flex;
-
 align-items:center;
-
 justify-content:center;
 
 overflow:hidden;
-
 padding:20px;
 
-position:relative;
-
 box-shadow:
-0 12px 35px rgba(23,33,30,.08);
+0 18px 45px rgba(23,33,30,.10);
 
-animation:visualReveal 1s .15s ease both;
+animation:
+visualReveal 1s .15s both;
 }
 
-.visual::before{
-
-content:"";
-
-position:absolute;
-
-inset:-40%;
-
-background:radial-gradient(
-circle,
-rgba(255,255,255,.08),
-transparent 55%
-);
-
-animation:logoGlow 8s ease-in-out infinite alternate;
+@keyframes visualReveal{
+from{
+opacity:0;
+transform:translateY(20px) scale(.97);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
 }
 
 .visual img{
-
 display:block;
 
 width:100%;
-
 height:100%;
-
 max-height:300px;
 
 object-fit:contain;
 
 border-radius:18px;
 
-position:relative;
-
 transition:
-transform .6s cubic-bezier(.2,.8,.2,1),
-filter .5s ease;
+transform .7s cubic-bezier(.2,.8,.2,1),
+filter .7s ease;
 }
 
 .visual:hover img{
-
-transform:scale(1.035);
-
-filter:drop-shadow(0 10px 18px rgba(0,0,0,.15));
-}
-
-@keyframes visualReveal{
-
-from{
-opacity:0;
-transform:translateX(-18px) scale(.98);
-}
-
-to{
-opacity:1;
-transform:translateX(0) scale(1);
-}
-
-}
-
-@keyframes logoGlow{
-
-from{
-transform:translate(-5%,-4%) scale(.95);
-opacity:.5;
-}
-
-to{
-transform:translate(5%,4%) scale(1.05);
-opacity:1;
-}
-
+transform:scale(1.025);
+filter:brightness(1.04);
 }
 
 
@@ -726,66 +471,31 @@ opacity:1;
 ========================================================= */
 
 section{
-
 max-width:1120px;
-
 width:92%;
-
 margin:auto;
-
 padding:55px 0;
 }
 
 .head{
-
 margin-bottom:22px;
-
-transition:transform .3s ease;
-}
-
-.head:hover{
-
-transform:translateX(-3px);
 }
 
 .head h2{
-
 margin:0;
-
 font-size:30px;
 
-position:relative;
-
-display:inline-block;
-}
-
-.head h2::after{
-
-content:"";
-
-display:block;
-
-height:2px;
-
-width:38px;
-
-margin-top:4px;
-
-background:var(--accent);
-
-border-radius:5px;
-
 transition:
-width .35s ease;
+transform .3s ease,
+color .3s ease;
 }
 
-.head:hover h2::after{
-
-width:70px;
+.head h2:hover{
+color:var(--accent);
+transform:translateX(-3px);
 }
 
 .head p{
-
 color:var(--muted);
 }
 
@@ -795,13 +505,11 @@ color:var(--muted);
 ========================================================= */
 
 .search{
-
 width:100%;
 
 padding:13px 15px;
 
 border:1px solid var(--line);
-
 border-radius:12px;
 
 font:inherit;
@@ -809,7 +517,6 @@ font:inherit;
 margin-bottom:20px;
 
 background:#fff;
-
 color:var(--text);
 
 outline:none;
@@ -821,10 +528,10 @@ transform .25s ease;
 }
 
 .search:focus{
-
 border-color:var(--accent);
 
-box-shadow:0 0 0 4px rgba(154,107,53,.08);
+box-shadow:
+0 0 0 4px rgba(154,107,53,.08);
 
 transform:translateY(-1px);
 }
@@ -835,7 +542,6 @@ transform:translateY(-1px);
 ========================================================= */
 
 .grid{
-
 display:grid;
 
 grid-template-columns:repeat(3,1fr);
@@ -849,90 +555,101 @@ gap:18px;
 ========================================================= */
 
 .card{
-
 background:#fff;
 
 border:1px solid var(--line);
-
 border-radius:17px;
 
 padding:24px;
 
 overflow:hidden;
 
+position:relative;
+
+opacity:0;
+
+animation:
+cardReveal .65s cubic-bezier(.2,.8,.2,1) forwards;
+
 transition:
 transform .35s cubic-bezier(.2,.8,.2,1),
 box-shadow .35s ease,
 border-color .35s ease;
+}
 
+@keyframes cardReveal{
+from{
 opacity:0;
-
 transform:translateY(18px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 
-animation:cardReveal .65s ease forwards;
+.card:nth-child(2){
+animation-delay:.06s;
+}
 
-position:relative;
+.card:nth-child(3){
+animation-delay:.12s;
+}
+
+.card:nth-child(4){
+animation-delay:.18s;
+}
+
+.card:nth-child(5){
+animation-delay:.24s;
+}
+
+.card:nth-child(6){
+animation-delay:.30s;
 }
 
 .card::before{
-
 content:"";
 
 position:absolute;
 
 top:0;
-
 right:0;
 
 width:0;
-
-height:2px;
+height:3px;
 
 background:var(--accent);
 
-transition:width .35s ease;
-}
-
-.card:hover::before{
-
-width:100%;
+transition:
+width .4s cubic-bezier(.2,.8,.2,1);
 }
 
 .card:hover{
-
-transform:translateY(-7px);
+transform:
+translateY(-7px)
+scale(1.012);
 
 box-shadow:
-0 14px 32px rgba(23,33,30,.10);
+0 15px 35px rgba(23,33,30,.10);
 
-border-color:#dccfbd;
+border-color:#ddd3c4;
+}
+
+.card:hover::before{
+width:100%;
 }
 
 .card:active{
-
-transform:translateY(-3px) scale(.985);
+transform:
+translateY(-2px)
+scale(.992);
 }
-
-@keyframes cardReveal{
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-
-/* =========================================================
-   CARD IMAGE
-========================================================= */
 
 .card-image{
-
 display:block;
 
 width:100%;
-
 height:210px;
 
 object-fit:cover;
@@ -948,97 +665,56 @@ background:#f1eee8;
 cursor:zoom-in;
 
 transition:
-transform .55s cubic-bezier(.2,.8,.2,1),
-filter .4s ease;
+transform .45s cubic-bezier(.2,.8,.2,1),
+filter .45s ease;
 }
 
 .card:hover .card-image{
-
 transform:scale(1.025);
-
-filter:saturate(1.04);
+filter:brightness(1.025);
 }
 
-
-/* =========================================================
-   CARD TEXT
-========================================================= */
-
 .card h3{
-
 margin:8px 0;
 
 font-size:22px;
-
 line-height:1.7;
 
 transition:
-color .25s ease,
-transform .25s ease;
+color .3s ease,
+transform .3s ease;
 }
 
 .card:hover h3{
-
 color:var(--accent);
-
-transform:translateX(-2px);
+transform:translateX(-3px);
 }
 
 .card p{
-
 color:var(--muted);
-
 font-size:15px;
 }
 
 .read{
-
 display:inline-block;
 
 margin-top:15px;
 
 color:var(--accent);
-
 font-weight:700;
 
 transition:
-transform .25s ease,
-color .25s ease;
+transform .3s ease,
+color .3s ease;
 }
 
 .read:hover{
-
-text-decoration:none;
-
-transform:translateX(-5px);
-
-color:#7f5428;
+text-decoration:underline;
+transform:translateX(-4px);
 }
 
-
-/* =========================================================
-   CARD OPEN ANIMATION
-========================================================= */
-
-.card-opening{
-
-animation:cardOpen .35s ease both !important;
-}
-
-@keyframes cardOpen{
-
-0%{
-transform:scale(1);
-}
-
-50%{
-transform:scale(.97);
-}
-
-100%{
-transform:scale(1);
-}
-
+.read:active{
+transform:scale(.95);
 }
 
 
@@ -1047,7 +723,6 @@ transform:scale(1);
 ========================================================= */
 
 .about{
-
 background:var(--dark);
 
 color:#eef0ed;
@@ -1056,50 +731,21 @@ border-radius:25px;
 
 padding:45px;
 
-position:relative;
-
-overflow:hidden;
+box-shadow:
+0 14px 35px rgba(23,33,30,.08);
 
 transition:
-transform .35s ease,
-box-shadow .35s ease;
-}
-
-.about::before{
-
-content:"";
-
-position:absolute;
-
-width:180px;
-
-height:180px;
-
-border:1px solid rgba(255,255,255,.05);
-
-border-radius:50%;
-
-top:-80px;
-
-left:-60px;
-
-transition:transform 1s ease;
+transform .4s ease,
+box-shadow .4s ease;
 }
 
 .about:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 14px 35px rgba(23,33,30,.12);
-}
-
-.about:hover::before{
-
-transform:scale(1.35);
+transform:translateY(-4px);
+box-shadow:
+0 20px 45px rgba(23,33,30,.12);
 }
 
 .about p{
-
 color:#bfc8c3;
 }
 
@@ -1109,17 +755,14 @@ color:#bfc8c3;
 ========================================================= */
 
 .media-lightbox{
-
 position:fixed;
-
 inset:0;
 
-background:rgba(23,33,30,.86);
+background:rgba(23,33,30,.88);
 
 display:none;
 
 align-items:center;
-
 justify-content:center;
 
 padding:24px;
@@ -1127,25 +770,19 @@ padding:24px;
 z-index:100;
 
 opacity:0;
-
-transition:opacity .25s ease;
+transition:opacity .3s ease;
 }
 
 .media-lightbox.show{
-
 display:flex;
-
 opacity:1;
 }
 
 .media-lightbox img{
-
 max-width:94vw;
-
 max-height:90vh;
 
 width:auto;
-
 height:auto;
 
 object-fit:contain;
@@ -1155,45 +792,38 @@ border-radius:14px;
 box-shadow:
 0 15px 50px rgba(0,0,0,.35);
 
-animation:photoZoom .35s ease both;
+animation:
+imageOpen .35s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes photoZoom{
-
+@keyframes imageOpen{
 from{
 opacity:0;
-transform:scale(.92);
+transform:scale(.94);
 }
-
 to{
 opacity:1;
 transform:scale(1);
 }
-
 }
 
 .media-close{
-
 position:absolute;
 
 top:18px;
-
 left:22px;
 
 border:0;
 
 background:#fff;
-
 color:#17211e;
 
 width:42px;
-
 height:42px;
 
 border-radius:50%;
 
 font-size:28px;
-
 line-height:1;
 
 cursor:pointer;
@@ -1204,10 +834,8 @@ background .25s ease;
 }
 
 .media-close:hover{
-
-transform:rotate(90deg);
-
-background:#f0ece5;
+transform:rotate(90deg) scale(1.05);
+background:#f3eee7;
 }
 
 
@@ -1216,7 +844,6 @@ background:#f0ece5;
 ========================================================= */
 
 .video-frame{
-
 aspect-ratio:16/9;
 
 background:#17211e;
@@ -1225,22 +852,12 @@ border-radius:13px;
 
 overflow:hidden;
 
-transition:
-transform .35s ease,
-box-shadow .35s ease;
-}
-
-.card:hover .video-frame{
-
-transform:scale(1.015);
-
-box-shadow:0 8px 20px rgba(23,33,30,.12);
+box-shadow:
+0 8px 20px rgba(23,33,30,.08);
 }
 
 .video-frame iframe{
-
 width:100%;
-
 height:100%;
 
 border:0;
@@ -1252,7 +869,6 @@ border:0;
 ========================================================= */
 
 footer{
-
 padding:32px;
 
 text-align:center;
@@ -1260,36 +876,60 @@ text-align:center;
 color:var(--muted);
 
 border-top:1px solid var(--line);
-
-transition:color .3s ease;
-}
-
-footer:hover{
-
-color:var(--accent);
 }
 
 
 /* =========================================================
-   SCROLL REVEAL
+   LOADING
 ========================================================= */
 
-.reveal{
-
-opacity:0;
-
-transform:translateY(25px);
-
-transition:
-opacity .7s ease,
-transform .7s cubic-bezier(.2,.8,.2,1);
+.loading{
+padding:35px 10px;
+text-align:center;
+color:var(--muted);
 }
 
-.reveal.visible{
+.loading::after{
+content:"";
 
-opacity:1;
+display:block;
 
-transform:translateY(0);
+width:25px;
+height:25px;
+
+margin:12px auto 0;
+
+border:3px solid #ddd5c9;
+border-top-color:var(--accent);
+
+border-radius:50%;
+
+animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+to{
+transform:rotate(360deg);
+}
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-box{
+background:#fff4f1;
+
+border:1px solid #e8c7c0;
+
+color:#8b3b32;
+
+border-radius:12px;
+
+padding:15px;
+
+line-height:1.8;
 }
 
 
@@ -1304,98 +944,54 @@ display:none;
 }
 
 .nav{
-
 justify-content:center;
 }
 
 .brand-wrap{
-
 align-items:center;
-
 width:100%;
 }
 
 .section-nav{
-
 width:100%;
-
 justify-content:flex-start;
 }
 
 .hero{
-
 grid-template-columns:1fr;
-
 padding-top:50px;
 }
 
 .visual{
-
 min-height:240px;
 }
 
 .visual img{
-
 max-height:210px;
 }
 
 .grid{
-
 grid-template-columns:1fr;
 }
 
 body::before{
-
 font-size:27px;
-
 letter-spacing:8px;
-
 word-spacing:12px;
-
 opacity:.02;
 }
 
 body::after{
-
 font-size:20px;
-
 letter-spacing:12px;
-
 opacity:.014;
 }
 
-.card:hover{
-
-transform:translateY(-4px);
-}
-
 }
 
 
 /* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-*,
-*::before,
-*::after{
-
-animation-duration:.01ms !important;
-
-animation-iteration-count:1 !important;
-
-transition-duration:.01ms !important;
-
-scroll-behavior:auto !important;
-}
-
-}
-
-
-/* =========================================================
-   AMIRI FONT
+   FONT
 ========================================================= */
 
 html,
@@ -1404,7 +1000,6 @@ button,
 input,
 textarea,
 select{
-
 font-family:
 "Amiri",
 "Noto Naskh Arabic",
@@ -1424,7 +1019,6 @@ h4,
 .read,
 .links,
 .section-nav a{
-
 font-family:
 "Amiri",
 "Noto Naskh Arabic",
@@ -1435,7 +1029,10 @@ sans-serif !important;
 font-weight:700 !important;
 }
 
-</style><script type="application/ld+json">
+</style>
+
+
+<script type="application/ld+json">
 
 {
 "@context":"https://schema.org",
@@ -1445,121 +1042,260 @@ font-weight:700 !important;
 "inLanguage":"ar"
 }
 
-</script></head><body><!-- =========================================================
-     NAVIGATION
-========================================================= --><nav><div class="nav"><div class="brand-wrap"><a class="brand" href="index.html">
+</script>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="nav">
+
+<div class="brand-wrap">
+
+<a class="brand" href="index.html" aria-label="الصفحة الرئيسية">
 Al-<span>Adeeb</span>
-</a><div class="section-nav" aria-label="أقسام الموقع"><a href="#home">الرئيسية</a>
+</a>
 
+<div class="section-nav" aria-label="أقسام الموقع">
+
+<a href="#home">الرئيسية</a>
 <a href="#articles">المقالات</a>
-
 <a href="#books">الكتب</a>
-
 <a href="#photos">الصور</a>
-
 <a href="#videos">الفيديوهات</a>
-
 <a href="#about">من نحنُ؟</a>
 
-</div></div><div class="links"><a href="#articles">المقالات</a>
+</div>
 
+</div>
+
+
+<div class="links">
+
+<a href="#articles">المقالات</a>
 <a href="#books">الكتب</a>
-
 <a href="#about">عن الموقع</a>
 
-</div></div></nav><!-- =========================================================
-     HERO
-========================================================= --><section class="hero" id="home"><div><div class="kicker" id="tagline">
+</div>
+
+</div>
+
+</nav>
+
+
+<section class="hero" id="home">
+
+<div>
+
+<div class="kicker" id="tagline">
 مساحة للقراءة والفكرة
-</div><h1>
+</div>
+
+<h1>
 Al-Adeeb
-</h1><p id="desc"></p><a class="btn primary" href="#articles">
+</h1>
+
+<p id="desc"></p>
+
+<a class="btn primary" href="#articles">
 استكشف المقالات
-</a><a class="btn" href="#books">
+</a>
+
+<a class="btn" href="#books">
 تصفح الكتب
-</a></div><div class="visual"><img
+</a>
+
+</div>
+
+
+<div class="visual">
+
+<img
 src="logo.png"
 alt="Al-Adeeb"
 loading="eager"
+onerror="this.style.display='none'"
+>
 
-«»
+</div>
 
-</div></section><!-- =========================================================
-     ARTICLES
-========================================================= --><section id="articles" class="reveal"><div class="head"><h2>
+</section>
+
+
+<section id="articles">
+
+<div class="head">
+
+<h2>
 أحدث المقالات
-</h2><p>
+</h2>
+
+<p>
 أفكار وقراءات متنوعة.
-</p></div><input
+</p>
+
+</div>
+
+
+<input
 id="search"
 class="search"
 placeholder="ابحث في المقالات والكتب..."
 autocomplete="off"
+>
 
-«»
 
-<div id="articlesGrid" class="grid"></div></section><!-- =========================================================
-     BOOKS
-========================================================= --><section id="books" class="reveal"><div class="head"><h2>
+<div id="articlesGrid" class="grid">
+
+<div class="loading">
+جاري تحميل المقالات...
+</div>
+
+</div>
+
+</section>
+
+
+<section id="books">
+
+<div class="head">
+
+<h2>
 الكتب
-</h2><p>
-مكتبة قابلة للتوسع.
-</p></div><div id="booksGrid" class="grid"></div></section><!-- =========================================================
-     PHOTOS
-========================================================= --><section id="photos" class="reveal"><div class="head"><h2>
-الصور
-</h2><p>
-معرض الصور.
-</p></div><div id="photosGrid" class="grid"><p class="muted">
-لا توجد صور بعد.
-</p></div></section><!-- =========================================================
-     VIDEOS
-========================================================= --><section id="videos" class="reveal"><div class="head"><h2>
-الفيديوهات
-</h2><p>
-الفيديوهات المنشورة في الموقع.
-</p></div><div id="videosGrid" class="grid"><p class="muted">
-لا توجد فيديوهات بعد.
-</p></div></section><!-- =========================================================
-     ABOUT
-========================================================= --><section id="about" class="reveal"><div class="about"><div class="kicker">
-عن الموقع
-</div><h2 id="aboutTitle">
-أهلاً بك في Al-Adeeb
-</h2><p id="aboutText">
-مساحة شخصية للنشر والمعرفة.
-</p></div></section><footer>© 2026 Al-Adeeb — جميع الحقوق محفوظة
+</h2>
 
-</footer><!-- =========================================================
-     IMAGE LIGHTBOX
-========================================================= --><div
+<p>
+مكتبة قابلة للتوسع.
+</p>
+
+</div>
+
+
+<div id="booksGrid" class="grid">
+
+<div class="loading">
+جاري تحميل الكتب...
+</div>
+
+</div>
+
+</section>
+
+
+<section id="photos">
+
+<div class="head">
+
+<h2>
+الصور
+</h2>
+
+<p>
+معرض الصور.
+</p>
+
+</div>
+
+
+<div id="photosGrid" class="grid">
+
+<p class="muted">
+جاري تحميل الصور...
+</p>
+
+</div>
+
+</section>
+
+
+<section id="videos">
+
+<div class="head">
+
+<h2>
+الفيديوهات
+</h2>
+
+<p>
+الفيديوهات المنشورة في الموقع.
+</p>
+
+</div>
+
+
+<div id="videosGrid" class="grid">
+
+<p class="muted">
+جاري تحميل الفيديوهات...
+</p>
+
+</div>
+
+</section>
+
+
+<section id="about">
+
+<div class="about">
+
+<div class="kicker">
+عن الموقع
+</div>
+
+<h2 id="aboutTitle">
+أهلاً بك في Al-Adeeb
+</h2>
+
+<p id="aboutText">
+مساحة شخصية للنشر والمعرفة.
+</p>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 Al-Adeeb — جميع الحقوق محفوظة
+
+</footer>
+
+
+<div
 id="mediaLightbox"
 class="media-lightbox"
 aria-hidden="true"
 onclick="if(event.target===this)closePhoto()"
-><button
+>
+
+<button
 class="media-close"
 onclick="closePhoto()"
 aria-label="إغلاق"
-
-«»
-
+>
 ×
 </button>
 
 <img
 id="lightboxImage"
 alt=""
+>
 
-«»
+</div>
 
-</div><script>
+
+<script>
 
 /* =========================================================
    GLOBAL DATA
 ========================================================= */
 
-let D = {
+let D={
 site:{},
 articles:[],
 books:[],
@@ -1567,18 +1303,18 @@ photos:[],
 videos:[]
 };
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
 
 /* =========================================================
-   ESCAPE HTML
+   ESCAPE
 ========================================================= */
 
 function esc(s){
 
-return String(s ?? '').replace(
+return String(s??'').replace(
 /[&<>"']/g,
-m => ({
+m=>({
 '&':'&amp;',
 '<':'&lt;',
 '>':'&gt;',
@@ -1596,7 +1332,7 @@ m => ({
 
 function safeId(value){
 
-return String(value ?? '')
+return String(value??'')
 .replace(/[^a-zA-Z0-9_-]/g,'_');
 
 }
@@ -1608,16 +1344,13 @@ return String(value ?? '')
 
 function openPhoto(src,alt){
 
-const box = $('mediaLightbox');
+const box=$('mediaLightbox');
+const image=$('lightboxImage');
 
-const image = $('lightboxImage');
-
-image.src = src;
-
-image.alt = alt || '';
+image.src=src;
+image.alt=alt||'';
 
 box.classList.add('show');
-
 box.setAttribute('aria-hidden','false');
 
 document.body.style.overflow='hidden';
@@ -1627,10 +1360,9 @@ document.body.style.overflow='hidden';
 
 function closePhoto(){
 
-const box = $('mediaLightbox');
+const box=$('mediaLightbox');
 
 box.classList.remove('show');
-
 box.setAttribute('aria-hidden','true');
 
 document.body.style.overflow='';
@@ -1638,16 +1370,12 @@ document.body.style.overflow='';
 }
 
 
-/* ESC closes image */
-
 document.addEventListener(
 'keydown',
 function(e){
 
-if(e.key === 'Escape'){
-
+if(e.key==='Escape'){
 closePhoto();
-
 }
 
 }
@@ -1655,96 +1383,22 @@ closePhoto();
 
 
 /* =========================================================
-   ARTICLE / BOOK OPEN EFFECT
-========================================================= */
-
-function openContentLink(event,link){
-
-if(
-event.ctrlKey ||
-event.metaKey ||
-event.shiftKey ||
-event.altKey ||
-event.button !== 0
-){
-
-return;
-}
-
-event.preventDefault();
-
-const card =
-link.closest('.card');
-
-if(card){
-
-card.classList.add('card-opening');
-
-}
-
-document.body.classList.add('page-leaving');
-
-setTimeout(
-function(){
-
-window.location.href =
-link.href;
-
-},
-260
-);
-
-}
-
-
-/* =========================================================
-   ADD LINK EVENTS
-========================================================= */
-
-function bindContentLinks(){
-
-document
-.querySelectorAll(
-'.card .read'
-)
-.forEach(function(link){
-
-link.addEventListener(
-'click',
-function(event){
-
-openContentLink(
-event,
-this
-);
-
-}
-);
-
-});
-
-}
-
-
-/* =========================================================
-   RENDER ARTICLES
+   ARTICLES
 ========================================================= */
 
 function renderArticles(){
 
-const q = $('search').value
+const q=$('search').value
 .toLowerCase()
 .trim();
 
+const results=D.articles.filter(x=>{
 
-const results = D.articles.filter(x => {
-
-const text =
-
-(x.title || '') + ' ' +
-(x.category || '') + ' ' +
-(x.excerpt || '') + ' ' +
-(x.body || '');
+const text=
+(x.title||'')+' '+
+(x.category||'')+' '+
+(x.excerpt||'')+' '+
+(x.body||'');
 
 return text
 .toLowerCase()
@@ -1753,16 +1407,16 @@ return text
 });
 
 
-$('articlesGrid').innerHTML =
+$('articlesGrid').innerHTML=
 
-results.map((x,index) => {
+results.map(x=>{
 
-const id = safeId(x.id);
+const id=safeId(x.id);
 
-const url =
-'article.html?id=' +
-encodeURIComponent(x.id) +
-'&return=article-card-' +
+const url=
+'article.html?id='+
+encodeURIComponent(x.id)+
+'&return=article-card-'+
 encodeURIComponent(id);
 
 
@@ -1771,40 +1425,39 @@ return `
 <article
 class="card"
 id="article-card-${esc(id)}"
-style="animation-delay:${Math.min(index * 70,420)}ms"
 >
 
-${x.image ? `
+${x.image?`
 
 <img
 class="card-image"
 src="${esc(x.image)}"
-alt="${esc(x.title)}"
+alt="${esc(x.title||'')}"
 loading="lazy"
 onclick="openPhoto(this.src,this.alt)"
 onerror="this.style.display='none'"
 >
 
-` : ''}
+`:''}
 
 
 <div class="tag">
 
-${esc(x.category || 'متنوع')}
+${esc(x.category||'متنوع')}
 
 </div>
 
 
 <h3>
 
-${esc(x.title || '')}
+${esc(x.title||'مقال بلا عنوان')}
 
 </h3>
 
 
 <p>
 
-${esc(x.excerpt || '')}
+${esc(x.excerpt||'')}
 
 </p>
 
@@ -1827,36 +1480,32 @@ href="${url}"
 
 ||
 
-'<p>لا توجد نتائج.</p>';
-
-bindContentLinks();
+'<p class="muted">لا توجد نتائج.</p>';
 
 }
 
 
 /* =========================================================
-   RENDER BOOKS
+   BOOKS
 ========================================================= */
 
 function renderBooks(){
 
-$('booksGrid').innerHTML =
+$('booksGrid').innerHTML=
 
-D.books.map((x,index) => {
+D.books.map(x=>{
 
-const id =
-x.id ||
-x.title ||
-('book-' + Date.now());
+const id=
+x.id||
+x.title||
+('book-'+Date.now());
 
-const safe =
-safeId(id);
+const safe=safeId(id);
 
-
-const url =
-'book.html?id=' +
-encodeURIComponent(id) +
-'&return=book-card-' +
+const url=
+'book.html?id='+
+encodeURIComponent(id)+
+'&return=book-card-'+
 encodeURIComponent(safe);
 
 
@@ -1865,41 +1514,34 @@ return `
 <article
 class="card"
 id="book-card-${esc(safe)}"
-style="animation-delay:${Math.min(index * 70,420)}ms"
 >
 
-${x.image ? `
+${x.image?`
 
 <img
 class="card-image"
 src="${esc(x.image)}"
-alt="${esc(x.title)}"
+alt="${esc(x.title||'')}"
 loading="lazy"
 onclick="openPhoto(this.src,this.alt)"
 onerror="this.style.display='none'"
 >
 
-` : ''}
+`:''}
 
 
 <div class="tag">
-
 كتاب
-
 </div>
 
 
 <h3>
-
-${esc(x.title || '')}
-
+${esc(x.title||'كتاب')}
 </h3>
 
 
 <p>
-
-${esc(x.description || '')}
-
+${esc(x.description||'')}
 </p>
 
 
@@ -1907,9 +1549,7 @@ ${esc(x.description || '')}
 class="read"
 href="${url}"
 >
-
 فتح الكتاب ←
-
 </a>
 
 
@@ -1921,47 +1561,38 @@ href="${url}"
 
 ||
 
-'<p>لا توجد كتب بعد.</p>';
-
-bindContentLinks();
+'<p class="muted">لا توجد كتب بعد.</p>';
 
 }
 
 
 /* =========================================================
-   RENDER PHOTOS
+   PHOTOS
 ========================================================= */
 
 function renderPhotos(){
 
-const photos = D.photos || [];
+const photos=D.photos||[];
 
+$('photosGrid').innerHTML=
 
-$('photosGrid').innerHTML =
+photos.map((x,i)=>{
 
-photos.map((x,i) => {
+const src=
+typeof x==='string'
+?x
+:(x.image||x.src||x.url);
 
-const src =
-typeof x === 'string'
-? x
-: (x.image || x.src || x.url);
+const title=
+typeof x==='string'
+?''
+:(x.title||'');
 
-
-const title =
-typeof x === 'string'
-? ''
-: (x.title || '');
-
-
-if(!src) return '';
-
+if(!src)return '';
 
 return `
 
-<article
-class="card"
-style="animation-delay:${Math.min(i * 70,420)}ms"
->
+<article class="card">
 
 <img
 class="card-image"
@@ -1972,15 +1603,13 @@ onclick="openPhoto(this.src,this.alt)"
 onerror="this.style.display='none'"
 >
 
-${title ? `
+${title?`
 
 <h3>
-
 ${esc(title)}
-
 </h3>
 
-` : ''}
+`:''}
 
 </article>
 
@@ -1996,47 +1625,39 @@ ${esc(title)}
 
 
 /* =========================================================
-   VIDEO URL CONVERTER
+   VIDEO URL
 ========================================================= */
 
 function videoEmbed(url){
 
-if(!url) return '';
+if(!url)return '';
 
-let value = String(url).trim();
+let value=String(url).trim();
 
-
-/* YouTube */
-
-let match =
-value.match(
+let match=value.match(
 /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?/]+)/i
 );
 
 if(match){
 
-return 'https://www.youtube.com/embed/' +
+return
+'https://www.youtube.com/embed/'+
 encodeURIComponent(match[1]);
 
 }
 
 
-/* Vimeo */
-
-match =
-value.match(
+match=value.match(
 /vimeo\.com\/(?:video\/)?([0-9]+)/i
 );
 
 if(match){
 
-return 'https://player.vimeo.com/video/' +
+return
+'https://player.vimeo.com/video/'+
 encodeURIComponent(match[1]);
 
 }
-
-
-/* Direct iframe URL */
 
 return value;
 
@@ -2044,49 +1665,40 @@ return value;
 
 
 /* =========================================================
-   RENDER VIDEOS
+   VIDEOS
 ========================================================= */
 
 function renderVideos(){
 
-const videos = D.videos || [];
+const videos=D.videos||[];
 
+$('videosGrid').innerHTML=
 
-$('videosGrid').innerHTML =
+videos.map(x=>{
 
-videos.map((x,index) => {
+const raw=
+typeof x==='string'
+?x
+:(x.url||x.src||'');
 
-const raw =
-typeof x === 'string'
-? x
-: (x.url || x.src || '');
+const title=
+typeof x==='string'
+?''
+:(x.title||'');
 
+const url=videoEmbed(raw);
 
-const title =
-typeof x === 'string'
-? ''
-: (x.title || '');
-
-
-const url =
-videoEmbed(raw);
-
-
-if(!url) return '';
-
+if(!url)return '';
 
 return `
 
-<article
-class="card"
-style="animation-delay:${Math.min(index * 70,420)}ms"
->
+<article class="card">
 
 <div class="video-frame">
 
 <iframe
 src="${esc(url)}"
-title="${esc(title || 'فيديو من Al-Adeeb')}"
+title="${esc(title||'فيديو من Al-Adeeb')}"
 loading="lazy"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 allowfullscreen
@@ -2096,15 +1708,13 @@ referrerpolicy="strict-origin-when-cross-origin"
 </div>
 
 
-${title ? `
+${title?`
 
 <h3>
-
 ${esc(title)}
-
 </h3>
 
-` : ''}
+`:''}
 
 </article>
 
@@ -2120,69 +1730,15 @@ ${esc(title)}
 
 
 /* =========================================================
-   MAIN RENDER
+   RENDER
 ========================================================= */
 
 function render(){
 
 renderArticles();
-
 renderBooks();
-
 renderPhotos();
-
 renderVideos();
-
-}
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-function initScrollReveal(){
-
-const elements =
-document.querySelectorAll('.reveal');
-
-if(!('IntersectionObserver' in window)){
-
-elements.forEach(
-el => el.classList.add('visible')
-);
-
-return;
-
-}
-
-const observer =
-new IntersectionObserver(
-entries => {
-
-entries.forEach(entry => {
-
-if(entry.isIntersecting){
-
-entry.target.classList.add('visible');
-
-observer.unobserve(
-entry.target
-);
-
-}
-
-});
-
-},
-{
-threshold:.12,
-rootMargin:'0px 0px -40px 0px'
-}
-);
-
-elements.forEach(
-el => observer.observe(el)
-);
 
 }
 
@@ -2191,170 +1747,113 @@ el => observer.observe(el)
    SEARCH
 ========================================================= */
 
-$('search').oninput = renderArticles;
+$('search').oninput=renderArticles;
 
 
 /* =========================================================
-   SECTION NAV ACTIVE EFFECT
-========================================================= */
-
-function initSectionNavigation(){
-
-const links =
-document.querySelectorAll(
-'.section-nav a'
-);
-
-const sections =
-Array.from(links)
-.map(link =>
-document.querySelector(
-link.getAttribute('href')
-)
-)
-.filter(Boolean);
-
-if(!('IntersectionObserver' in window))
-return;
-
-const observer =
-new IntersectionObserver(
-entries => {
-
-entries.forEach(entry => {
-
-if(entry.isIntersecting){
-
-links.forEach(link => {
-
-link.classList.remove('active');
-
-if(
-link.getAttribute('href') ===
-'#' + entry.target.id
-){
-
-link.classList.add('active');
-
-}
-
-});
-
-}
-
-});
-
-},
-{
-threshold:.2
-}
-);
-
-sections.forEach(
-section => observer.observe(section)
-);
-
-}
-
-
-/* =========================================================
-   LOAD CONTENT.JSON
+   LOAD CONTENT
 ========================================================= */
 
 fetch(
-'content.json?' +
-Date.now()
+'content.json?cache='+Date.now(),
+{
+cache:'no-store'
+}
 )
 
-.then(r => {
+.then(r=>{
 
 if(!r.ok){
 
 throw new Error(
-'HTTP ' + r.status
+'HTTP '+r.status+
+' — تعذر الوصول إلى content.json'
 );
 
 }
 
-return r.json();
+return r.text();
 
 })
 
-.then(x => {
+.then(text=>{
 
-D = x || {};
+let x;
 
-D.site =
-D.site || {};
+try{
 
-D.articles =
+x=JSON.parse(text);
+
+}catch(e){
+
+throw new Error(
+'content.json يحتوي على JSON غير صالح.'
+);
+
+}
+
+D=x||{};
+
+D.site=D.site||{};
+
+D.articles=
 Array.isArray(D.articles)
-? D.articles
-: [];
+?D.articles
+:[];
 
-D.books =
+D.books=
 Array.isArray(D.books)
-? D.books
-: [];
+?D.books
+:[];
 
-D.photos =
+D.photos=
 Array.isArray(D.photos)
-? D.photos
-: [];
+?D.photos
+:[];
 
-D.videos =
+D.videos=
 Array.isArray(D.videos)
-? D.videos
-: [];
+?D.videos
+:[];
 
 
-/* SITE INFORMATION */
+/* SITE */
 
-$('desc').textContent =
-D.site.description || '';
+$('desc').textContent=
+D.site.description||'';
 
-$('tagline').textContent =
-D.site.tagline ||
+$('tagline').textContent=
+D.site.tagline||
 'مساحة للقراءة والفكرة';
 
+$('aboutTitle').textContent=
+'أهلاً بك في '+
+(D.site.name||'Al-Adeeb');
 
-$('aboutTitle').textContent =
-'أهلاً بك في ' +
-(D.site.name || 'Al-Adeeb');
-
-
-$('aboutText').textContent =
-D.site.description ||
+$('aboutText').textContent=
+D.site.description||
 'مساحة شخصية للنشر والمعرفة.';
 
 
-/* RENDER */
-
 render();
-
-initScrollReveal();
-
-initSectionNavigation();
 
 
 /* =========================================================
-   RETURN TO PREVIOUS CARD
+   RETURN TO CARD
 ========================================================= */
 
-const params =
+const params=
 new URLSearchParams(
 location.search
 );
 
-const target =
-params.get('return');
-
+const target=params.get('return');
 
 if(target){
 
-setTimeout(() => {
+setTimeout(()=>{
 
-const element =
+const element=
 document.getElementById(target);
 
 if(element){
@@ -2364,47 +1863,67 @@ behavior:'smooth',
 block:'center'
 });
 
+element.animate(
+[
+{
+transform:'scale(1)'
+},
+{
+transform:'scale(1.025)'
+},
+{
+transform:'scale(1)'
+}
+],
+{
+duration:650,
+easing:'ease-out'
+}
+);
+
 }
 
-},350);
+},450);
 
 }
 
 })
 
-.catch(error => {
+.catch(error=>{
 
 console.error(
 'content.json error:',
 error
 );
 
-$('desc').textContent =
-'تعذر تحميل المحتوى حالياً.';
+$('desc').textContent=
+'حدث خطأ أثناء تحميل محتوى الموقع.';
 
-$('articlesGrid').innerHTML =
-'<p>تعذر تحميل المقالات حالياً.</p>';
+$('articlesGrid').innerHTML=`
 
-$('booksGrid').innerHTML =
-'<p>تعذر تحميل الكتب حالياً.</p>';
+<div class="error-box">
+
+<strong>تعذر تحميل المحتوى.</strong><br>
+
+يرجى التأكد من وجود ملف
+<strong>content.json</strong>
+بجانب ملف
+<strong>index.html</strong>.
+
+</div>
+
+`;
+
+$('booksGrid').innerHTML='';
+
+$('photosGrid').innerHTML='';
+
+$('videosGrid').innerHTML='';
 
 });
 
+</script>
 
-/* =========================================================
-   PREVENT DOUBLE CLICK DURING PAGE TRANSITION
-========================================================= */
 
-window.addEventListener(
-'pageshow',
-function(){
-
-document.body.classList.remove(
-'page-leaving'
-);
-
-}
-);
-
-</script></body>
-                                                                                                              </html>
+</body>
+</html>
