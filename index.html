@@ -86,69 +86,61 @@ font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
 ========================================================= */
 
 body::before{
-
 content:
 "A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة
  ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A
  ن  ص  و  ر  ة  ف  ك  ر  ة";
 
 position:fixed;
-
 inset:-8%;
-
 z-index:-2;
-
 pointer-events:none;
-
 font-family:Georgia,"Amiri",serif;
-
 font-size:34px;
-
 line-height:3.1;
-
 letter-spacing:12px;
-
 word-spacing:18px;
-
 color:#9a6b35;
-
 opacity:.025;
-
 transform:rotate(-8deg) scale(1.08);
-
 white-space:normal;
 }
 
-
 body::after{
-
 content:
 "Al-Adeeb  •  A  •  ع  •  أ  •  د  •  ب
  •  A  •  2026";
 
 position:fixed;
-
 inset:15% -10%;
-
 z-index:-2;
-
 pointer-events:none;
-
 font-family:Georgia,"Amiri",serif;
-
 font-size:24px;
-
 line-height:5;
-
 letter-spacing:18px;
-
 color:#17211e;
-
 opacity:.018;
-
 transform:rotate(7deg);
-
 white-space:normal;
+}
+
+
+/* =========================================================
+   PAGE INTRO ANIMATION
+========================================================= */
+
+@keyframes pageReveal{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+
+body{
+animation:pageReveal .8s ease both;
 }
 
 
@@ -157,38 +149,23 @@ white-space:normal;
 ========================================================= */
 
 nav{
-
 position:sticky;
-
 top:0;
-
 z-index:20;
-
 background:#f7f5f0ee;
-
 border-bottom:1px solid var(--line);
-
 backdrop-filter:blur(8px);
 }
 
 .nav{
-
 max-width:1120px;
-
 width:92%;
-
 margin:auto;
-
 min-height:92px;
-
 padding:10px 0;
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 gap:18px;
 }
 
@@ -198,31 +175,142 @@ gap:18px;
 ========================================================= */
 
 .brand-wrap{
-
 display:flex;
-
 flex-direction:column;
-
 align-items:flex-start;
-
 gap:5px;
 }
 
 .brand{
-
+position:relative;
+display:inline-block;
 font-weight:700;
-
 font-size:25px;
-
 direction:ltr;
-
 line-height:1.2;
-
 cursor:pointer;
+
+transition:
+transform .35s cubic-bezier(.2,.8,.2,1),
+letter-spacing .35s ease;
+}
+
+.brand::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:-5px;
+height:2px;
+background:var(--accent);
+transform:scaleX(0);
+transform-origin:right;
+transition:transform .4s ease;
+opacity:.65;
+}
+
+.brand:hover{
+transform:translateY(-2px);
+letter-spacing:.5px;
+}
+
+.brand:hover::after{
+transform:scaleX(1);
+transform-origin:left;
 }
 
 .brand span{
 color:var(--accent);
+display:inline-block;
+
+animation:
+brandAccent 1.8s ease .4s both;
+}
+
+@keyframes brandAccent{
+0%{
+opacity:0;
+transform:translateY(7px);
+}
+55%{
+opacity:1;
+transform:translateY(-2px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero h1{
+animation:
+heroTitle .9s cubic-bezier(.2,.8,.2,1) .15s both;
+}
+
+@keyframes heroTitle{
+from{
+opacity:0;
+transform:translateY(20px);
+letter-spacing:8px;
+}
+to{
+opacity:1;
+transform:translateY(0);
+letter-spacing:0;
+}
+}
+
+.hero .kicker{
+animation:
+heroKicker .7s ease both;
+}
+
+.hero p{
+animation:
+heroText .8s ease .35s both;
+}
+
+.hero .btn{
+animation:
+heroButtons .7s ease .5s both;
+}
+
+@keyframes heroKicker{
+from{
+opacity:0;
+transform:translateX(20px);
+}
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
+
+@keyframes heroText{
+from{
+opacity:0;
+transform:translateY(12px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes heroButtons{
+from{
+opacity:0;
+transform:translateY(14px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 
@@ -231,18 +319,22 @@ color:var(--accent);
 ========================================================= */
 
 .links{
-
 display:flex;
-
 gap:24px;
-
 color:#4f5954;
-
 font-weight:700;
+}
+
+.links a{
+position:relative;
+transition:
+color .25s ease,
+transform .25s ease;
 }
 
 .links a:hover{
 color:var(--accent);
+transform:translateY(-1px);
 }
 
 
@@ -251,25 +343,15 @@ color:var(--accent);
 ========================================================= */
 
 .section-nav{
-
 display:flex;
-
 align-items:center;
-
 gap:3px;
-
 background:var(--accent);
-
 border-radius:11px;
-
 padding:4px 5px;
-
 white-space:nowrap;
-
 overflow-x:auto;
-
 max-width:100%;
-
 scrollbar-width:none;
 }
 
@@ -278,28 +360,29 @@ display:none;
 }
 
 .section-nav a{
-
 color:#fff;
-
 padding:4px 10px;
-
 border-radius:8px;
-
 font-size:14px;
-
 font-weight:700;
-
 line-height:1.5;
 
-transition:.2s ease;
+transition:
+background .25s ease,
+transform .2s ease,
+box-shadow .25s ease;
 }
 
 .section-nav a:hover,
 .section-nav a:focus{
-
 background:#7f5428;
-
 color:#fff;
+transform:translateY(-1px);
+box-shadow:0 4px 10px rgba(0,0,0,.12);
+}
+
+.section-nav a:active{
+transform:scale(.95);
 }
 
 
@@ -308,122 +391,98 @@ color:#fff;
 ========================================================= */
 
 .hero{
-
 max-width:1120px;
-
 width:92%;
-
 margin:auto;
-
 padding:75px 0 60px;
-
 display:grid;
-
 grid-template-columns:1.2fr .8fr;
-
 gap:50px;
-
 align-items:center;
 }
 
 .kicker,
 .tag{
-
 color:var(--accent);
-
 font-weight:700;
 }
 
 h1{
-
 font-family:Georgia,serif;
-
 font-size:clamp(50px,7vw,82px);
-
 line-height:1;
-
 margin:12px 0 20px;
-
 direction:ltr;
-
 text-align:right;
 }
 
 .hero p{
-
 font-size:19px;
-
 color:var(--muted);
 }
 
 
 /* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn{
-
-display:inline-block;
-
-padding:11px 21px;
-
-border-radius:10px;
-
-border:1px solid var(--line);
-
-font-weight:700;
-
-margin:10px 6px 0 0;
-}
-
-.primary{
-
-background:var(--dark);
-
-color:white;
-}
-
-
-/* =========================================================
-   LOGO
+   HERO VISUAL
 ========================================================= */
 
 .visual{
-
 min-height:340px;
-
 border-radius:26px;
-
 background:linear-gradient(
 145deg,
 #18231f,
 #34443c
 );
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 overflow:hidden;
-
 padding:20px;
+
+animation:
+visualReveal 1s cubic-bezier(.2,.8,.2,1) .2s both;
+
+box-shadow:
+0 15px 40px rgba(23,33,30,.08);
+
+transition:
+transform .5s ease,
+box-shadow .5s ease;
+}
+
+.visual:hover{
+transform:translateY(-4px);
+box-shadow:
+0 20px 50px rgba(23,33,30,.13);
+}
+
+@keyframes visualReveal{
+from{
+opacity:0;
+transform:translateX(-25px) scale(.97);
+}
+to{
+opacity:1;
+transform:translateX(0) scale(1);
+}
 }
 
 .visual img{
-
 display:block;
-
 width:100%;
-
 height:100%;
-
 max-height:300px;
-
 object-fit:contain;
-
 border-radius:18px;
+
+transition:
+transform .7s cubic-bezier(.2,.8,.2,1),
+filter .5s ease;
+}
+
+.visual:hover img{
+transform:scale(1.025);
 }
 
 
@@ -432,30 +491,31 @@ border-radius:18px;
 ========================================================= */
 
 section{
-
 max-width:1120px;
-
 width:92%;
-
 margin:auto;
-
 padding:55px 0;
 }
 
 .head{
-
 margin-bottom:22px;
 }
 
 .head h2{
-
 margin:0;
-
 font-size:30px;
+
+transition:
+color .3s ease,
+transform .3s ease;
+}
+
+.head h2:hover{
+color:var(--accent);
+transform:translateX(-3px);
 }
 
 .head p{
-
 color:var(--muted);
 }
 
@@ -465,29 +525,26 @@ color:var(--muted);
 ========================================================= */
 
 .search{
-
 width:100%;
-
 padding:13px 15px;
-
 border:1px solid var(--line);
-
 border-radius:12px;
-
 font:inherit;
-
 margin-bottom:20px;
-
 background:#fff;
-
 color:var(--text);
-
 outline:none;
+
+transition:
+border-color .25s ease,
+box-shadow .25s ease,
+transform .25s ease;
 }
 
 .search:focus{
-
 border-color:var(--accent);
+box-shadow:0 5px 18px rgba(154,107,53,.08);
+transform:translateY(-1px);
 }
 
 
@@ -496,11 +553,8 @@ border-color:var(--accent);
 ========================================================= */
 
 .grid{
-
 display:grid;
-
 grid-template-columns:repeat(3,1fr);
-
 gap:18px;
 }
 
@@ -510,81 +564,122 @@ gap:18px;
 ========================================================= */
 
 .card{
-
 background:#fff;
-
 border:1px solid var(--line);
-
 border-radius:17px;
-
 padding:24px;
-
 overflow:hidden;
 
+opacity:0;
+transform:translateY(18px);
+
+animation:
+cardReveal .65s cubic-bezier(.2,.8,.2,1) forwards;
+
 transition:
-transform .2s ease,
-box-shadow .2s ease;
+transform .35s cubic-bezier(.2,.8,.2,1),
+box-shadow .35s ease,
+border-color .35s ease;
+}
+
+.card:nth-child(2){
+animation-delay:.07s;
+}
+
+.card:nth-child(3){
+animation-delay:.14s;
+}
+
+.card:nth-child(4){
+animation-delay:.21s;
+}
+
+.card:nth-child(5){
+animation-delay:.28s;
+}
+
+.card:nth-child(6){
+animation-delay:.35s;
+}
+
+@keyframes cardReveal{
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .card:hover{
-
-transform:translateY(-2px);
-
+transform:translateY(-6px);
 box-shadow:
-0 8px 25px rgba(23,33,30,.07);
+0 14px 32px rgba(23,33,30,.10);
+border-color:#d9c8b2;
+}
+
+.card:active{
+transform:translateY(-2px) scale(.995);
 }
 
 .card-image{
-
 display:block;
-
 width:100%;
-
 height:210px;
-
 object-fit:cover;
-
 border-radius:13px;
-
 margin:-4px 0 18px;
-
 border:1px solid var(--line);
-
 background:#f1eee8;
-
 cursor:zoom-in;
+
+transition:
+transform .5s cubic-bezier(.2,.8,.2,1),
+filter .4s ease;
+}
+
+.card:hover .card-image{
+transform:scale(1.025);
+filter:saturate(1.04);
 }
 
 .card h3{
-
 margin:8px 0;
-
 font-size:22px;
-
 line-height:1.7;
+
+transition:
+color .3s ease,
+transform .3s ease;
+}
+
+.card:hover h3{
+color:var(--accent);
+transform:translateX(-3px);
 }
 
 .card p{
-
 color:var(--muted);
-
 font-size:15px;
 }
 
 .read{
-
 display:inline-block;
-
 margin-top:15px;
-
 color:var(--accent);
-
 font-weight:700;
+
+transition:
+transform .25s ease,
+color .25s ease;
 }
 
 .read:hover{
+text-decoration:none;
+transform:translateX(-5px);
+color:#7f5428;
+}
 
-text-decoration:underline;
+.read:active{
+transform:translateX(-2px) scale(.97);
 }
 
 
@@ -593,18 +688,22 @@ text-decoration:underline;
 ========================================================= */
 
 .about{
-
 background:var(--dark);
-
 color:#eef0ed;
-
 border-radius:25px;
-
 padding:45px;
+
+transition:
+transform .4s ease,
+box-shadow .4s ease;
+}
+
+.about:hover{
+transform:translateY(-3px);
+box-shadow:0 15px 35px rgba(23,33,30,.12);
 }
 
 .about p{
-
 color:#bfc8c3;
 }
 
@@ -614,72 +713,76 @@ color:#bfc8c3;
 ========================================================= */
 
 .media-lightbox{
-
 position:fixed;
-
 inset:0;
-
 background:rgba(23,33,30,.86);
-
 display:none;
-
 align-items:center;
-
 justify-content:center;
-
 padding:24px;
-
 z-index:100;
 }
 
 .media-lightbox.show{
-
 display:flex;
+animation:lightboxIn .25s ease both;
+}
+
+@keyframes lightboxIn{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
 }
 
 .media-lightbox img{
-
 max-width:94vw;
-
 max-height:90vh;
-
 width:auto;
-
 height:auto;
-
 object-fit:contain;
-
 border-radius:14px;
+box-shadow:0 15px 50px rgba(0,0,0,.35);
 
-box-shadow:
-0 15px 50px rgba(0,0,0,.35);
+animation:
+imageIn .35s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes imageIn{
+from{
+opacity:0;
+transform:scale(.92);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
 .media-close{
-
 position:absolute;
-
 top:18px;
-
 left:22px;
-
 border:0;
-
 background:#fff;
-
 color:#17211e;
-
 width:42px;
-
 height:42px;
-
 border-radius:50%;
-
 font-size:28px;
-
 line-height:1;
-
 cursor:pointer;
+
+transition:
+transform .25s ease,
+background .25s ease;
+}
+
+.media-close:hover{
+transform:rotate(90deg) scale(1.05);
+background:#f1eee8;
 }
 
 
@@ -688,22 +791,23 @@ cursor:pointer;
 ========================================================= */
 
 .video-frame{
-
 aspect-ratio:16/9;
-
 background:#17211e;
-
 border-radius:13px;
-
 overflow:hidden;
+transition:
+transform .4s ease,
+box-shadow .4s ease;
+}
+
+.card:hover .video-frame{
+transform:scale(1.015);
+box-shadow:0 10px 25px rgba(23,33,30,.12);
 }
 
 .video-frame iframe{
-
 width:100%;
-
 height:100%;
-
 border:0;
 }
 
@@ -713,13 +817,9 @@ border:0;
 ========================================================= */
 
 footer{
-
 padding:32px;
-
 text-align:center;
-
 color:var(--muted);
-
 border-top:1px solid var(--line);
 }
 
@@ -735,64 +835,69 @@ display:none;
 }
 
 .nav{
-
 justify-content:center;
 }
 
 .brand-wrap{
-
 align-items:center;
-
 width:100%;
 }
 
 .section-nav{
-
 width:100%;
-
 justify-content:flex-start;
 }
 
 .hero{
-
 grid-template-columns:1fr;
-
 padding-top:50px;
 }
 
 .visual{
-
 min-height:240px;
 }
 
 .visual img{
-
 max-height:210px;
 }
 
 .grid{
-
 grid-template-columns:1fr;
 }
 
 body::before{
-
 font-size:27px;
-
 letter-spacing:8px;
-
 word-spacing:12px;
-
 opacity:.02;
 }
 
 body::after{
-
 font-size:20px;
-
 letter-spacing:12px;
-
 opacity:.014;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+*,
+*::before,
+*::after{
+animation-duration:.01ms !important;
+animation-iteration-count:1 !important;
+transition-duration:.01ms !important;
+scroll-behavior:auto !important;
 }
 
 }
@@ -808,7 +913,6 @@ button,
 input,
 textarea,
 select{
-
 font-family:
 "Amiri",
 "Noto Naskh Arabic",
@@ -828,7 +932,6 @@ h4,
 .read,
 .links,
 .section-nav a{
-
 font-family:
 "Amiri",
 "Noto Naskh Arabic",
@@ -843,7 +946,6 @@ font-weight:700 !important;
 
 
 <script type="application/ld+json">
-
 {
 "@context":"https://schema.org",
 "@type":"WebSite",
@@ -851,7 +953,6 @@ font-weight:700 !important;
 "url":"https://3li3deeb.github.io/Ali-Adeeb/",
 "inLanguage":"ar"
 }
-
 </script>
 
 </head>
@@ -860,35 +961,23 @@ font-weight:700 !important;
 <body>
 
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
 <nav>
 
 <div class="nav">
 
 <div class="brand-wrap">
 
-<!-- الضغط على الاسم يعيد تحميل الصفحة الرئيسية -->
-
 <a class="brand" href="index.html">
 Al-<span>Adeeb</span>
 </a>
 
-
 <div class="section-nav" aria-label="أقسام الموقع">
 
 <a href="#home">الرئيسية</a>
-
 <a href="#articles">المقالات</a>
-
 <a href="#books">الكتب</a>
-
 <a href="#photos">الصور</a>
-
 <a href="#videos">الفيديوهات</a>
-
 <a href="#about">من نحنُ؟</a>
 
 </div>
@@ -899,9 +988,7 @@ Al-<span>Adeeb</span>
 <div class="links">
 
 <a href="#articles">المقالات</a>
-
 <a href="#books">الكتب</a>
-
 <a href="#about">عن الموقع</a>
 
 </div>
@@ -910,11 +997,6 @@ Al-<span>Adeeb</span>
 
 </nav>
 
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
 
 <section class="hero" id="home">
 
@@ -954,11 +1036,6 @@ loading="eager"
 </section>
 
 
-
-<!-- =========================================================
-     ARTICLES
-========================================================= -->
-
 <section id="articles">
 
 <div class="head">
@@ -983,16 +1060,10 @@ autocomplete="off"
 
 
 <div id="articlesGrid" class="grid">
-
 </div>
 
 </section>
 
-
-
-<!-- =========================================================
-     BOOKS
-========================================================= -->
 
 <section id="books">
 
@@ -1010,16 +1081,10 @@ autocomplete="off"
 
 
 <div id="booksGrid" class="grid">
-
 </div>
 
 </section>
 
-
-
-<!-- =========================================================
-     PHOTOS
-========================================================= -->
 
 <section id="photos">
 
@@ -1047,11 +1112,6 @@ autocomplete="off"
 </section>
 
 
-
-<!-- =========================================================
-     VIDEOS
-========================================================= -->
-
 <section id="videos">
 
 <div class="head">
@@ -1078,11 +1138,6 @@ autocomplete="off"
 </section>
 
 
-
-<!-- =========================================================
-     ABOUT
-========================================================= -->
-
 <section id="about">
 
 <div class="about">
@@ -1104,18 +1159,10 @@ autocomplete="off"
 </section>
 
 
-
 <footer>
-
 © 2026 Al-Adeeb — جميع الحقوق محفوظة
-
 </footer>
 
-
-
-<!-- =========================================================
-     IMAGE LIGHTBOX
-========================================================= -->
 
 <div
 id="mediaLightbox"
@@ -1138,7 +1185,6 @@ alt=""
 >
 
 </div>
-
 
 
 <script>
@@ -1197,19 +1243,15 @@ return String(value ?? '')
 function openPhoto(src,alt){
 
 const box = $('mediaLightbox');
-
 const image = $('lightboxImage');
 
 image.src = src;
-
 image.alt = alt || '';
 
 box.classList.add('show');
-
 box.setAttribute('aria-hidden','false');
 
 document.body.style.overflow='hidden';
-
 }
 
 
@@ -1218,24 +1260,18 @@ function closePhoto(){
 const box = $('mediaLightbox');
 
 box.classList.remove('show');
-
 box.setAttribute('aria-hidden','true');
 
 document.body.style.overflow='';
-
 }
 
-
-/* ESC closes image */
 
 document.addEventListener(
 'keydown',
 function(e){
 
 if(e.key === 'Escape'){
-
 closePhoto();
-
 }
 
 }
@@ -1271,7 +1307,7 @@ return text
 
 $('articlesGrid').innerHTML =
 
-results.map(x => {
+results.map((x,index) => {
 
 const id = safeId(x.id);
 
@@ -1287,6 +1323,7 @@ return `
 <article
 class="card"
 id="article-card-${esc(id)}"
+style="animation-delay:${Math.min(index * .06,.6)}s"
 >
 
 ${x.image ? `
@@ -1304,23 +1341,17 @@ onerror="this.style.display='none'"
 
 
 <div class="tag">
-
 ${esc(x.category || 'متنوع')}
-
 </div>
 
 
 <h3>
-
 ${esc(x.title || '')}
-
 </h3>
 
 
 <p>
-
 ${esc(x.excerpt || '')}
-
 </p>
 
 
@@ -1328,11 +1359,8 @@ ${esc(x.excerpt || '')}
 class="read"
 href="${url}"
 >
-
 قراءة المقال ←
-
 </a>
-
 
 </article>
 
@@ -1355,7 +1383,7 @@ function renderBooks(){
 
 $('booksGrid').innerHTML =
 
-D.books.map(x => {
+D.books.map((x,index) => {
 
 const id =
 x.id ||
@@ -1364,7 +1392,6 @@ x.title ||
 
 const safe =
 safeId(id);
-
 
 const url =
 'book.html?id=' +
@@ -1378,6 +1405,7 @@ return `
 <article
 class="card"
 id="book-card-${esc(safe)}"
+style="animation-delay:${Math.min(index * .06,.6)}s"
 >
 
 ${x.image ? `
@@ -1395,23 +1423,17 @@ onerror="this.style.display='none'"
 
 
 <div class="tag">
-
 كتاب
-
 </div>
 
 
 <h3>
-
 ${esc(x.title || '')}
-
 </h3>
 
 
 <p>
-
 ${esc(x.description || '')}
-
 </p>
 
 
@@ -1419,11 +1441,8 @@ ${esc(x.description || '')}
 class="read"
 href="${url}"
 >
-
 فتح الكتاب ←
-
 </a>
-
 
 </article>
 
@@ -1446,25 +1465,21 @@ function renderPhotos(){
 
 const photos = D.photos || [];
 
-
 $('photosGrid').innerHTML =
 
-photos.map((x,i) => {
+photos.map((x) => {
 
 const src =
 typeof x === 'string'
 ? x
 : (x.image || x.src || x.url);
 
-
 const title =
 typeof x === 'string'
 ? ''
 : (x.title || '');
 
-
 if(!src) return '';
-
 
 return `
 
@@ -1482,9 +1497,7 @@ onerror="this.style.display='none'"
 ${title ? `
 
 <h3>
-
 ${esc(title)}
-
 </h3>
 
 ` : ''}
@@ -1513,8 +1526,6 @@ if(!url) return '';
 let value = String(url).trim();
 
 
-/* YouTube */
-
 let match =
 value.match(
 /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?/]+)/i
@@ -1528,8 +1539,6 @@ encodeURIComponent(match[1]);
 }
 
 
-/* Vimeo */
-
 match =
 value.match(
 /vimeo\.com\/(?:video\/)?([0-9]+)/i
@@ -1541,9 +1550,6 @@ return 'https://player.vimeo.com/video/' +
 encodeURIComponent(match[1]);
 
 }
-
-
-/* Direct iframe URL */
 
 return value;
 
@@ -1558,33 +1564,31 @@ function renderVideos(){
 
 const videos = D.videos || [];
 
-
 $('videosGrid').innerHTML =
 
-videos.map(x => {
+videos.map((x,index) => {
 
 const raw =
 typeof x === 'string'
 ? x
 : (x.url || x.src || '');
 
-
 const title =
 typeof x === 'string'
 ? ''
 : (x.title || '');
 
-
 const url =
 videoEmbed(raw);
 
-
 if(!url) return '';
-
 
 return `
 
-<article class="card">
+<article
+class="card"
+style="animation-delay:${Math.min(index * .06,.6)}s"
+>
 
 <div class="video-frame">
 
@@ -1603,9 +1607,7 @@ referrerpolicy="strict-origin-when-cross-origin"
 ${title ? `
 
 <h3>
-
 ${esc(title)}
-
 </h3>
 
 ` : ''}
@@ -1630,11 +1632,8 @@ ${esc(title)}
 function render(){
 
 renderArticles();
-
 renderBooks();
-
 renderPhotos();
-
 renderVideos();
 
 }
@@ -1648,7 +1647,7 @@ $('search').oninput = renderArticles;
 
 
 /* =========================================================
-   LOAD CONTENT.JSON
+   LOAD CONTENT
 ========================================================= */
 
 fetch(
@@ -1659,11 +1658,7 @@ Date.now()
 .then(r => {
 
 if(!r.ok){
-
-throw new Error(
-'HTTP ' + r.status
-);
-
+throw new Error('HTTP ' + r.status);
 }
 
 return r.json();
@@ -1674,8 +1669,7 @@ return r.json();
 
 D = x || {};
 
-D.site =
-D.site || {};
+D.site = D.site || {};
 
 D.articles =
 Array.isArray(D.articles)
@@ -1698,8 +1692,6 @@ Array.isArray(D.videos)
 : [];
 
 
-/* SITE INFORMATION */
-
 $('desc').textContent =
 D.site.description || '';
 
@@ -1707,18 +1699,14 @@ $('tagline').textContent =
 D.site.tagline ||
 'مساحة للقراءة والفكرة';
 
-
 $('aboutTitle').textContent =
 'أهلاً بك في ' +
 (D.site.name || 'Al-Adeeb');
-
 
 $('aboutText').textContent =
 D.site.description ||
 'مساحة شخصية للنشر والمعرفة.';
 
-
-/* RENDER */
 
 render();
 
@@ -1728,13 +1716,10 @@ render();
 ========================================================= */
 
 const params =
-new URLSearchParams(
-location.search
-);
+new URLSearchParams(location.search);
 
 const target =
 params.get('return');
-
 
 if(target){
 
@@ -1749,6 +1734,12 @@ element.scrollIntoView({
 behavior:'smooth',
 block:'center'
 });
+
+element.classList.add('return-highlight');
+
+setTimeout(() => {
+element.classList.remove('return-highlight');
+},1400);
 
 }
 
