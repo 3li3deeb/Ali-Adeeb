@@ -1,57 +1,1990 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>المقال — Al-Adeeb</title><meta id="metaDescription" name="description" content="مقال من Al-Adeeb"><meta name="robots" content="index,follow,max-image-preview:large">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="site-manifest.json">
-<style>
-*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#17211e;font-family:"Amiri",Tahoma,Arial,sans-serif;line-height:2;font-size:19px}main{max-width:850px;width:92%;margin:auto;padding:28px 0 70px}.back{display:inline-block;margin-bottom:25px;color:#9a6b35;font-weight:700}article{background:#fff;border:1px solid #e3ddd2;border-radius:22px;padding:28px 30px;box-shadow:0 8px 30px #17211e0b}.tag{color:#9a6b35;font-weight:700;font-size:15px}.date{color:#68716c;font-size:14px}h1{font-size:38px;line-height:1.35;margin:10px 0 18px}.excerpt{color:#68716c;font-size:20px}.body{margin-top:28px}.body p{margin:0 0 20px}.cover{display:block;width:100%;max-height:520px;object-fit:cover;border-radius:16px;margin:20px 0}.interactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px;padding-top:16px;border-top:1px solid #e3ddd2}.interaction-btn{border:1px solid #e3ddd2;background:#fff;border-radius:9px;padding:8px 13px;font-family:inherit;cursor:pointer}.interaction-btn.liked{color:#9a6b35;background:#f7eee5}.comment-box{display:none;width:100%;margin-top:10px}.comment-box.show{display:block}.comment-input{width:100%;min-height:90px;padding:10px;border:1px solid #ddd;border-radius:10px;font:inherit}.comment-submit{margin-top:7px;border:0;background:#17211e;color:#fff;border-radius:9px;padding:8px 14px;font:inherit}.comment-item{background:#f7f5f0;border-radius:10px;padding:9px 12px;margin-top:7px;font-size:14px}.comment-date{display:block;font-size:10px;color:#68716c}
+<html lang="ar" dir="rtl">
 
-.body h2{font-size:30px;line-height:1.5;margin:28px 0 12px}.body h3{font-size:25px;line-height:1.5;margin:24px 0 10px}.body blockquote{border-right:4px solid #9a6b35;background:#faf7f1;padding:10px 16px;margin:18px 0;color:#555;border-radius:8px}.body ul,.body ol{padding-right:28px}.body img{max-width:100%;height:auto;border-radius:14px;margin:14px 0}.body a{color:#9a6b35;text-decoration:underline}.body span[style]{line-height:1.9}
-@media(max-width:650px){article{padding:22px 18px}h1{font-size:30px}}
-</style></head><body><main><a id="back" class="back">← العودة إلى الموقع</a><article id="article"><p>جاري تحميل المقال...</p></article></main>
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>المقال — Al-Adeeb</title>
+
+<meta
+id="metaDescription"
+name="description"
+content="مقال من Al-Adeeb"
+>
+
+<meta
+name="robots"
+content="index,follow,max-image-preview:large"
+>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com"
+>
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin
+>
+
+<!-- الخطوط العربية -->
+
+<link
+href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&family=Lateef:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;500;700&display=swap"
+rel="stylesheet"
+>
+
+<link
+rel="manifest"
+href="site-manifest.json"
+>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+margin:0;
+
+background:#f5f3ee;
+
+color:#17211e;
+
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif;
+
+line-height:2;
+
+font-size:19px;
+
+overflow-x:hidden;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+
+max-width:850px;
+
+width:92%;
+
+margin:auto;
+
+padding:28px 0 70px;
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back{
+
+display:inline-block;
+
+margin-bottom:25px;
+
+color:#9a6b35;
+
+font-weight:700;
+
+text-decoration:none;
+
+transition:
+transform .2s ease,
+color .2s ease;
+
+}
+
+.back:hover{
+
+color:#7f5428;
+
+transform:translateX(4px);
+
+}
+
+
+/* =========================================================
+   ARTICLE CARD
+========================================================= */
+
+article{
+
+background:#fff;
+
+border:1px solid #e3ddd2;
+
+border-radius:22px;
+
+padding:28px 30px;
+
+box-shadow:
+0 8px 30px #17211e0b;
+
+animation:
+articleEnter .55s ease both;
+
+}
+
+@keyframes articleEnter{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(18px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+}
+
+
+/* =========================================================
+   ARTICLE HEADER
+========================================================= */
+
+.tag{
+
+color:#9a6b35;
+
+font-weight:700;
+
+font-size:15px;
+
+}
+
+.date{
+
+color:#68716c;
+
+font-size:14px;
+
+}
+
+h1{
+
+font-size:38px;
+
+line-height:1.35;
+
+margin:10px 0 18px;
+
+font-weight:700;
+
+}
+
+
+/* =========================================================
+   EXCERPT
+========================================================= */
+
+.excerpt{
+
+color:#68716c;
+
+font-size:20px;
+
+margin-top:15px;
+
+padding-bottom:12px;
+
+}
+
+
+/* =========================================================
+   ARTICLE BODY
+========================================================= */
+
+.body{
+
+margin-top:28px;
+
+overflow-wrap:
+break-word;
+
+word-wrap:
+break-word;
+
+}
+
+
+/* الفقرات */
+
+.body p{
+
+margin:
+0 0 20px;
+
+}
+
+
+/* العناوين */
+
+.body h2{
+
+font-size:30px;
+
+line-height:1.5;
+
+margin:
+30px 0 14px;
+
+font-weight:700;
+
+}
+
+.body h3{
+
+font-size:25px;
+
+line-height:1.5;
+
+margin:
+26px 0 12px;
+
+font-weight:700;
+
+}
+
+
+/* الاقتباس */
+
+.body blockquote{
+
+border-right:
+4px solid #9a6b35;
+
+background:#faf7f1;
+
+padding:
+12px 16px;
+
+margin:
+20px 0;
+
+color:#555;
+
+border-radius:8px;
+
+font-style:italic;
+
+}
+
+
+/* القوائم */
+
+.body ul,
+.body ol{
+
+padding-right:30px;
+
+margin:
+15px 0 22px;
+
+}
+
+.body li{
+
+margin-bottom:6px;
+
+}
+
+
+/* الروابط */
+
+.body a{
+
+color:#9a6b35;
+
+text-decoration:underline;
+
+text-decoration-thickness:1px;
+
+text-underline-offset:3px;
+
+}
+
+.body a:hover{
+
+color:#7f5428;
+
+}
+
+
+/* الصور داخل المقال */
+
+.body img{
+
+display:block;
+
+max-width:100%;
+
+height:auto;
+
+border-radius:14px;
+
+margin:
+18px auto;
+
+}
+
+
+/* =========================================================
+   TEXT FORMATTING
+========================================================= */
+
+/*
+   هذه القواعد تسمح للتنسيقات التي ينتجها
+   محرر النص بالظهور كما هي.
+*/
+
+.body span{
+
+max-width:100%;
+
+}
+
+.body strong,
+.body b{
+
+font-weight:700;
+
+}
+
+.body em,
+.body i{
+
+font-style:italic;
+
+}
+
+.body u{
+
+text-decoration:underline;
+
+}
+
+.body s,
+.body del{
+
+text-decoration:line-through;
+
+}
+
+
+/* =========================================================
+   FONT FAMILIES
+========================================================= */
+
+.body .font-amiri,
+.body [style*="Amiri"]{
+
+font-family:
+"Amiri",
+serif !important;
+
+}
+
+.body .font-naskh,
+.body [style*="Noto Naskh"]{
+
+font-family:
+"Noto Naskh Arabic",
+serif !important;
+
+}
+
+.body .font-cairo,
+.body [style*="Cairo"]{
+
+font-family:
+"Cairo",
+sans-serif !important;
+
+}
+
+.body .font-tajawal,
+.body [style*="Tajawal"]{
+
+font-family:
+"Tajawal",
+sans-serif !important;
+
+}
+
+.body .font-lateef,
+.body [style*="Lateef"]{
+
+font-family:
+"Lateef",
+serif !important;
+
+}
+
+.body .font-ruqaa,
+.body [style*="Aref Ruqaa"]{
+
+font-family:
+"Aref Ruqaa",
+serif !important;
+
+}
+
+.body .font-scheherazade,
+.body [style*="Scheherazade"]{
+
+font-family:
+"Scheherazade New",
+serif !important;
+
+}
+
+.body .font-reem,
+.body [style*="Reem Kufi"]{
+
+font-family:
+"Reem Kufi",
+sans-serif !important;
+
+}
+
+
+/* =========================================================
+   TEXT COLORS
+========================================================= */
+
+.body [style*="color"]{
+
+/* السماح بالألوان القادمة من المحرر */
+
+}
+
+
+/* =========================================================
+   HIGHLIGHT
+========================================================= */
+
+.body [style*="background-color"]{
+
+border-radius:3px;
+
+padding:
+0 2px;
+
+}
+
+
+/* =========================================================
+   TEXT ALIGNMENT
+========================================================= */
+
+.body [style*="text-align:center"]{
+
+text-align:center !important;
+
+}
+
+.body [style*="text-align: center"]{
+
+text-align:center !important;
+
+}
+
+.body [style*="text-align:right"]{
+
+text-align:right !important;
+
+}
+
+.body [style*="text-align: right"]{
+
+text-align:right !important;
+
+}
+
+.body [style*="text-align:left"]{
+
+text-align:left !important;
+
+}
+
+.body [style*="text-align: left"]{
+
+text-align:left !important;
+
+}
+
+
+/* =========================================================
+   FONT TAG SUPPORT
+========================================================= */
+
+/*
+   محرر النص قد ينتج <font>
+   خصوصاً عند تغيير الحجم أو نوع الخط.
+*/
+
+.body font{
+
+font-family:inherit;
+
+}
+
+
+/* =========================================================
+   INTERACTIONS
+========================================================= */
+
+.interactions{
+
+display:flex;
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin-top:30px;
+
+padding-top:18px;
+
+border-top:
+1px solid #e3ddd2;
+
+}
+
+.interaction-btn{
+
+border:
+1px solid #e3ddd2;
+
+background:#fff;
+
+color:#17211e;
+
+border-radius:9px;
+
+padding:
+8px 13px;
+
+font-family:inherit;
+
+cursor:pointer;
+
+transition:
+transform .18s ease,
+background .18s ease,
+color .18s ease;
+
+}
+
+.interaction-btn:hover{
+
+transform:
+translateY(-2px);
+
+background:#f7f2e8;
+
+}
+
+.interaction-btn.liked{
+
+color:#9a6b35;
+
+background:#f7eee5;
+
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+.comment-box{
+
+display:none;
+
+width:100%;
+
+margin-top:10px;
+
+}
+
+.comment-box.show{
+
+display:block;
+
+}
+
+.comment-input{
+
+width:100%;
+
+min-height:90px;
+
+padding:10px;
+
+border:
+1px solid #ddd;
+
+border-radius:10px;
+
+font:inherit;
+
+resize:vertical;
+
+outline:none;
+
+}
+
+.comment-input:focus{
+
+border-color:#9a6b35;
+
+}
+
+.comment-submit{
+
+margin-top:7px;
+
+border:0;
+
+background:#17211e;
+
+color:#fff;
+
+border-radius:9px;
+
+padding:
+8px 14px;
+
+font:inherit;
+
+cursor:pointer;
+
+}
+
+.comment-item{
+
+background:#f7f5f0;
+
+border-radius:10px;
+
+padding:
+9px 12px;
+
+margin-top:7px;
+
+font-size:14px;
+
+}
+
+.comment-date{
+
+display:block;
+
+font-size:10px;
+
+color:#68716c;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+article{
+
+padding:
+22px 18px;
+
+}
+
+h1{
+
+font-size:30px;
+
+}
+
+.body h2{
+
+font-size:26px;
+
+}
+
+.body h3{
+
+font-size:23px;
+
+}
+
+.body{
+
+font-size:18px;
+
+}
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+
+animation:none !important;
+
+transition:none !important;
+
+scroll-behavior:auto !important;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main>
+
+<a
+id="back"
+class="back"
+href="./"
+>
+← العودة إلى الموقع
+</a>
+
+
+<article id="article">
+
+<p>
+جاري تحميل المقال...
+</p>
+
+</article>
+
+</main>
+
+
 <script>
-const id=new URLSearchParams(location.search).get('id');const $=x=>document.getElementById(x);
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function key(v){return String(v).replace(/[^a-zA-Z0-9_-]/g,'_')}
-function getLike(){return +localStorage.getItem('al-adeeb-like-count-article-'+id)||0}
-function liked(){return localStorage.getItem('al-adeeb-liked-article-'+id)==='1'}
-function comments(){try{return JSON.parse(localStorage.getItem('al-adeeb-comments-article-'+id)||'[]')}catch{return[]}}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+const id =
+new URLSearchParams(
+location.search
+).get('id');
+
+
+const $ =
+x => document.getElementById(x);
+
+
+/* =========================================================
+   ESCAPE TEXT
+========================================================= */
+
+function esc(s){
+
+return String(
+s ?? ''
+).replace(
+/[&<>"']/g,
+m => ({
+
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+
+}[m])
+);
+
+}
+
+
+/* =========================================================
+   SAFE ID
+========================================================= */
+
+function key(v){
+
+return String(v)
+.replace(
+/[^a-zA-Z0-9_-]/g,
+'_'
+);
+
+}
+
+
+/* =========================================================
+   LIKES
+========================================================= */
+
+function getLike(){
+
+return +localStorage.getItem(
+'al-adeeb-like-count-article-'+id
+)||0;
+
+}
+
+
+function liked(){
+
+return localStorage.getItem(
+'al-adeeb-liked-article-'+id
+)==='1';
+
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+function comments(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem(
+'al-adeeb-comments-article-'+id
+)||'[]'
+);
+
+}catch{
+
+return[];
+
+}
+
+}
+
+
+/* =========================================================
+   INTERACTIONS
+========================================================= */
+
 function interactions(){
- let c=getLike(),l=liked(),k=key(id);
- return `<div class="interactions"><button id="like" class="interaction-btn ${l?'liked':''}" onclick="toggleLike()"> ${l?'♥ أعجبني':'♡ إعجاب'} <span id="count">${c}</span></button><button class="interaction-btn" onclick="share()">↗ مشاركة</button><button class="interaction-btn" onclick="toggleComments()">💬 تعليق</button><div id="commentBox" class="comment-box"><textarea id="commentInput" class="comment-input" placeholder="اكتب تعليقك هنا..."></textarea><button class="comment-submit" onclick="addComment()">إضافة التعليق</button><div id="comments"></div></div></div>`
+
+let c=getLike();
+
+let l=liked();
+
+return `
+
+<div class="interactions">
+
+<button
+id="like"
+class="interaction-btn ${l?'liked':''}"
+onclick="toggleLike()"
+>
+
+${l?'♥ أعجبني':'♡ إعجاب'}
+
+<span id="count">
+${c}
+</span>
+
+</button>
+
+
+<button
+class="interaction-btn"
+onclick="share()"
+>
+
+↗ مشاركة
+
+</button>
+
+
+<button
+class="interaction-btn"
+onclick="toggleComments()"
+>
+
+💬 تعليق
+
+</button>
+
+
+<div
+id="commentBox"
+class="comment-box"
+>
+
+<textarea
+id="commentInput"
+class="comment-input"
+placeholder="اكتب تعليقك هنا..."
+></textarea>
+
+
+<button
+class="comment-submit"
+onclick="addComment()"
+>
+
+إضافة التعليق
+
+</button>
+
+
+<div id="comments"></div>
+
+</div>
+
+</div>
+
+`;
+
 }
-function toggleLike(){let l=liked(),c=getLike();localStorage.setItem('al-adeeb-liked-article-'+id,l?'0':'1');localStorage.setItem('al-adeeb-like-count-article-'+id,Math.max(0,c+(l?-1:1)));location.reload()}
-function toggleComments(){$('commentBox').classList.toggle('show');loadComments()}
-function loadComments(){$('comments').innerHTML=comments().map(c=>`<div class="comment-item">${esc(c.text)}<span class="comment-date">${esc(c.date)}</span></div>`).join('')}
-function addComment(){let i=$('commentInput'),t=i.value.trim();if(!t)return alert('اكتب تعليقك أولاً');let a=comments();a.push({text:t,date:new Date().toLocaleString('ar-IQ')});localStorage.setItem('al-adeeb-comments-article-'+id,JSON.stringify(a));i.value='';loadComments()}
-function share(){let u=location.href;if(navigator.share)navigator.share({title:document.title,text:'مشاركة من موقع Al-Adeeb',url:u}).catch(()=>{});else navigator.clipboard?.writeText(u).then(()=>alert('تم نسخ الرابط'))}
+
+
+/* =========================================================
+   LIKE
+========================================================= */
+
+function toggleLike(){
+
+let l=liked();
+
+let c=getLike();
+
+localStorage.setItem(
+'al-adeeb-liked-article-'+id,
+l?'0':'1'
+);
+
+localStorage.setItem(
+'al-adeeb-like-count-article-'+id,
+Math.max(
+0,
+c+(l?-1:1)
+)
+);
+
+location.reload();
+
+}
+
+
+/* =========================================================
+   COMMENTS UI
+========================================================= */
+
+function toggleComments(){
+
+$('commentBox')
+.classList
+.toggle('show');
+
+loadComments();
+
+}
+
+
+function loadComments(){
+
+$('comments').innerHTML =
+
+comments()
+.map(c=>`
+
+<div class="comment-item">
+
+${esc(c.text)}
+
+<span class="comment-date">
+
+${esc(c.date)}
+
+</span>
+
+</div>
+
+`)
+.join('');
+
+}
+
+
+function addComment(){
+
+let i =
+$('commentInput');
+
+let t =
+i.value.trim();
+
+if(!t){
+
+alert(
+'اكتب تعليقك أولاً'
+);
+
+return;
+
+}
+
+let a =
+comments();
+
+a.push({
+
+text:t,
+
+date:
+new Date()
+.toLocaleString('ar-IQ')
+
+});
+
+localStorage.setItem(
+'al-adeeb-comments-article-'+id,
+JSON.stringify(a)
+);
+
+i.value='';
+
+loadComments();
+
+}
+
+
+/* =========================================================
+   SHARE
+========================================================= */
+
+function share(){
+
+let u =
+location.href;
+
+if(
+navigator.share
+){
+
+navigator.share({
+
+title:
+document.title,
+
+text:
+'مشاركة من موقع Al-Adeeb',
+
+url:u
+
+}).catch(
+()=>{}
+);
+
+}else if(
+navigator.clipboard
+){
+
+navigator.clipboard
+.writeText(u)
+.then(
+()=>alert('تم نسخ الرابط')
+);
+
+}else{
+
+prompt(
+'انسخ رابط المقال:',
+u
+);
+
+}
+
+}
+
+
+/* =========================================================
+   SAFE STYLE
+========================================================= */
+
+function cleanStyle(style){
+
+if(!style)return '';
+
+let parts =
+String(style)
+.split(';');
+
+let allowed = {
+
+'font-family':true,
+
+'font-size':true,
+
+'font-weight':true,
+
+'font-style':true,
+
+'color':true,
+
+'background-color':true,
+
+'text-align':true,
+
+'text-decoration':true,
+
+'line-height':true,
+
+'direction':true,
+
+'letter-spacing':true
+
+};
+
+let output=[];
+
+for(
+const part of parts
+){
+
+let index =
+part.indexOf(':');
+
+if(index<0)continue;
+
+let property =
+part
+.slice(0,index)
+.trim()
+.toLowerCase();
+
+let value =
+part
+.slice(index+1)
+.trim();
+
+if(!allowed[property])continue;
+
+
+/*
+   منع أي قيم خطرة داخل style
+*/
+
+if(
+/url\s*\(|expression\s*\(|javascript\s*:/i
+.test(value)
+){
+
+continue;
+
+}
+
+
+/* السماح فقط بقيم معقولة */
+
+if(
+value.length>200
+){
+
+continue;
+
+}
+
+output.push(
+property+':'+value
+);
+
+}
+
+return output.join(';');
+
+}
+
+
+/* =========================================================
+   RICH HTML SANITIZER
+========================================================= */
+
 function richHTML(s){
- const src=String(s??'');
- if(!src.trim())return '';
- if(!/[<][a-z][\s\S]*[>]/i.test(src)) return src.split(/\n\s*\n|\n/).filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('');
- const doc=new DOMParser().parseFromString(`<div>${src}</div>`,'text/html');
- const allowed=new Set(['P','BR','STRONG','B','EM','I','U','S','DEL','H2','H3','UL','OL','LI','BLOCKQUOTE','A','SPAN','IMG','DIV']);
- const clean=doc.body.firstElementChild;
- function walk(node){
-   [...node.childNodes].forEach(n=>{
-     if(n.nodeType===1){
-       if(!allowed.has(n.tagName)){n.replaceWith(...[...n.childNodes]);return}
-       [...n.attributes].forEach(a=>{
-         const ok=(n.tagName==='A'&&a.name==='href')||(n.tagName==='A'&&a.name==='target')||(n.tagName==='A'&&a.name==='rel')||(n.tagName==='IMG'&&a.name==='src')||(n.tagName==='IMG'&&a.name==='alt')||(n.tagName==='IMG'&&a.name==='title')||(a.name==='style'&&['SPAN','DIV','P','H2','H3','BLOCKQUOTE'].includes(n.tagName));
-         if(!ok)n.removeAttribute(a.name);
-       });
-       if(n.tagName==='A'){let h=n.getAttribute('href')||'';if(!/^(https?:|mailto:|#|\/)/i.test(h))n.removeAttribute('href');else{n.setAttribute('target','_blank');n.setAttribute('rel','noopener')}}
-       if(n.tagName==='IMG'){let u=n.getAttribute('src')||'';if(!/^(https?:|data:image\/|\/|assets\/)/i.test(u))n.remove()}
-       walk(n);
-     }
-   });
- }
- walk(clean);
- return clean.innerHTML;
+
+const src =
+String(s ?? '');
+
+
+if(!src.trim()){
+
+return '';
+
 }
-fetch('content.json?'+Date.now()).then(r=>r.json()).then(D=>{
- const x=(D.articles||[]).find(a=>String(a.id)===String(id));if(!x){$('article').innerHTML='<h1>المقال غير موجود</h1>';return}
- const base=location.origin+location.pathname+'?id='+encodeURIComponent(x.id);document.title=(x.title||'مقال')+' — Al-Adeeb';$('back').href='./?return=article-card-'+encodeURIComponent(x.id);
- $('article').innerHTML=`<div class="tag">${esc(x.category||'متنوع')}</div><h1>${esc(x.title||'مقال')}</h1><div class="date">${esc(x.date||'')}</div>${x.image?`<img class="cover" src="${esc(x.image)}" alt="${esc(x.title||'')}">`:''}<p class="excerpt">${esc(x.excerpt||'')}</p><div class="body">${richHTML(x.body)}</div>${interactions()}`;loadComments();
-}).catch(()=>$('article').innerHTML='<h1>تعذر تحميل المقال</h1>');
-</script></body></html>
+
+
+/*
+   إذا كان النص قديماً
+   بدون HTML
+*/
+
+if(
+!/[<][a-z][\s\S]*[>]/i
+.test(src)
+){
+
+return src
+
+.split(
+/\n\s*\n|\n/
+)
+
+.filter(Boolean)
+
+.map(
+p=>`<p>${esc(p)}</p>`
+)
+
+.join('');
+
+}
+
+
+/* =========================================================
+   PARSE HTML
+========================================================= */
+
+const doc =
+new DOMParser()
+.parseFromString(
+`<div>${src}</div>`,
+'text/html'
+);
+
+
+const clean =
+doc.body.firstElementChild;
+
+
+/*
+   الوسوم التي يسمح بها المقال
+*/
+
+const allowed =
+new Set([
+
+'P',
+
+'BR',
+
+'STRONG',
+
+'B',
+
+'EM',
+
+'I',
+
+'U',
+
+'S',
+
+'DEL',
+
+'H2',
+
+'H3',
+
+'UL',
+
+'OL',
+
+'LI',
+
+'BLOCKQUOTE',
+
+'A',
+
+'SPAN',
+
+'IMG',
+
+'DIV',
+
+'FONT'
+
+]);
+
+
+/* =========================================================
+   WALK
+========================================================= */
+
+function walk(node){
+
+[...node.childNodes]
+.forEach(n=>{
+
+if(n.nodeType!==1){
+
+return;
+
+}
+
+
+/* إزالة الوسوم غير المسموحة */
+
+if(
+!allowed.has(
+n.tagName
+)
+){
+
+n.replaceWith(
+...[...n.childNodes]
+);
+
+return;
+
+}
+
+
+/* =====================================================
+   FONT
+===================================================== */
+
+if(
+n.tagName==='FONT'
+){
+
+let styles=[];
+
+let face =
+n.getAttribute('face');
+
+let size =
+n.getAttribute('size');
+
+let color =
+n.getAttribute('color');
+
+
+if(face){
+
+let safeFace =
+face
+.replace(
+/["'<>]/g,
+''
+);
+
+if(safeFace){
+
+styles.push(
+'font-family:'+safeFace
+);
+
+}
+
+}
+
+
+if(size){
+
+const sizes={
+
+'1':'12px',
+
+'2':'14px',
+
+'3':'18px',
+
+'4':'22px',
+
+'5':'28px',
+
+'6':'34px',
+
+'7':'42px'
+
+};
+
+if(
+sizes[size]
+){
+
+styles.push(
+'font-size:'+sizes[size]
+);
+
+}
+
+}
+
+
+if(color){
+
+if(
+/^#[0-9a-f]{3,8}$/i
+.test(color) ||
+/^rgb(a)?\(/i.test(color)
+){
+
+styles.push(
+'color:'+color
+);
+
+}
+
+}
+
+
+/*
+   تحويل FONT إلى SPAN
+*/
+
+const span =
+doc.createElement('span');
+
+if(styles.length){
+
+span.setAttribute(
+'style',
+styles.join(';')
+);
+
+}
+
+while(
+n.firstChild
+){
+
+span.appendChild(
+n.firstChild
+);
+
+}
+
+n.replaceWith(span);
+
+return;
+
+}
+
+
+/* =====================================================
+   ATTRIBUTES
+===================================================== */
+
+[
+...n.attributes
+]
+.forEach(a=>{
+
+const name =
+a.name.toLowerCase();
+
+
+let keep=false;
+
+
+/* الروابط */
+
+if(
+n.tagName==='A' &&
+(
+name==='href' ||
+name==='target' ||
+name==='rel'
+)
+){
+
+keep=true;
+
+}
+
+
+/* الصور */
+
+if(
+n.tagName==='IMG' &&
+(
+name==='src' ||
+name==='alt' ||
+name==='title'
+)
+){
+
+keep=true;
+
+}
+
+
+/* style */
+
+if(
+name==='style' &&
+[
+'SPAN',
+'DIV',
+'P',
+'H2',
+'H3',
+'BLOCKQUOTE',
+'FONT'
+]
+.includes(
+n.tagName
+)
+){
+
+keep=true;
+
+}
+
+
+/* إزالة أي attribute آخر */
+
+if(!keep){
+
+n.removeAttribute(
+a.name
+);
+
+}
+
+});
+
+
+/* =====================================================
+   CLEAN STYLE
+===================================================== */
+
+if(
+n.hasAttribute('style')
+){
+
+const cleaned =
+cleanStyle(
+n.getAttribute('style')
+);
+
+if(cleaned){
+
+n.setAttribute(
+'style',
+cleaned
+);
+
+}else{
+
+n.removeAttribute(
+'style'
+);
+
+}
+
+}
+
+
+/* =====================================================
+   LINKS
+===================================================== */
+
+if(
+n.tagName==='A'
+){
+
+let h =
+n.getAttribute('href')||'';
+
+
+if(
+! /^(https?:|mailto:|#|\/|\.\/|assets\/)/i
+.test(h)
+){
+
+n.removeAttribute(
+'href'
+);
+
+}else{
+
+n.setAttribute(
+'target',
+'_blank'
+);
+
+n.setAttribute(
+'rel',
+'noopener noreferrer'
+);
+
+}
+
+}
+
+
+/* =====================================================
+   IMAGES
+===================================================== */
+
+if(
+n.tagName==='IMG'
+){
+
+let u =
+n.getAttribute('src')||'';
+
+
+if(
+! /^(https?:|data:image\/|\/|\.\/|assets\/)/i
+.test(u)
+){
+
+n.remove();
+
+return;
+
+}
+
+}
+
+
+/* استمرار التنظيف */
+
+walk(n);
+
+});
+
+}
+
+
+walk(clean);
+
+
+/* =========================================================
+   RETURN CLEAN HTML
+========================================================= */
+
+return clean.innerHTML;
+
+}
+
+
+/* =========================================================
+   LOAD ARTICLE
+========================================================= */
+
+fetch(
+'content.json?'+Date.now()
+)
+
+.then(
+r=>{
+
+if(!r.ok){
+
+throw new Error(
+'HTTP '+r.status
+);
+
+}
+
+return r.json();
+
+}
+)
+
+.then(
+D=>{
+
+const x =
+(D.articles||[])
+.find(
+a=>String(a.id)===String(id)
+);
+
+
+/* المقال غير موجود */
+
+if(!x){
+
+document.title =
+'المقال غير موجود — Al-Adeeb';
+
+$('article').innerHTML = `
+
+<h1>
+المقال غير موجود
+</h1>
+
+<p>
+تعذر العثور على المقال المطلوب.
+</p>
+
+`;
+
+return;
+
+}
+
+
+/* =====================================================
+   SEO
+===================================================== */
+
+const base =
+location.origin+
+location.pathname+
+'?id='+
+encodeURIComponent(x.id);
+
+
+document.title =
+(x.seoTitle||x.title||'مقال')+
+' — Al-Adeeb';
+
+
+$('metaDescription').content =
+x.seoDescription||
+x.excerpt||
+x.title||
+'مقال من Al-Adeeb';
+
+
+/* =====================================================
+   BACK LINK
+===================================================== */
+
+$('back').href =
+'./?return=article-card-'+
+encodeURIComponent(
+key(x.id)
+);
+
+
+/* =====================================================
+   ARTICLE
+===================================================== */
+
+$('article').innerHTML = `
+
+<div class="tag">
+
+${esc(
+x.category||
+'متنوع'
+)}
+
+</div>
+
+
+<h1>
+
+${esc(
+x.title||
+'مقال'
+)}
+
+</h1>
+
+
+<div class="date">
+
+${esc(
+x.date||
+''
+)}
+
+</div>
+
+
+${
+x.image
+?
+`
+
+<img
+class="cover"
+src="${esc(x.image)}"
+alt="${esc(x.title||'')}"
+loading="eager"
+onerror="this.style.display='none'"
+>
+
+`
+:
+''
+}
+
+
+${
+x.excerpt
+?
+`
+
+<p class="excerpt">
+
+${esc(x.excerpt)}
+
+</p>
+
+`
+:
+''
+}
+
+
+<div class="body">
+
+${richHTML(x.body)}
+
+</div>
+
+
+${interactions()}
+
+`;
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+loadComments();
+
+
+/* =====================================================
+   STRUCTURED DATA
+===================================================== */
+
+const ld =
+document.createElement(
+'script'
+);
+
+ld.type =
+'application/ld+json';
+
+ld.textContent =
+JSON.stringify({
+
+"@context":
+"https://schema.org",
+
+"@type":
+"Article",
+
+"headline":
+x.seoTitle||
+x.title||
+"مقال",
+
+"description":
+x.seoDescription||
+x.excerpt||
+"",
+
+"datePublished":
+x.date||
+undefined,
+
+"inLanguage":
+"ar",
+
+"mainEntityOfPage":
+base,
+
+"author":{
+
+"@type":
+"Person",
+
+"name":
+"Al-Adeeb"
+
+}
+
+});
+
+document.head.appendChild(
+ld
+);
+
+}
+)
+
+.catch(
+error=>{
+
+console.error(
+'Article error:',
+error
+);
+
+$('article').innerHTML = `
+
+<h1>
+تعذر تحميل المقال
+</h1>
+
+<p>
+حدث خطأ أثناء تحميل المقال.
+</p>
+
+`;
+
+}
+);
+
+</script>
+
+</body>
+</html>
