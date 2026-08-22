@@ -1,59 +1,1782 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Al-Adeeb</title>
+
 <meta name="description" content="Al-Adeeb — مساحة للقراءة والفكرة، مقالات وكتب.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="author" content="Al-Adeeb">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<link rel="canonical" href="https://3li3deeb.github.io/Ali-Adeeb/">
+
+<meta property="og:site_name" content="Al-Adeeb">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Al-Adeeb">
+<meta property="og:description" content="مساحة للقراءة والفكرة، مقالات وقراءات وكتب.">
+<meta property="og:url" content="https://3li3deeb.github.io/Ali-Adeeb/">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
 <link rel="manifest" href="site-manifest.json">
+
 <style>
-:root{--bg:#f7f5f0;--card:#fff;--text:#18201d;--muted:#69716d;--accent:#9a6b35;--line:#e7e0d5;--dark:#17211e}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"Amiri",Tahoma,Arial,sans-serif;font-size:17px;line-height:2;position:relative;overflow-x:hidden}
-body::before{content:"A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة  ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A  ن  ص  و  ر  ة  ف  ك  ر  ة";position:fixed;inset:-8%;z-index:-1;pointer-events:none;font-family:Georgia,"Amiri",serif;font-size:34px;line-height:3.1;letter-spacing:12px;word-spacing:18px;color:#9a6b35;opacity:.025;transform:rotate(-8deg) scale(1.08);white-space:normal}
-body::after{content:"Al-Adeeb  •  A  •  ع  •  أ  •  د  •  ب  •  A  •  2026";position:fixed;inset:15% -10%;z-index:-1;pointer-events:none;font-family:Georgia,"Amiri",serif;font-size:24px;line-height:5;letter-spacing:18px;color:#17211e;opacity:.018;transform:rotate(7deg);white-space:normal}a{text-decoration:none;color:inherit}
-nav{position:sticky;top:0;z-index:5;background:#f7f5f0ee;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}.nav{max-width:1120px;width:92%;margin:auto;min-height:92px;padding:10px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:5px}.brand{font-weight:700;font-size:25px;direction:ltr;line-height:1.2}.brand span{color:var(--accent)}.links{display:flex;gap:24px;color:#4f5954;font-weight:700}.links a:hover{color:var(--accent)}.section-nav{display:flex;align-items:center;gap:3px;background:var(--accent);border-radius:11px;padding:4px 5px;white-space:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.section-nav::-webkit-scrollbar{display:none}.section-nav a{color:#fff;padding:4px 10px;border-radius:8px;font-size:14px;font-weight:700;line-height:1.5;transition:background .2s ease}.section-nav a:hover,.section-nav a:focus{background:#7f5428;color:#fff}.section-nav a.active{background:#7f5428}
-.hero{max-width:1120px;width:92%;margin:auto;padding:75px 0 60px;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}.kicker,.tag{color:var(--accent);font-weight:700}h1{font-family:Georgia,serif;font-size:clamp(50px,7vw,82px);line-height:1;margin:12px 0 20px;direction:ltr;text-align:right}.hero p{font-size:19px;color:var(--muted)}.btn{display:inline-block;padding:11px 21px;border-radius:10px;border:1px solid var(--line);font-weight:700;margin:10px 6px 0 0}.primary{background:var(--dark);color:white}
-.visual{min-height:340px;border-radius:26px;background:linear-gradient(145deg,#18231f,#34443c);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:20px}.visual img{display:block;width:100%;height:100%;max-height:300px;object-fit:contain;border-radius:18px}
-section{max-width:1120px;width:92%;margin:auto;padding:55px 0}.head{margin-bottom:22px}.head h2{margin:0;font-size:30px}.head p{color:var(--muted)}.search{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font:inherit;margin-bottom:20px;background:#fff;color:var(--text);outline:none}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:24px;overflow:hidden}.card-image{display:block;width:100%;height:210px;object-fit:cover;border-radius:13px;margin:-4px 0 18px;border:1px solid var(--line);background:#f1eee8}.card h3{margin:8px 0;font-size:22px}.card p{color:var(--muted);font-size:15px}.read{display:inline-block;margin-top:15px;color:var(--accent);font-weight:700}.read:hover{text-decoration:underline}
-.about{background:var(--dark);color:#eef0ed;border-radius:25px;padding:45px}.about p{color:#bfc8c3}footer{padding:32px;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
-@media(max-width:800px){.links{display:none}.nav{justify-content:center}.brand-wrap{align-items:center;width:100%}.section-nav{width:100%;justify-content:flex-start}.hero{grid-template-columns:1fr;padding-top:50px}.visual{min-height:240px}.visual img{max-height:210px}.grid{grid-template-columns:1fr}}
-.media-lightbox{position:fixed;inset:0;background:rgba(23,33,30,.82);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
-.media-lightbox.show{display:flex}.media-lightbox img{max-width:94vw;max-height:90vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 15px 50px rgba(0,0,0,.35)}
-.media-lightbox .media-close{position:absolute;top:18px;left:22px;border:0;background:#fff;color:#17211e;width:42px;height:42px;border-radius:50%;font-size:28px;line-height:1;cursor:pointer}
-#photosGrid .card-image{cursor:zoom-in}
-.video-frame{aspect-ratio:16/9;background:#17211e;border-radius:13px;overflow:hidden}
-.video-frame iframe{width:100%;height:100%;border:0}
-@media(max-width:800px){body::before{font-size:27px;letter-spacing:8px;word-spacing:12px;opacity:.02}body::after{font-size:20px;letter-spacing:12px;opacity:.014}}</style></head><body>
-<nav><div class="nav"><div class="brand-wrap"><a class="brand" href="index.html">Al-<span>Adeeb</span></a><div class="section-nav" aria-label="أقسام الموقع"><a href="#home">الرئيسية</a><a href="#articles">المقالات</a><a href="#books">الكتب</a><a href="#photos">الصور</a><a href="#videos">الفيديوهات</a><a href="#about">من نحنُ؟</a></div></div><div class="links"><a href="#articles">المقالات</a><a href="#books">الكتب</a><a href="#about">عن الموقع</a></div></div></nav>
-<section class="hero" id="home"><div><div class="kicker" id="tagline">مساحة للقراءة والفكرة</div><h1>Al-Adeeb</h1><p id="desc"></p><a class="btn primary" href="#articles">استكشف المقالات</a><a class="btn" href="#books">تصفح الكتب</a></div><div class="visual"><img src="logo.png" alt="Al-Adeeb"></div></section>
-<section id="articles"><div class="head"><h2>أحدث المقالات</h2><p>أفكار وقراءات متنوعة.</p></div><input id="search" class="search" placeholder="ابحث في المقالات والكتب..." autocomplete="off"><div id="articlesGrid" class="grid"></div></section>
-<section id="books"><div class="head"><h2>الكتب</h2><p>مكتبة قابلة للتوسع.</p></div><div id="booksGrid" class="grid"></div></section>
-<section id="photos"><div class="head"><h2>الصور</h2><p>معرض الصور.</p></div><div id="photosGrid" class="grid"><p class="muted">لا توجد صور بعد.</p></div></section>
-<section id="videos"><div class="head"><h2>الفيديوهات</h2><p>الفيديوهات المنشورة في الموقع.</p></div><div id="videosGrid" class="grid"><p class="muted">لا توجد فيديوهات بعد.</p></div></section>
-<section id="about"><div class="about"><div class="kicker">عن الموقع</div><h2 id="aboutTitle">أهلاً بك في Al-Adeeb</h2><p id="aboutText">مساحة شخصية للنشر والمعرفة.</p></div></section>
-<footer>© 2026 Al-Adeeb — جميع الحقوق محفوظة</footer>
-<div id="mediaLightbox" class="media-lightbox" aria-hidden="true" onclick="if(event.target===this)closePhoto()"><button class="media-close" onclick="closePhoto()" aria-label="إغلاق">×</button><img id="lightboxImage" alt=""></div>
-<script>
-function openPhoto(src,alt){const b=document.getElementById("mediaLightbox"),i=document.getElementById("lightboxImage");i.src=src;i.alt=alt||"";b.classList.add("show");b.setAttribute("aria-hidden","false")}function closePhoto(){const b=document.getElementById("mediaLightbox");b.classList.remove("show");b.setAttribute("aria-hidden","true")}document.addEventListener("keydown",e=>{if(e.key==="Escape")closePhoto()});
-let D={site:{},articles:[],books:[]};const $=id=>document.getElementById(id);
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function render(){
- let q=$('search').value.toLowerCase().trim();
- $('articlesGrid').innerHTML=D.articles.filter(x=>((x.title||'')+' '+(x.category||'')+' '+(x.excerpt||'')+' '+(x.body||'')).toLowerCase().includes(q)).map(x=>{
-  const url='article.html?id='+encodeURIComponent(x.id);
-  return `<article class="card" id="article-card-${esc(x.id)}">${x.image?`<img class="card-image" src="${esc(x.image)}" alt="${esc(x.title)}" loading="lazy">`:''}<div class="tag">${esc(x.category||'متنوع')}</div><h3>${esc(x.title||'')}</h3><p>${esc(x.excerpt||'')}</p><a class="read" href="${url}">قراءة المقال ←</a></article>`
- }).join('')||'<p>لا توجد نتائج.</p>';
- $('booksGrid').innerHTML=D.books.map(x=>`<article class="card" id="book-card-${esc(x.id||x.title)}">${x.image?`<img class="card-image" src="${esc(x.image)}" alt="${esc(x.title)}" loading="lazy">`:''}<div class="tag">كتاب</div><h3>${esc(x.title||'')}</h3><p>${esc(x.description||'')}</p><a class="read" href="book.html?id=${encodeURIComponent(x.id||x.title)}">فتح الكتاب ←</a></article>`).join('')||'<p>لا توجد كتب بعد.</p>';
- const photos=D.photos||[];
- $('photosGrid').innerHTML=photos.map((x,i)=>{const src=typeof x==='string'?x:x.image;const title=typeof x==='string'?'':(x.title||'');return src?`<article class="card"><img class="card-image" src="${esc(src)}" alt="${esc(title)}" loading="lazy" onclick="openPhoto(this.src,this.alt)">${title?`<h3>${esc(title)}</h3>`:''}</article>`:''}).join('')||'<p class="muted">لا توجد صور بعد.</p>';
- const videos=D.videos||[];
- $('videosGrid').innerHTML=videos.map(x=>{const url=typeof x==='string'?x:(x.url||x.src);const title=typeof x==='string'?'':(x.title||'');return url?`<article class="card"><div class="video-frame"><iframe src="${esc(url)}" title="${esc(title)}" loading="lazy" allowfullscreen></iframe></div>${title?`<h3>${esc(title)}</h3>`:''}</article>`:''}).join('')||'<p class="muted">لا توجد فيديوهات بعد.</p>';
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+--bg:#f7f5f0;
+--card:#fff;
+--text:#18201d;
+--muted:#69716d;
+--accent:#9a6b35;
+--line:#e7e0d5;
+--dark:#17211e;
 }
-$('search').oninput=render;
-fetch('content.json?'+Date.now()).then(r=>r.json()).then(x=>{D=x;D.site=D.site||{};$('desc').textContent=D.site.description||'';$('tagline').textContent=D.site.tagline||'مساحة للقراءة والفكرة';$('aboutTitle').textContent='أهلاً بك في '+(D.site.name||'Al-Adeeb');$('aboutText').textContent=D.site.description||'';render();
- const target=new URLSearchParams(location.search).get('return');
- if(target){setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:'smooth',block:'center'}),250)}
-}).catch(()=>{$('desc').textContent='تعذر تحميل المحتوى حالياً.'});
-</script></body></html>
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+font-size:17px;
+line-height:2;
+position:relative;
+overflow-x:hidden;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+textarea,
+select{
+font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+}
+
+
+/* =========================================================
+   BACKGROUND LETTERS
+========================================================= */
+
+body::before{
+
+content:
+"A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة
+ ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A
+ ن  ص  و  ر  ة  ف  ك  ر  ة";
+
+position:fixed;
+
+inset:-8%;
+
+z-index:-2;
+
+pointer-events:none;
+
+font-family:Georgia,"Amiri",serif;
+
+font-size:34px;
+
+line-height:3.1;
+
+letter-spacing:12px;
+
+word-spacing:18px;
+
+color:#9a6b35;
+
+opacity:.025;
+
+transform:rotate(-8deg) scale(1.08);
+
+white-space:normal;
+}
+
+
+body::after{
+
+content:
+"Al-Adeeb  •  A  •  ع  •  أ  •  د  •  ب
+ •  A  •  2026";
+
+position:fixed;
+
+inset:15% -10%;
+
+z-index:-2;
+
+pointer-events:none;
+
+font-family:Georgia,"Amiri",serif;
+
+font-size:24px;
+
+line-height:5;
+
+letter-spacing:18px;
+
+color:#17211e;
+
+opacity:.018;
+
+transform:rotate(7deg);
+
+white-space:normal;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav{
+
+position:sticky;
+
+top:0;
+
+z-index:20;
+
+background:#f7f5f0ee;
+
+border-bottom:1px solid var(--line);
+
+backdrop-filter:blur(8px);
+}
+
+.nav{
+
+max-width:1120px;
+
+width:92%;
+
+margin:auto;
+
+min-height:92px;
+
+padding:10px 0;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:18px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand-wrap{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:5px;
+}
+
+.brand{
+
+font-weight:700;
+
+font-size:25px;
+
+direction:ltr;
+
+line-height:1.2;
+
+cursor:pointer;
+}
+
+.brand span{
+color:var(--accent);
+}
+
+
+/* =========================================================
+   OLD NAV LINKS
+========================================================= */
+
+.links{
+
+display:flex;
+
+gap:24px;
+
+color:#4f5954;
+
+font-weight:700;
+}
+
+.links a:hover{
+color:var(--accent);
+}
+
+
+/* =========================================================
+   SECTION BUTTONS
+========================================================= */
+
+.section-nav{
+
+display:flex;
+
+align-items:center;
+
+gap:3px;
+
+background:var(--accent);
+
+border-radius:11px;
+
+padding:4px 5px;
+
+white-space:nowrap;
+
+overflow-x:auto;
+
+max-width:100%;
+
+scrollbar-width:none;
+}
+
+.section-nav::-webkit-scrollbar{
+display:none;
+}
+
+.section-nav a{
+
+color:#fff;
+
+padding:4px 10px;
+
+border-radius:8px;
+
+font-size:14px;
+
+font-weight:700;
+
+line-height:1.5;
+
+transition:.2s ease;
+}
+
+.section-nav a:hover,
+.section-nav a:focus{
+
+background:#7f5428;
+
+color:#fff;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+max-width:1120px;
+
+width:92%;
+
+margin:auto;
+
+padding:75px 0 60px;
+
+display:grid;
+
+grid-template-columns:1.2fr .8fr;
+
+gap:50px;
+
+align-items:center;
+}
+
+.kicker,
+.tag{
+
+color:var(--accent);
+
+font-weight:700;
+}
+
+h1{
+
+font-family:Georgia,serif;
+
+font-size:clamp(50px,7vw,82px);
+
+line-height:1;
+
+margin:12px 0 20px;
+
+direction:ltr;
+
+text-align:right;
+}
+
+.hero p{
+
+font-size:19px;
+
+color:var(--muted);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+
+display:inline-block;
+
+padding:11px 21px;
+
+border-radius:10px;
+
+border:1px solid var(--line);
+
+font-weight:700;
+
+margin:10px 6px 0 0;
+}
+
+.primary{
+
+background:var(--dark);
+
+color:white;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.visual{
+
+min-height:340px;
+
+border-radius:26px;
+
+background:linear-gradient(
+145deg,
+#18231f,
+#34443c
+);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
+padding:20px;
+}
+
+.visual img{
+
+display:block;
+
+width:100%;
+
+height:100%;
+
+max-height:300px;
+
+object-fit:contain;
+
+border-radius:18px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section{
+
+max-width:1120px;
+
+width:92%;
+
+margin:auto;
+
+padding:55px 0;
+}
+
+.head{
+
+margin-bottom:22px;
+}
+
+.head h2{
+
+margin:0;
+
+font-size:30px;
+}
+
+.head p{
+
+color:var(--muted);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search{
+
+width:100%;
+
+padding:13px 15px;
+
+border:1px solid var(--line);
+
+border-radius:12px;
+
+font:inherit;
+
+margin-bottom:20px;
+
+background:#fff;
+
+color:var(--text);
+
+outline:none;
+}
+
+.search:focus{
+
+border-color:var(--accent);
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:18px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card{
+
+background:#fff;
+
+border:1px solid var(--line);
+
+border-radius:17px;
+
+padding:24px;
+
+overflow:hidden;
+
+transition:
+transform .2s ease,
+box-shadow .2s ease;
+}
+
+.card:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 8px 25px rgba(23,33,30,.07);
+}
+
+.card-image{
+
+display:block;
+
+width:100%;
+
+height:210px;
+
+object-fit:cover;
+
+border-radius:13px;
+
+margin:-4px 0 18px;
+
+border:1px solid var(--line);
+
+background:#f1eee8;
+
+cursor:zoom-in;
+}
+
+.card h3{
+
+margin:8px 0;
+
+font-size:22px;
+
+line-height:1.7;
+}
+
+.card p{
+
+color:var(--muted);
+
+font-size:15px;
+}
+
+.read{
+
+display:inline-block;
+
+margin-top:15px;
+
+color:var(--accent);
+
+font-weight:700;
+}
+
+.read:hover{
+
+text-decoration:underline;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+
+background:var(--dark);
+
+color:#eef0ed;
+
+border-radius:25px;
+
+padding:45px;
+}
+
+.about p{
+
+color:#bfc8c3;
+}
+
+
+/* =========================================================
+   PHOTOS LIGHTBOX
+========================================================= */
+
+.media-lightbox{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(23,33,30,.86);
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+padding:24px;
+
+z-index:100;
+}
+
+.media-lightbox.show{
+
+display:flex;
+}
+
+.media-lightbox img{
+
+max-width:94vw;
+
+max-height:90vh;
+
+width:auto;
+
+height:auto;
+
+object-fit:contain;
+
+border-radius:14px;
+
+box-shadow:
+0 15px 50px rgba(0,0,0,.35);
+}
+
+.media-close{
+
+position:absolute;
+
+top:18px;
+
+left:22px;
+
+border:0;
+
+background:#fff;
+
+color:#17211e;
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+font-size:28px;
+
+line-height:1;
+
+cursor:pointer;
+}
+
+
+/* =========================================================
+   VIDEOS
+========================================================= */
+
+.video-frame{
+
+aspect-ratio:16/9;
+
+background:#17211e;
+
+border-radius:13px;
+
+overflow:hidden;
+}
+
+.video-frame iframe{
+
+width:100%;
+
+height:100%;
+
+border:0;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+padding:32px;
+
+text-align:center;
+
+color:var(--muted);
+
+border-top:1px solid var(--line);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:800px){
+
+.links{
+display:none;
+}
+
+.nav{
+
+justify-content:center;
+}
+
+.brand-wrap{
+
+align-items:center;
+
+width:100%;
+}
+
+.section-nav{
+
+width:100%;
+
+justify-content:flex-start;
+}
+
+.hero{
+
+grid-template-columns:1fr;
+
+padding-top:50px;
+}
+
+.visual{
+
+min-height:240px;
+}
+
+.visual img{
+
+max-height:210px;
+}
+
+.grid{
+
+grid-template-columns:1fr;
+}
+
+body::before{
+
+font-size:27px;
+
+letter-spacing:8px;
+
+word-spacing:12px;
+
+opacity:.02;
+}
+
+body::after{
+
+font-size:20px;
+
+letter-spacing:12px;
+
+opacity:.014;
+}
+
+}
+
+
+/* =========================================================
+   AMIRI FONT
+========================================================= */
+
+html,
+body,
+button,
+input,
+textarea,
+select{
+
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand,
+.kicker,
+.tag,
+.btn,
+.read,
+.links,
+.section-nav a{
+
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif !important;
+
+font-weight:700 !important;
+}
+
+</style>
+
+
+<script type="application/ld+json">
+
+{
+"@context":"https://schema.org",
+"@type":"WebSite",
+"name":"Al-Adeeb",
+"url":"https://3li3deeb.github.io/Ali-Adeeb/",
+"inLanguage":"ar"
+}
+
+</script>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav>
+
+<div class="nav">
+
+<div class="brand-wrap">
+
+<!-- الضغط على الاسم يعيد تحميل الصفحة الرئيسية -->
+
+<a class="brand" href="index.html">
+Al-<span>Adeeb</span>
+</a>
+
+
+<div class="section-nav" aria-label="أقسام الموقع">
+
+<a href="#home">الرئيسية</a>
+
+<a href="#articles">المقالات</a>
+
+<a href="#books">الكتب</a>
+
+<a href="#photos">الصور</a>
+
+<a href="#videos">الفيديوهات</a>
+
+<a href="#about">من نحنُ؟</a>
+
+</div>
+
+</div>
+
+
+<div class="links">
+
+<a href="#articles">المقالات</a>
+
+<a href="#books">الكتب</a>
+
+<a href="#about">عن الموقع</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+<div>
+
+<div class="kicker" id="tagline">
+مساحة للقراءة والفكرة
+</div>
+
+<h1>
+Al-Adeeb
+</h1>
+
+<p id="desc"></p>
+
+<a class="btn primary" href="#articles">
+استكشف المقالات
+</a>
+
+<a class="btn" href="#books">
+تصفح الكتب
+</a>
+
+</div>
+
+
+<div class="visual">
+
+<img
+src="logo.png"
+alt="Al-Adeeb"
+loading="eager"
+>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ARTICLES
+========================================================= -->
+
+<section id="articles">
+
+<div class="head">
+
+<h2>
+أحدث المقالات
+</h2>
+
+<p>
+أفكار وقراءات متنوعة.
+</p>
+
+</div>
+
+
+<input
+id="search"
+class="search"
+placeholder="ابحث في المقالات والكتب..."
+autocomplete="off"
+>
+
+
+<div id="articlesGrid" class="grid">
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     BOOKS
+========================================================= -->
+
+<section id="books">
+
+<div class="head">
+
+<h2>
+الكتب
+</h2>
+
+<p>
+مكتبة قابلة للتوسع.
+</p>
+
+</div>
+
+
+<div id="booksGrid" class="grid">
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PHOTOS
+========================================================= -->
+
+<section id="photos">
+
+<div class="head">
+
+<h2>
+الصور
+</h2>
+
+<p>
+معرض الصور.
+</p>
+
+</div>
+
+
+<div id="photosGrid" class="grid">
+
+<p class="muted">
+لا توجد صور بعد.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     VIDEOS
+========================================================= -->
+
+<section id="videos">
+
+<div class="head">
+
+<h2>
+الفيديوهات
+</h2>
+
+<p>
+الفيديوهات المنشورة في الموقع.
+</p>
+
+</div>
+
+
+<div id="videosGrid" class="grid">
+
+<p class="muted">
+لا توجد فيديوهات بعد.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section id="about">
+
+<div class="about">
+
+<div class="kicker">
+عن الموقع
+</div>
+
+<h2 id="aboutTitle">
+أهلاً بك في Al-Adeeb
+</h2>
+
+<p id="aboutText">
+مساحة شخصية للنشر والمعرفة.
+</p>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+© 2026 Al-Adeeb — جميع الحقوق محفوظة
+
+</footer>
+
+
+
+<!-- =========================================================
+     IMAGE LIGHTBOX
+========================================================= -->
+
+<div
+id="mediaLightbox"
+class="media-lightbox"
+aria-hidden="true"
+onclick="if(event.target===this)closePhoto()"
+>
+
+<button
+class="media-close"
+onclick="closePhoto()"
+aria-label="إغلاق"
+>
+×
+</button>
+
+<img
+id="lightboxImage"
+alt=""
+>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let D = {
+site:{},
+articles:[],
+books:[],
+photos:[],
+videos:[]
+};
+
+const $ = id => document.getElementById(id);
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function esc(s){
+
+return String(s ?? '').replace(
+/[&<>"']/g,
+m => ({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+}[m])
+);
+
+}
+
+
+/* =========================================================
+   SAFE ID
+========================================================= */
+
+function safeId(value){
+
+return String(value ?? '')
+.replace(/[^a-zA-Z0-9_-]/g,'_');
+
+}
+
+
+/* =========================================================
+   IMAGE LIGHTBOX
+========================================================= */
+
+function openPhoto(src,alt){
+
+const box = $('mediaLightbox');
+
+const image = $('lightboxImage');
+
+image.src = src;
+
+image.alt = alt || '';
+
+box.classList.add('show');
+
+box.setAttribute('aria-hidden','false');
+
+document.body.style.overflow='hidden';
+
+}
+
+
+function closePhoto(){
+
+const box = $('mediaLightbox');
+
+box.classList.remove('show');
+
+box.setAttribute('aria-hidden','true');
+
+document.body.style.overflow='';
+
+}
+
+
+/* ESC closes image */
+
+document.addEventListener(
+'keydown',
+function(e){
+
+if(e.key === 'Escape'){
+
+closePhoto();
+
+}
+
+}
+);
+
+
+/* =========================================================
+   RENDER ARTICLES
+========================================================= */
+
+function renderArticles(){
+
+const q = $('search').value
+.toLowerCase()
+.trim();
+
+
+const results = D.articles.filter(x => {
+
+const text =
+
+(x.title || '') + ' ' +
+(x.category || '') + ' ' +
+(x.excerpt || '') + ' ' +
+(x.body || '');
+
+return text
+.toLowerCase()
+.includes(q);
+
+});
+
+
+$('articlesGrid').innerHTML =
+
+results.map(x => {
+
+const id = safeId(x.id);
+
+const url =
+'article.html?id=' +
+encodeURIComponent(x.id) +
+'&return=article-card-' +
+encodeURIComponent(id);
+
+
+return `
+
+<article
+class="card"
+id="article-card-${esc(id)}"
+>
+
+${x.image ? `
+
+<img
+class="card-image"
+src="${esc(x.image)}"
+alt="${esc(x.title)}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'"
+>
+
+` : ''}
+
+
+<div class="tag">
+
+${esc(x.category || 'متنوع')}
+
+</div>
+
+
+<h3>
+
+${esc(x.title || '')}
+
+</h3>
+
+
+<p>
+
+${esc(x.excerpt || '')}
+
+</p>
+
+
+<a
+class="read"
+href="${url}"
+>
+
+قراءة المقال ←
+
+</a>
+
+
+</article>
+
+`;
+
+}).join('')
+
+||
+
+'<p>لا توجد نتائج.</p>';
+
+}
+
+
+/* =========================================================
+   RENDER BOOKS
+========================================================= */
+
+function renderBooks(){
+
+$('booksGrid').innerHTML =
+
+D.books.map(x => {
+
+const id =
+x.id ||
+x.title ||
+('book-' + Date.now());
+
+const safe =
+safeId(id);
+
+
+const url =
+'book.html?id=' +
+encodeURIComponent(id) +
+'&return=book-card-' +
+encodeURIComponent(safe);
+
+
+return `
+
+<article
+class="card"
+id="book-card-${esc(safe)}"
+>
+
+${x.image ? `
+
+<img
+class="card-image"
+src="${esc(x.image)}"
+alt="${esc(x.title)}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'"
+>
+
+` : ''}
+
+
+<div class="tag">
+
+كتاب
+
+</div>
+
+
+<h3>
+
+${esc(x.title || '')}
+
+</h3>
+
+
+<p>
+
+${esc(x.description || '')}
+
+</p>
+
+
+<a
+class="read"
+href="${url}"
+>
+
+فتح الكتاب ←
+
+</a>
+
+
+</article>
+
+`;
+
+}).join('')
+
+||
+
+'<p>لا توجد كتب بعد.</p>';
+
+}
+
+
+/* =========================================================
+   RENDER PHOTOS
+========================================================= */
+
+function renderPhotos(){
+
+const photos = D.photos || [];
+
+
+$('photosGrid').innerHTML =
+
+photos.map((x,i) => {
+
+const src =
+typeof x === 'string'
+? x
+: (x.image || x.src || x.url);
+
+
+const title =
+typeof x === 'string'
+? ''
+: (x.title || '');
+
+
+if(!src) return '';
+
+
+return `
+
+<article class="card">
+
+<img
+class="card-image"
+src="${esc(src)}"
+alt="${esc(title)}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'"
+>
+
+${title ? `
+
+<h3>
+
+${esc(title)}
+
+</h3>
+
+` : ''}
+
+</article>
+
+`;
+
+}).join('')
+
+||
+
+'<p class="muted">لا توجد صور بعد.</p>';
+
+}
+
+
+/* =========================================================
+   VIDEO URL CONVERTER
+========================================================= */
+
+function videoEmbed(url){
+
+if(!url) return '';
+
+let value = String(url).trim();
+
+
+/* YouTube */
+
+let match =
+value.match(
+/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?/]+)/i
+);
+
+if(match){
+
+return 'https://www.youtube.com/embed/' +
+encodeURIComponent(match[1]);
+
+}
+
+
+/* Vimeo */
+
+match =
+value.match(
+/vimeo\.com\/(?:video\/)?([0-9]+)/i
+);
+
+if(match){
+
+return 'https://player.vimeo.com/video/' +
+encodeURIComponent(match[1]);
+
+}
+
+
+/* Direct iframe URL */
+
+return value;
+
+}
+
+
+/* =========================================================
+   RENDER VIDEOS
+========================================================= */
+
+function renderVideos(){
+
+const videos = D.videos || [];
+
+
+$('videosGrid').innerHTML =
+
+videos.map(x => {
+
+const raw =
+typeof x === 'string'
+? x
+: (x.url || x.src || '');
+
+
+const title =
+typeof x === 'string'
+? ''
+: (x.title || '');
+
+
+const url =
+videoEmbed(raw);
+
+
+if(!url) return '';
+
+
+return `
+
+<article class="card">
+
+<div class="video-frame">
+
+<iframe
+src="${esc(url)}"
+title="${esc(title || 'فيديو من Al-Adeeb')}"
+loading="lazy"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+referrerpolicy="strict-origin-when-cross-origin"
+></iframe>
+
+</div>
+
+
+${title ? `
+
+<h3>
+
+${esc(title)}
+
+</h3>
+
+` : ''}
+
+</article>
+
+`;
+
+}).join('')
+
+||
+
+'<p class="muted">لا توجد فيديوهات بعد.</p>';
+
+}
+
+
+/* =========================================================
+   MAIN RENDER
+========================================================= */
+
+function render(){
+
+renderArticles();
+
+renderBooks();
+
+renderPhotos();
+
+renderVideos();
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+$('search').oninput = renderArticles;
+
+
+/* =========================================================
+   LOAD CONTENT.JSON
+========================================================= */
+
+fetch(
+'content.json?' +
+Date.now()
+)
+
+.then(r => {
+
+if(!r.ok){
+
+throw new Error(
+'HTTP ' + r.status
+);
+
+}
+
+return r.json();
+
+})
+
+.then(x => {
+
+D = x || {};
+
+D.site =
+D.site || {};
+
+D.articles =
+Array.isArray(D.articles)
+? D.articles
+: [];
+
+D.books =
+Array.isArray(D.books)
+? D.books
+: [];
+
+D.photos =
+Array.isArray(D.photos)
+? D.photos
+: [];
+
+D.videos =
+Array.isArray(D.videos)
+? D.videos
+: [];
+
+
+/* SITE INFORMATION */
+
+$('desc').textContent =
+D.site.description || '';
+
+$('tagline').textContent =
+D.site.tagline ||
+'مساحة للقراءة والفكرة';
+
+
+$('aboutTitle').textContent =
+'أهلاً بك في ' +
+(D.site.name || 'Al-Adeeb');
+
+
+$('aboutText').textContent =
+D.site.description ||
+'مساحة شخصية للنشر والمعرفة.';
+
+
+/* RENDER */
+
+render();
+
+
+/* =========================================================
+   RETURN TO PREVIOUS CARD
+========================================================= */
+
+const params =
+new URLSearchParams(
+location.search
+);
+
+const target =
+params.get('return');
+
+
+if(target){
+
+setTimeout(() => {
+
+const element =
+document.getElementById(target);
+
+if(element){
+
+element.scrollIntoView({
+behavior:'smooth',
+block:'center'
+});
+
+}
+
+},350);
+
+}
+
+})
+
+.catch(error => {
+
+console.error(
+'content.json error:',
+error
+);
+
+$('desc').textContent =
+'تعذر تحميل المحتوى حالياً.';
+
+$('articlesGrid').innerHTML =
+'<p>تعذر تحميل المقالات حالياً.</p>';
+
+$('booksGrid').innerHTML =
+'<p>تعذر تحميل الكتب حالياً.</p>';
+
+});
+
+</script>
+
+</body>
+</html>
