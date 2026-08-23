@@ -214,7 +214,7 @@ gap:18px;
 padding:8px 25px;
 white-space:nowrap;
 font-family:"Noto Naskh Arabic",serif;
-font-size:18px;
+font-size:19px;
 font-weight:700;
 line-height:1.7;
 color:#fff;
@@ -224,7 +224,8 @@ direction:rtl
 .quote-item::before{
 content:"❖";
 color:#c49a69;
-font-size:14px
+font-size:14px;
+flex-shrink:0
 }
 
 .quote-separator{
@@ -528,7 +529,7 @@ justify-content:flex-start
 }
 
 .quote-item{
-font-size:17px;
+font-size:18px;
 padding:7px 20px
 }
 
@@ -1005,70 +1006,202 @@ m=>({
 
 
 /* =========================
+   QUOTE TEXT NORMALIZER
+========================= */
+
+/*
+   هذه الدالة تمنع ظهور [object Object].
+
+   الاقتباس قد يكون محفوظاً في content.json
+   كنص مباشر:
+
+   "العلم نور"
+
+   أو ككائن:
+
+   {"text":"العلم نور"}
+
+   أو:
+
+   {"quote":"العلم نور"}
+
+   أو:
+
+   {"content":"العلم نور"}
+
+   أو:
+
+   {"title":"العلم نور"}
+
+   أو:
+
+   {"value":"العلم نور"}
+*/
+
+function getQuoteText(q){
+
+    /* =========================
+       نص مباشر
+    ========================= */
+
+    if(typeof q === 'string'){
+
+        return q.trim();
+
+    }
+
+
+    /* =========================
+       كائن
+    ========================= */
+
+    if(q && typeof q === 'object'){
+
+        const value =
+            q.text ??
+            q.quote ??
+            q.content ??
+            q.title ??
+            q.value ??
+            q.textContent ??
+            q.description ??
+            '';
+
+        /*
+           إذا كانت القيمة نفسها كائناً
+           نحاول التعامل معها مرة أخرى.
+        */
+
+        if(typeof value === 'string'){
+
+            return value.trim();
+
+        }
+
+        if(
+            value !== null &&
+            typeof value !== 'undefined'
+        ){
+
+            return String(value).trim();
+
+        }
+
+    }
+
+    return '';
+
+}
+
+
+/* =========================
    QUOTE TICKER
 ========================= */
 
 function renderQuotes(){
 
-const ticker=$('quoteTicker');
+    const ticker =
+        $('quoteTicker');
 
-const track=$('quoteTickerTrack');
-
-let quotes=
-Array.isArray(D.quotes)
-?
-D.quotes
-.filter(q=>String(q||'').trim())
-.map(q=>String(q).trim())
-:
-[];
-
-if(!quotes.length){
-
-ticker.style.display='none';
-
-track.innerHTML='';
-
-return;
-
-}
-
-ticker.style.display='block';
+    const track =
+        $('quoteTickerTrack');
 
 
-function groupHTML(){
+    /* =========================
+       قراءة الاقتباسات
+    ========================= */
 
-return `
-
-<div class="quote-group">
-
-${quotes.map(q=>`
-
-<div class="quote-item">
-
-<span>
-${esc(q)}
-</span>
-
-</div>
-
-`).join('')}
-
-</div>
-
-`;
-
-}
+    const rawQuotes =
+        Array.isArray(D.quotes)
+        ?
+        D.quotes
+        :
+        [];
 
 
-/*
-نكرر المجموعة مرتين حتى تستمر
-الحركة بشكل دائري بدون انقطاع.
-*/
+    /*
+       تحويل جميع الصيغ إلى نصوص
+       وإزالة الاقتباسات الفارغة.
+    */
 
-track.innerHTML=
-groupHTML()+
-groupHTML();
+    const quotes =
+        rawQuotes
+        .map(getQuoteText)
+        .filter(q => q.length > 0);
+
+
+    /* =========================
+       لا توجد اقتباسات
+    ========================= */
+
+    if(!quotes.length){
+
+        ticker.style.display='none';
+
+        track.innerHTML='';
+
+        return;
+
+    }
+
+
+    /* =========================
+       إظهار الشريط
+    ========================= */
+
+    ticker.style.display='block';
+
+
+    /* =========================
+       إنشاء مجموعة
+    ========================= */
+
+    function groupHTML(){
+
+        return `
+
+        <div class="quote-group">
+
+            ${quotes.map(q => `
+
+                <div class="quote-item">
+
+                    <span>
+                        ${esc(q)}
+                    </span>
+
+                </div>
+
+            `).join('')}
+
+        </div>
+
+        `;
+
+    }
+
+
+    /*
+       تكرار المجموعة مرتين.
+       هذا يسمح للحركة بالاستمرار
+       دون ظهور فراغ في الشريط.
+    */
+
+    track.innerHTML =
+        groupHTML() +
+        groupHTML();
+
+
+    /*
+       إعادة تشغيل الحركة عند تحديث الاقتباسات.
+    */
+
+    track.style.animation='none';
+
+    void track.offsetWidth;
+
+    track.style.animation=
+        'quoteScroll 38s linear infinite';
 
 }
 
@@ -1481,15 +1614,28 @@ D.videos
 :
 [];
 
-D.quotes=
-Array.isArray(D.quotes)
-?
-D.quotes
-:
-[];
+
+/* =========================
+   QUOTES
+========================= */
+
+/*
+   لا نحول الاقتباسات إلى String هنا.
+   نتركها كما هي حتى تقوم getQuoteText()
+   بمعالجة النص أو الـ Object بشكل صحيح.
+*/
+
+D.quotes =
+    Array.isArray(D.quotes)
+    ?
+    D.quotes
+    :
+    [];
 
 
-/* SITE */
+/* =========================
+   SITE
+========================= */
 
 $('desc').textContent=
 D.site.description||'';
@@ -1506,12 +1652,16 @@ $('aboutText').textContent=
 D.site.description||'';
 
 
-/* RENDER */
+/* =========================
+   RENDER
+========================= */
 
 render();
 
 
-/* RETURN */
+/* =========================
+   RETURN
+========================= */
 
 const target=
 new URLSearchParams(
