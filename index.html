@@ -1,38 +1,21 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Al-Adeeb</title>
 
 <meta name="description" content="Al-Adeeb — مساحة للقراءة والفكرة، مقالات وكتب.">
-<meta name="author" content="Al-Adeeb">
-<meta name="robots" content="index,follow,max-image-preview:large">
-
-<link rel="canonical" href="https://3li3deeb.github.io/Ali-Adeeb/">
-
-<meta property="og:site_name" content="Al-Adeeb">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Al-Adeeb">
-<meta property="og:description" content="مساحة للقراءة والفكرة، مقالات وقراءات وكتب.">
-<meta property="og:url" content="https://3li3deeb.github.io/Ali-Adeeb/">
-
-<meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="manifest" href="site-manifest.json">
 
 <style>
-
-/* =========================================================
-   VARIABLES
-========================================================= */
 
 :root{
 --bg:#f7f5f0;
@@ -40,959 +23,579 @@
 --text:#18201d;
 --muted:#69716d;
 --accent:#9a6b35;
---accent-dark:#765025;
 --line:#e7e0d5;
---dark:#17211e;
+--dark:#17211e
 }
 
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
 *{
-box-sizing:border-box;
+box-sizing:border-box
 }
 
 html{
-scroll-behavior:smooth;
+scroll-behavior:smooth
 }
 
 body{
 margin:0;
 background:var(--bg);
 color:var(--text);
-font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+font-family:"Amiri",Tahoma,Arial,sans-serif;
 font-size:17px;
 line-height:2;
 position:relative;
-overflow-x:hidden;
+overflow-x:hidden
 }
-
-a{
-text-decoration:none;
-color:inherit;
-}
-
-button,
-input,
-textarea,
-select{
-font-family:inherit;
-}
-
-
-/* =========================================================
-   BACKGROUND LETTERS
-========================================================= */
 
 body::before{
-content:
-"A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة
-ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A
-ن  ص  و  ر  ة  ف  ك  ر  ة";
-
+content:"A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة  ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A  ن  ص  و  ر  ة  ف  ك  ر  ة";
 position:fixed;
 inset:-8%;
-z-index:-2;
+z-index:-1;
 pointer-events:none;
-
 font-family:Georgia,"Amiri",serif;
 font-size:34px;
 line-height:3.1;
 letter-spacing:12px;
 word-spacing:18px;
-
-color:var(--accent);
+color:#9a6b35;
 opacity:.025;
-
 transform:rotate(-8deg) scale(1.08);
-white-space:normal;
+white-space:normal
 }
 
 body::after{
-content:
-"Al-Adeeb  •  A  •  ع  •  أ  •  د  •  ب
-•  A  •  2026";
-
+content:"Al-Adeeb  •  A  •  ع  •  أ  •  د  •  ب  •  A  •  2026";
 position:fixed;
 inset:15% -10%;
-z-index:-2;
+z-index:-1;
 pointer-events:none;
-
 font-family:Georgia,"Amiri",serif;
 font-size:24px;
 line-height:5;
 letter-spacing:18px;
-
-color:var(--dark);
+color:#17211e;
 opacity:.018;
-
 transform:rotate(7deg);
+white-space:normal
+}
+
+a{
+text-decoration:none;
+color:inherit
 }
 
 
-/* =========================================================
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
 nav{
 position:sticky;
 top:0;
 z-index:20;
-
 background:#f7f5f0ee;
 border-bottom:1px solid var(--line);
-
-backdrop-filter:blur(10px);
--webkit-backdrop-filter:blur(10px);
+backdrop-filter:blur(8px)
 }
 
 .nav{
 max-width:1120px;
 width:92%;
 margin:auto;
-
-min-height:100px;
+min-height:92px;
 padding:10px 0;
-
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:18px;
+gap:18px
 }
-
-
-/* =========================================================
-   BRAND
-========================================================= */
 
 .brand-wrap{
 display:flex;
 flex-direction:column;
 align-items:flex-start;
-gap:6px;
+gap:5px
 }
 
 .brand{
 font-weight:700;
-font-size:28px;
+font-size:25px;
 direction:ltr;
-line-height:1.2;
-cursor:pointer;
-
-position:relative;
-
-transition:
-transform .35s cubic-bezier(.2,.8,.2,1),
-letter-spacing .35s ease;
-}
-
-.brand:hover{
-transform:translateY(-2px) scale(1.025);
-letter-spacing:.5px;
-}
-
-.brand:active{
-transform:scale(.96);
+line-height:1.2
 }
 
 .brand span{
-color:var(--accent);
-
-display:inline-block;
-
-transition:
-transform .4s ease,
-color .3s ease;
+color:var(--accent)
 }
-
-.brand:hover span{
-transform:rotate(-2deg);
-color:var(--accent-dark);
-}
-
-
-/* =========================================================
-   SECTION NAVIGATION
-========================================================= */
-
-.section-nav{
-display:flex;
-align-items:center;
-gap:3px;
-
-background:var(--accent);
-
-border-radius:11px;
-padding:4px 5px;
-
-white-space:nowrap;
-overflow-x:auto;
-max-width:100%;
-
-scrollbar-width:none;
-
-box-shadow:
-0 4px 14px rgba(154,107,53,.10);
-}
-
-.section-nav::-webkit-scrollbar{
-display:none;
-}
-
-.section-nav a{
-color:#fff;
-
-padding:5px 10px;
-border-radius:8px;
-
-font-size:14px;
-font-weight:700;
-line-height:1.5;
-
-transition:
-background .25s ease,
-transform .25s ease,
-box-shadow .25s ease;
-}
-
-.section-nav a:hover,
-.section-nav a:focus{
-background:var(--accent-dark);
-color:#fff;
-
-transform:translateY(-1px);
-box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
-
-.section-nav a:active{
-transform:scale(.94);
-}
-
-
-/* =========================================================
-   OLD LINKS
-========================================================= */
 
 .links{
 display:flex;
 gap:24px;
 color:#4f5954;
-font-weight:700;
-}
-
-.links a{
-transition:
-color .25s ease,
-transform .25s ease;
+font-weight:700
 }
 
 .links a:hover{
-color:var(--accent);
-transform:translateY(-1px);
+color:var(--accent)
+}
+
+.section-nav{
+display:flex;
+align-items:center;
+gap:3px;
+background:var(--accent);
+border-radius:11px;
+padding:4px 5px;
+white-space:nowrap;
+overflow-x:auto;
+max-width:100%;
+scrollbar-width:none
+}
+
+.section-nav::-webkit-scrollbar{
+display:none
+}
+
+.section-nav a{
+color:#fff;
+padding:4px 10px;
+border-radius:8px;
+font-size:14px;
+font-weight:700;
+line-height:1.5;
+transition:background .2s ease
+}
+
+.section-nav a:hover,
+.section-nav a:focus{
+background:#7f5428;
+color:#fff
+}
+
+.section-nav a.active{
+background:#7f5428
 }
 
 
-/* =========================================================
+/* =========================
+   QUOTE TICKER
+========================= */
+
+.quote-ticker{
+width:100%;
+background:#17211e;
+border-bottom:1px solid #26332e;
+border-top:1px solid #26332e;
+overflow:hidden;
+position:relative;
+direction:ltr;
+z-index:10
+}
+
+.quote-ticker-track{
+display:flex;
+width:max-content;
+min-width:max-content;
+animation:quoteScroll 38s linear infinite;
+will-change:transform
+}
+
+.quote-group{
+display:flex;
+align-items:center;
+flex-shrink:0;
+width:max-content
+}
+
+.quote-item{
+display:flex;
+align-items:center;
+gap:18px;
+padding:8px 25px;
+white-space:nowrap;
+font-family:"Noto Naskh Arabic",serif;
+font-size:18px;
+font-weight:700;
+line-height:1.7;
+color:#fff;
+direction:rtl
+}
+
+.quote-item::before{
+content:"❖";
+color:#c49a69;
+font-size:14px
+}
+
+.quote-separator{
+color:#9a6b35;
+font-size:16px;
+margin:0 5px
+}
+
+@keyframes quoteScroll{
+
+from{
+transform:translateX(0)
+}
+
+to{
+transform:translateX(-50%)
+}
+
+}
+
+.quote-ticker:hover .quote-ticker-track{
+animation-play-state:paused
+}
+
+
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero{
 max-width:1120px;
 width:92%;
 margin:auto;
-
 padding:75px 0 60px;
-
 display:grid;
 grid-template-columns:1.2fr .8fr;
 gap:50px;
-
-align-items:center;
+align-items:center
 }
 
 .kicker,
 .tag{
 color:var(--accent);
-font-weight:700;
+font-weight:700
 }
 
 h1{
-font-family:Georgia,"Amiri",serif;
-
+font-family:Georgia,serif;
 font-size:clamp(50px,7vw,82px);
 line-height:1;
-
 margin:12px 0 20px;
-
 direction:ltr;
-text-align:right;
-
-animation:
-titleReveal .9s cubic-bezier(.2,.8,.2,1) both;
-}
-
-@keyframes titleReveal{
-from{
-opacity:0;
-transform:translateY(18px);
-filter:blur(4px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-filter:blur(0);
-}
+text-align:right
 }
 
 .hero p{
 font-size:19px;
-color:var(--muted);
-
-animation:
-fadeUp .9s .12s both;
+color:var(--muted)
 }
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(12px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 .btn{
 display:inline-block;
-
 padding:11px 21px;
-
 border-radius:10px;
 border:1px solid var(--line);
-
 font-weight:700;
-
-margin:10px 6px 0 0;
-
-transition:
-transform .25s ease,
-box-shadow .25s ease,
-background .25s ease;
-}
-
-.btn:hover{
-transform:translateY(-2px);
-box-shadow:0 7px 18px rgba(23,33,30,.10);
-}
-
-.btn:active{
-transform:scale(.96);
+margin:10px 6px 0 0
 }
 
 .primary{
 background:var(--dark);
-color:white;
+color:white
 }
-
-
-/* =========================================================
-   LOGO / VISUAL
-========================================================= */
 
 .visual{
 min-height:340px;
-
 border-radius:26px;
-
-background:
-linear-gradient(
-145deg,
-#18231f,
-#34443c
-);
-
+background:linear-gradient(145deg,#18231f,#34443c);
 display:flex;
 align-items:center;
 justify-content:center;
-
 overflow:hidden;
-padding:20px;
-
-box-shadow:
-0 18px 45px rgba(23,33,30,.10);
-
-animation:
-visualReveal 1s .15s both;
-}
-
-@keyframes visualReveal{
-from{
-opacity:0;
-transform:translateY(20px) scale(.97);
-}
-to{
-opacity:1;
-transform:translateY(0) scale(1);
-}
+padding:20px
 }
 
 .visual img{
 display:block;
-
 width:100%;
 height:100%;
 max-height:300px;
-
 object-fit:contain;
-
-border-radius:18px;
-
-transition:
-transform .7s cubic-bezier(.2,.8,.2,1),
-filter .7s ease;
-}
-
-.visual:hover img{
-transform:scale(1.025);
-filter:brightness(1.04);
+border-radius:18px
 }
 
 
-/* =========================================================
+/* =========================
    SECTIONS
-========================================================= */
+========================= */
 
 section{
 max-width:1120px;
 width:92%;
 margin:auto;
-padding:55px 0;
+padding:55px 0
 }
 
 .head{
-margin-bottom:22px;
+margin-bottom:22px
 }
 
 .head h2{
 margin:0;
-font-size:30px;
-
-transition:
-transform .3s ease,
-color .3s ease;
-}
-
-.head h2:hover{
-color:var(--accent);
-transform:translateX(-3px);
+font-size:30px
 }
 
 .head p{
-color:var(--muted);
+color:var(--muted)
 }
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
 
 .search{
 width:100%;
-
 padding:13px 15px;
-
 border:1px solid var(--line);
 border-radius:12px;
-
 font:inherit;
-
 margin-bottom:20px;
-
 background:#fff;
 color:var(--text);
-
-outline:none;
-
-transition:
-border-color .25s ease,
-box-shadow .25s ease,
-transform .25s ease;
-}
-
-.search:focus{
-border-color:var(--accent);
-
-box-shadow:
-0 0 0 4px rgba(154,107,53,.08);
-
-transform:translateY(-1px);
+outline:none
 }
 
 
-/* =========================================================
-   GRID
-========================================================= */
+/* =========================
+   CARDS
+========================= */
 
 .grid{
 display:grid;
-
 grid-template-columns:repeat(3,1fr);
-
-gap:18px;
+gap:18px
 }
-
-
-/* =========================================================
-   CARDS
-========================================================= */
 
 .card{
 background:#fff;
-
 border:1px solid var(--line);
 border-radius:17px;
-
 padding:24px;
-
-overflow:hidden;
-
-position:relative;
-
-opacity:0;
-
-animation:
-cardReveal .65s cubic-bezier(.2,.8,.2,1) forwards;
-
-transition:
-transform .35s cubic-bezier(.2,.8,.2,1),
-box-shadow .35s ease,
-border-color .35s ease;
-}
-
-@keyframes cardReveal{
-from{
-opacity:0;
-transform:translateY(18px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.card:nth-child(2){
-animation-delay:.06s;
-}
-
-.card:nth-child(3){
-animation-delay:.12s;
-}
-
-.card:nth-child(4){
-animation-delay:.18s;
-}
-
-.card:nth-child(5){
-animation-delay:.24s;
-}
-
-.card:nth-child(6){
-animation-delay:.30s;
-}
-
-.card::before{
-content:"";
-
-position:absolute;
-
-top:0;
-right:0;
-
-width:0;
-height:3px;
-
-background:var(--accent);
-
-transition:
-width .4s cubic-bezier(.2,.8,.2,1);
-}
-
-.card:hover{
-transform:
-translateY(-7px)
-scale(1.012);
-
-box-shadow:
-0 15px 35px rgba(23,33,30,.10);
-
-border-color:#ddd3c4;
-}
-
-.card:hover::before{
-width:100%;
-}
-
-.card:active{
-transform:
-translateY(-2px)
-scale(.992);
+overflow:hidden
 }
 
 .card-image{
 display:block;
-
 width:100%;
 height:210px;
-
 object-fit:cover;
-
 border-radius:13px;
-
 margin:-4px 0 18px;
-
 border:1px solid var(--line);
-
-background:#f1eee8;
-
-cursor:zoom-in;
-
-transition:
-transform .45s cubic-bezier(.2,.8,.2,1),
-filter .45s ease;
-}
-
-.card:hover .card-image{
-transform:scale(1.025);
-filter:brightness(1.025);
+background:#f1eee8
 }
 
 .card h3{
 margin:8px 0;
-
-font-size:22px;
-line-height:1.7;
-
-transition:
-color .3s ease,
-transform .3s ease;
-}
-
-.card:hover h3{
-color:var(--accent);
-transform:translateX(-3px);
+font-size:22px
 }
 
 .card p{
 color:var(--muted);
-font-size:15px;
+font-size:15px
 }
 
 .read{
 display:inline-block;
-
 margin-top:15px;
-
 color:var(--accent);
-font-weight:700;
-
-transition:
-transform .3s ease,
-color .3s ease;
+font-weight:700
 }
 
 .read:hover{
-text-decoration:underline;
-transform:translateX(-4px);
-}
-
-.read:active{
-transform:scale(.95);
+text-decoration:underline
 }
 
 
-/* =========================================================
+/* =========================
    ABOUT
-========================================================= */
+========================= */
 
 .about{
 background:var(--dark);
-
 color:#eef0ed;
-
 border-radius:25px;
-
-padding:45px;
-
-box-shadow:
-0 14px 35px rgba(23,33,30,.08);
-
-transition:
-transform .4s ease,
-box-shadow .4s ease;
-}
-
-.about:hover{
-transform:translateY(-4px);
-box-shadow:
-0 20px 45px rgba(23,33,30,.12);
+padding:45px
 }
 
 .about p{
-color:#bfc8c3;
+color:#bfc8c3
 }
 
 
-/* =========================================================
-   PHOTOS LIGHTBOX
-========================================================= */
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+padding:32px;
+text-align:center;
+color:var(--muted);
+border-top:1px solid var(--line)
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
 
 .media-lightbox{
 position:fixed;
 inset:0;
-
-background:rgba(23,33,30,.88);
-
+background:rgba(23,33,30,.82);
 display:none;
-
 align-items:center;
 justify-content:center;
-
 padding:24px;
-
-z-index:100;
-
-opacity:0;
-transition:opacity .3s ease;
+z-index:50
 }
 
 .media-lightbox.show{
-display:flex;
-opacity:1;
+display:flex
 }
 
 .media-lightbox img{
 max-width:94vw;
 max-height:90vh;
-
 width:auto;
 height:auto;
-
 object-fit:contain;
-
 border-radius:14px;
-
-box-shadow:
-0 15px 50px rgba(0,0,0,.35);
-
-animation:
-imageOpen .35s cubic-bezier(.2,.8,.2,1);
+box-shadow:0 15px 50px rgba(0,0,0,.35)
 }
 
-@keyframes imageOpen{
-from{
-opacity:0;
-transform:scale(.94);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
-}
-
-.media-close{
+.media-lightbox .media-close{
 position:absolute;
-
 top:18px;
 left:22px;
-
 border:0;
-
 background:#fff;
 color:#17211e;
-
 width:42px;
 height:42px;
-
 border-radius:50%;
-
 font-size:28px;
 line-height:1;
-
-cursor:pointer;
-
-transition:
-transform .25s ease,
-background .25s ease;
+cursor:pointer
 }
 
-.media-close:hover{
-transform:rotate(90deg) scale(1.05);
-background:#f3eee7;
+#photosGrid .card-image{
+cursor:zoom-in
 }
 
 
-/* =========================================================
+/* =========================
    VIDEOS
-========================================================= */
+========================= */
 
 .video-frame{
 aspect-ratio:16/9;
-
 background:#17211e;
-
 border-radius:13px;
-
-overflow:hidden;
-
-box-shadow:
-0 8px 20px rgba(23,33,30,.08);
+overflow:hidden
 }
 
 .video-frame iframe{
 width:100%;
 height:100%;
-
-border:0;
+border:0
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-padding:32px;
-
-text-align:center;
-
-color:var(--muted);
-
-border-top:1px solid var(--line);
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-padding:35px 10px;
-text-align:center;
-color:var(--muted);
-}
-
-.loading::after{
-content:"";
-
-display:block;
-
-width:25px;
-height:25px;
-
-margin:12px auto 0;
-
-border:3px solid #ddd5c9;
-border-top-color:var(--accent);
-
-border-radius:50%;
-
-animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-to{
-transform:rotate(360deg);
-}
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-.error-box{
-background:#fff4f1;
-
-border:1px solid #e8c7c0;
-
-color:#8b3b32;
-
-border-radius:12px;
-
-padding:15px;
-
-line-height:1.8;
-}
-
-
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:800px){
 
 .links{
-display:none;
+display:none
 }
 
 .nav{
-justify-content:center;
+justify-content:center
 }
 
 .brand-wrap{
 align-items:center;
-width:100%;
+width:100%
 }
 
 .section-nav{
 width:100%;
-justify-content:flex-start;
+justify-content:flex-start
+}
+
+.quote-item{
+font-size:17px;
+padding:7px 20px
+}
+
+.quote-ticker-track{
+animation-duration:32s
 }
 
 .hero{
 grid-template-columns:1fr;
-padding-top:50px;
+padding-top:50px
 }
 
 .visual{
-min-height:240px;
+min-height:240px
 }
 
 .visual img{
-max-height:210px;
+max-height:210px
 }
 
 .grid{
-grid-template-columns:1fr;
+grid-template-columns:1fr
 }
 
 body::before{
 font-size:27px;
 letter-spacing:8px;
 word-spacing:12px;
-opacity:.02;
+opacity:.02
 }
 
 body::after{
 font-size:20px;
 letter-spacing:12px;
-opacity:.014;
+opacity:.014
+}
+
+.card:hover{
+transform:translateY(-4px)
 }
 
 }
 
 
-/* =========================================================
-   FONT
-========================================================= */
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+.quote-ticker-track{
+animation:none
+}
+
+*,
+*::before,
+*::after{
+transition-duration:.01ms !important;
+scroll-behavior:auto !important
+}
+
+}
+
+
+/* =========================
+   FONTS
+========================= */
 
 html,
 body,
@@ -1005,7 +608,7 @@ font-family:
 "Noto Naskh Arabic",
 Tahoma,
 Arial,
-sans-serif !important;
+sans-serif !important
 }
 
 h1,
@@ -1025,15 +628,12 @@ font-family:
 Tahoma,
 Arial,
 sans-serif !important;
-
-font-weight:700 !important;
+font-weight:700 !important
 }
 
 </style>
 
-
 <script type="application/ld+json">
-
 {
 "@context":"https://schema.org",
 "@type":"WebSite",
@@ -1041,14 +641,16 @@ font-weight:700 !important;
 "url":"https://3li3deeb.github.io/Ali-Adeeb/",
 "inLanguage":"ar"
 }
-
 </script>
 
 </head>
 
-
 <body>
 
+
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <nav>
 
@@ -1056,7 +658,7 @@ font-weight:700 !important;
 
 <div class="brand-wrap">
 
-<a class="brand" href="index.html" aria-label="الصفحة الرئيسية">
+<a class="brand" href="index.html">
 Al-<span>Adeeb</span>
 </a>
 
@@ -1073,7 +675,6 @@ Al-<span>Adeeb</span>
 
 </div>
 
-
 <div class="links">
 
 <a href="#articles">المقالات</a>
@@ -1086,6 +687,26 @@ Al-<span>Adeeb</span>
 
 </nav>
 
+
+<!-- =========================
+     QUOTE TICKER
+========================= -->
+
+<div
+id="quoteTicker"
+class="quote-ticker"
+aria-label="اقتباسات">
+
+<div id="quoteTickerTrack" class="quote-ticker-track">
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero" id="home">
 
@@ -1111,20 +732,20 @@ Al-Adeeb
 
 </div>
 
-
 <div class="visual">
 
 <img
 src="logo.png"
-alt="Al-Adeeb"
-loading="eager"
-onerror="this.style.display='none'"
->
+alt="Al-Adeeb">
 
 </div>
 
 </section>
 
+
+<!-- =========================
+     ARTICLES
+========================= -->
 
 <section id="articles">
 
@@ -1140,25 +761,24 @@ onerror="this.style.display='none'"
 
 </div>
 
-
 <input
 id="search"
 class="search"
 placeholder="ابحث في المقالات والكتب..."
-autocomplete="off"
->
+autocomplete="off">
 
-
-<div id="articlesGrid" class="grid">
-
-<div class="loading">
-جاري تحميل المقالات...
-</div>
+<div
+id="articlesGrid"
+class="grid">
 
 </div>
 
 </section>
 
+
+<!-- =========================
+     BOOKS
+========================= -->
 
 <section id="books">
 
@@ -1174,17 +794,18 @@ autocomplete="off"
 
 </div>
 
-
-<div id="booksGrid" class="grid">
-
-<div class="loading">
-جاري تحميل الكتب...
-</div>
+<div
+id="booksGrid"
+class="grid">
 
 </div>
 
 </section>
 
+
+<!-- =========================
+     PHOTOS
+========================= -->
 
 <section id="photos">
 
@@ -1200,17 +821,22 @@ autocomplete="off"
 
 </div>
 
-
-<div id="photosGrid" class="grid">
+<div
+id="photosGrid"
+class="grid">
 
 <p class="muted">
-جاري تحميل الصور...
+لا توجد صور بعد.
 </p>
 
 </div>
 
 </section>
 
+
+<!-- =========================
+     VIDEOS
+========================= -->
 
 <section id="videos">
 
@@ -1226,17 +852,22 @@ autocomplete="off"
 
 </div>
 
-
-<div id="videosGrid" class="grid">
+<div
+id="videosGrid"
+class="grid">
 
 <p class="muted">
-جاري تحميل الفيديوهات...
+لا توجد فيديوهات بعد.
 </p>
 
 </div>
 
 </section>
 
+
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section id="about">
 
@@ -1260,55 +891,102 @@ autocomplete="off"
 
 
 <footer>
-
 © 2026 Al-Adeeb — جميع الحقوق محفوظة
-
 </footer>
 
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
 
 <div
 id="mediaLightbox"
 class="media-lightbox"
 aria-hidden="true"
-onclick="if(event.target===this)closePhoto()"
->
+onclick="if(event.target===this)closePhoto()">
 
 <button
 class="media-close"
 onclick="closePhoto()"
-aria-label="إغلاق"
->
+aria-label="إغلاق">
+
 ×
 </button>
 
 <img
 id="lightboxImage"
-alt=""
->
+alt="">
 
 </div>
 
 
 <script>
 
-/* =========================================================
-   GLOBAL DATA
-========================================================= */
+
+/* =========================
+   PHOTO LIGHTBOX
+========================= */
+
+function openPhoto(src,alt){
+
+const b=document.getElementById("mediaLightbox");
+
+const i=document.getElementById("lightboxImage");
+
+i.src=src;
+
+i.alt=alt||"";
+
+b.classList.add("show");
+
+b.setAttribute(
+"aria-hidden",
+"false"
+);
+
+}
+
+function closePhoto(){
+
+const b=document.getElementById("mediaLightbox");
+
+b.classList.remove("show");
+
+b.setAttribute(
+"aria-hidden",
+"true"
+);
+
+}
+
+document.addEventListener(
+"keydown",
+e=>{
+if(e.key==="Escape")closePhoto()
+}
+);
+
+
+/* =========================
+   DATA
+========================= */
 
 let D={
 site:{},
 articles:[],
 books:[],
 photos:[],
-videos:[]
+videos:[],
+quotes:[]
 };
 
-const $=id=>document.getElementById(id);
+const $=id=>
+document.getElementById(id);
 
 
-/* =========================================================
+/* =========================
    ESCAPE
-========================================================= */
+========================= */
 
 function esc(s){
 
@@ -1326,273 +1004,251 @@ m=>({
 }
 
 
-/* =========================================================
-   SAFE ID
-========================================================= */
+/* =========================
+   QUOTE TICKER
+========================= */
 
-function safeId(value){
+function renderQuotes(){
 
-return String(value??'')
-.replace(/[^a-zA-Z0-9_-]/g,'_');
+const ticker=$('quoteTicker');
+
+const track=$('quoteTickerTrack');
+
+let quotes=
+Array.isArray(D.quotes)
+?
+D.quotes
+.filter(q=>String(q||'').trim())
+.map(q=>String(q).trim())
+:
+[];
+
+if(!quotes.length){
+
+ticker.style.display='none';
+
+track.innerHTML='';
+
+return;
+
+}
+
+ticker.style.display='block';
+
+
+function groupHTML(){
+
+return `
+
+<div class="quote-group">
+
+${quotes.map(q=>`
+
+<div class="quote-item">
+
+<span>
+${esc(q)}
+</span>
+
+</div>
+
+`).join('')}
+
+</div>
+
+`;
 
 }
 
 
-/* =========================================================
-   IMAGE LIGHTBOX
-========================================================= */
+/*
+نكرر المجموعة مرتين حتى تستمر
+الحركة بشكل دائري بدون انقطاع.
+*/
 
-function openPhoto(src,alt){
-
-const box=$('mediaLightbox');
-const image=$('lightboxImage');
-
-image.src=src;
-image.alt=alt||'';
-
-box.classList.add('show');
-box.setAttribute('aria-hidden','false');
-
-document.body.style.overflow='hidden';
+track.innerHTML=
+groupHTML()+
+groupHTML();
 
 }
 
 
-function closePhoto(){
-
-const box=$('mediaLightbox');
-
-box.classList.remove('show');
-box.setAttribute('aria-hidden','true');
-
-document.body.style.overflow='';
-
-}
-
-
-document.addEventListener(
-'keydown',
-function(e){
-
-if(e.key==='Escape'){
-closePhoto();
-}
-
-}
-);
-
-
-/* =========================================================
-   ARTICLES
-========================================================= */
+/* =========================
+   RENDER ARTICLES
+========================= */
 
 function renderArticles(){
 
-const q=$('search').value
+let q=
+$('search').value
 .toLowerCase()
 .trim();
 
-const results=D.articles.filter(x=>{
-
-const text=
-(x.title||'')+' '+
-(x.category||'')+' '+
-(x.excerpt||'')+' '+
-(x.body||'');
-
-return text
-.toLowerCase()
-.includes(q);
-
-});
-
-
 $('articlesGrid').innerHTML=
 
-results.map(x=>{
-
-const id=safeId(x.id);
+D.articles
+.filter(x=>
+(
+(x.title||'')+
+' '+
+(x.category||'')+
+' '+
+(x.excerpt||'')+
+' '+
+(x.body||'')
+)
+.toLowerCase()
+.includes(q)
+)
+.map(x=>{
 
 const url=
 'article.html?id='+
-encodeURIComponent(x.id)+
-'&return=article-card-'+
-encodeURIComponent(id);
-
+encodeURIComponent(x.id);
 
 return `
 
 <article
 class="card"
-id="article-card-${esc(id)}"
->
+id="article-card-${esc(x.id)}">
 
-${x.image?`
+${x.image?
 
-<img
+`<img
 class="card-image"
 src="${esc(x.image)}"
-alt="${esc(x.title||'')}"
+alt="${esc(x.title)}"
 loading="lazy"
-onclick="openPhoto(this.src,this.alt)"
-onerror="this.style.display='none'"
->
+onerror="this.style.display='none'">`
 
-`:''}
-
+:''}
 
 <div class="tag">
-
 ${esc(x.category||'متنوع')}
-
 </div>
 
-
 <h3>
-
-${esc(x.title||'مقال بلا عنوان')}
-
+${esc(x.title||'')}
 </h3>
 
-
 <p>
-
 ${esc(x.excerpt||'')}
-
 </p>
-
 
 <a
 class="read"
-href="${url}"
->
+href="${url}">
 
 قراءة المقال ←
 
 </a>
 
-
 </article>
 
 `;
 
-}).join('')
+})
+.join('')
 
 ||
 
-'<p class="muted">لا توجد نتائج.</p>';
+'<p>لا توجد نتائج.</p>';
 
 }
 
 
-/* =========================================================
-   BOOKS
-========================================================= */
+/* =========================
+   RENDER BOOKS
+========================= */
 
 function renderBooks(){
 
 $('booksGrid').innerHTML=
 
-D.books.map(x=>{
-
-const id=
-x.id||
-x.title||
-('book-'+Date.now());
-
-const safe=safeId(id);
-
-const url=
-'book.html?id='+
-encodeURIComponent(id)+
-'&return=book-card-'+
-encodeURIComponent(safe);
-
-
-return `
+D.books
+.map(x=>`
 
 <article
 class="card"
-id="book-card-${esc(safe)}"
->
+id="book-card-${esc(x.id||x.title)}">
 
-${x.image?`
+${x.image?
 
-<img
+`<img
 class="card-image"
 src="${esc(x.image)}"
-alt="${esc(x.title||'')}"
+alt="${esc(x.title)}"
 loading="lazy"
-onclick="openPhoto(this.src,this.alt)"
-onerror="this.style.display='none'"
->
+onerror="this.style.display='none'">`
 
-`:''}
-
+:''}
 
 <div class="tag">
 كتاب
 </div>
 
-
 <h3>
-${esc(x.title||'كتاب')}
+${esc(x.title||'')}
 </h3>
-
 
 <p>
 ${esc(x.description||'')}
 </p>
 
-
 <a
 class="read"
-href="${url}"
->
-فتح الكتاب ←
-</a>
+href="book.html?id=${encodeURIComponent(x.id||x.title)}">
 
+فتح الكتاب ←
+
+</a>
 
 </article>
 
-`;
-
-}).join('')
+`)
+.join('')
 
 ||
 
-'<p class="muted">لا توجد كتب بعد.</p>';
+'<p>لا توجد كتب بعد.</p>';
 
 }
 
 
-/* =========================================================
-   PHOTOS
-========================================================= */
+/* =========================
+   RENDER PHOTOS
+========================= */
 
 function renderPhotos(){
 
-const photos=D.photos||[];
+const photos=
+D.photos||[];
 
 $('photosGrid').innerHTML=
 
-photos.map((x,i)=>{
+photos
+.map((x,i)=>{
 
 const src=
 typeof x==='string'
-?x
-:(x.image||x.src||x.url);
+?
+x
+:
+x.image;
 
 const title=
 typeof x==='string'
-?''
-:(x.title||'');
+?
+''
+:
+(x.title||'');
 
-if(!src)return '';
+return src?
 
-return `
+`
 
-<article class="card">
+<article
+class="card">
 
 <img
 class="card-image"
@@ -1600,22 +1256,24 @@ src="${esc(src)}"
 alt="${esc(title)}"
 loading="lazy"
 onclick="openPhoto(this.src,this.alt)"
-onerror="this.style.display='none'"
->
+onerror="this.style.display='none'">
 
-${title?`
+${title?
 
-<h3>
+`<h3>
 ${esc(title)}
-</h3>
+</h3>`
 
-`:''}
+:''}
 
 </article>
 
-`;
+`
 
-}).join('')
+:'';
+
+})
+.join('')
 
 ||
 
@@ -1624,37 +1282,39 @@ ${esc(title)}
 }
 
 
-/* =========================================================
+/* =========================
    VIDEO URL
-========================================================= */
+========================= */
 
 function videoEmbed(url){
 
 if(!url)return '';
 
-let value=String(url).trim();
+let value=
+String(url).trim();
 
-let match=value.match(
+let match=
+value.match(
 /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?/]+)/i
 );
 
 if(match){
 
 return
-'https://www.youtube.com/embed/'+
+'https://www.youtube.com/embed/' +
 encodeURIComponent(match[1]);
 
 }
 
-
-match=value.match(
+match=
+value.match(
 /vimeo\.com\/(?:video\/)?([0-9]+)/i
 );
 
 if(match){
 
 return
-'https://player.vimeo.com/video/'+
+'https://player.vimeo.com/video/' +
 encodeURIComponent(match[1]);
 
 }
@@ -1664,35 +1324,43 @@ return value;
 }
 
 
-/* =========================================================
-   VIDEOS
-========================================================= */
+/* =========================
+   RENDER VIDEOS
+========================= */
 
 function renderVideos(){
 
-const videos=D.videos||[];
+const videos=
+D.videos||[];
 
 $('videosGrid').innerHTML=
 
-videos.map(x=>{
+videos
+.map((x,index)=>{
 
 const raw=
 typeof x==='string'
-?x
-:(x.url||x.src||'');
+?
+x
+:
+(x.url||x.src||'');
 
 const title=
 typeof x==='string'
-?''
-:(x.title||'');
+?
+''
+:
+(x.title||'');
 
-const url=videoEmbed(raw);
+const url=
+videoEmbed(raw);
 
 if(!url)return '';
 
 return `
 
-<article class="card">
+<article
+class="card">
 
 <div class="video-frame">
 
@@ -1702,25 +1370,25 @@ title="${esc(title||'فيديو من Al-Adeeb')}"
 loading="lazy"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 allowfullscreen
-referrerpolicy="strict-origin-when-cross-origin"
-></iframe>
+referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
 
 </div>
 
+${title?
 
-${title?`
-
-<h3>
+`<h3>
 ${esc(title)}
-</h3>
+</h3>`
 
-`:''}
+:''}
 
 </article>
 
 `;
 
-}).join('')
+})
+.join('')
 
 ||
 
@@ -1729,36 +1397,39 @@ ${esc(title)}
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
+/* =========================
+   MAIN RENDER
+========================= */
 
 function render(){
 
+renderQuotes();
+
 renderArticles();
+
 renderBooks();
+
 renderPhotos();
+
 renderVideos();
 
 }
 
 
-/* =========================================================
+/* =========================
    SEARCH
-========================================================= */
+========================= */
 
-$('search').oninput=renderArticles;
+$('search').oninput=
+renderArticles;
 
 
-/* =========================================================
-   LOAD CONTENT
-========================================================= */
+/* =========================
+   LOAD CONTENT.JSON
+========================= */
 
 fetch(
-'content.json?cache='+Date.now(),
-{
-cache:'no-store'
-}
+'content.json?'+Date.now()
 )
 
 .then(r=>{
@@ -1766,55 +1437,56 @@ cache:'no-store'
 if(!r.ok){
 
 throw new Error(
-'HTTP '+r.status+
-' — تعذر الوصول إلى content.json'
+'HTTP '+r.status
 );
 
 }
 
-return r.text();
+return r.json();
 
 })
 
-.then(text=>{
-
-let x;
-
-try{
-
-x=JSON.parse(text);
-
-}catch(e){
-
-throw new Error(
-'content.json يحتوي على JSON غير صالح.'
-);
-
-}
+.then(x=>{
 
 D=x||{};
 
-D.site=D.site||{};
+D.site=
+D.site||{};
 
 D.articles=
 Array.isArray(D.articles)
-?D.articles
-:[];
+?
+D.articles
+:
+[];
 
 D.books=
 Array.isArray(D.books)
-?D.books
-:[];
+?
+D.books
+:
+[];
 
 D.photos=
 Array.isArray(D.photos)
-?D.photos
-:[];
+?
+D.photos
+:
+[];
 
 D.videos=
 Array.isArray(D.videos)
-?D.videos
-:[];
+?
+D.videos
+:
+[];
+
+D.quotes=
+Array.isArray(D.quotes)
+?
+D.quotes
+:
+[];
 
 
 /* SITE */
@@ -1831,59 +1503,34 @@ $('aboutTitle').textContent=
 (D.site.name||'Al-Adeeb');
 
 $('aboutText').textContent=
-D.site.description||
-'مساحة شخصية للنشر والمعرفة.';
+D.site.description||'';
 
+
+/* RENDER */
 
 render();
 
 
-/* =========================================================
-   RETURN TO CARD
-========================================================= */
+/* RETURN */
 
-const params=
+const target=
 new URLSearchParams(
 location.search
-);
-
-const target=params.get('return');
+).get('return');
 
 if(target){
 
-setTimeout(()=>{
-
-const element=
-document.getElementById(target);
-
-if(element){
-
-element.scrollIntoView({
+setTimeout(
+()=>{
+document
+.getElementById(target)
+?.scrollIntoView({
 behavior:'smooth',
 block:'center'
-});
-
-element.animate(
-[
-{
-transform:'scale(1)'
+})
 },
-{
-transform:'scale(1.025)'
-},
-{
-transform:'scale(1)'
-}
-],
-{
-duration:650,
-easing:'ease-out'
-}
+250
 );
-
-}
-
-},450);
 
 }
 
@@ -1897,33 +1544,18 @@ error
 );
 
 $('desc').textContent=
-'حدث خطأ أثناء تحميل محتوى الموقع.';
+'تعذر تحميل المحتوى حالياً.';
 
-$('articlesGrid').innerHTML=`
+$('articlesGrid').innerHTML=
+'<p>تعذر تحميل المقالات حالياً.</p>';
 
-<div class="error-box">
-
-<strong>تعذر تحميل المحتوى.</strong><br>
-
-يرجى التأكد من وجود ملف
-<strong>content.json</strong>
-بجانب ملف
-<strong>index.html</strong>.
-
-</div>
-
-`;
-
-$('booksGrid').innerHTML='';
-
-$('photosGrid').innerHTML='';
-
-$('videosGrid').innerHTML='';
+$('booksGrid').innerHTML=
+'<p>تعذر تحميل الكتب حالياً.</p>';
 
 });
 
-</script>
 
+</script>
 
 </body>
 </html>
