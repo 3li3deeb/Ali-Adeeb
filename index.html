@@ -39,7 +39,7 @@ body{
 margin:0;
 background:var(--bg);
 color:var(--text);
-font-family:"Amiri",Tahoma,Arial,sans-serif;
+font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
 font-size:17px;
 line-height:2;
 position:relative;
@@ -167,13 +167,10 @@ transition:background .2s ease
 }
 
 .section-nav a:hover,
-.section-nav a:focus{
+.section-nav a:focus,
+.section-nav a.active{
 background:#7f5428;
 color:#fff
-}
-
-.section-nav a.active{
-background:#7f5428
 }
 
 
@@ -189,7 +186,8 @@ border-top:1px solid #26332e;
 overflow:hidden;
 position:relative;
 direction:ltr;
-z-index:10
+z-index:10;
+white-space:nowrap
 }
 
 .quote-ticker-track{
@@ -210,38 +208,64 @@ width:max-content
 .quote-item{
 display:flex;
 align-items:center;
-gap:18px;
-padding:8px 25px;
+gap:12px;
+padding:9px 28px;
 white-space:nowrap;
-font-family:"Noto Naskh Arabic",serif;
+font-family:"Noto Naskh Arabic","Amiri",serif;
 font-size:19px;
 font-weight:700;
 line-height:1.7;
 color:#fff;
-direction:rtl
+direction:rtl;
+text-align:right
 }
 
 .quote-item::before{
 content:"❖";
 color:#c49a69;
-font-size:14px;
-flex-shrink:0
+font-size:13px;
+font-weight:700;
+margin-left:3px
 }
 
-.quote-separator{
-color:#9a6b35;
-font-size:16px;
-margin:0 5px
+/* نص الاقتباس */
+
+.quote-text{
+font-family:"Noto Naskh Arabic","Amiri",serif;
+font-size:19px;
+font-weight:700;
+color:#fff
 }
+
+/* اسم القائل */
+
+.quote-author{
+font-family:"Noto Naskh Arabic","Amiri",serif;
+font-size:15px;
+font-weight:600;
+color:#c49a69;
+margin-right:5px
+}
+
+.quote-author::before{
+content:"— ";
+color:#8f9a94;
+margin-left:3px
+}
+
+
+/*
+   الحركة من اليسار إلى اليمين
+*/
 
 @keyframes quoteScroll{
 
 from{
-transform:translateX(0)
+transform:translateX(-50%)
 }
 
 to{
-transform:translateX(-50%)
+transform:translateX(0)
 }
 
 }
@@ -505,6 +529,46 @@ border:0
 
 
 /* =========================
+   FONTS
+========================= */
+
+html,
+body,
+button,
+input,
+textarea,
+select{
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif !important
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand,
+.kicker,
+.tag,
+.btn,
+.read,
+.links,
+.section-nav a{
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif !important;
+
+font-weight:700 !important
+}
+
+
+/* =========================
    MOBILE
 ========================= */
 
@@ -530,7 +594,15 @@ justify-content:flex-start
 
 .quote-item{
 font-size:18px;
-padding:7px 20px
+padding:8px 22px
+}
+
+.quote-text{
+font-size:18px
+}
+
+.quote-author{
+font-size:14px
 }
 
 .quote-ticker-track{
@@ -567,10 +639,6 @@ letter-spacing:12px;
 opacity:.014
 }
 
-.card:hover{
-transform:translateY(-4px)
-}
-
 }
 
 
@@ -591,45 +659,6 @@ transition-duration:.01ms !important;
 scroll-behavior:auto !important
 }
 
-}
-
-
-/* =========================
-   FONTS
-========================= */
-
-html,
-body,
-button,
-input,
-textarea,
-select{
-font-family:
-"Amiri",
-"Noto Naskh Arabic",
-Tahoma,
-Arial,
-sans-serif !important
-}
-
-h1,
-h2,
-h3,
-h4,
-.brand,
-.kicker,
-.tag,
-.btn,
-.read,
-.links,
-.section-nav a{
-font-family:
-"Amiri",
-"Noto Naskh Arabic",
-Tahoma,
-Arial,
-sans-serif !important;
-font-weight:700 !important
 }
 
 </style>
@@ -698,7 +727,9 @@ id="quoteTicker"
 class="quote-ticker"
 aria-label="اقتباسات">
 
-<div id="quoteTickerTrack" class="quote-ticker-track">
+<div
+id="quoteTickerTrack"
+class="quote-ticker-track">
 
 </div>
 
@@ -1006,202 +1037,170 @@ m=>({
 
 
 /* =========================
-   QUOTE TEXT NORMALIZER
+   QUOTE TICKER
 ========================= */
 
 /*
-   هذه الدالة تمنع ظهور [object Object].
+يدعم الاقتباسات بالشكل التالي:
 
-   الاقتباس قد يكون محفوظاً في content.json
-   كنص مباشر:
+{
+  "text":"نص الاقتباس",
+  "author":"اسم القائل"
+}
 
-   "العلم نور"
+كما يدعم:
 
-   أو ككائن:
+{
+  "quote":"نص الاقتباس",
+  "author":"اسم القائل"
+}
 
-   {"text":"العلم نور"}
+أو:
 
-   أو:
-
-   {"quote":"العلم نور"}
-
-   أو:
-
-   {"content":"العلم نور"}
-
-   أو:
-
-   {"title":"العلم نور"}
-
-   أو:
-
-   {"value":"العلم نور"}
+{
+  "content":"نص الاقتباس",
+  "speaker":"اسم القائل"
+}
 */
 
-function getQuoteText(q){
+function renderQuotes(){
 
-    /* =========================
-       نص مباشر
-    ========================= */
+const ticker=$('quoteTicker');
 
-    if(typeof q === 'string'){
+const track=$('quoteTickerTrack');
 
-        return q.trim();
-
-    }
-
-
-    /* =========================
-       كائن
-    ========================= */
-
-    if(q && typeof q === 'object'){
-
-        const value =
-            q.text ??
-            q.quote ??
-            q.content ??
-            q.title ??
-            q.value ??
-            q.textContent ??
-            q.description ??
-            '';
-
-        /*
-           إذا كانت القيمة نفسها كائناً
-           نحاول التعامل معها مرة أخرى.
-        */
-
-        if(typeof value === 'string'){
-
-            return value.trim();
-
-        }
-
-        if(
-            value !== null &&
-            typeof value !== 'undefined'
-        ){
-
-            return String(value).trim();
-
-        }
-
-    }
-
-    return '';
-
+if(!ticker||!track){
+return;
 }
 
 
 /* =========================
-   QUOTE TICKER
+   معالجة الاقتباسات
 ========================= */
 
-function renderQuotes(){
+const quotes=
+Array.isArray(D.quotes)
+?
+D.quotes
+.map(q=>{
 
-    const ticker =
-        $('quoteTicker');
+/*
+إذا كان الاقتباس كائن Object
+*/
 
-    const track =
-        $('quoteTickerTrack');
+if(
+q &&
+typeof q==='object'
+){
 
+return{
 
-    /* =========================
-       قراءة الاقتباسات
-    ========================= */
+text:String(
+q.text ??
+q.quote ??
+q.content ??
+q.excerpt ??
+q.title ??
+''
+).trim(),
 
-    const rawQuotes =
-        Array.isArray(D.quotes)
-        ?
-        D.quotes
-        :
-        [];
+author:String(
+q.author ??
+q.speaker ??
+q.by ??
+q.writer ??
+''
+).trim()
 
+};
 
-    /*
-       تحويل جميع الصيغ إلى نصوص
-       وإزالة الاقتباسات الفارغة.
-    */
-
-    const quotes =
-        rawQuotes
-        .map(getQuoteText)
-        .filter(q => q.length > 0);
-
-
-    /* =========================
-       لا توجد اقتباسات
-    ========================= */
-
-    if(!quotes.length){
-
-        ticker.style.display='none';
-
-        track.innerHTML='';
-
-        return;
-
-    }
+}
 
 
-    /* =========================
-       إظهار الشريط
-    ========================= */
+/*
+إذا كان الاقتباس نصاً فقط
+*/
 
-    ticker.style.display='block';
+return{
 
+text:String(q??'').trim(),
 
-    /* =========================
-       إنشاء مجموعة
-    ========================= */
+author:''
 
-    function groupHTML(){
+};
 
-        return `
-
-        <div class="quote-group">
-
-            ${quotes.map(q => `
-
-                <div class="quote-item">
-
-                    <span>
-                        ${esc(q)}
-                    </span>
-
-                </div>
-
-            `).join('')}
-
-        </div>
-
-        `;
-
-    }
+})
+.filter(q=>q.text)
+:
+[];
 
 
-    /*
-       تكرار المجموعة مرتين.
-       هذا يسمح للحركة بالاستمرار
-       دون ظهور فراغ في الشريط.
-    */
+/* =========================
+   لا توجد اقتباسات
+========================= */
 
-    track.innerHTML =
-        groupHTML() +
-        groupHTML();
+if(!quotes.length){
+
+ticker.style.display='none';
+
+track.innerHTML='';
+
+return;
+
+}
+
+ticker.style.display='block';
 
 
-    /*
-       إعادة تشغيل الحركة عند تحديث الاقتباسات.
-    */
+/* =========================
+   إنشاء مجموعة الاقتباسات
+========================= */
 
-    track.style.animation='none';
+function groupHTML(){
 
-    void track.offsetWidth;
+return `
 
-    track.style.animation=
-        'quoteScroll 38s linear infinite';
+<div class="quote-group">
+
+${quotes.map(q=>`
+
+<div class="quote-item">
+
+<span class="quote-text">
+
+${esc(q.text)}
+
+</span>
+
+${q.author?
+
+`<span class="quote-author">
+
+${esc(q.author)}
+
+</span>`
+
+:''}
+
+</div>
+
+`).join('')}
+
+</div>
+
+`;
+
+}
+
+
+/*
+نكرر المجموعة مرتين حتى تستمر
+الحركة بصورة دائرية بدون انقطاع.
+*/
+
+track.innerHTML=
+groupHTML()+
+groupHTML();
 
 }
 
@@ -1614,28 +1613,15 @@ D.videos
 :
 [];
 
-
-/* =========================
-   QUOTES
-========================= */
-
-/*
-   لا نحول الاقتباسات إلى String هنا.
-   نتركها كما هي حتى تقوم getQuoteText()
-   بمعالجة النص أو الـ Object بشكل صحيح.
-*/
-
-D.quotes =
-    Array.isArray(D.quotes)
-    ?
-    D.quotes
-    :
-    [];
+D.quotes=
+Array.isArray(D.quotes)
+?
+D.quotes
+:
+[];
 
 
-/* =========================
-   SITE
-========================= */
+/* SITE */
 
 $('desc').textContent=
 D.site.description||'';
@@ -1652,16 +1638,12 @@ $('aboutText').textContent=
 D.site.description||'';
 
 
-/* =========================
-   RENDER
-========================= */
+/* RENDER */
 
 render();
 
 
-/* =========================
-   RETURN
-========================= */
+/* RETURN */
 
 const target=
 new URLSearchParams(
@@ -1708,4 +1690,4 @@ $('booksGrid').innerHTML=
 </script>
 
 </body>
-</html>
+   </html>
