@@ -27,7 +27,7 @@ body{
 margin:0;
 background:var(--bg);
 color:var(--text);
-font-family:Arial,Tahoma,sans-serif;
+font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
 line-height:1.8;
 }
 
@@ -47,7 +47,10 @@ margin:16px 0;
 box-shadow:0 5px 20px #17211e0a;
 }
 
-h1{margin:0}
+h1,h2,h3{
+font-family:"Amiri","Noto Naskh Arabic",serif;
+font-weight:700;
+}
 
 label{
 display:block;
@@ -141,6 +144,7 @@ background:var(--text);
 color:white;
 font-weight:bold;
 cursor:pointer;
+font-family:"Amiri","Noto Naskh Arabic",serif;
 }
 
 button.accent{background:var(--accent)}
@@ -184,56 +188,7 @@ background:var(--accent);
 color:#fff;
 }
 
-
-/* =========================================================
-   QUOTES
-========================================================= */
-
-.quote-item{
-border:1px solid var(--line);
-border-radius:14px;
-padding:15px;
-margin:10px 0;
-background:#fff;
-}
-
-.quote-preview{
-margin-top:12px;
-padding:18px 20px;
-border-radius:12px;
-background:#f7f2e8;
-border-right:4px solid var(--accent);
-font-family:"Noto Naskh Arabic",serif;
-font-size:21px;
-font-weight:700;
-line-height:2;
-}
-
-.quote-preview .quote-author{
-display:block;
-margin-top:5px;
-font-size:15px;
-font-weight:500;
-color:var(--muted);
-}
-
-.quote-order{
-max-width:150px;
-}
-
-.quote-note{
-padding:12px;
-background:#faf8f4;
-border:1px solid var(--line);
-border-radius:10px;
-margin-bottom:15px;
-font-size:13px;
-}
-
-
-/* =========================
-   RICH TEXT EDITOR
-========================= */
+/* RICH EDITOR */
 
 .rich-wrap{
 border:1px solid #d8d1c6;
@@ -275,24 +230,11 @@ font-weight:bold;
 min-width:38px;
 }
 
-.toolbar button:hover,
-.toolbar select:hover{
-background:#eee8de;
-}
-
 .toolbar .sep{
 width:1px;
 height:30px;
 background:#d8d1c6;
 margin:0 3px;
-}
-
-.toolbar .font-select{
-min-width:150px;
-}
-
-.toolbar .size-select{
-min-width:115px;
 }
 
 .rich-editor{
@@ -336,61 +278,6 @@ font-size:24px;
 margin:20px 0 10px;
 }
 
-.rich-editor ul,
-.rich-editor ol{
-padding-right:30px;
-}
-
-.rich-editor a{
-color:var(--accent);
-text-decoration:underline;
-}
-
-
-/* =========================
-   EDITOR FONTS
-========================= */
-
-.font-amiri{
-font-family:"Amiri",serif;
-}
-
-.font-naskh{
-font-family:"Noto Naskh Arabic",serif;
-}
-
-.font-cairo{
-font-family:"Cairo",sans-serif;
-}
-
-.font-tajawal{
-font-family:"Tajawal",sans-serif;
-}
-
-.font-scheherazade{
-font-family:"Scheherazade New",serif;
-}
-
-.font-georgia{
-font-family:Georgia,serif;
-}
-
-.font-arial{
-font-family:Arial,sans-serif;
-}
-
-.preview-box{
-border:1px solid var(--line);
-border-radius:12px;
-background:#faf8f4;
-padding:18px;
-margin-top:12px;
-}
-
-.preview-box h3{
-margin-top:0;
-}
-
 .editor-info{
 display:flex;
 justify-content:space-between;
@@ -403,6 +290,38 @@ color:#777;
 font-size:12px;
 }
 
+/* MEDIA CARDS */
+
+.media-gallery{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+gap:10px;
+margin-top:12px;
+}
+
+.media-thumb{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:10px;
+border:1px solid var(--line);
+}
+
+.media-card{
+border:1px solid var(--line);
+border-radius:14px;
+padding:15px;
+margin-top:12px;
+background:#fff;
+}
+
+.media-meta{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+font-size:12px;
+color:var(--muted);
+}
 
 @media(max-width:650px){
 
@@ -422,25 +341,9 @@ flex:1;
 position:relative;
 }
 
-.toolbar button{
-padding:7px 8px;
-}
-
-.toolbar .font-select{
-min-width:125px;
-}
-
-.toolbar .size-select{
-min-width:100px;
-}
-
 .rich-editor{
 min-height:300px;
 font-size:18px;
-}
-
-.quote-preview{
-font-size:19px;
 }
 
 }
@@ -454,13 +357,8 @@ font-size:19px;
 <h1>لوحة تحكم Al-Adeeb</h1>
 
 <p class="muted">
-إدارة الموقع والمقالات والكتب والاقتباسات والنشر إلى GitHub.
+إدارة الموقع والمقالات والكتب والصور والفيديوهات والاقتباسات والنشر إلى GitHub.
 </p>
-
-
-<!-- =========================================================
-     GITHUB
-========================================================= -->
 
 <section class="box">
 
@@ -492,10 +390,6 @@ type="password"
 autocomplete="off"
 placeholder="الصق التوكن هنا">
 
-<p class="muted">
-يحتاج Contents: Read and write.
-</p>
-
 <div class="actions">
 
 <button onclick="connect()">
@@ -514,13 +408,7 @@ placeholder="الصق التوكن هنا">
 
 </section>
 
-
 <div id="app" class="hidden">
-
-
-<!-- =========================================================
-     SITE SETTINGS
-========================================================= -->
 
 <section class="box">
 
@@ -542,47 +430,26 @@ placeholder="الصق التوكن هنا">
 </section>
 
 
-<!-- =========================================================
-     QUOTES
-========================================================= -->
+<!-- QUOTES -->
 
 <section class="box">
 
 <h2>الاقتباسات المتحركة</h2>
 
-<div class="quote-note">
-
-<strong>شريط الاقتباسات:</strong>
-
-أضف هنا الاقتباسات التي تريد ظهورها في الشريط المتحرك أسفل شريط الأقسام في الموقع.
-
-<br>
-
-كل اقتباس يتم حفظه داخل
-<code>content.json</code>
-وسيظهر في الموقع بعد الضغط على
-<strong>نشر التغييرات</strong>.
-
-<br>
-
-<span>
-يفضل أن تكون الاقتباسات قصيرة حتى تظهر بشكل جميل أثناء الحركة.
-</span>
-
-</div>
+<p class="muted">
+أضف الاقتباس واسم قائله. سيظهران في الشريط المتحرك أسفل شريط الأقسام.
+</p>
 
 <div id="quotes"></div>
 
-<button class="accent" onclick="newQuote()">
+<button onclick="newQuote()">
 ＋ إضافة اقتباس
 </button>
 
 </section>
 
 
-<!-- =========================================================
-     ARTICLES
-========================================================= -->
+<!-- ARTICLES -->
 
 <section class="box">
 
@@ -597,9 +464,7 @@ placeholder="الصق التوكن هنا">
 </section>
 
 
-<!-- =========================================================
-     BOOKS
-========================================================= -->
+<!-- BOOKS -->
 
 <section class="box">
 
@@ -614,16 +479,42 @@ placeholder="الصق التوكن هنا">
 </section>
 
 
-<!-- =========================================================
-     PUBLISH
-========================================================= -->
+<!-- PHOTOS -->
+
+<section class="box">
+
+<h2>الصور</h2>
+
+<div id="photos"></div>
+
+<button onclick="newPhoto()">
+＋ إضافة كارت صور
+</button>
+
+</section>
+
+
+<!-- VIDEOS -->
+
+<section class="box">
+
+<h2>الفيديوهات</h2>
+
+<div id="videos"></div>
+
+<button onclick="newVideo()">
+＋ إضافة كارت فيديو
+</button>
+
+</section>
+
 
 <section class="box">
 
 <h2>النشر</h2>
 
 <p class="muted">
-بعد التعديلات اضغط نشر التغييرات.
+بعد إجراء التعديلات اضغط نشر التغييرات.
 </p>
 
 <button class="accent" onclick="publish()">
@@ -640,202 +531,24 @@ placeholder="الصق التوكن هنا">
 
 </main>
 
-
 <script>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 let D=null;
 let SHA=null;
+let savedRange=null;
+const fileCache={};
 
 const $=id=>document.getElementById(id);
 
-const v=id=>$(id).value.trim();
+const v=id=>
+$(id)?.value.trim()||'';
 
 const categories=[
-"متنوع",
-"ثقافة",
-"فكر",
-"علم",
-"تاريخ",
-"أدب",
-"مجتمع",
-"تقنية",
-"دين",
-"أخبار"
+"متنوع","ثقافة","فكر","علم","تاريخ",
+"أدب","مجتمع","تقنية","دين","أخبار"
 ];
 
-let savedSelections={};
-
-const fileCache={};
-
-
-/* =========================================================
-   GITHUB API
-========================================================= */
-
-const api=()=>`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/content.json`;
-
-async function gh(method,url,body){
-
-let response=await fetch(url,{
-method,
-headers:{
-Authorization:'Bearer '+v('token'),
-Accept:'application/vnd.github+json',
-'Content-Type':'application/json'
-},
-body:body?JSON.stringify(body):undefined
-});
-
-let data=await response.json();
-
-if(!response.ok){
-throw Error(data.message||response.status);
-}
-
-return data;
-}
-
-
-/* =========================================================
-   FILE TO BASE64
-========================================================= */
-
-function fileToBase64(file){
-
-return new Promise((resolve,reject)=>{
-
-if(!file){
-reject(new Error('لم يتم اختيار ملف.'));
-return;
-}
-
-const reader=new FileReader();
-
-reader.onload=()=>{
-try{
-
-const result=String(reader.result||'');
-const comma=result.indexOf(',');
-
-if(comma===-1){
-reject(new Error('تعذر قراءة الملف.'));
-return;
-}
-
-resolve(result.substring(comma+1));
-
-}catch(e){
-reject(e);
-}
-};
-
-reader.onerror=()=>{
-reject(new Error(
-'تعذر قراءة الملف من الهاتف. أعد اختيار الملف وحاول مرة أخرى.'
-));
-};
-
-reader.onabort=()=>{
-reject(new Error('تم إلغاء قراءة الملف.'));
-};
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-
-/* =========================================================
-   CACHE FILE
-========================================================= */
-
-async function cacheFileInput(input){
-
-if(!input || !input.files || !input.files[0]){
-return;
-}
-
-const file=input.files[0];
-
-try{
-
-const base64=await fileToBase64(file);
-
-fileCache[input.id]={
-name:file.name,
-type:file.type,
-size:file.size,
-base64:base64
-};
-
-}catch(e){
-
-delete fileCache[input.id];
-
-alert(
-'تعذر قراءة الملف من الهاتف:\n'+
-e.message
-);
-
-}
-
-}
-
-
-/* =========================================================
-   ENCODE / DECODE
-========================================================= */
-
-function decode(c){
-
-let bin=atob(c.replace(/\n/g,''));
-
-let bytes=Uint8Array.from(
-bin,
-x=>x.charCodeAt(0)
-);
-
-return JSON.parse(
-new TextDecoder().decode(bytes)
-);
-
-}
-
-
-function encode(s){
-
-let bytes=new TextEncoder().encode(s);
-
-let bin='';
-
-for(
-let i=0;
-i<bytes.length;
-i+=8192
-){
-
-bin+=String.fromCharCode(
-...bytes.subarray(i,i+8192)
-);
-
-}
-
-return btoa(bin);
-
-}
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
 function esc(s){
-
 return String(s??'').replace(
 /[&<>"']/g,
 m=>({
@@ -846,2237 +559,70 @@ m=>({
 "'":'&#039;'
 }[m])
 );
-
 }
 
 
-/* =========================================================
-   UPLOAD FILE
-========================================================= */
+/* GITHUB */
 
-async function uploadFile(file,path,preloadedBase64=null){
+const api=()=>
+`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/content.json`;
 
-let content=preloadedBase64;
+async function gh(method,url,body){
 
-if(!content){
+const response=await fetch(url,{
+method,
+headers:{
+Authorization:'Bearer '+v('token'),
+Accept:'application/vnd.github+json',
+'Content-Type':'application/json'
+},
+body:body?JSON.stringify(body):undefined
+});
 
-if(!file){
-throw Error('لم يتم اختيار ملف.');
+const data=await response.json();
+
+if(!response.ok){
+throw Error(data.message||response.status);
 }
 
-content=await fileToBase64(file);
-
+return data;
 }
 
-let url=
-`https://api.github.com/repos/${v('user')}/${v('repo')}/contents/${path}`;
 
-let existing=null;
+/* BASE64 */
 
-try{
+function fileToBase64(file){
 
-existing=await gh('GET',url);
+return new Promise((resolve,reject)=>{
 
-}catch(e){}
+const reader=new FileReader();
 
-let body={
-message:'Upload '+path,
-content:content
+reader.onload=()=>{
+const result=String(reader.result||'');
+const comma=result.indexOf(',');
+
+if(comma===-1){
+reject(new Error('تعذر قراءة الملف.'));
+return;
+}
+
+resolve(result.substring(comma+1));
 };
 
-if(existing?.sha){
-body.sha=existing.sha;
-}
-
-let result=await gh(
-'PUT',
-url,
-body
-);
-
-return result;
-
-}
-
-
-/* =========================================================
-   CONNECT
-========================================================= */
-
-async function connect(){
-
-try{
-
-$('status').textContent=
-'جاري الاتصال بـ GitHub...';
-
-$('status').className='status';
-
-let r=await gh(
-'GET',
-api()
-);
-
-if(!r.content||!r.sha){
-
-throw Error(
-'تعذر قراءة content.json.'
-);
-
-}
-
-SHA=r.sha;
-
-D=decode(r.content);
-
-D.site=D.site||{};
-D.articles=D.articles||[];
-D.books=D.books||[];
-
-/*
-   إضافة نظام الاقتباسات تلقائياً
-   إذا لم يكن موجوداً في content.json.
-*/
-
-if(!Array.isArray(D.quotes)){
-D.quotes=[];
-}
-
-$('app').classList.remove('hidden');
-
-loadSite();
-
-render();
-
-$('status').textContent=
-'تم الاتصال بنجاح ✓';
-
-$('status').className=
-'status ok';
-
-}catch(e){
-
-$('status').textContent=
-'فشل الاتصال: '+e.message;
-
-$('status').className=
-'status warn';
-
-}
-
-}
-
-
-/* =========================================================
-   CLEAR TOKEN
-========================================================= */
-
-function clearToken(){
-
-$('token').value='';
-
-$('status').textContent=
-'تم مسح التوكن';
-
-$('status').className='status';
-
-}
-
-
-/* =========================================================
-   SITE
-========================================================= */
-
-function loadSite(){
-
-$('siteName').value=
-D.site.name||'Al-Adeeb';
-
-$('siteTagline').value=
-D.site.tagline||'مساحة للقراءة والفكرة';
-
-$('siteDesc').value=
-D.site.description||'';
-
-}
-
-
-function saveSite(){
-
-D.site.name=
-v('siteName')||'Al-Adeeb';
-
-D.site.tagline=
-v('siteTagline');
-
-D.site.description=
-v('siteDesc');
-
-alert(
-'تم الحفظ مؤقتاً. اضغط نشر التغييرات.'
-);
-
-}
-
-
-/* =========================================================
-   QUOTES
-========================================================= */
-
-function renderQuotes(){
-
-if(!Array.isArray(D.quotes)){
-D.quotes=[];
-}
-
-const container=$('quotes');
-
-if(!container){
-return;
-}
-
-container.innerHTML=
-D.quotes.map((x,i)=>`
-
-<div class="quote-item">
-
-<div class="top">
-
-<div>
-
-<b>
-الاقتباس ${i+1}
-</b>
-
-<div class="tag">
-${x.author?
-'القائل: '+esc(x.author):
-'اقتباس بدون اسم قائل'}
-</div>
-
-</div>
-
-<div class="actions">
-
-<button onclick="toggle('qe${i}')">
-تعديل
-</button>
-
-<button
-class="danger"
-onclick="delQuote(${i})">
-حذف
-</button>
-
-</div>
-
-</div>
-
-
-<div
-id="qe${i}"
-class="editor hidden">
-
-<label>
-نص الاقتباس
-</label>
-
-<textarea
-id="qt${i}"
-style="min-height:110px;font-family:'Noto Naskh Arabic',serif;font-size:20px;font-weight:700"
-placeholder="اكتب الاقتباس هنا...">${esc(x.text||'')}</textarea>
-
-
-<label>
-القائل — اختياري
-</label>
-
-<input
-id="qa${i}"
-value="${esc(x.author||'')}"
-placeholder="مثال: الإمام علي عليه السلام">
-
-
-<label>
-ترتيب الاقتباس
-</label>
-
-<input
-id="qo${i}"
-class="quote-order"
-type="number"
-min="1"
-value="${Number(x.order)||i+1}">
-
-
-<div class="quote-preview">
-
-${esc(x.text||'ضع نص الاقتباس هنا')}
-
-${x.author?
-`<span class="quote-author">— ${esc(x.author)}</span>`
-:''}
-
-</div>
-
-
-<div class="actions">
-
-<button
-class="accent"
-onclick="saveQuote(${i})">
-
-حفظ الاقتباس
-
-</button>
-
-<button
-class="light"
-onclick="previewQuote(${i})">
-
-معاينة
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`).join('') ||
-
-'<p class="muted">لا توجد اقتباسات حالياً. اضغط "إضافة اقتباس" لإضافة أول اقتباس.</p>';
-
-}
-
-
-/* =========================================================
-   NEW QUOTE
-========================================================= */
-
-function newQuote(){
-
-if(!Array.isArray(D.quotes)){
-D.quotes=[];
-}
-
-D.quotes.push({
-
-id:'quote-'+Date.now(),
-
-text:'اقتباس جديد',
-
-author:'',
-
-order:D.quotes.length+1
-
-});
-
-renderQuotes();
-
-let index=D.quotes.length-1;
-
-toggle('qe'+index);
-
-}
-
-
-/* =========================================================
-   SAVE QUOTE
-========================================================= */
-
-function saveQuote(i){
-
-let x=D.quotes[i];
-
-if(!x){
-alert('تعذر تحديد الاقتباس.');
-return;
-}
-
-x.text=
-v('qt'+i)||
-'';
-
-x.author=
-v('qa'+i)||
-'';
-
-x.order=
-parseInt(v('qo'+i),10)||i+1;
-
-renderQuotes();
-
-alert(
-'تم حفظ الاقتباس مؤقتاً ✓\n\nاضغط "نشر التغييرات" حتى يظهر في الموقع.'
-);
-
-}
-
-
-/* =========================================================
-   DELETE QUOTE
-========================================================= */
-
-function delQuote(i){
-
-if(
-confirm('هل تريد حذف هذا الاقتباس؟')
-){
-
-D.quotes.splice(i,1);
-
-/*
-   إعادة ترتيب الاقتباسات بعد الحذف.
-*/
-
-D.quotes.forEach((q,index)=>{
-q.order=index+1;
-});
-
-renderQuotes();
-
-}
-
-}
-
-
-/* =========================================================
-   QUOTE PREVIEW
-========================================================= */
-
-function previewQuote(i){
-
-let x=D.quotes[i];
-
-if(!x)return;
-
-let win=
-window.open(
-'',
-'_blank'
-);
-
-if(!win){
-
-alert(
-'المتصفح منع نافذة المعاينة.'
-);
-
-return;
-
-}
-
-win.document.write(`
-
-<!doctype html>
-
-<html lang="ar" dir="rtl">
-
-<head>
-
-<meta charset="utf-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>معاينة الاقتباس</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&display=swap" rel="stylesheet">
-
-<style>
-
-body{
-margin:0;
-background:#f5f3ee;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-}
-
-.quote{
-max-width:800px;
-background:#fff;
-padding:35px 30px;
-border-radius:18px;
-border-right:5px solid #9a6b35;
-box-shadow:0 8px 30px rgba(0,0,0,.08);
-font-family:"Noto Naskh Arabic",serif;
-font-size:28px;
-font-weight:700;
-line-height:2;
-text-align:center;
-color:#17211e;
-}
-
-.author{
-display:block;
-font-size:19px;
-font-weight:700;
-margin-top:10px;
-color:#68716c;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="quote">
-
-${esc(x.text||'')}
-
-${x.author?
-`<span class="author">— ${esc(x.author)}</span>`
-:''}
-
-</div>
-
-</body>
-
-</html>
-
-`);
-
-win.document.close();
-
-}
-
-
-/* =========================================================
-   CATEGORY BUTTONS
-========================================================= */
-
-function catBtns(i,val){
-
-let current=
-val||'متنوع';
-
-return `
-
-<div class="cat-buttons">
-
-${categories.map(c=>`
-
-<button
-type="button"
-class="${c===current?'active':''}"
-onclick="setCat(${i},'${c}')">
-
-${c}
-
-</button>
-
-`).join('')}
-
-</div>
-
-<input
-id="ac${i}"
-value="${esc(current)}"
-readonly
-style="margin-top:7px">
-
-`;
-
-}
-
-
-function setCat(i,c){
-
-let input=$('ac'+i);
-
-if(input){
-input.value=c;
-}
-
-savedSelections[i]=c;
-
-document
-.querySelectorAll(`#ae${i} .cat-buttons button`)
-.forEach(btn=>{
-btn.classList.toggle(
-'active',
-btn.textContent.trim()===c
-);
-});
-
-}
-
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-function render(){
-
-renderQuotes();
-
-
-/* =========================
-   ARTICLES
-========================= */
-
-$('articles').innerHTML=
-D.articles.map((x,i)=>`
-
-<div class="item">
-
-<div class="top">
-
-<div>
-
-<b>
-${esc(x.title||'بدون عنوان')}
-</b>
-
-<div class="tag">
-${esc(x.category||'متنوع')}
- ·
-${esc(x.date||'')}
-</div>
-
-</div>
-
-<div class="actions">
-
-<button onclick="toggle('ae${i}')">
-تعديل
-</button>
-
-<button
-class="danger"
-onclick="delA(${i})">
-حذف
-</button>
-
-</div>
-
-</div>
-
-
-<div
-id="ae${i}"
-class="editor hidden">
-
-<label>
-عنوان المقال
-</label>
-
-<input
-id="at${i}"
-value="${esc(x.title||'')}">
-
-
-<label>
-القسم — اختر بنقرة
-</label>
-
-${catBtns(i,x.category)}
-
-
-<div class="row">
-
-<div>
-
-<label>
-التاريخ
-</label>
-
-<input
-id="ad${i}"
-type="date"
-value="${esc(x.date||'')}">
-
-</div>
-
-
-<div>
-
-<label>
-صورة المقال
-</label>
-
-<div class="upload">
-
-<input
-id="ai${i}"
-type="file"
-accept="image/*"
-onchange="handleImageSelect(this,'ap${i}')">
-
-<small>
-اختر صورة من الهاتف ثم احفظ المقال.
-</small>
-
-<img
-id="ap${i}"
-class="preview"
-${x.image?`src="${esc(x.image)}" style="display:block"`:''}>
-
-</div>
-
-</div>
-
-</div>
-
-
-<label>
-المقدمة
-</label>
-
-<textarea id="ax${i}">
-${esc(x.excerpt||'')}
-</textarea>
-
-
-<label>
-نص المقال
-</label>
-
-${richEditorHTML(i,x.body||'')}
-
-
-<div class="actions">
-
-<button
-class="accent"
-onclick="saveA(${i})">
-
-حفظ المقال
-
-</button>
-
-<button
-class="light"
-onclick="previewArticle(${i})">
-
-معاينة المقال
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`).join('') ||
-
-'<p class="muted">لا توجد مقالات.</p>';
-
-
-/* =========================
-   BOOKS
-========================= */
-
-$('books').innerHTML=
-D.books.map((x,i)=>`
-
-<div class="item">
-
-<div class="top">
-
-<div>
-
-<b>
-${esc(x.title||'بدون عنوان')}
-</b>
-
-<div class="tag">
-كتاب
-</div>
-
-</div>
-
-<div class="actions">
-
-<button onclick="toggle('be${i}')">
-تعديل
-</button>
-
-<button
-class="danger"
-onclick="delB(${i})">
-حذف
-</button>
-
-</div>
-
-</div>
-
-
-<div
-id="be${i}"
-class="editor hidden">
-
-<label>
-عنوان الكتاب
-</label>
-
-<input
-id="bt${i}"
-value="${esc(x.title||'')}">
-
-
-<label>
-المؤلف
-</label>
-
-<input
-id="ba${i}"
-value="${esc(x.author||'')}">
-
-
-<label>
-صورة الغلاف
-</label>
-
-<div class="upload">
-
-<input
-id="bi${i}"
-type="file"
-accept="image/*"
-onchange="handleImageSelect(this,'bp${i}')">
-
-<small>
-اختيار الغلاف من الهاتف.
-</small>
-
-<img
-id="bp${i}"
-class="preview"
-${x.image?`src="${esc(x.image)}" style="display:block"`:''}>
-
-</div>
-
-
-<label>
-ملف PDF للكتاب
-</label>
-
-<div class="upload">
-
-<input
-id="bf${i}"
-type="file"
-accept="application/pdf"
-onchange="cacheFileInput(this)">
-
-<small>
-سيتم رفع PDF إلى المستودع وتشغيله داخل صفحة الكتاب.
-</small>
-
-${x.file?`
-<div class="muted">
-الملف الحالي: ${esc(x.file)}
-</div>
-`:''}
-
-</div>
-
-
-<label>
-وصف الكتاب
-</label>
-
-<textarea id="bd${i}">
-${esc(x.description||'')}
-</textarea>
-
-
-<div class="actions">
-
-<button
-class="accent"
-onclick="saveB(${i})">
-
-حفظ الكتاب
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`).join('') ||
-
-'<p class="muted">لا توجد كتب.</p>';
-
-}
-
-
-/* =========================================================
-   IMAGE SELECT
-========================================================= */
-
-async function handleImageSelect(input,previewId){
-
-const file=input?.files?.[0];
-
-const img=$(previewId);
-
-if(!file){
-
-if(img){
-img.style.display='none';
-}
-
-delete fileCache[input.id];
-
-return;
-}
-
-try{
-
-if(img){
-
-img.src=URL.createObjectURL(file);
-img.style.display='block';
-
-}
-
-await cacheFileInput(input);
-
-if(!fileCache[input.id]){
-
-throw Error(
-'لم يتم الاحتفاظ بالصورة في ذاكرة الصفحة.'
-);
-
-}
-
-}catch(e){
-
-if(img){
-img.style.display='none';
-}
-
-alert(
-'تعذر تجهيز الصورة:\n'+
-e.message
-);
-
-}
-
-}
-
-
-/* =========================================================
-   RICH EDITOR HTML
-========================================================= */
-
-function richEditorHTML(i,body){
-
-return `
-
-<div class="rich-wrap">
-
-<div
-class="toolbar"
-onmousedown="toolbarMouseDown(event)"
-onclick="toolbarClick(event)">
-
-
-<select
-class="font-select"
-title="نوع الخط"
-onchange="richFont(this.value);this.selectedIndex=0">
-
-<option value="">
-نوع الخط
-</option>
-
-<option value="Amiri">
-Amiri — أميري
-</option>
-
-<option value="Noto Naskh Arabic">
-Noto Naskh Arabic — نسخ
-</option>
-
-<option value="Cairo">
-Cairo — كايرو
-</option>
-
-<option value="Tajawal">
-Tajawal — تجوال
-</option>
-
-<option value="Scheherazade New">
-Scheherazade New — شهرزاد
-</option>
-
-<option value="Georgia">
-Georgia
-</option>
-
-<option value="Arial">
-Arial
-</option>
-
-</select>
-
-
-<select
-class="size-select"
-title="حجم الخط"
-onchange="richFontSize(this.value);this.selectedIndex=0">
-
-<option value="">
-حجم الخط
-</option>
-
-<option value="10px">10</option>
-<option value="12px">12</option>
-<option value="14px">14</option>
-<option value="16px">16</option>
-<option value="18px">18</option>
-<option value="20px">20</option>
-<option value="22px">22</option>
-<option value="24px">24</option>
-<option value="28px">28</option>
-<option value="32px">32</option>
-<option value="38px">38</option>
-<option value="44px">44</option>
-
-</select>
-
-
-<span class="sep"></span>
-
-
-<button
-type="button"
-title="تراجع"
-data-command="undo">
-↶
-</button>
-
-<button
-type="button"
-title="إعادة"
-data-command="redo">
-↷
-</button>
-
-
-<span class="sep"></span>
-
-
-<button
-type="button"
-title="عريض"
-data-command="bold">
-<b>B</b>
-</button>
-
-<button
-type="button"
-title="مائل"
-data-command="italic">
-<i>I</i>
-</button>
-
-<button
-type="button"
-title="تحته خط"
-data-command="underline">
-<u>U</u>
-</button>
-
-<button
-type="button"
-title="يتوسطه خط"
-data-command="strikeThrough">
-<s>S</s>
-</button>
-
-
-<span class="sep"></span>
-
-
-<input
-type="color"
-title="لون النص"
-value="#17211e"
-onchange="richColor(this.value)">
-
-
-<input
-type="color"
-title="تمييز النص"
-value="#fff1a8"
-onchange="richHighlight(this.value)">
-
-
-<span class="sep"></span>
-
-
-<select
-title="نوع العنصر"
-onchange="richBlock(this.value);this.selectedIndex=0">
-
-<option value="">
-نوع النص
-</option>
-
-<option value="p">
-فقرة
-</option>
-
-<option value="h2">
-عنوان رئيسي
-</option>
-
-<option value="h3">
-عنوان فرعي
-</option>
-
-<option value="blockquote">
-اقتباس
-</option>
-
-</select>
-
-
-<button
-type="button"
-title="محاذاة يمين"
-data-command="justifyRight">
-☰
-</button>
-
-<button
-type="button"
-title="محاذاة وسط"
-data-command="justifyCenter">
-≡
-</button>
-
-<button
-type="button"
-title="محاذاة يسار"
-data-command="justifyLeft">
-☷
-</button>
-
-
-<span class="sep"></span>
-
-
-<button
-type="button"
-title="قائمة نقطية"
-data-command="insertUnorderedList">
-• قائمة
-</button>
-
-<button
-type="button"
-title="قائمة مرقمة"
-data-command="insertOrderedList">
-1. قائمة
-</button>
-
-
-<span class="sep"></span>
-
-
-<button
-type="button"
-title="إضافة رابط"
-onclick="richLink()">
-🔗
-</button>
-
-
-<button
-type="button"
-title="إدراج صورة"
-onclick="richImage()">
-🖼️
-</button>
-
-
-<button
-type="button"
-title="خط أفقي"
-data-command="insertHorizontalRule">
-―
-</button>
-
-
-<button
-type="button"
-title="إزالة التنسيق"
-data-command="removeFormat">
-Tx
-</button>
-
-</div>
-
-
-<div
-id="ab${i}"
-class="rich-editor"
-contenteditable="true"
-data-placeholder="اكتب نص المقال هنا...">${body}</div>
-
-
-<div class="editor-info">
-
-<span>
-محرر نص متقدم
-</span>
-
-<span>
-يمكنك تحديد النص ثم اختيار الخط أو الحجم أو اللون.
-</span>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================================================
-   EDITOR SELECTION
-========================================================= */
-
-let savedRange=null;
-
-
-function getActiveEditor(){
-
-let active=document.activeElement;
-
-if(
-active &&
-active.classList &&
-active.classList.contains('rich-editor')
-){
-return active;
-}
-
-return document.querySelector('.rich-editor');
-
-}
-
-
-function saveSelection(){
-
-let selection=window.getSelection();
-
-if(!selection||selection.rangeCount===0){
-return;
-}
-
-let range=selection.getRangeAt(0);
-
-let editor=
-range.commonAncestorContainer.nodeType===1
-?
-range.commonAncestorContainer.closest?.('.rich-editor')
-:
-range.commonAncestorContainer.parentElement?.closest?.('.rich-editor');
-
-if(editor){
-
-savedRange={
-range:range.cloneRange(),
-editor:editor
+reader.onerror=()=>{
+reject(new Error('تعذر قراءة الملف.'));
 };
 
-}
-
-}
-
-
-function restoreSelection(){
-
-if(!savedRange){
-return;
-}
-
-let selection=window.getSelection();
-
-selection.removeAllRanges();
-
-try{
-
-selection.addRange(
-savedRange.range
-);
-
-savedRange.editor.focus();
-
-}catch(e){}
-
-}
-
-
-/* =========================================================
-   TOOLBAR
-========================================================= */
-
-function toolbarMouseDown(e){
-
-if(
-e.target.closest('button') ||
-e.target.closest('select') ||
-e.target.closest('input')
-){
-
-saveSelection();
-
-}
-
-}
-
-
-function toolbarClick(e){
-
-let button=e.target.closest('[data-command]');
-
-if(button){
-
-restoreSelection();
-
-let command=
-button.getAttribute('data-command');
-
-richCmd(command);
-
-}
-
-}
-
-
-/* =========================================================
-   EDITOR COMMANDS
-========================================================= */
-
-function richCmd(command,value=null){
-
-restoreSelection();
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor){
-return;
-}
-
-editor.focus();
-
-document.execCommand(
-command,
-false,
-value
-);
-
-saveSelection();
-
-}
-
-
-/* =========================================================
-   FONT
-========================================================= */
-
-function richFont(font){
-
-restoreSelection();
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor)return;
-
-editor.focus();
-
-document.execCommand(
-'fontName',
-false,
-font
-);
-
-saveSelection();
-
-}
-
-
-/* =========================================================
-   FONT SIZE
-========================================================= */
-
-function richFontSize(size){
-
-restoreSelection();
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor)return;
-
-editor.focus();
-
-let selection=window.getSelection();
-
-if(!selection.rangeCount){
-return;
-}
-
-let range=selection.getRangeAt(0);
-
-if(range.collapsed){
-return;
-}
-
-let span=document.createElement('span');
-
-span.style.fontSize=size;
-
-try{
-
-range.surroundContents(span);
-
-}catch(e){
-
-let fragment=
-range.extractContents();
-
-span.appendChild(fragment);
-
-range.insertNode(span);
-
-}
-
-saveSelection();
-
-}
-
-
-/* =========================================================
-   COLOR
-========================================================= */
-
-function richColor(color){
-
-restoreSelection();
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor)return;
-
-editor.focus();
-
-document.execCommand(
-'foreColor',
-false,
-color
-);
-
-saveSelection();
-
-}
-
-
-/* =========================================================
-   HIGHLIGHT
-========================================================= */
-
-function richHighlight(color){
-
-restoreSelection();
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor)return;
-
-editor.focus();
-
-try{
-
-document.execCommand(
-'hiliteColor',
-false,
-color
-);
-
-}catch(e){
-
-document.execCommand(
-'backColor',
-false,
-color
-);
-
-}
-
-saveSelection();
-
-}
-
-
-/* =========================================================
-   BLOCK FORMAT
-========================================================= */
-
-function richBlock(value){
-
-if(!value)return;
-
-restoreSelection();
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor)return;
-
-editor.focus();
-
-document.execCommand(
-'formatBlock',
-false,
-value
-);
-
-saveSelection();
-
-}
-
-
-/* =========================================================
-   LINK
-========================================================= */
-
-function richLink(){
-
-restoreSelection();
-
-let url=prompt(
-'أدخل رابط الموقع:'
-);
-
-if(!url){
-return;
-}
-
-if(
-!/^https?:\/\//i.test(url)
-){
-url='https://'+url;
-}
-
-richCmd(
-'createLink',
-url
-);
-
-}
-
-
-/* =========================================================
-   IMAGE INSIDE ARTICLE
-========================================================= */
-
-async function richImage(){
-
-let editor=
-savedRange?.editor ||
-getActiveEditor();
-
-if(!editor){
-
-alert(
-'ضع المؤشر داخل نص المقال أولاً.'
-);
-
-return;
-
-}
-
-let input=document.createElement('input');
-
-input.type='file';
-input.accept='image/*';
-
-input.onchange=async()=>{
-
-let file=input.files?.[0];
-
-if(!file)return;
-
-try{
-
-let base64=
-await fileToBase64(file);
-
-let articleId=
-editor.id.replace('ab','');
-
-let article=
-D.articles[parseInt(articleId)];
-
-if(!article){
-
-throw Error(
-'تعذر تحديد المقال.'
-);
-
-}
-
-let ext=
-(file.name.split('.').pop()||'jpg')
-.toLowerCase();
-
-let path=
-`assets/articles/${article.id}-inline-${Date.now()}.${ext}`;
-
-await uploadFile(
-null,
-path,
-base64
-);
-
-restoreSelection();
-
-editor.focus();
-
-let img=document.createElement('img');
-
-img.src=path;
-img.alt='';
-img.style.maxWidth='100%';
-img.style.borderRadius='10px';
-
-let selection=window.getSelection();
-
-if(selection.rangeCount){
-
-let range=selection.getRangeAt(0);
-
-range.collapse(false);
-
-range.insertNode(img);
-
-range.setStartAfter(img);
-range.collapse(true);
-
-selection.removeAllRanges();
-selection.addRange(range);
-
-}
-
-saveSelection();
-
-alert(
-'تم رفع الصورة وإدراجها داخل المقال ✓'
-);
-
-}catch(e){
-
-alert(
-'تعذر رفع الصورة:\n'+
-e.message
-);
-
-}
-
-};
-
-input.click();
-
-}
-
-
-/* =========================================================
-   TRACK EDITOR SELECTION
-========================================================= */
-
-document.addEventListener(
-'selectionchange',
-()=>{
-
-let active=
-document.activeElement;
-
-if(
-active &&
-active.classList &&
-active.classList.contains('rich-editor')
-){
-
-saveSelection();
-
-}
-
-}
-);
-
-
-/* =========================================================
-   TOGGLE
-========================================================= */
-
-function toggle(id){
-
-$(id).classList.toggle('hidden');
-
-}
-
-
-/* =========================================================
-   NEW ARTICLE
-========================================================= */
-
-function newArticle(){
-
-D.articles.push({
-
-id:'article-'+Date.now(),
-
-title:'مقال جديد',
-
-category:'متنوع',
-
-excerpt:'',
-
-body:'',
-
-date:new Date()
-.toISOString()
-.slice(0,10)
+reader.readAsDataURL(file);
 
 });
-
-render();
-
-let index=
-D.articles.length-1;
-
-toggle('ae'+index);
-
 }
 
 
-/* =========================================================
-   SAVE ARTICLE
-========================================================= */
+async function cacheFileInput(input){
 
-async function saveA(i){
+if(!input?.files?.[0])return;
 
-try{
+const file=input.files[0];
 
-let x=D.articles[i];
-
-if(!x){
-throw Error('تعذر تحديد المقال.');
-}
-
-let imageInput=
-$('ai'+i);
-
-let imageFile=
-imageInput?.files?.[0];
-
-let cachedImage=
-fileCache[imageInput?.id];
-
-
-/* TEXT */
-
-x.title=
-v('at'+i)||
-'مقال بلا عنوان';
-
-x.category=
-v('ac'+i)||
-'متنوع';
-
-x.date=
-v('ad'+i)||
-new Date()
-.toISOString()
-.slice(0,10);
-
-x.excerpt=
-v('ax'+i);
-
-x.body=
-$('ab'+i)?.innerHTML||'';
-
-
-/* COVER IMAGE */
-
-if(imageFile){
-
-let ext=
-(imageFile.name.split('.').pop()||'jpg')
-.toLowerCase();
-
-let path=
-`assets/articles/${x.id}.${ext}`;
-
-if(cachedImage?.base64){
-
-await uploadFile(
-null,
-path,
-cachedImage.base64
-);
-
-}else{
-
-await uploadFile(
-imageFile,
-path
-);
-
-}
-
-x.image=path;
-
-}
-
-render();
-
-alert(
-'تم حفظ المقال بنجاح ✓\n\nاضغط "نشر التغييرات" حتى يظهر على الموقع.'
-);
-
-}catch(e){
-
-alert(
-'تعذر حفظ المقال أو رفع الصورة:\n'+
-e.message
-);
-
-}
-
-}
-
-
-/* =========================================================
-   DELETE ARTICLE
-========================================================= */
-
-function delA(i){
-
-if(
-confirm('هل تريد حذف المقال؟')
-){
-
-D.articles.splice(i,1);
-
-render();
-
-}
-
-}
-
-
-/* =========================================================
-   NEW BOOK
-========================================================= */
-
-function newBook(){
-
-D.books.push({
-
-id:'book-'+Date.now(),
-
-title:'كتاب جديد',
-
-description:'',
-
-author:'',
-
-file:'',
-
-image:''
-
-});
-
-render();
-
-let index=
-D.books.length-1;
-
-toggle('be'+index);
-
-}
-
-
-/* =========================================================
-   SAVE BOOK
-========================================================= */
-
-async function saveB(i){
-
-try{
-
-let x=D.books[i];
-
-if(!x){
-throw Error('تعذر تحديد الكتاب.');
-}
-
-let imageInput=
-$('bi'+i);
-
-let pdfInput=
-$('bf'+i);
-
-let imageFile=
-imageInput?.files?.[0];
-
-let pdfFile=
-pdfInput?.files?.[0];
-
-let cachedImage=
-fileCache[imageInput?.id];
-
-let cachedPdf=
-fileCache[pdfInput?.id];
-
-
-x.title=
-v('bt'+i)||
-'كتاب بلا عنوان';
-
-x.author=
-v('ba'+i);
-
-x.description=
-v('bd'+i);
-
-
-/* COVER */
-
-if(imageFile){
-
-let ext=
-(imageFile.name.split('.').pop()||'jpg')
-.toLowerCase();
-
-let path=
-`assets/books/${x.id}-cover.${ext}`;
-
-if(cachedImage?.base64){
-
-await uploadFile(
-null,
-path,
-cachedImage.base64
-);
-
-}else{
-
-await uploadFile(
-imageFile,
-path
-);
-
-}
-
-x.image=path;
-
-}
-
-
-/* PDF */
-
-if(pdfFile){
-
-let path=
-`assets/books/${x.id}.pdf`;
-
-if(cachedPdf?.base64){
-
-await uploadFile(
-null,
-path,
-cachedPdf.base64
-);
-
-}else{
-
-await uploadFile(
-pdfFile,
-path
-);
-
-}
-
-x.file=path;
-
-}
-
-
-render();
-
-alert(
-'تم حفظ الكتاب ورفع الملفات بنجاح ✓\n\nاضغط "نشر التغييرات".'
-);
-
-}catch(e){
-
-alert(
-'تعذر رفع الملف:\n'+
-e.message
-);
-
-}
-
-}
-
-
-/* =========================================================
-   DELETE BOOK
-========================================================= */
-
-function delB(i){
-
-if(
-confirm('هل تريد حذف الكتاب؟')
-){
-
-D.books.splice(i,1);
-
-render();
-
-}
-
-}
-
-
-/* =========================================================
-   ARTICLE PREVIEW
-========================================================= */
-
-function previewArticle(i){
-
-let x=D.articles[i];
-
-if(!x)return;
-
-let win=
-window.open(
-'',
-'_blank'
-);
-
-if(!win){
-
-alert(
-'المتصفح منع نافذة المعاينة.'
-);
-
-return;
-
-}
-
-win.document.write(`
-
-<!doctype html>
-
-<html lang="ar" dir="rtl">
-
-<head>
-
-<meta charset="utf-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>
-${esc(x.title||'معاينة المقال')}
-</title>
-
-<style>
-
-body{
-margin:0;
-background:#f5f3ee;
-color:#17211e;
-font-family:Arial,sans-serif;
-line-height:2;
-}
-
-main{
-max-width:850px;
-width:92%;
-margin:auto;
-padding:30px 0;
-}
-
-article{
-background:#fff;
-border:1px solid #e3ddd2;
-border-radius:20px;
-padding:30px;
-}
-
-img{
-max-width:100%;
-height:auto;
-border-radius:12px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<main>
-
-<article>
-
-<div>
-${esc(x.category||'متنوع')}
-</div>
-
-<h1>
-${esc(x.title||'مقال')}
-</h1>
-
-<p>
-${esc(x.excerpt||'')}
-</p>
-
-${x.image?
-`<img src="${esc(x.image)}">`
-:''}
-
-<div>
-${x.body||''}
-</div>
-
-</article>
-
-</main>
-
-</body>
-
-</html>
-
-`);
-
-win.document.close();
-
-}
-
-
-/* =========================================================
-   PUBLISH
-========================================================= */
-
-async function publish(){
-
-try{
-
-if(!D||!SHA){
-
-alert(
-'اتصل بـ GitHub أولاً.'
-);
-
-return;
-
-}
-
-/*
-   ترتيب الاقتباسات قبل النشر.
-*/
-
-if(Array.isArray(D.quotes)){
-
-D.quotes.sort(
-(a,b)=>
-(Number(a.order)||0)-
-(Number(b.order)||0)
-);
-
-}
-
-$('pub').textContent=
-'جاري نشر content.json...';
-
-$('pub').className=
-'status';
-
-
-let result=
-await gh(
-'PUT',
-api(),
-{
-message:
-'Update Al-Adeeb - Quotes Ticker',
-
-content:
-encode(
-JSON.stringify(
-D,
-null,
-2
-)
-),
-
-sha:SHA
-
-}
-);
-
-
-SHA=
-result.content.sha;
-
-
-$('pub').textContent=
-'تم النشر بنجاح ✓';
-
-$('pub').className=
-'status ok';
-
-
-}catch(e){
-
-$('pub').textContent=
-'فشل النشر: '+e.message;
-
-$('pub').className=
-'status warn';
-
-}
-
-}
-
-</script>
-
-</body>
-</html>
+const base64=await fileToBase64(file);
