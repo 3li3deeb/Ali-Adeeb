@@ -54,5 +54,13 @@
       "date": "2026-08-16",
       "image": "https://raw.githubusercontent.com/3li3deeb/Ali-Adeeb/main/assets/books/book-1786888489558/cover/1786888620445-1000113334.webp"
     }
+  ],
+  "quotes": [
+    {
+      "id": "quote-1787486626699",
+      "text": "إذا لم تكن عالماً،  فكن مستمعاً واعياً",
+      "author": "الامام علي بن ابي طالب ع",
+      "order": 1
+    }
   ]
 }
