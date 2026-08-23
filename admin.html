@@ -184,6 +184,53 @@ background:var(--accent);
 color:#fff;
 }
 
+
+/* =========================================================
+   QUOTES
+========================================================= */
+
+.quote-item{
+border:1px solid var(--line);
+border-radius:14px;
+padding:15px;
+margin:10px 0;
+background:#fff;
+}
+
+.quote-preview{
+margin-top:12px;
+padding:18px 20px;
+border-radius:12px;
+background:#f7f2e8;
+border-right:4px solid var(--accent);
+font-family:"Noto Naskh Arabic",serif;
+font-size:21px;
+font-weight:700;
+line-height:2;
+}
+
+.quote-preview .quote-author{
+display:block;
+margin-top:5px;
+font-size:15px;
+font-weight:500;
+color:var(--muted);
+}
+
+.quote-order{
+max-width:150px;
+}
+
+.quote-note{
+padding:12px;
+background:#faf8f4;
+border:1px solid var(--line);
+border-radius:10px;
+margin-bottom:15px;
+font-size:13px;
+}
+
+
 /* =========================
    RICH TEXT EDITOR
 ========================= */
@@ -299,19 +346,10 @@ color:var(--accent);
 text-decoration:underline;
 }
 
-.editor-info{
-display:flex;
-justify-content:space-between;
-gap:10px;
-flex-wrap:wrap;
-padding:8px 12px;
-background:#faf8f4;
-border-top:1px solid #eee7dc;
-color:#777;
-font-size:12px;
-}
 
-/* الخطوط */
+/* =========================
+   EDITOR FONTS
+========================= */
 
 .font-amiri{
 font-family:"Amiri",serif;
@@ -353,6 +391,19 @@ margin-top:12px;
 margin-top:0;
 }
 
+.editor-info{
+display:flex;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
+padding:8px 12px;
+background:#faf8f4;
+border-top:1px solid #eee7dc;
+color:#777;
+font-size:12px;
+}
+
+
 @media(max-width:650px){
 
 .row{
@@ -388,6 +439,10 @@ min-height:300px;
 font-size:18px;
 }
 
+.quote-preview{
+font-size:19px;
+}
+
 }
 </style>
 </head>
@@ -399,12 +454,13 @@ font-size:18px;
 <h1>لوحة تحكم Al-Adeeb</h1>
 
 <p class="muted">
-إدارة الموقع والمقالات والكتب والنشر إلى GitHub.
+إدارة الموقع والمقالات والكتب والاقتباسات والنشر إلى GitHub.
 </p>
 
-<!-- =========================
+
+<!-- =========================================================
      GITHUB
-========================= -->
+========================================================= -->
 
 <section class="box">
 
@@ -461,9 +517,10 @@ placeholder="الصق التوكن هنا">
 
 <div id="app" class="hidden">
 
-<!-- =========================
+
+<!-- =========================================================
      SITE SETTINGS
-========================= -->
+========================================================= -->
 
 <section class="box">
 
@@ -485,9 +542,47 @@ placeholder="الصق التوكن هنا">
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
+     QUOTES
+========================================================= -->
+
+<section class="box">
+
+<h2>الاقتباسات المتحركة</h2>
+
+<div class="quote-note">
+
+<strong>شريط الاقتباسات:</strong>
+
+أضف هنا الاقتباسات التي تريد ظهورها في الشريط المتحرك أسفل شريط الأقسام في الموقع.
+
+<br>
+
+كل اقتباس يتم حفظه داخل
+<code>content.json</code>
+وسيظهر في الموقع بعد الضغط على
+<strong>نشر التغييرات</strong>.
+
+<br>
+
+<span>
+يفضل أن تكون الاقتباسات قصيرة حتى تظهر بشكل جميل أثناء الحركة.
+</span>
+
+</div>
+
+<div id="quotes"></div>
+
+<button class="accent" onclick="newQuote()">
+＋ إضافة اقتباس
+</button>
+
+</section>
+
+
+<!-- =========================================================
      ARTICLES
-========================= -->
+========================================================= -->
 
 <section class="box">
 
@@ -502,9 +597,9 @@ placeholder="الصق التوكن هنا">
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      BOOKS
-========================= -->
+========================================================= -->
 
 <section class="box">
 
@@ -519,9 +614,9 @@ placeholder="الصق التوكن هنا">
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      PUBLISH
-========================= -->
+========================================================= -->
 
 <section class="box">
 
@@ -574,11 +669,6 @@ const categories=[
 
 let savedSelections={};
 
-/*
-   تخزين الملفات التي يختارها المستخدم فوراً.
-   هذا مهم جداً على الهاتف لأن بعض المتصفحات
-   قد تفقد صلاحية قراءة ملف الهاتف بعد مرور وقت.
-*/
 const fileCache={};
 
 
@@ -612,7 +702,6 @@ return data;
 
 /* =========================================================
    FILE TO BASE64
-   نسخة أكثر توافقاً مع متصفحات الهاتف
 ========================================================= */
 
 function fileToBase64(file){
@@ -620,9 +709,7 @@ function fileToBase64(file){
 return new Promise((resolve,reject)=>{
 
 if(!file){
-reject(
-new Error('لم يتم اختيار ملف.')
-);
+reject(new Error('لم يتم اختيار ملف.'));
 return;
 }
 
@@ -632,19 +719,14 @@ reader.onload=()=>{
 try{
 
 const result=String(reader.result||'');
-
 const comma=result.indexOf(',');
 
 if(comma===-1){
-reject(
-new Error('تعذر قراءة الملف.')
-);
+reject(new Error('تعذر قراءة الملف.'));
 return;
 }
 
-resolve(
-result.substring(comma+1)
-);
+resolve(result.substring(comma+1));
 
 }catch(e){
 reject(e);
@@ -652,19 +734,13 @@ reject(e);
 };
 
 reader.onerror=()=>{
-reject(
-new Error(
+reject(new Error(
 'تعذر قراءة الملف من الهاتف. أعد اختيار الملف وحاول مرة أخرى.'
-)
-);
+));
 };
 
 reader.onabort=()=>{
-reject(
-new Error(
-'تم إلغاء قراءة الملف.'
-)
-);
+reject(new Error('تم إلغاء قراءة الملف.'));
 };
 
 reader.readAsDataURL(file);
@@ -857,6 +933,15 @@ D.site=D.site||{};
 D.articles=D.articles||[];
 D.books=D.books||[];
 
+/*
+   إضافة نظام الاقتباسات تلقائياً
+   إذا لم يكن موجوداً في content.json.
+*/
+
+if(!Array.isArray(D.quotes)){
+D.quotes=[];
+}
+
 $('app').classList.remove('hidden');
 
 loadSite();
@@ -935,6 +1020,336 @@ alert(
 
 
 /* =========================================================
+   QUOTES
+========================================================= */
+
+function renderQuotes(){
+
+if(!Array.isArray(D.quotes)){
+D.quotes=[];
+}
+
+const container=$('quotes');
+
+if(!container){
+return;
+}
+
+container.innerHTML=
+D.quotes.map((x,i)=>`
+
+<div class="quote-item">
+
+<div class="top">
+
+<div>
+
+<b>
+الاقتباس ${i+1}
+</b>
+
+<div class="tag">
+${x.author?
+'القائل: '+esc(x.author):
+'اقتباس بدون اسم قائل'}
+</div>
+
+</div>
+
+<div class="actions">
+
+<button onclick="toggle('qe${i}')">
+تعديل
+</button>
+
+<button
+class="danger"
+onclick="delQuote(${i})">
+حذف
+</button>
+
+</div>
+
+</div>
+
+
+<div
+id="qe${i}"
+class="editor hidden">
+
+<label>
+نص الاقتباس
+</label>
+
+<textarea
+id="qt${i}"
+style="min-height:110px;font-family:'Noto Naskh Arabic',serif;font-size:20px;font-weight:700"
+placeholder="اكتب الاقتباس هنا...">${esc(x.text||'')}</textarea>
+
+
+<label>
+القائل — اختياري
+</label>
+
+<input
+id="qa${i}"
+value="${esc(x.author||'')}"
+placeholder="مثال: الإمام علي عليه السلام">
+
+
+<label>
+ترتيب الاقتباس
+</label>
+
+<input
+id="qo${i}"
+class="quote-order"
+type="number"
+min="1"
+value="${Number(x.order)||i+1}">
+
+
+<div class="quote-preview">
+
+${esc(x.text||'ضع نص الاقتباس هنا')}
+
+${x.author?
+`<span class="quote-author">— ${esc(x.author)}</span>`
+:''}
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="accent"
+onclick="saveQuote(${i})">
+
+حفظ الاقتباس
+
+</button>
+
+<button
+class="light"
+onclick="previewQuote(${i})">
+
+معاينة
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join('') ||
+
+'<p class="muted">لا توجد اقتباسات حالياً. اضغط "إضافة اقتباس" لإضافة أول اقتباس.</p>';
+
+}
+
+
+/* =========================================================
+   NEW QUOTE
+========================================================= */
+
+function newQuote(){
+
+if(!Array.isArray(D.quotes)){
+D.quotes=[];
+}
+
+D.quotes.push({
+
+id:'quote-'+Date.now(),
+
+text:'اقتباس جديد',
+
+author:'',
+
+order:D.quotes.length+1
+
+});
+
+renderQuotes();
+
+let index=D.quotes.length-1;
+
+toggle('qe'+index);
+
+}
+
+
+/* =========================================================
+   SAVE QUOTE
+========================================================= */
+
+function saveQuote(i){
+
+let x=D.quotes[i];
+
+if(!x){
+alert('تعذر تحديد الاقتباس.');
+return;
+}
+
+x.text=
+v('qt'+i)||
+'';
+
+x.author=
+v('qa'+i)||
+'';
+
+x.order=
+parseInt(v('qo'+i),10)||i+1;
+
+renderQuotes();
+
+alert(
+'تم حفظ الاقتباس مؤقتاً ✓\n\nاضغط "نشر التغييرات" حتى يظهر في الموقع.'
+);
+
+}
+
+
+/* =========================================================
+   DELETE QUOTE
+========================================================= */
+
+function delQuote(i){
+
+if(
+confirm('هل تريد حذف هذا الاقتباس؟')
+){
+
+D.quotes.splice(i,1);
+
+/*
+   إعادة ترتيب الاقتباسات بعد الحذف.
+*/
+
+D.quotes.forEach((q,index)=>{
+q.order=index+1;
+});
+
+renderQuotes();
+
+}
+
+}
+
+
+/* =========================================================
+   QUOTE PREVIEW
+========================================================= */
+
+function previewQuote(i){
+
+let x=D.quotes[i];
+
+if(!x)return;
+
+let win=
+window.open(
+'',
+'_blank'
+);
+
+if(!win){
+
+alert(
+'المتصفح منع نافذة المعاينة.'
+);
+
+return;
+
+}
+
+win.document.write(`
+
+<!doctype html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>معاينة الاقتباس</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:#f5f3ee;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.quote{
+max-width:800px;
+background:#fff;
+padding:35px 30px;
+border-radius:18px;
+border-right:5px solid #9a6b35;
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+font-family:"Noto Naskh Arabic",serif;
+font-size:28px;
+font-weight:700;
+line-height:2;
+text-align:center;
+color:#17211e;
+}
+
+.author{
+display:block;
+font-size:19px;
+font-weight:700;
+margin-top:10px;
+color:#68716c;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="quote">
+
+${esc(x.text||'')}
+
+${x.author?
+`<span class="author">— ${esc(x.author)}</span>`
+:''}
+
+</div>
+
+</body>
+
+</html>
+
+`);
+
+win.document.close();
+
+}
+
+
+/* =========================================================
    CATEGORY BUTTONS
 ========================================================= */
 
@@ -1000,6 +1415,9 @@ btn.textContent.trim()===c
 ========================================================= */
 
 function render(){
+
+renderQuotes();
+
 
 /* =========================
    ARTICLES
@@ -1121,7 +1539,6 @@ ${esc(x.excerpt||'')}
 <label>
 نص المقال
 </label>
-
 
 ${richEditorHTML(i,x.body||'')}
 
@@ -1327,12 +1744,6 @@ img.src=URL.createObjectURL(file);
 img.style.display='block';
 
 }
-
-/*
-   نقرأ الصورة فور اختيارها ونخزنها.
-   بذلك لا نعتمد على صلاحية ملف الهاتف
-   عند الضغط على حفظ بعد عدة دقائق.
-*/
 
 await cacheFileInput(input);
 
@@ -2020,10 +2431,6 @@ if(!file)return;
 
 try{
 
-/*
-   نقرأ الملف فور اختياره قبل أي عملية أخرى.
-*/
-
 let base64=
 await fileToBase64(file);
 
@@ -2048,17 +2455,11 @@ let ext=
 let path=
 `assets/articles/${article.id}-inline-${Date.now()}.${ext}`;
 
-
-/*
-   نرسل النسخة المقروءة مسبقاً إلى GitHub.
-*/
-
 await uploadFile(
 null,
 path,
 base64
 );
-
 
 restoreSelection();
 
@@ -2107,33 +2508,6 @@ e.message
 };
 
 input.click();
-
-}
-
-
-/* =========================================================
-   PREVIEW IMAGE
-========================================================= */
-
-function previewImage(input,id){
-
-let img=$(id);
-
-if(!img)return;
-
-let file=input.files?.[0];
-
-if(!file){
-
-img.style.display='none';
-
-return;
-}
-
-img.src=
-URL.createObjectURL(file);
-
-img.style.display='block';
 
 }
 
@@ -2232,9 +2606,7 @@ let cachedImage=
 fileCache[imageInput?.id];
 
 
-/* =========================
-   TEXT
-========================= */
+/* TEXT */
 
 x.title=
 v('at'+i)||
@@ -2257,9 +2629,7 @@ x.body=
 $('ab'+i)?.innerHTML||'';
 
 
-/* =========================
-   COVER IMAGE
-========================= */
+/* COVER IMAGE */
 
 if(imageFile){
 
@@ -2269,12 +2639,6 @@ let ext=
 
 let path=
 `assets/articles/${x.id}.${ext}`;
-
-
-/*
-   نستخدم النسخة الموجودة في الذاكرة
-   إذا كانت قد قُرئت عند اختيار الصورة.
-*/
 
 if(cachedImage?.base64){
 
@@ -2286,11 +2650,6 @@ cachedImage.base64
 
 }else{
 
-/*
-   احتياطياً إذا لم تكن الصورة مخزنة،
-   نقرأها الآن.
-*/
-
 await uploadFile(
 imageFile,
 path
@@ -2301,11 +2660,6 @@ path
 x.image=path;
 
 }
-
-
-/* =========================
-   RENDER
-========================= */
 
 render();
 
@@ -2420,9 +2774,7 @@ x.description=
 v('bd'+i);
 
 
-/* =========================
-   COVER
-========================= */
+/* COVER */
 
 if(imageFile){
 
@@ -2455,9 +2807,7 @@ x.image=path;
 }
 
 
-/* =========================
-   PDF
-========================= */
+/* PDF */
 
 if(pdfFile){
 
@@ -2659,6 +3009,20 @@ return;
 
 }
 
+/*
+   ترتيب الاقتباسات قبل النشر.
+*/
+
+if(Array.isArray(D.quotes)){
+
+D.quotes.sort(
+(a,b)=>
+(Number(a.order)||0)-
+(Number(b.order)||0)
+);
+
+}
+
 $('pub').textContent=
 'جاري نشر content.json...';
 
@@ -2672,7 +3036,7 @@ await gh(
 api(),
 {
 message:
-'Update Al-Adeeb V16.7 File Upload Fix',
+'Update Al-Adeeb - Quotes Ticker',
 
 content:
 encode(
