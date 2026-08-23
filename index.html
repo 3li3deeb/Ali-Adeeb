@@ -26,16 +26,15 @@
 --accent:#9a6b35;
 --line:#e7e0d5;
 --dark:#17211e;
---accent-dark:#7f5428;
---like:#a83f3f;
+--quote:#c49a69;
 }
 
 *{
-box-sizing:border-box
+box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth
+scroll-behavior:smooth;
 }
 
 body{
@@ -46,11 +45,11 @@ font-family:"Amiri","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
 font-size:17px;
 line-height:2;
 position:relative;
-overflow-x:hidden
+overflow-x:hidden;
 }
 
 body::before{
-content:"A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة  ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ  A  ن  ص  و  ر  ة  ف  ك  ر  ة";
+content:"A  ع  ا  ل  A  د  ب  A  م  ك  ت  ب  ة  A  ف  ك  ر  ة  ع  ل  م  A  أ  د  ب  A  2026  ا  ق  ر  أ";
 position:fixed;
 inset:-8%;
 z-index:-1;
@@ -63,7 +62,6 @@ word-spacing:18px;
 color:#9a6b35;
 opacity:.025;
 transform:rotate(-8deg) scale(1.08);
-white-space:normal
 }
 
 body::after{
@@ -79,12 +77,18 @@ letter-spacing:18px;
 color:#17211e;
 opacity:.018;
 transform:rotate(7deg);
-white-space:normal
 }
 
 a{
 text-decoration:none;
-color:inherit
+color:inherit;
+}
+
+button,
+input,
+textarea,
+select{
+font-family:inherit;
 }
 
 
@@ -95,10 +99,10 @@ color:inherit
 nav{
 position:sticky;
 top:0;
-z-index:20;
+z-index:30;
 background:#f7f5f0ee;
 border-bottom:1px solid var(--line);
-backdrop-filter:blur(8px)
+backdrop-filter:blur(8px);
 }
 
 .nav{
@@ -110,36 +114,36 @@ padding:10px 0;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:18px
+gap:18px;
 }
 
 .brand-wrap{
 display:flex;
 flex-direction:column;
 align-items:flex-start;
-gap:5px
+gap:5px;
 }
 
 .brand{
 font-weight:700;
 font-size:25px;
 direction:ltr;
-line-height:1.2
+line-height:1.2;
 }
 
 .brand span{
-color:var(--accent)
+color:var(--accent);
 }
 
 .links{
 display:flex;
 gap:24px;
 color:#4f5954;
-font-weight:700
+font-weight:700;
 }
 
 .links a:hover{
-color:var(--accent)
+color:var(--accent);
 }
 
 .section-nav{
@@ -152,11 +156,11 @@ padding:4px 5px;
 white-space:nowrap;
 overflow-x:auto;
 max-width:100%;
-scrollbar-width:none
+scrollbar-width:none;
 }
 
 .section-nav::-webkit-scrollbar{
-display:none
+display:none;
 }
 
 .section-nav a{
@@ -166,17 +170,12 @@ border-radius:8px;
 font-size:14px;
 font-weight:700;
 line-height:1.5;
-transition:background .2s ease
+transition:background .2s ease;
 }
 
 .section-nav a:hover,
 .section-nav a:focus{
-background:var(--accent-dark);
-color:#fff
-}
-
-.section-nav a.active{
-background:var(--accent-dark)
+background:#7f5428;
 }
 
 
@@ -191,23 +190,23 @@ border-bottom:1px solid #26332e;
 border-top:1px solid #26332e;
 overflow:hidden;
 position:relative;
+z-index:20;
 direction:ltr;
-z-index:10
 }
 
 .quote-ticker-track{
 display:flex;
 width:max-content;
 min-width:max-content;
-animation:quoteScrollLTR 42s linear infinite;
-will-change:transform
+animation:quoteScrollRTL 45s linear infinite;
+will-change:transform;
 }
 
 .quote-group{
 display:flex;
 align-items:center;
 flex-shrink:0;
-width:max-content
+width:max-content;
 }
 
 .quote-item{
@@ -216,28 +215,2257 @@ align-items:center;
 gap:12px;
 padding:8px 28px;
 white-space:nowrap;
+direction:rtl;
 font-family:"Noto Naskh Arabic",serif;
+line-height:1.7;
+}
+
+.quote-text{
 font-size:20px;
 font-weight:700;
-line-height:1.7;
 color:#fff;
-direction:rtl
+}
+
+.quote-author{
+font-family:"Noto Naskh Arabic",serif;
+font-size:15px;
+font-weight:600;
+color:var(--quote);
 }
 
 .quote-item::before{
 content:"❖";
-color:#c49a69;
-font-size:14px;
-margin-left:5px
+color:var(--quote);
+font-size:13px;
+margin-left:4px;
+}
+
+.quote-separator{
+color:var(--accent);
+padding:0 8px;
+}
+
+@keyframes quoteScrollRTL{
+
+from{
+transform:translateX(-50%);
+}
+
+to{
+transform:translateX(0);
+}
+
+}
+
+.quote-ticker:hover .quote-ticker-track{
+animation-play-state:paused;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+max-width:1120px;
+width:92%;
+margin:auto;
+padding:75px 0 60px;
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:50px;
+align-items:center;
+}
+
+.kicker,
+.tag{
+color:var(--accent);
+font-weight:700;
+}
+
+h1{
+font-family:Georgia,serif;
+font-size:clamp(50px,7vw,82px);
+line-height:1;
+margin:12px 0 20px;
+direction:ltr;
+text-align:right;
+}
+
+.hero p{
+font-size:19px;
+color:var(--muted);
+}
+
+.btn{
+display:inline-block;
+padding:11px 21px;
+border-radius:10px;
+border:1px solid var(--line);
+font-weight:700;
+margin:10px 6px 0 0;
+}
+
+.primary{
+background:var(--dark);
+color:white;
+}
+
+.visual{
+min-height:340px;
+border-radius:26px;
+background:linear-gradient(145deg,#18231f,#34443c);
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+padding:20px;
+}
+
+.visual img{
+display:block;
+width:100%;
+height:100%;
+max-height:300px;
+object-fit:contain;
+border-radius:18px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+max-width:1120px;
+width:92%;
+margin:auto;
+padding:55px 0;
+}
+
+.head{
+margin-bottom:22px;
+}
+
+.head h2{
+margin:0;
+font-size:30px;
+}
+
+.head p{
+color:var(--muted);
+}
+
+.search{
+width:100%;
+padding:13px 15px;
+border:1px solid var(--line);
+border-radius:12px;
+font:inherit;
+margin-bottom:20px;
+background:#fff;
+color:var(--text);
+outline:none;
+}
+
+
+/* =========================
+   GRID / CARDS
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.card{
+background:#fff;
+border:1px solid var(--line);
+border-radius:17px;
+padding:24px;
+overflow:hidden;
+transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.card:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(23,33,30,.08);
+}
+
+.card-image{
+display:block;
+width:100%;
+height:210px;
+object-fit:cover;
+border-radius:13px;
+margin:-4px 0 18px;
+border:1px solid var(--line);
+background:#f1eee8;
+cursor:zoom-in;
+}
+
+.card h3{
+margin:8px 0;
+font-size:22px;
+}
+
+.card p{
+color:var(--muted);
+font-size:15px;
+}
+
+.read{
+display:inline-block;
+margin-top:15px;
+color:var(--accent);
+font-weight:700;
+}
+
+.read:hover{
+text-decoration:underline;
+}
+
+
+/* =========================
+   MULTI MEDIA
+========================= */
+
+.media-gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:7px;
+margin:-4px 0 18px;
+}
+
+.media-gallery.single{
+grid-template-columns:1fr;
+}
+
+.media-gallery img{
+display:block;
+width:100%;
+height:170px;
+object-fit:cover;
+border-radius:10px;
+border:1px solid var(--line);
+cursor:zoom-in;
+background:#f1eee8;
+}
+
+.media-gallery.single img{
+height:240px;
+}
+
+.media-caption{
+font-size:13px;
+color:var(--muted);
+margin-top:-8px;
+margin-bottom:10px;
+}
+
+.media-date{
+font-size:12px;
+color:#8a8176;
+margin-bottom:12px;
+}
+
+.video-gallery{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+margin:-4px 0 18px;
+}
+
+.video-box{
+width:100%;
+aspect-ratio:16/9;
+background:#17211e;
+border-radius:12px;
+overflow:hidden;
+}
+
+.video-box iframe{
+width:100%;
+height:100%;
+border:0;
+}
+
+
+/* =========================
+   INTERACTIONS
+========================= */
+
+.card-actions{
+display:flex;
+align-items:center;
+gap:7px;
+flex-wrap:wrap;
+margin-top:16px;
+padding-top:13px;
+border-top:1px solid #eee8df;
+}
+
+.action-btn{
+border:1px solid var(--line);
+background:#faf8f4;
+color:var(--text);
+border-radius:9px;
+padding:6px 10px;
+font-family:inherit;
+font-size:13px;
+cursor:pointer;
+transition:.2s;
+}
+
+.action-btn:hover{
+background:#eee8de;
+}
+
+.action-btn.liked{
+background:#f3e1d0;
+color:#8b5424;
+border-color:#d8b38c;
+}
+
+.comment-box{
+display:none;
+margin-top:12px;
+}
+
+.comment-box.open{
+display:block;
+}
+
+.comment-box textarea{
+width:100%;
+min-height:80px;
+border:1px solid var(--line);
+border-radius:10px;
+padding:9px;
+resize:vertical;
+outline:none;
+}
+
+.comment-send{
+margin-top:6px;
+border:0;
+background:var(--dark);
+color:white;
+border-radius:8px;
+padding:7px 13px;
+font-family:inherit;
+cursor:pointer;
+}
+
+.comments-list{
+margin-top:10px;
+}
+
+.comment{
+background:#faf8f4;
+border-right:3px solid var(--accent);
+padding:7px 10px;
+border-radius:7px;
+margin-top:6px;
+font-size:13px;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+background:var(--dark);
+color:#eef0ed;
+border-radius:25px;
+padding:45px;
+}
+
+.about p{
+color:#bfc8c3;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+padding:32px;
+text-align:center;
+color:var(--muted);
+border-top:1px solid var(--line);
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.media-lightbox{
+position:fixed;
+inset:0;
+background:rgba(23,33,30,.88);
+display:none;
+align-items:center;
+justify-content:center;
+padding:24px;
+z-index:100;
+}
+
+.media-lightbox.show{
+display:flex;
+}
+
+.media-lightbox img{
+max-width:94vw;
+max-height:90vh;
+width:auto;
+height:auto;
+object-fit:contain;
+border-radius:14px;
+box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.media-close{
+position:absolute;
+top:18px;
+left:22px;
+border:0;
+background:#fff;
+color:#17211e;
+width:42px;
+height:42px;
+border-radius:50%;
+font-size:28px;
+line-height:1;
+cursor:pointer;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+.links{
+display:none;
+}
+
+.nav{
+justify-content:center;
+}
+
+.brand-wrap{
+align-items:center;
+width:100%;
+}
+
+.section-nav{
+width:100%;
+justify-content:flex-start;
 }
 
 .quote-text{
-font-weight:700;
-color:#fff
+font-size:18px;
 }
 
 .quote-author{
-font-size:15px;
-font-weight:600;
-color:#d1a46f;
-margin-right
+font-size:14px;
+}
+
+.quote-ticker-track{
+animation-duration:36s;
+}
+
+.hero{
+grid-template-columns:1fr;
+padding-top:50px;
+}
+
+.visual{
+min-height:240px;
+}
+
+.visual img{
+max-height:210px;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.media-gallery img{
+height:170px;
+}
+
+body::before{
+font-size:27px;
+letter-spacing:8px;
+word-spacing:12px;
+opacity:.02;
+}
+
+body::after{
+font-size:20px;
+letter-spacing:12px;
+opacity:.014;
+}
+
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+.quote-ticker-track{
+animation:none;
+}
+
+*,
+*::before,
+*::after{
+transition-duration:.01ms!important;
+scroll-behavior:auto!important;
+}
+
+}
+
+
+/* =========================
+   FONT
+========================= */
+
+html,
+body,
+button,
+input,
+textarea,
+select{
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif!important;
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand,
+.kicker,
+.tag,
+.btn,
+.read,
+.links,
+.section-nav a{
+font-family:
+"Amiri",
+"Noto Naskh Arabic",
+Tahoma,
+Arial,
+sans-serif!important;
+font-weight:700!important;
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"WebSite",
+"name":"Al-Adeeb",
+"url":"https://3li3deeb.github.io/Ali-Adeeb/",
+"inLanguage":"ar"
+}
+</script>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+<div class="nav">
+
+<div class="brand-wrap">
+
+<a class="brand" href="#home">
+Al-<span>Adeeb</span>
+</a>
+
+<div class="section-nav" aria-label="أقسام الموقع">
+
+<a href="#home">الرئيسية</a>
+<a href="#articles">المقالات</a>
+<a href="#books">الكتب</a>
+<a href="#photos">الصور</a>
+<a href="#videos">الفيديوهات</a>
+<a href="#about">من نحنُ؟</a>
+
+</div>
+
+</div>
+
+<div class="links">
+
+<a href="#articles">المقالات</a>
+<a href="#books">الكتب</a>
+<a href="#about">عن الموقع</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     QUOTE TICKER
+========================= -->
+
+<div
+id="quoteTicker"
+class="quote-ticker"
+aria-label="اقتباسات">
+
+<div
+id="quoteTickerTrack"
+class="quote-ticker-track">
+</div>
+
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+<div>
+
+<div
+class="kicker"
+id="tagline">
+مساحة للقراءة والفكرة
+</div>
+
+<h1>
+Al-Adeeb
+</h1>
+
+<p id="desc"></p>
+
+<a
+class="btn primary"
+href="#articles">
+استكشف المقالات
+</a>
+
+<a
+class="btn"
+href="#books">
+تصفح الكتب
+</a>
+
+</div>
+
+<div class="visual">
+
+<img
+src="logo.png"
+alt="Al-Adeeb"
+loading="eager">
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ARTICLES
+========================= -->
+
+<section id="articles">
+
+<div class="head">
+
+<h2>
+أحدث المقالات
+</h2>
+
+<p>
+أفكار وقراءات متنوعة.
+</p>
+
+</div>
+
+<input
+id="search"
+class="search"
+placeholder="ابحث في المقالات والكتب..."
+autocomplete="off">
+
+<div
+id="articlesGrid"
+class="grid">
+</div>
+
+</section>
+
+
+<!-- =========================
+     BOOKS
+========================= -->
+
+<section id="books">
+
+<div class="head">
+
+<h2>
+الكتب
+</h2>
+
+<p>
+مكتبة قابلة للتوسع.
+</p>
+
+</div>
+
+<div
+id="booksGrid"
+class="grid">
+</div>
+
+</section>
+
+
+<!-- =========================
+     PHOTOS
+========================= -->
+
+<section id="photos">
+
+<div class="head">
+
+<h2>
+الصور
+</h2>
+
+<p>
+معرض الصور.
+</p>
+
+</div>
+
+<div
+id="photosGrid"
+class="grid">
+
+<p class="muted">
+لا توجد صور بعد.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     VIDEOS
+========================= -->
+
+<section id="videos">
+
+<div class="head">
+
+<h2>
+الفيديوهات
+</h2>
+
+<p>
+الفيديوهات المنشورة في الموقع.
+</p>
+
+</div>
+
+<div
+id="videosGrid"
+class="grid">
+
+<p class="muted">
+لا توجد فيديوهات بعد.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+<div class="about">
+
+<div class="kicker">
+عن الموقع
+</div>
+
+<h2 id="aboutTitle">
+أهلاً بك في Al-Adeeb
+</h2>
+
+<p id="aboutText">
+مساحة شخصية للنشر والمعرفة.
+</p>
+
+</div>
+
+</section>
+
+
+<footer>
+© 2026 Al-Adeeb — جميع الحقوق محفوظة
+</footer>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div
+id="mediaLightbox"
+class="media-lightbox"
+aria-hidden="true"
+onclick="if(event.target===this)closePhoto()">
+
+<button
+class="media-close"
+onclick="closePhoto()"
+aria-label="إغلاق">
+×
+</button>
+
+<img
+id="lightboxImage"
+alt="">
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let D={
+site:{},
+articles:[],
+books:[],
+photos:[],
+videos:[],
+quotes:[]
+};
+
+const $=id=>document.getElementById(id);
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function esc(value){
+
+return String(value??'').replace(
+/[&<>"']/g,
+m=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+}[m])
+);
+
+}
+
+
+/* =========================================================
+   SAFE TEXT
+   يمنع ظهور [object Object]
+========================================================= */
+
+function safeText(value){
+
+if(value===null||value===undefined){
+return '';
+}
+
+if(typeof value==='string'){
+return value.trim();
+}
+
+if(typeof value==='number'||typeof value==='boolean'){
+return String(value);
+}
+
+if(typeof value==='object'){
+
+if(typeof value.text==='string'){
+return value.text.trim();
+}
+
+if(typeof value.quote==='string'){
+return value.quote.trim();
+}
+
+if(typeof value.content==='string'){
+return value.content.trim();
+}
+
+if(typeof value.title==='string'){
+return value.title.trim();
+}
+
+return '';
+}
+
+return String(value);
+}
+
+
+/* =========================================================
+   PHOTO LIGHTBOX
+========================================================= */
+
+function openPhoto(src,alt){
+
+const box=$('mediaLightbox');
+const img=$('lightboxImage');
+
+if(!src)return;
+
+img.src=src;
+img.alt=alt||'';
+
+box.classList.add('show');
+
+box.setAttribute(
+'aria-hidden',
+'false'
+);
+
+}
+
+function closePhoto(){
+
+const box=$('mediaLightbox');
+
+box.classList.remove('show');
+
+box.setAttribute(
+'aria-hidden',
+'true'
+);
+
+}
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+'keydown',
+function(e){
+
+if(e.key==='Escape'){
+closePhoto();
+}
+
+}
+);
+
+
+/* =========================================================
+   QUOTE NORMALIZATION
+========================================================= */
+
+function normalizeQuote(q){
+
+if(typeof q==='string'){
+
+return {
+text:q.trim(),
+author:''
+};
+
+}
+
+if(!q||typeof q!=='object'){
+
+return {
+text:'',
+author:''
+};
+
+}
+
+let text=
+safeText(
+q.text||
+q.quote||
+q.content||
+q.value||
+q.title
+);
+
+let author=
+safeText(
+q.author||
+q.by||
+q.speaker||
+q.writer||
+q.name
+);
+
+return {
+text,
+author
+};
+
+}
+
+
+/* =========================================================
+   QUOTES
+========================================================= */
+
+function renderQuotes(){
+
+const ticker=$('quoteTicker');
+const track=$('quoteTickerTrack');
+
+let quotes=
+Array.isArray(D.quotes)
+?
+D.quotes
+.map(normalizeQuote)
+.filter(q=>q.text)
+:
+[];
+
+if(!quotes.length){
+
+ticker.style.display='none';
+track.innerHTML='';
+
+return;
+
+}
+
+ticker.style.display='block';
+
+
+function groupHTML(){
+
+return `
+
+<div class="quote-group">
+
+${quotes.map(q=>`
+
+<div class="quote-item">
+
+<span class="quote-text">
+${esc(q.text)}
+</span>
+
+${q.author?
+
+`<span class="quote-author">
+— ${esc(q.author)}
+</span>`
+
+:''}
+
+</div>
+
+`).join('')}
+
+</div>
+
+`;
+
+}
+
+
+/*
+نكرر المجموعة مرتين.
+الحركة تبدأ من -50% وتنتهي عند 0،
+أي من اليسار إلى اليمين.
+*/
+
+track.innerHTML=
+groupHTML()+
+groupHTML();
+
+}
+
+
+/* =========================================================
+   NORMALIZE MEDIA
+========================================================= */
+
+function normalizeImages(item){
+
+if(!item)return [];
+
+let raw=
+item.images||
+item.photos||
+item.gallery||
+item.image;
+
+if(!raw)return [];
+
+if(typeof raw==='string'){
+return [raw];
+}
+
+if(Array.isArray(raw)){
+
+return raw
+.map(x=>{
+
+if(typeof x==='string'){
+return x;
+}
+
+if(x&&typeof x==='object'){
+return x.image||x.src||x.url||'';
+}
+
+return '';
+
+})
+.filter(Boolean);
+
+}
+
+return [];
+
+}
+
+
+function normalizeVideos(item){
+
+if(!item)return [];
+
+let raw=
+item.videos||
+item.videoGallery||
+item.galleryVideos||
+item.video||
+item.url||
+item.src;
+
+if(!raw)return [];
+
+if(typeof raw==='string'){
+return [raw];
+}
+
+if(Array.isArray(raw)){
+
+return raw
+.map(x=>{
+
+if(typeof x==='string'){
+return x;
+}
+
+if(x&&typeof x==='object'){
+return x.url||x.src||x.video||'';
+}
+
+return '';
+
+})
+.filter(Boolean);
+
+}
+
+return [];
+
+}
+
+
+/* =========================================================
+   YOUTUBE / VIMEO
+========================================================= */
+
+function videoEmbed(url){
+
+if(!url)return '';
+
+let value=
+String(url).trim();
+
+let match=value.match(
+/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?/]+)/i
+);
+
+if(match){
+
+return
+'https://www.youtube.com/embed/' +
+encodeURIComponent(match[1]);
+
+}
+
+match=value.match(
+/vimeo\.com\/(?:video\/)?([0-9]+)/i
+);
+
+if(match){
+
+return
+'https://player.vimeo.com/video/' +
+encodeURIComponent(match[1]);
+
+}
+
+return value;
+
+}
+
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+
+function storageKey(type,id){
+
+return 'al-adeeb-'+type+'-'+String(id);
+
+}
+
+
+function getLikes(type,id){
+
+return parseInt(
+localStorage.getItem(
+storageKey('likes',type+'-'+id)
+)||'0',
+10
+);
+
+}
+
+
+function isLiked(type,id){
+
+return localStorage.getItem(
+storageKey('liked',type+'-'+id)
+)==='1';
+
+}
+
+
+function getComments(type,id){
+
+try{
+
+let data=
+JSON.parse(
+localStorage.getItem(
+storageKey('comments',type+'-'+id)
+)||'[]'
+);
+
+return Array.isArray(data)?data:[];
+
+}catch(e){
+
+return [];
+
+}
+
+}
+
+
+/* =========================================================
+   INTERACTION HTML
+========================================================= */
+
+function interactionHTML(type,id){
+
+let likes=
+getLikes(type,id);
+
+let liked=
+isLiked(type,id);
+
+let comments=
+getComments(type,id);
+
+return `
+
+<div class="card-actions">
+
+<button
+class="action-btn ${liked?'liked':''}"
+onclick="toggleLike('${esc(type)}','${esc(id)}',this)">
+
+♥ إعجاب
+<span class="like-count">
+${likes}
+</span>
+
+</button>
+
+<button
+class="action-btn"
+onclick="shareItem('${esc(type)}','${esc(id)}')">
+
+↗ مشاركة
+
+</button>
+
+<button
+class="action-btn"
+onclick="toggleComments('${esc(type)}','${esc(id)}')">
+
+💬 تعليق
+<span>
+${comments.length}
+</span>
+
+</button>
+
+</div>
+
+<div
+id="comments-${esc(type)}-${esc(id)}"
+class="comment-box">
+
+<textarea
+id="comment-input-${esc(type)}-${esc(id)}"
+placeholder="اكتب تعليقك..."></textarea>
+
+<button
+class="comment-send"
+onclick="addComment('${esc(type)}','${esc(id)}')">
+
+إضافة التعليق
+
+</button>
+
+<div
+class="comments-list"
+id="comment-list-${esc(type)}-${esc(id)}">
+
+${comments.map(c=>`
+
+<div class="comment">
+${esc(c)}
+</div>
+
+`).join('')}
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   LIKE
+========================================================= */
+
+function toggleLike(type,id,button){
+
+let key=
+storageKey('liked',type+'-'+id);
+
+let likesKey=
+storageKey('likes',type+'-'+id);
+
+let likes=
+parseInt(
+localStorage.getItem(likesKey)||'0',
+10
+);
+
+if(localStorage.getItem(key)==='1'){
+
+localStorage.removeItem(key);
+
+likes=Math.max(0,likes-1);
+
+button.classList.remove('liked');
+
+}else{
+
+localStorage.setItem(key,'1');
+
+likes++;
+
+button.classList.add('liked');
+
+}
+
+localStorage.setItem(
+likesKey,
+String(likes)
+);
+
+let counter=
+button.querySelector('.like-count');
+
+if(counter){
+counter.textContent=likes;
+}
+
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+function toggleComments(type,id){
+
+const box=
+$('comments-'+type+'-'+id);
+
+if(!box)return;
+
+box.classList.toggle('open');
+
+}
+
+
+function addComment(type,id){
+
+const input=
+$('comment-input-'+type+'-'+id);
+
+if(!input)return;
+
+let text=
+input.value.trim();
+
+if(!text)return;
+
+let comments=
+getComments(type,id);
+
+comments.push(text);
+
+localStorage.setItem(
+storageKey('comments',type+'-'+id),
+JSON.stringify(comments)
+);
+
+input.value='';
+
+render();
+
+setTimeout(
+()=>{
+
+const box=
+$('comments-'+type+'-'+id);
+
+if(box){
+box.classList.add('open');
+}
+
+},
+0
+);
+
+}
+
+
+/* =========================================================
+   SHARE
+========================================================= */
+
+async function shareItem(type,id){
+
+let url=
+location.href.split('#')[0];
+
+let title='Al-Adeeb';
+
+if(type==='article'){
+
+let item=
+D.articles.find(
+x=>String(x.id)===String(id)
+);
+
+if(item){
+title=
+safeText(item.title)||title;
+}
+
+}
+
+if(type==='photo'){
+
+let item=
+D.photos.find(
+(x,index)=>
+String(x.id||index)===String(id)
+);
+
+if(item&&typeof item==='object'){
+title=
+safeText(item.title)||title;
+}
+
+}
+
+if(type==='video'){
+
+let item=
+D.videos.find(
+(x,index)=>
+String(x.id||index)===String(id)
+);
+
+if(item&&typeof item==='object'){
+title=
+safeText(item.title)||title;
+}
+
+}
+
+if(navigator.share){
+
+try{
+
+await navigator.share({
+title:title,
+text:title,
+url:url
+});
+
+return;
+
+}catch(e){}
+
+}
+
+try{
+
+await navigator.clipboard.writeText(url);
+
+alert('تم نسخ رابط الصفحة ✓');
+
+}catch(e){
+
+prompt(
+'انسخ الرابط:',
+url
+);
+
+}
+
+}
+
+
+/* =========================================================
+   ARTICLE GALLERY
+========================================================= */
+
+function articleGallery(x){
+
+let images=
+normalizeImages(x);
+
+if(!images.length)return '';
+
+return `
+
+<div
+class="media-gallery ${images.length===1?'single':''}">
+
+${images.map((src,index)=>`
+
+<img
+src="${esc(src)}"
+alt="${esc(safeText(x.title))} ${index+1}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'">
+
+`).join('')}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   PHOTO CARD
+========================================================= */
+
+function photoCard(x,index){
+
+let images=
+normalizeImages(x);
+
+if(!images.length){
+
+return '';
+
+}
+
+let title=
+typeof x==='string'
+?
+''
+:
+safeText(x.title);
+
+let description=
+typeof x==='object'
+?
+safeText(x.description||x.caption)
+:
+'';
+
+let date=
+typeof x==='object'
+?
+safeText(x.date||x.uploadDate||x.createdAt)
+:
+'';
+
+let id=
+typeof x==='object'
+&& x.id
+?
+x.id
+:
+index;
+
+return `
+
+<article
+class="card"
+id="photo-card-${esc(id)}">
+
+${images.length>1?
+
+`<div class="media-gallery">
+
+${images.map((src,i)=>`
+
+<img
+src="${esc(src)}"
+alt="${esc(title)} ${i+1}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'">
+
+`).join('')}
+
+</div>`
+
+:
+
+`<img
+class="card-image"
+src="${esc(images[0])}"
+alt="${esc(title)}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'">`
+
+}
+
+${title?
+
+`<h3>
+${esc(title)}
+</h3>`
+
+:''}
+
+${description?
+
+`<p>
+${esc(description)}
+</p>`
+
+:''}
+
+${date?
+
+`<div class="media-date">
+تاريخ الرفع: ${esc(date)}
+</div>`
+
+:''}
+
+${interactionHTML('photo',id)}
+
+</article>
+
+`;
+
+}
+
+
+/* =========================================================
+   VIDEO CARD
+========================================================= */
+
+function videoCard(x,index){
+
+let videos=
+normalizeVideos(x);
+
+if(!videos.length){
+
+return '';
+
+}
+
+let title=
+typeof x==='string'
+?
+''
+:
+safeText(x.title);
+
+let description=
+typeof x==='object'
+?
+safeText(x.description||x.caption)
+:
+'';
+
+let date=
+typeof x==='object'
+?
+safeText(x.date||x.uploadDate||x.createdAt)
+:
+'';
+
+let id=
+typeof x==='object'
+&& x.id
+?
+x.id
+:
+index;
+
+return `
+
+<article
+class="card"
+id="video-card-${esc(id)}">
+
+<div class="video-gallery">
+
+${videos.map((url,i)=>{
+
+let embed=
+videoEmbed(url);
+
+return `
+
+<div class="video-box">
+
+<iframe
+src="${esc(embed)}"
+title="${esc(title||'فيديو Al-Adeeb')}"
+loading="lazy"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen
+referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+
+</div>
+
+`;
+
+}).join('')}
+
+</div>
+
+${title?
+
+`<h3>
+${esc(title)}
+</h3>`
+
+:''}
+
+${description?
+
+`<p>
+${esc(description)}
+</p>`
+
+:''}
+
+${date?
+
+`<div class="media-date">
+تاريخ الرفع: ${esc(date)}
+</div>`
+
+:''}
+
+${interactionHTML('video',id)}
+
+</article>
+
+`;
+
+}
+
+
+/* =========================================================
+   ARTICLES
+========================================================= */
+
+function renderArticles(){
+
+let search=
+$('search')
+?
+$('search').value.toLowerCase().trim()
+:
+'';
+
+let articles=
+Array.isArray(D.articles)
+?
+D.articles
+:
+[];
+
+$('articlesGrid').innerHTML=
+
+articles
+.filter(x=>{
+
+let text=
+safeText(x.title)+' '+
+safeText(x.category)+' '+
+safeText(x.excerpt)+' '+
+safeText(x.body);
+
+return text.toLowerCase().includes(search);
+
+})
+.map(x=>{
+
+let id=
+x.id||x.title||Date.now();
+
+let url=
+'article.html?id='+
+encodeURIComponent(id);
+
+return `
+
+<article
+class="card"
+id="article-card-${esc(id)}">
+
+${x.image?
+
+`<img
+class="card-image"
+src="${esc(x.image)}"
+alt="${esc(safeText(x.title))}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'">`
+
+:''}
+
+${articleGallery(x)}
+
+<div class="tag">
+${esc(safeText(x.category)||'متنوع')}
+</div>
+
+<h3>
+${esc(safeText(x.title))}
+</h3>
+
+<p>
+${esc(safeText(x.excerpt))}
+</p>
+
+${interactionHTML('article',id)}
+
+<a
+class="read"
+href="${url}">
+
+قراءة المقال ←
+
+</a>
+
+</article>
+
+`;
+
+})
+.join('')
+
+||
+
+'<p>لا توجد نتائج.</p>';
+
+}
+
+
+/* =========================================================
+   BOOKS
+========================================================= */
+
+function renderBooks(){
+
+let books=
+Array.isArray(D.books)
+?
+D.books
+:
+[];
+
+$('booksGrid').innerHTML=
+
+books.map(x=>{
+
+let id=
+x.id||x.title;
+
+return `
+
+<article
+class="card"
+id="book-card-${esc(id)}">
+
+${x.image?
+
+`<img
+class="card-image"
+src="${esc(x.image)}"
+alt="${esc(safeText(x.title))}"
+loading="lazy"
+onclick="openPhoto(this.src,this.alt)"
+onerror="this.style.display='none'">`
+
+:''}
+
+<div class="tag">
+كتاب
+</div>
+
+<h3>
+${esc(safeText(x.title))}
+</h3>
+
+<p>
+${esc(safeText(x.description))}
+</p>
+
+<a
+class="read"
+href="book.html?id=${encodeURIComponent(id)}">
+
+فتح الكتاب ←
+
+</a>
+
+</article>
+
+`;
+
+}).join('')
+
+||
+
+'<p>لا توجد كتب بعد.</p>';
+
+}
+
+
+/* =========================================================
+   PHOTOS
+========================================================= */
+
+function renderPhotos(){
+
+let photos=
+Array.isArray(D.photos)
+?
+D.photos
+:
+[];
+
+$('photosGrid').innerHTML=
+
+photos
+.map((x,i)=>photoCard(x,i))
+.join('')
+
+||
+
+'<p class="muted">
+لا توجد صور بعد.
+</p>';
+
+}
+
+
+/* =========================================================
+   VIDEOS
+========================================================= */
+
+function renderVideos(){
+
+let videos=
+Array.isArray(D.videos)
+?
+D.videos
+:
+[];
+
+$('videosGrid').innerHTML=
+
+videos
+.map((x,i)=>videoCard(x,i))
+.join('')
+
+||
+
+'<p class="muted">
+لا توجد فيديوهات بعد.
+</p>';
+
+}
+
+
+/* =========================================================
+   MAIN RENDER
+========================================================= */
+
+function render(){
+
+renderQuotes();
+renderArticles();
+renderBooks();
+renderPhotos();
+renderVideos();
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput=$('search');
+
+if(searchInput){
+
+searchInput.addEventListener(
+'input',
+renderArticles
+);
+
+}
+
+
+/* =========================================================
+   LOAD CONTENT.JSON
+========================================================= */
+
+fetch(
+'content.json?'+Date.now(),
+{
+cache:'no-store'
+}
+)
+
+.then(response=>{
+
+if(!response.ok){
+
+throw new Error(
+'HTTP '+response.status
+);
+
+}
+
+return response.json();
+
+})
+
+.then(data=>{
+
+D=data||{};
+
+D.site=
+D.site||{};
+
+D.articles=
+Array.isArray(D.articles)
+?
+D.articles
+:
+[];
+
+D.books=
+Array.isArray(D.books)
+?
+D.books
+:
+[];
+
+D.photos=
+Array.isArray(D.photos)
+?
+D.photos
+:
+[];
+
+D.videos=
+Array.isArray(D.videos)
+?
+D.videos
+:
+[];
+
+D.quotes=
+Array.isArray(D.quotes)
+?
+D.quotes
+:
+[];
+
+
+/* =========================
+   SITE SETTINGS
+========================= */
+
+$('desc').textContent=
+safeText(D.site.description);
+
+$('tagline').textContent=
+safeText(D.site.tagline)||
+'مساحة للقراءة والفكرة';
+
+$('aboutTitle').textContent=
+'أهلاً بك في '+
+(
+safeText(D.site.name)||
+'Al-Adeeb'
+);
+
+$('aboutText').textContent=
+safeText(D.site.description);
+
+
+/* =========================
+   RENDER
+========================= */
+
+render();
+
+
+/* =========================
+   RETURN SCROLL
+========================= */
+
+const target=
+new URLSearchParams(
+location.search
+).get('return');
+
+if(target){
+
+setTimeout(
+()=>{
+
+document
+.getElementById(target)
+?.scrollIntoView({
+behavior:'smooth',
+block:'center'
+});
+
+},
+250
+);
+
+}
+
+})
+
+.catch(error=>{
+
+console.error(
+'content.json error:',
+error
+);
+
+$('desc').textContent=
+'تعذر تحميل المحتوى حالياً.';
+
+$('articlesGrid').innerHTML=
+'<p>تعذر تحميل المقالات حالياً.</p>';
+
+$('booksGrid').innerHTML=
+'<p>تعذر تحميل الكتب حالياً.</p>';
+
+$('photosGrid').innerHTML=
+'<p>تعذر تحميل الصور حالياً.</p>';
+
+$('videosGrid').innerHTML=
+'<p>تعذر تحميل الفيديوهات حالياً.</p>';
+
+});
+
+
+</script>
+
+</body>
+</html>
